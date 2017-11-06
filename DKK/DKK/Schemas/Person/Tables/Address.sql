@@ -1,0 +1,11 @@
+﻿CREATE TABLE [Person].[Address]
+(
+	[AddressId] INT IDENTITY(1,1) NOT NULL PRIMARY KEY
+	,StreetAddress1 NVARCHAR(255) NOT NULL
+	,StreetAddress2 NVARCHAR(255) NULL
+	,AppartmentCode NVARCHAR(10) NULL
+	,City NVARCHAR(30) NOT NULL
+	,StateProvidence NVARCHAR(30) NOT NULL
+	,PostalCode NVARCHAR(10) NOT NULL
+	,Country NVARCHAR(30) NOT NULL
+)
