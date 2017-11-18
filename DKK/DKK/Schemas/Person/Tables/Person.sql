@@ -9,5 +9,12 @@
 	,Gender CHAR NULL
 	,PhoneNumber NVARCHAR(15) NULL --TODO: Check Constraint for format
 	,Email NVARCHAR(255) NULL --TODO: Check Constraint for format
+	,StreetAddress1 NVARCHAR(255) NULL
+	,StreetAddress2 NVARCHAR(255) NULL
+	,AppartmentCode NVARCHAR(10) NULL
+	,City NVARCHAR(30) NULL
+	,StateProvidence NVARCHAR(30) NULL
+	,PostalCode NVARCHAR(10) NULL
+	,Country NVARCHAR(30) NULL
 )
 GO

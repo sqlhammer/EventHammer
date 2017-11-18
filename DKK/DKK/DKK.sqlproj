@@ -70,6 +70,8 @@
     <Folder Include="Schemas\Facility\Data" />
     <Folder Include="Schemas\Event\Data" />
     <Folder Include="Schemas\Person\Data" />
+    <Folder Include="Schemas\Stage\Data" />
+    <Folder Include="Schemas\Stage\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\Person\Person.sql" />
@@ -79,7 +81,6 @@
     <Build Include="Schemas\Person\Tables\Title.sql" />
     <Build Include="Schemas\Person\Tables\Person.sql" />
     <Build Include="Schemas\Person\Tables\Competitor.sql" />
-    <Build Include="Schemas\Person\Tables\Address.sql" />
     <Build Include="Schemas\Facility\Tables\FacilityType.sql" />
     <Build Include="Schemas\Facility\Tables\Facility.sql" />
     <Build Include="Schemas\Facility\Tables\MartialArtType.sql" />
@@ -96,6 +97,11 @@
     <None Include="Schemas\Facility\Data\MartialArtType.sql" />
     <None Include="Schemas\Person\Data\Title.sql" />
     <None Include="Schemas\Event\Data\EventType.sql" />
+    <None Include="Schemas\Stage\Data\TestPerson.sql" />
+    <None Include="Schemas\Facility\Data\Facility.sql" />
+    <None Include="Schemas\Facility\Data\FacilityType.sql" />
+    <None Include="Schemas\Facility\Data\Dojo.sql" />
+    <Build Include="Schemas\Stage\Stored Procedures\spLoadPersonPerson.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />
