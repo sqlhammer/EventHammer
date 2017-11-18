@@ -18,3 +18,6 @@
 	,Country NVARCHAR(30) NULL
 )
 GO
+CREATE UNIQUE NONCLUSTERED INDEX UQ_Person_Person_FirstName_LastName_Email
+ON Person.Person (Email, LastName, FirstName);
+GO

@@ -1,6 +1,6 @@
-﻿TRUNCATE TABLE Stage.TestPerson;
+﻿TRUNCATE TABLE Stage.Registration;
 
-INSERT INTO Stage.TestPerson
+INSERT INTO Stage.Registration
 (
 	[FirstName], 
 	[LastName], 
@@ -18,7 +18,11 @@ INSERT INTO Stage.TestPerson
 	[DojoName], 
 	[EmailAddress],
 	[Gender],
-	[PhoneNumber]
+	[PhoneNumber],
+	[Age],
+	DateOfBirth,
+	[Weight],
+	[IsMinor]
 )
 VALUES
 ( N'John', N'Smith', 4, N'123 Street St.', NULL, NULL, N'Danbury', N'CT', N'06810', N'USA', 1, 1, 0, N'Kanreikai', N'jonny@aol.com', 'M', '1-555-232-1231' ), 

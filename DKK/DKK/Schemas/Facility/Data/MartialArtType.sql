@@ -1,7 +1,7 @@
 ﻿
-SET IDENTITY_INSERT [Person].[MartialArtType] ON
+SET IDENTITY_INSERT [Facility].[MartialArtType] ON
 
-MERGE INTO [Person].[MartialArtType] AS [target]
+MERGE INTO [Facility].[MartialArtType] AS [target]
 USING
 (VALUES
 (1, 'Amercican Karate'),
@@ -40,4 +40,4 @@ WHEN NOT MATCHED BY TARGET THEN
 WHEN NOT MATCHED BY SOURCE THEN
 	DELETE;
 
-SET IDENTITY_INSERT [Person].[MartialArtType] OFF
+SET IDENTITY_INSERT [Facility].[MartialArtType] OFF
