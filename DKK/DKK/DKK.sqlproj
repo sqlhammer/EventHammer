@@ -102,6 +102,7 @@
     <None Include="Schemas\Facility\Data\FacilityType.sql" />
     <None Include="Schemas\Facility\Data\Dojo.sql" />
     <Build Include="Schemas\Stage\Stored Procedures\spLoadRegistration.sql" />
+    <None Include="Schemas\Event\Data\Event.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

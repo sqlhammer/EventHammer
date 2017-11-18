@@ -996,11 +996,11 @@ Version:4.0.1.1364-->
                   <WeightedListOfItems type="WeightedListOfItems" version="1">
                     <value version="1" type="WeightedListItem">
                       <Name>True</Name>
-                      <Weight>50</Weight>
+                      <Weight>10</Weight>
                     </value>
                     <value version="1" type="WeightedListItem">
                       <Name>False</Name>
-                      <Weight>50</Weight>
+                      <Weight>90</Weight>
                     </value>
                   </WeightedListOfItems>
                 </value>
@@ -2256,11 +2256,11 @@ Version:4.0.1.1364-->
                   <WeightedListOfItems type="WeightedListOfItems" version="1">
                     <value version="1" type="WeightedListItem">
                       <Name>True</Name>
-                      <Weight>50</Weight>
+                      <Weight>10</Weight>
                     </value>
                     <value version="1" type="WeightedListItem">
                       <Name>False</Name>
-                      <Weight>50</Weight>
+                      <Weight>90</Weight>
                     </value>
                   </WeightedListOfItems>
                 </value>
@@ -2276,6 +2276,53 @@ Version:4.0.1.1364-->
               <element>
                 <key type="string">Seed</key>
                 <value type="string">10248</value>
+              </element>
+            </GeneratorProperties>
+          </Generator>
+        </value>
+        <value version="1" type="SDGField">
+          <Name>IsSpecialConsideration</Name>
+          <FieldType>Generated</FieldType>
+          <PrimaryKey>False</PrimaryKey>
+          <ForeignKey>False</ForeignKey>
+          <Unique>False</Unique>
+          <AllowsNulls>False</AllowsNulls>
+          <SqlType>Boolean</SqlType>
+          <Precision>1</Precision>
+          <Scale>0</Scale>
+          <DefinedSize>1</DefinedSize>
+          <Generator version="1" type="GeneratorDetails">
+            <GeneratorTypeName>RedGate.SQLDataGenerator.Generators.List.WeightedListGenerator</GeneratorTypeName>
+            <DisplayName>Bit Weighted List</DisplayName>
+            <Description>TRUE or FALSE (even distribution)</Description>
+            <CategoryName>Personal</CategoryName>
+            <GeneratorProperties type="Dictionary&lt;string, object&gt;" version="1">
+              <element>
+                <key type="string">ListItems</key>
+                <value version="1" type="WeightedListItems">
+                  <WeightedListOfItems type="WeightedListOfItems" version="1">
+                    <value version="1" type="WeightedListItem">
+                      <Name>True</Name>
+                      <Weight>10</Weight>
+                    </value>
+                    <value version="1" type="WeightedListItem">
+                      <Name>False</Name>
+                      <Weight>90</Weight>
+                    </value>
+                  </WeightedListOfItems>
+                </value>
+              </element>
+              <element>
+                <key type="string">NullsAllowed</key>
+                <value type="string">False</value>
+              </element>
+              <element>
+                <key type="string">NullProportion</key>
+                <value type="string">0.01</value>
+              </element>
+              <element>
+                <key type="string">Seed</key>
+                <value type="string">9225</value>
               </element>
             </GeneratorProperties>
           </Generator>
@@ -2532,11 +2579,11 @@ Version:4.0.1.1364-->
                   <WeightedListOfItems type="WeightedListOfItems" version="1">
                     <value version="1" type="WeightedListItem">
                       <Name>True</Name>
-                      <Weight>50</Weight>
+                      <Weight>10</Weight>
                     </value>
                     <value version="1" type="WeightedListItem">
                       <Name>False</Name>
-                      <Weight>50</Weight>
+                      <Weight>90</Weight>
                     </value>
                   </WeightedListOfItems>
                 </value>
@@ -3798,11 +3845,11 @@ Version:4.0.1.1364-->
                   <WeightedListOfItems type="WeightedListOfItems" version="1">
                     <value version="1" type="WeightedListItem">
                       <Name>True</Name>
-                      <Weight>50</Weight>
+                      <Weight>10</Weight>
                     </value>
                     <value version="1" type="WeightedListItem">
                       <Name>False</Name>
-                      <Weight>50</Weight>
+                      <Weight>90</Weight>
                     </value>
                   </WeightedListOfItems>
                 </value>
@@ -3845,11 +3892,11 @@ Version:4.0.1.1364-->
                   <WeightedListOfItems type="WeightedListOfItems" version="1">
                     <value version="1" type="WeightedListItem">
                       <Name>True</Name>
-                      <Weight>50</Weight>
+                      <Weight>10</Weight>
                     </value>
                     <value version="1" type="WeightedListItem">
                       <Name>False</Name>
-                      <Weight>50</Weight>
+                      <Weight>90</Weight>
                     </value>
                   </WeightedListOfItems>
                 </value>
@@ -3892,11 +3939,11 @@ Version:4.0.1.1364-->
                   <WeightedListOfItems type="WeightedListOfItems" version="1">
                     <value version="1" type="WeightedListItem">
                       <Name>True</Name>
-                      <Weight>50</Weight>
+                      <Weight>10</Weight>
                     </value>
                     <value version="1" type="WeightedListItem">
                       <Name>False</Name>
-                      <Weight>50</Weight>
+                      <Weight>90</Weight>
                     </value>
                   </WeightedListOfItems>
                 </value>
@@ -4299,6 +4346,53 @@ Version:4.0.1.1364-->
               <element>
                 <key type="string">ColumnType</key>
                 <value type="string">nvarchar</value>
+              </element>
+            </GeneratorProperties>
+          </Generator>
+        </value>
+        <value version="1" type="SDGField">
+          <Name>IsSpecialConsideration</Name>
+          <FieldType>Generated</FieldType>
+          <PrimaryKey>False</PrimaryKey>
+          <ForeignKey>False</ForeignKey>
+          <Unique>False</Unique>
+          <AllowsNulls>False</AllowsNulls>
+          <SqlType>Boolean</SqlType>
+          <Precision>1</Precision>
+          <Scale>0</Scale>
+          <DefinedSize>1</DefinedSize>
+          <Generator version="1" type="GeneratorDetails">
+            <GeneratorTypeName>RedGate.SQLDataGenerator.Generators.List.WeightedListGenerator</GeneratorTypeName>
+            <DisplayName>Bit Weighted List</DisplayName>
+            <Description>TRUE or FALSE (even distribution)</Description>
+            <CategoryName>Personal</CategoryName>
+            <GeneratorProperties type="Dictionary&lt;string, object&gt;" version="1">
+              <element>
+                <key type="string">ListItems</key>
+                <value version="1" type="WeightedListItems">
+                  <WeightedListOfItems type="WeightedListOfItems" version="1">
+                    <value version="1" type="WeightedListItem">
+                      <Name>True</Name>
+                      <Weight>10</Weight>
+                    </value>
+                    <value version="1" type="WeightedListItem">
+                      <Name>False</Name>
+                      <Weight>90</Weight>
+                    </value>
+                  </WeightedListOfItems>
+                </value>
+              </element>
+              <element>
+                <key type="string">NullsAllowed</key>
+                <value type="string">False</value>
+              </element>
+              <element>
+                <key type="string">NullProportion</key>
+                <value type="string">0.01</value>
+              </element>
+              <element>
+                <key type="string">Seed</key>
+                <value type="string">12313</value>
               </element>
             </GeneratorProperties>
           </Generator>

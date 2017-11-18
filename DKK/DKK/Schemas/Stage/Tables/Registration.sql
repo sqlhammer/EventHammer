@@ -25,4 +25,5 @@
 	,[ParentFirstName] NVARCHAR(60) NOT NULL
 	,[ParentLastName] NVARCHAR(60) NOT NULL
 	,[ParentEmailAddress] NVARCHAR(128) NULL
+	,IsSpecialConsideration BIT NOT NULL
 )

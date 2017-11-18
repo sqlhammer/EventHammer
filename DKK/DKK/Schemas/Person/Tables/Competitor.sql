@@ -9,4 +9,5 @@
 	,DojoId INT NOT NULL CONSTRAINT FK_Facility_Dojo_DojoId FOREIGN KEY REFERENCES Facility.Dojo (DojoId)
 	,ParentId INT NULL CONSTRAINT FK_Person_Person_ParentId FOREIGN KEY REFERENCES Person.Person (PersonId)
 	,IsMinor BIT NOT NULL CONSTRAINT DF_Person_Competitor_IsMinor DEFAULT(0)
+	,IsSpecialConsideration BIT NOT NULL CONSTRAINT DF_Person_Competitor_IsSpecialConsideration DEFAULT(0)
 )

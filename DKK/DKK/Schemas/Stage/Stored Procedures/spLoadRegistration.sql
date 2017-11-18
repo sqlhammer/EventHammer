@@ -45,11 +45,11 @@ AS
 
 			--Competitor inserts
 			INSERT INTO [Person].[Competitor]
-			(PersonId, DateOfBirth, Age, [Weight], RankId, DojoId, ParentId, IsMinor)
+			(PersonId, DateOfBirth, Age, [Weight], RankId, DojoId, ParentId, IsMinor, IsSpecialConsideration)
 			SELECT p.PersonId
-				, [DateOfBirth]
-				, [Age]
-				, [Weight]
+				, r.[DateOfBirth]
+				, r.[Age]
+				, r.[Weight]
 				, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.[Rank])
 				, (
 					SELECT TOP 1 DojoId 
@@ -66,11 +66,14 @@ AS
 						AND p.LastName = r.ParentLastName
 						AND p.Email = r.ParentEmailAddress
 				)
-				, [IsMinor]
+				, r.[IsMinor]
+				, r.IsSpecialConsideration
 			FROM Stage.[Registration] r
 			INNER JOIN Person.Person p ON p.FirstName = r.FirstName
 										AND p.LastName = r.LastName
 										AND p.Email = r.EmailAddress
+			LEFT JOIN Person.Competitor c ON c.PersonId = p.PersonId
+			WHERE c.CompetitorId IS NULL
 
 		END TRY
 		BEGIN CATCH
