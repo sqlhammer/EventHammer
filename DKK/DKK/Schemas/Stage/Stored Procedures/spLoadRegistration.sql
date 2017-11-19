@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [Stage].[spLoadRegistration]
+	@EventId INT
 AS
 BEGIN
 	SET NOCOUNT ON
@@ -24,7 +25,7 @@ BEGIN
 			INNER JOIN Person.Person p ON p.FirstName = r.FirstName
 										AND p.LastName = r.LastName
 										AND p.EmailAddress = r.EmailAddress
-										
+
 			--Competitor updates
 			UPDATE c
 			SET c.PersonId = p.PersonId
@@ -49,11 +50,16 @@ BEGIN
 				)
 				,c.IsMinor = r.[IsMinor]
 				,c.IsSpecialConsideration = r.IsSpecialConsideration
+				, c.IsKata = r.IsKata	  
+				, c.IsWeaponKata = r.IsWeaponKata
+				, c.IsSemiKnockdown = r.IsSemiKnockdown	  
+				, c.IsKnockdown = r.IsKnockdown
 			FROM Stage.[Registration] r
 			INNER JOIN Person.Person p ON p.FirstName = r.FirstName
 										AND p.LastName = r.LastName
 										AND p.EmailAddress = r.EmailAddress
 			INNER JOIN Person.Competitor c ON c.PersonId = p.PersonId
+											AND c.EventId = @EventId
 
 			--Person inserts
 			INSERT INTO Person.Person ( FirstName, LastName, DisplayName
@@ -94,7 +100,8 @@ BEGIN
 
 			--Competitor inserts
 			INSERT INTO [Person].[Competitor]
-			(PersonId, DateOfBirth, Age, [Weight], RankId, DojoId, ParentId, IsMinor, IsSpecialConsideration)
+			(PersonId, DateOfBirth, Age, [Weight], RankId, DojoId, ParentId, IsMinor
+				, IsSpecialConsideration, EventId, IsKata, IsWeaponKata, IsSemiKnockdown, IsKnockdown)
 			SELECT p.PersonId
 				, r.[DateOfBirth]
 				, r.[Age]
@@ -117,6 +124,11 @@ BEGIN
 				)
 				, r.[IsMinor]
 				, r.IsSpecialConsideration
+				, @EventId
+				, r.IsKata	  
+				, r.IsWeaponKata
+				, r.IsSemiKnockdown	  
+				, r.IsKnockdown
 			FROM Stage.[Registration] r
 			INNER JOIN Person.Person p ON p.FirstName = r.FirstName
 										AND p.LastName = r.LastName

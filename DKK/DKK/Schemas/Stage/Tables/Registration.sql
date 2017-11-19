@@ -15,6 +15,7 @@
 	,[PostalCode] NVARCHAR(128) NULL
 	,[Country] NVARCHAR(128) NULL
 	,[IsKata] BIT NOT NULL
+	,[IsWeaponKata] BIT NOT NULL
 	,[IsSemiKnockdown] BIT NOT NULL
 	,[IsKnockdown] BIT NOT NULL
 	,[DojoName] NVARCHAR(60) NOT NULL

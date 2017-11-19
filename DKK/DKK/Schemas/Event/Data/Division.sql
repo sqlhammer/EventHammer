@@ -73,7 +73,6 @@ SELECT IDENTITY(INT, 1, 1) AS DivisionId
 	,MaximumAge
 	,MinimumLevelId
 	,MaximumLevelId
-	,IsSpecialConsideration 
 INTO #Division
 FROM
 (
@@ -86,22 +85,7 @@ FROM
 		,MaximumAge
 		,MinimumLevelId
 		,MaximumLevelId
-		,CAST(0 AS BIT) IsSpecialConsideration
 	FROM #BaseDivision bd
-	CROSS APPLY #Ages
-	CROSS APPLY #Ranks
-	UNION ALL
-	SELECT
-		bds.MinimumWeight_lb
-		,bds.MaximumWeight_lb
-		,bds.WeightClass
-		,bds.Gender
-		,MinimumAge
-		,MaximumAge
-		,MinimumLevelId
-		,MaximumLevelId
-		,CAST(1 AS BIT) IsSpecialConsideration
-	FROM #BaseDivision bds
 	CROSS APPLY #Ages
 	CROSS APPLY #Ranks
 ) dt;
@@ -120,11 +104,10 @@ USING
 		,MaximumAge
 		,MinimumLevelId
 		,MaximumLevelId
-		,IsSpecialConsideration 
 	FROM #Division
 )
 AS [source] (DivisionId, MinimumWeight_lb, MaximumWeight_lb, WeightClass, Gender
-	, MinimumAge, MaximumAge,MinimumLevelId, MaximumLevelId, IsSpecialConsideration )
+	, MinimumAge, MaximumAge,MinimumLevelId, MaximumLevelId )
 ON [target].DivisionId = [source].DivisionId
 
 WHEN MATCHED THEN
@@ -133,7 +116,6 @@ UPDATE
 		MaximumWeight_lb = [source].MaximumWeight_lb,
 		WeightClass = [source].WeightClass,
 		Gender = [source].Gender,
-		IsSpecialConsideration = [source].IsSpecialConsideration,
 		MinimumLevelId = [source].MinimumLevelId, 
 		MaximumLevelId = [source].MaximumLevelId, 
 		MinimumAge = [source].MinimumAge, 
@@ -141,9 +123,9 @@ UPDATE
 
 WHEN NOT MATCHED BY TARGET THEN
 	INSERT (DivisionId, MinimumWeight_lb, MaximumWeight_lb, WeightClass, Gender
-		, IsSpecialConsideration, MinimumLevelId, MaximumLevelId, MinimumAge, MaximumAge)
+		, MinimumLevelId, MaximumLevelId, MinimumAge, MaximumAge)
 	VALUES (DivisionId, MinimumWeight_lb, MaximumWeight_lb, WeightClass, Gender
-		, IsSpecialConsideration, MinimumLevelId, MaximumLevelId, MinimumAge, MaximumAge)
+		, MinimumLevelId, MaximumLevelId, MinimumAge, MaximumAge)
 
 WHEN NOT MATCHED BY SOURCE THEN
 	DELETE;

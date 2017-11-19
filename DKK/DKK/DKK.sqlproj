@@ -73,6 +73,8 @@
     <Folder Include="Schemas\Stage\Data" />
     <Folder Include="Schemas\Stage\Stored Procedures" />
     <Folder Include="Schemas\Event\Stored Procedures" />
+    <Folder Include="Schemas\Person\Views" />
+    <Folder Include="Schemas\Event\Views" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\Person\Person.sql" />
@@ -106,6 +108,9 @@
     <None Include="Schemas\Event\Data\Event.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spAutoSetMatches.sql" />
     <Build Include="Schemas\Event\Tables\MatchCompetitor.sql" />
+    <Build Include="Schemas\Event\Stored Procedures\spPurgeMatches.sql" />
+    <Build Include="Schemas\Person\Views\vwCompetitor.sql" />
+    <Build Include="Schemas\Event\Views\vwMatch.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />
@@ -114,5 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Publish\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\AzureV12\SqlSchemas\master.dacpac">
+      <HintPath>$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\AzureV12\SqlSchemas\master.dacpac</HintPath>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </ArtifactReference>
   </ItemGroup>
 </Project>
