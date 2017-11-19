@@ -8,16 +8,16 @@
 	,IsInstructor BIT NOT NULL CONSTRAINT DF_Person_Person_IsInstructor DEFAULT(0)
 	,Gender CHAR NULL
 	,PhoneNumber NVARCHAR(15) NULL --TODO: Check Constraint for format
-	,Email NVARCHAR(255) NULL --TODO: Check Constraint for format
+	,EmailAddress NVARCHAR(255) NULL --TODO: Check Constraint for format
 	,StreetAddress1 NVARCHAR(255) NULL
 	,StreetAddress2 NVARCHAR(255) NULL
 	,AppartmentCode NVARCHAR(10) NULL
 	,City NVARCHAR(30) NULL
-	,StateProvidence NVARCHAR(30) NULL
+	,StateProvince NVARCHAR(30) NULL
 	,PostalCode NVARCHAR(10) NULL
 	,Country NVARCHAR(30) NULL
 )
 GO
 CREATE UNIQUE NONCLUSTERED INDEX UQ_Person_Person_FirstName_LastName_Email
-ON Person.Person (Email, LastName, FirstName);
+ON Person.Person (EmailAddress, LastName, FirstName);
 GO

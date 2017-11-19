@@ -6,7 +6,8 @@ USING
 (VALUES
 (1, 'Kanreikai', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'USA'),
 (2, 'BigDojo', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'USA'),
-(3, 'AggressiveDojo', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Canada')
+(3, 'AggressiveDojo', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, 'Canada'),
+(4, 'Police Athletics League', '12037784725', NULL, NULL, 2, '35 Hayestown Rd', NULL, NULL, 'Danbury', 'CT', '06811', 'USA')
 )
 AS [source] ([FacilityId], [Name], PhoneNumber, Email, OwnerId, FacilityTypeId, StreetAddress1, StreetAddress2, AppartmentCode, City, StateProvidence, PostalCode, Country)
 ON [target].[FacilityId] = [source].[FacilityId]

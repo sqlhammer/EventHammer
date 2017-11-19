@@ -3445,7 +3445,7 @@ Version:4.0.1.1364-->
               </element>
               <element>
                 <key type="string">MinValue</key>
-                <value type="string">0.00</value>
+                <value type="string">50.00</value>
               </element>
               <element>
                 <key type="string">MaxValue</key>
