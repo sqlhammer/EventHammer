@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DKK">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=40.121.203.217,49001;Initial Catalog=dkk</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>a90173d5-3c83-4a92-b245-c480d24b767b</DataSourceID>
+</RptDataSource>

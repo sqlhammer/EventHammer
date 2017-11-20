@@ -111,6 +111,7 @@
     <Build Include="Schemas\Event\Stored Procedures\spPurgeMatches.sql" />
     <Build Include="Schemas\Person\Views\vwCompetitor.sql" />
     <Build Include="Schemas\Event\Views\vwMatch.sql" />
+    <Build Include="Schemas\Event\Views\vwSingleCompetitorDivision.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

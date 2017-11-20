@@ -10,4 +10,5 @@ CREATE TABLE [Event].[Division]
 	,MaximumLevelId INT NOT NULL CONSTRAINT FK_Event_Rank_MaximumLevelId FOREIGN KEY REFERENCES [Event].[Rank] (RankId)
 	,MinimumAge TINYINT NULL
 	,MaximumAge TINYINT NULL
+	,IsKata BIT NOT NULL
 )

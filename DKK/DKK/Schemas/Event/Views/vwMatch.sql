@@ -14,6 +14,9 @@ SELECT
 	  ,d.MinimumAge
 	  ,d.MaximumAge
 	  ,mc.CompetitorId
+	  ,p.FirstName
+	  ,p.LastName
+	  ,p.DisplayName
 	  ,mc.MatchPlacement
 	  ,c.DateOfBirth
 	  ,c.Age
@@ -28,6 +31,7 @@ INNER JOIN [Event].[MatchType] mt ON mt.MatchTypeId = m.MatchTypeId
 INNER JOIN [Event].[Division] d ON d.DivisionId = m.DivisionId
 LEFT JOIN [Event].[MatchCompetitor] mc ON mc.MatchId = m.MatchId
 LEFT JOIN [Person].[Competitor] c ON c.CompetitorId = mc.CompetitorId
+LEFT JOIN [Person].[Person] p ON p.PersonId = c.PersonId
 LEFT JOIN [Event].[Rank] r ON r.RankId = c.RankId
 LEFT JOIN Facility.Dojo dj ON dj.DojoId = c.DojoId
 LEFT JOIN Facility.Facility djf ON djf.FacilityId = dj.FacilityId
