@@ -26,38 +26,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="Textbox1">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Score Cards</Value>
-                    <Style>
-                      <FontSize>22pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>0.29042in</Top>
-            <Height>0.41667in</Height>
-            <Width>11in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="txtMatchTypeName">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -79,7 +47,6 @@
             <Top>2.22271in</Top>
             <Height>1.15625in</Height>
             <Width>11in</Width>
-            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -98,7 +65,7 @@
             <Left>3.22396in</Left>
             <Height>2.32812in</Height>
             <Width>4.69271in</Width>
-            <ZIndex>2</ZIndex>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -126,7 +93,7 @@
             <Top>6.11333in</Top>
             <Height>0.39583in</Height>
             <Width>11in</Width>
-            <ZIndex>3</ZIndex>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -165,7 +132,7 @@
               <Top>0.36333in</Top>
               <Left>0.29042in</Left>
               <Height>0.25in</Height>
-              <Width>1in</Width>
+              <Width>1.5in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>

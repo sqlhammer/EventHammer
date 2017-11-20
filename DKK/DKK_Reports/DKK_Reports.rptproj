@@ -12,12 +12,12 @@
       <Name>MaxEventDate.rsd</Name>
       <FullPath>MaxEventDate.rsd</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>dsDisplayDivisionNumber.rsd</Name>
+      <FullPath>dsDisplayDivisionNumber.rsd</FullPath>
+    </ProjectItem>
   </DataSets>
   <Reports>
-    <ProjectItem>
-      <Name>ScoreCard_CoverPage.rdl</Name>
-      <FullPath>ScoreCard_CoverPage.rdl</FullPath>
-    </ProjectItem>
     <ResourceProjectItem>
       <Name>dkk_logo_medium_horizontal.png</Name>
       <FullPath>dkk_logo_medium_horizontal.png</FullPath>
@@ -26,6 +26,10 @@
     <ProjectItem>
       <Name>KataScoreCard.rdl</Name>
       <FullPath>KataScoreCard.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>ScoreCard_CoverPage.rdl</Name>
+      <FullPath>ScoreCard_CoverPage.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

@@ -14,6 +14,7 @@ RETURN
 									,d.MinimumLevelId
 									,d.MinimumAge
 									,d.Gender) DisplayDivisionNumber
+		,m.SubDivisionId
 		,mt.Name
 		,mt.IsSpecialConsideration
 		,m.MatchId

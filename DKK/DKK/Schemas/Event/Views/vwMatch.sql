@@ -1,11 +1,12 @@
 ﻿CREATE VIEW [Event].[vwMatch]
 AS
 SELECT 
-		e.EventId
+	  e.EventId
 	  ,e.Name EventName
 	  ,m.MatchId
 	  ,mt.name MatchTypeName	  
 	  ,m.DivisionId
+	  ,m.SubDivisionId
 	  ,d.MinimumWeight_lb
 	  ,d.MaximumWeight_lb
 	  ,d.WeightClass
