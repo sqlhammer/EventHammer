@@ -75,6 +75,7 @@
     <Folder Include="Schemas\Event\Stored Procedures" />
     <Folder Include="Schemas\Person\Views" />
     <Folder Include="Schemas\Event\Views" />
+    <Folder Include="Schemas\Event\Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\Person\Person.sql" />
@@ -112,6 +113,7 @@
     <Build Include="Schemas\Person\Views\vwCompetitor.sql" />
     <Build Include="Schemas\Event\Views\vwMatch.sql" />
     <Build Include="Schemas\Event\Views\vwSingleCompetitorDivision.sql" />
+    <Build Include="Schemas\Event\Functions\udfGetDisplayDivisionNumber.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

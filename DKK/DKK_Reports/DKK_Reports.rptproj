@@ -7,8 +7,27 @@
       <FullPath>DKK.rds</FullPath>
     </ProjectItem>
   </DataSources>
-  <DataSets />
-  <Reports />
+  <DataSets>
+    <ProjectItem>
+      <Name>MaxEventDate.rsd</Name>
+      <FullPath>MaxEventDate.rsd</FullPath>
+    </ProjectItem>
+  </DataSets>
+  <Reports>
+    <ProjectItem>
+      <Name>ScoreCard_CoverPage.rdl</Name>
+      <FullPath>ScoreCard_CoverPage.rdl</FullPath>
+    </ProjectItem>
+    <ResourceProjectItem>
+      <Name>dkk_logo_medium_horizontal.png</Name>
+      <FullPath>dkk_logo_medium_horizontal.png</FullPath>
+      <MimeType>image/x-png</MimeType>
+    </ResourceProjectItem>
+    <ProjectItem>
+      <Name>KataScoreCard.rdl</Name>
+      <FullPath>KataScoreCard.rdl</FullPath>
+    </ProjectItem>
+  </Reports>
   <Configurations>
     <Configuration>
       <Name>Debug</Name>
