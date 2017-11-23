@@ -8,25 +8,27 @@
           <ReadOnly>false</ReadOnly>
           <Nullable>false</Nullable>
           <OmitFromQuery>false</OmitFromQuery>
-          <rd:DbType>String</rd:DbType>
+          <rd:DbType>Object</rd:DbType>
         </DataSetParameter>
         <DataSetParameter Name="@EventId">
           <ReadOnly>false</ReadOnly>
           <Nullable>false</Nullable>
           <OmitFromQuery>false</OmitFromQuery>
-          <rd:DbType>Int32</rd:DbType>
+          <rd:DbType>Object</rd:DbType>
         </DataSetParameter>
         <DataSetParameter Name="@IsSpecialConsideration">
           <ReadOnly>false</ReadOnly>
           <Nullable>false</Nullable>
           <OmitFromQuery>false</OmitFromQuery>
-          <rd:DbType>Boolean</rd:DbType>
+          <rd:DbType>Object</rd:DbType>
         </DataSetParameter>
       </DataSetParameters>
       <CommandText>SELECT DisplayDivisionNumber
 	  ,SubDivisionId
+	  ,DivisionId
 FROM [Event].udfGetDisplayDivisionNumber(@MatchTypeName,@EventId)
-WHERE IsSpecialConsideration = @IsSpecialConsideration</CommandText>
+WHERE IsSpecialConsideration = @IsSpecialConsideration
+ORDER BY DisplayDivisionNumber ASC, SubDivisionId ASC</CommandText>
     </Query>
     <Fields>
       <Field Name="DisplayDivisionNumber">
@@ -35,6 +37,10 @@ WHERE IsSpecialConsideration = @IsSpecialConsideration</CommandText>
       </Field>
       <Field Name="SubDivisionId">
         <DataField>SubDivisionId</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="DivisionId">
+        <DataField>DivisionId</DataField>
         <rd:TypeName>System.Int32</rd:TypeName>
       </Field>
     </Fields>

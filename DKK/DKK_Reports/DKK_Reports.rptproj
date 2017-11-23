@@ -9,12 +9,12 @@
   </DataSources>
   <DataSets>
     <ProjectItem>
-      <Name>MaxEventDate.rsd</Name>
-      <FullPath>MaxEventDate.rsd</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>dsDisplayDivisionNumber.rsd</Name>
       <FullPath>dsDisplayDivisionNumber.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>MaxEventDate.rsd</Name>
+      <FullPath>MaxEventDate.rsd</FullPath>
     </ProjectItem>
   </DataSets>
   <Reports>
@@ -39,7 +39,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2016</TargetServerVersion>
-        <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+        <TargetServerURL>http://40.121.203.217/reportserver</TargetServerURL>
         <TargetFolder>DKK_Reports</TargetFolder>
         <TargetMobileReportFolder>Mobile Reports</TargetMobileReportFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
