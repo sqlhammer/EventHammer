@@ -114,6 +114,10 @@
     <Build Include="Schemas\Event\Views\vwMatch.sql" />
     <Build Include="Schemas\Event\Views\vwSingleCompetitorDivision.sql" />
     <Build Include="Schemas\Event\Functions\udfGetDisplayDivisionNumber.sql" />
+    <Build Include="Schemas\Event\Views\vwEvent.sql" />
+    <Build Include="Schemas\Event\Stored Procedures\spCreateEvent.sql" />
+    <Build Include="Schemas\Event\Stored Procedures\spUpdateEvent.sql" />
+    <Build Include="Schemas\Event\Stored Procedures\spDeleteEvent.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

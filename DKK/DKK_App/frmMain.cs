@@ -121,7 +121,7 @@ namespace DKK_App
         {
             this.txtEventInfo.Text = "Event Id:\t\t" + CurrentEvent.EventId.ToString();
             this.txtEventInfo.Text = this.txtEventInfo.Text + System.Environment.NewLine + "Event Name:\t" + CurrentEvent.EventName;
-            this.txtEventInfo.Text = this.txtEventInfo.Text + System.Environment.NewLine + "Event Type:\t" + CurrentEvent.EventTypeName;
+            this.txtEventInfo.Text = this.txtEventInfo.Text + System.Environment.NewLine + "Event Type:\t" + CurrentEvent.EventType.EventTypeName;
             this.txtEventInfo.Text = this.txtEventInfo.Text + System.Environment.NewLine + "Event Date:\t" + CurrentEvent.Date.ToString("MM/dd/yyyy");
         }
 
@@ -165,7 +165,7 @@ namespace DKK_App
 
         private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form frm = new frmEventManager();
+            frmEventManager frm = new frmEventManager();
             frm.Show();
         }
     }
