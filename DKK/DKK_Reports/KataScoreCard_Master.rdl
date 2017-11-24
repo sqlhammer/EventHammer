@@ -204,7 +204,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
               </Border>
             </Style>
           </Rectangle>
-          <Rectangle Name="Rectangle1">
+          <Rectangle Name="rctBody">
             <ReportItems>
               <Tablix Name="tbxDivision">
                 <TablixBody>
@@ -614,7 +614,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                 <RepeatRowHeaders>true</RepeatRowHeaders>
                 <DataSetName>dsDivisionHeader</DataSetName>
                 <Top>0.40451in</Top>
-                <Left>0.1632in</Left>
+                <Left>0.30084in</Left>
                 <Height>0.25in</Height>
                 <Width>10.35416in</Width>
                 <Style>
@@ -641,7 +641,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                 </Paragraphs>
                 <rd:DefaultName>Textbox14</rd:DefaultName>
                 <Top>0.15451in</Top>
-                <Left>0.1632in</Left>
+                <Left>0.30084in</Left>
                 <Height>0.25in</Height>
                 <Width>1in</Width>
                 <ZIndex>1</ZIndex>
@@ -675,7 +675,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                 </Paragraphs>
                 <rd:DefaultName>Textbox14</rd:DefaultName>
                 <Top>0.15451in</Top>
-                <Left>1.1632in</Left>
+                <Left>1.30084in</Left>
                 <Height>0.25in</Height>
                 <Width>1in</Width>
                 <ZIndex>2</ZIndex>
@@ -709,7 +709,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                 </Paragraphs>
                 <rd:DefaultName>Textbox29</rd:DefaultName>
                 <Top>0.15451in</Top>
-                <Left>2.1632in</Left>
+                <Left>2.30084in</Left>
                 <Height>0.25in</Height>
                 <Width>8.35416in</Width>
                 <ZIndex>3</ZIndex>
@@ -742,15 +742,16 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox11</rd:DefaultName>
-                <Top>0.85244in</Top>
-                <Left>3.32639in</Left>
-                <Height>0.25in</Height>
+                <Top>1.17014in</Top>
+                <Left>3.42237in</Left>
+                <Height>0.35938in</Height>
                 <Width>2.15104in</Width>
                 <ZIndex>4</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -764,23 +765,28 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value />
-                        <Style />
+                        <Value>=Count(Fields!CompetitorId.Value, "dsParticipants")</Value>
+                        <Style>
+                          <FontSize>14pt</FontSize>
+                        </Style>
                       </TextRun>
                     </TextRuns>
-                    <Style />
+                    <Style>
+                      <TextAlign>Center</TextAlign>
+                    </Style>
                   </Paragraph>
                 </Paragraphs>
                 <rd:DefaultName>Textbox21</rd:DefaultName>
-                <Top>0.85244in</Top>
-                <Left>5.47743in</Left>
-                <Height>0.25in</Height>
+                <Top>1.17014in</Top>
+                <Left>5.57341in</Left>
+                <Height>0.35938in</Height>
                 <Width>1in</Width>
                 <ZIndex>5</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
                   <PaddingLeft>2pt</PaddingLeft>
                   <PaddingRight>2pt</PaddingRight>
                   <PaddingTop>2pt</PaddingTop>
@@ -794,25 +800,25 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                       <Width>1in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1in</Width>
+                      <Width>1.48959in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>1.11111in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.20313in</Width>
+                      <Width>1.14063in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>1.25in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.23438in</Width>
+                      <Width>1.07292in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.15104in</Width>
+                      <Width>1.01562in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.21527in</Width>
+                      <Width>1.08507in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>1.18923in</Width>
@@ -893,7 +899,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>_______________</Value>
+                                      <Value>_____________</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -923,7 +929,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>______________</Value>
+                                      <Value>_____________</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -953,7 +959,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>_______________</Value>
+                                      <Value>______________</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -983,7 +989,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>_______________</Value>
+                                      <Value>______________</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1013,7 +1019,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>______________</Value>
+                                      <Value>_____________</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1043,7 +1049,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>______________</Value>
+                                      <Value>_____________</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -1139,8 +1145,8 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                 <RepeatColumnHeaders>true</RepeatColumnHeaders>
                 <RepeatRowHeaders>true</RepeatRowHeaders>
                 <DataSetName>dsParticipants</DataSetName>
-                <Top>1.71702in</Top>
-                <Left>0.1632in</Left>
+                <Top>2.28646in</Top>
+                <Left>0.30084in</Left>
                 <Height>0.25in</Height>
                 <Width>10.35416in</Width>
                 <ZIndex>6</ZIndex>
@@ -1157,7 +1163,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>Competitor Id    Name                  Judge #1               Judge #2                Judge #3                   Judge #4                  Judge #5                 Total                        Rank</Value>
+                        <Value>Competitor Id    Name                                Judge #1               Judge #2                Judge #3                   Judge #4              Judge #5            Total                     Rank</Value>
                         <Style>
                           <Color>White</Color>
                         </Style>
@@ -1166,8 +1172,8 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <Top>1.46702in</Top>
-                <Left>0.1632in</Left>
+                <Top>2.03646in</Top>
+                <Left>0.30084in</Left>
                 <Height>0.25in</Height>
                 <Width>10.35416in</Width>
                 <ZIndex>7</ZIndex>
@@ -1183,12 +1189,61 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                   <PaddingBottom>2pt</PaddingBottom>
                 </Style>
               </Textbox>
+              <Textbox Name="Textbox63">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Ring: _________</Value>
+                        <Style>
+                          <FontSize>14pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style>
+                      <TextAlign>Right</TextAlign>
+                    </Style>
+                  </Paragraph>
+                </Paragraphs>
+                <rd:DefaultName>Textbox63</rd:DefaultName>
+                <Top>1.17014in</Top>
+                <Left>8.53521in</Left>
+                <Height>0.35938in</Height>
+                <Width>2.11979in</Width>
+                <ZIndex>8</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <VerticalAlign>Middle</VerticalAlign>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
+                </Style>
+              </Textbox>
+              <Image Name="imgLogo2">
+                <Source>Embedded</Source>
+                <Value>dkk_logo_medium_horizontal</Value>
+                <Sizing>FitProportional</Sizing>
+                <Top>7.02382in</Top>
+                <Left>4.63938in</Left>
+                <Height>0.83854in</Height>
+                <Width>1.68924in</Width>
+                <ZIndex>9</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Top>0.56819in</Top>
-            <Left>0.26264in</Left>
-            <Height>3.45139in</Height>
-            <Width>10.73736in</Width>
+            <Height>7.86236in</Height>
+            <Width>11.00396in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1200,7 +1255,7 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
         <Height>8.5in</Height>
         <Style />
       </Body>
-      <Width>11.64458in</Width>
+      <Width>11.00396in</Width>
       <Page>
         <PageHeader>
           <Height>0.61458in</Height>
@@ -1265,14 +1320,15 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <Top>0.36333in</Top>
+              <Top>0.22791in</Top>
               <Left>0.29042in</Left>
-              <Height>0.25in</Height>
+              <Height>0.38542in</Height>
               <Width>1.5in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1295,15 +1351,16 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.36333in</Top>
+              <Top>0.22791in</Top>
               <Left>9.14458in</Left>
-              <Height>0.25in</Height>
+              <Height>0.38542in</Height>
               <Width>1.5in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
@@ -1318,7 +1375,9 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                   <TextRuns>
                     <TextRun>
                       <Value>Kata</Value>
-                      <Style />
+                      <Style>
+                        <FontSize>18pt</FontSize>
+                      </Style>
                     </TextRun>
                   </TextRuns>
                   <Style>
@@ -1327,15 +1386,16 @@ ORDER BY gd.DisplayDivisionNumber ASC, gd.SubDivisionId ASC</CommandText>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.36333in</Top>
+              <Top>0.22791in</Top>
               <Left>1.84598in</Left>
-              <Height>0.25in</Height>
+              <Height>0.38542in</Height>
               <Width>7.24305in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
                 </Border>
+                <VerticalAlign>Middle</VerticalAlign>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>

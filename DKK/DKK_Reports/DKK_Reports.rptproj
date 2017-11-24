@@ -24,8 +24,8 @@
       <MimeType>image/x-png</MimeType>
     </ResourceProjectItem>
     <ProjectItem>
-      <Name>KataScoreCard.rdl</Name>
-      <FullPath>KataScoreCard.rdl</FullPath>
+      <Name>KataScoreCard_Master.rdl</Name>
+      <FullPath>KataScoreCard_Master.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ScoreCard_CoverPage.rdl</Name>

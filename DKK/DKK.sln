@@ -7,6 +7,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DKK", "DKK\DKK.sqlproj", "{
 EndProject
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "DKK_Reports", "DKK_Reports\DKK_Reports.rptproj", "{A3D64B3C-F67A-47E9-990B-FDA6B579FB1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DKK_App", "DKK_App\DKK_App.csproj", "{814C2530-5B57-4CEE-B204-3D814F7C1FCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,12 @@ Global
 		{A3D64B3C-F67A-47E9-990B-FDA6B579FB1C}.Release|Any CPU.ActiveCfg = Release
 		{A3D64B3C-F67A-47E9-990B-FDA6B579FB1C}.Release|Any CPU.Build.0 = Release
 		{A3D64B3C-F67A-47E9-990B-FDA6B579FB1C}.Release|Any CPU.Deploy.0 = Release
+		{814C2530-5B57-4CEE-B204-3D814F7C1FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{814C2530-5B57-4CEE-B204-3D814F7C1FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{814C2530-5B57-4CEE-B204-3D814F7C1FCA}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{814C2530-5B57-4CEE-B204-3D814F7C1FCA}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{814C2530-5B57-4CEE-B204-3D814F7C1FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{814C2530-5B57-4CEE-B204-3D814F7C1FCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

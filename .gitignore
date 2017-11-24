@@ -286,3 +286,5 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/Documentation/DKK Tournament DB 2017.ldb
+/Documentation/DKK Tournament DB 2017.mdb
