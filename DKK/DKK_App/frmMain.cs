@@ -162,5 +162,11 @@ namespace DKK_App
             RefreshAllEvents();
             RefreshEventSelect();
         }
+
+        private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frm = new frmEventManager();
+            frm.Show();
+        }
     }
 }

@@ -49,6 +49,12 @@
   <ItemGroup>
     <Compile Include="DataAccess.cs" />
     <Compile Include="Entities\Event.cs" />
+    <Compile Include="frmEventManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEventManager.Designer.cs">
+      <DependentUpon>frmEventManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +64,9 @@
     <Compile Include="GlobalConstants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmEventManager.resx">
+      <DependentUpon>frmEventManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,20 +10,39 @@ namespace DKK_App
     {
         public static List<Event> GetEventInformationByDateRange(DateTime minDate, DateTime maxDate)
         {
-            using (SqlConnection conn = new SqlConnection (ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            string query = @"SELECT e.EventId
+                                    ,e.Name EventName
+	                                ,e.Date
+	                                ,et.EventTypeId
+	                                ,et.Name EventTypeName
+                            FROM[Event].[Event] e
+                            INNER JOIN[Event].[EventType]
+                                    et ON et.EventTypeId = e.EventTypeId
+                            WHERE e.Date BETWEEN CAST('" + minDate.ToString("yyyyMMdd") + @"' AS DATE) 
+                                AND CAST('" + maxDate.ToString("yyyyMMdd") + @"' AS DATE)";
+
+            return QueryEventInformation(query);
+        }
+
+        public static List<Event> GetEventInformation()
+        {
+            string query = @"SELECT e.EventId
+                                    ,e.Name EventName
+	                                ,e.Date
+	                                ,et.EventTypeId
+	                                ,et.Name EventTypeName
+                            FROM[Event].[Event] e
+                            INNER JOIN[Event].[EventType]
+                                    et ON et.EventTypeId = e.EventTypeId";
+
+            return QueryEventInformation(query);
+        }
+
+        private static List<Event> QueryEventInformation(string query)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
                 List<Event> events = new List<Event>();
-
-                string query = @"SELECT e.EventId
-                                      ,e.Name EventName
-	                                  ,e.Date
-	                                  ,et.EventTypeId
-	                                  ,et.Name EventTypeName
-                                FROM[Event].[Event] e
-                                INNER JOIN[Event].[EventType]
-                                        et ON et.EventTypeId = e.EventTypeId
-                                WHERE e.Date BETWEEN CAST('" + minDate.ToString("yyyyMMdd") + @"' AS DATE) 
-                                    AND CAST('" + maxDate.ToString("yyyyMMdd") + @"' AS DATE)";
 
                 conn.Open();
 
@@ -45,7 +64,7 @@ namespace DKK_App
                                 });
                             }
                         }
-                    } 
+                    }
                 }
 
                 return events;
