@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DKK_App.Entities;
 
@@ -22,6 +17,12 @@ namespace DKK_App
         }
 
         #region EventTriggers
+        private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmEventManager frm = new frmEventManager();
+            frm.Show();
+        }
+
         private void pbCompany_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://www.danburykarate.com");
@@ -161,12 +162,6 @@ namespace DKK_App
             SetEventSearchDateRange();
             RefreshAllEvents();
             RefreshEventSelect();
-        }
-
-        private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmEventManager frm = new frmEventManager();
-            frm.Show();
         }
     }
 }

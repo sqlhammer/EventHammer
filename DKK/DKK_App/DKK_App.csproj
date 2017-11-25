@@ -48,6 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Entities\MatchCompetitor.cs" />
+    <Compile Include="Entities\FacilityType.cs" />
+    <Compile Include="Entities\Facility.cs" />
+    <Compile Include="Entities\MartialArtType.cs" />
+    <Compile Include="Entities\Dojo.cs" />
+    <Compile Include="Entities\Title.cs" />
+    <Compile Include="Entities\Competitor.cs" />
+    <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\Rank.cs" />
+    <Compile Include="Entities\Division.cs" />
+    <Compile Include="Entities\MatchType.cs" />
+    <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\EventType.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="frmEditEvent.cs">
@@ -68,7 +80,7 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlobalConstants.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmEditEvent.resx">

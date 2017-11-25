@@ -86,12 +86,7 @@ namespace DKK_App
             this.lblStatus.Text = "";
 
             EventType type = DataAccess.GetEventTypeByName(this.cbType.SelectedItem.ToString()).First();
-
-            if (EqualityComparer<EventType>.Default.Equals(type, default(EventType)))
-            {
-                this.lblStatus.Text = "Error: Invalid EventTypeId.";
-            }
-
+            
             Event Event = new Event
             {
                 EventId = SelectedEvent.EventId,
@@ -99,6 +94,13 @@ namespace DKK_App
                 EventName = this.txtName.Text,
                 EventType = type
             };
+
+            string result = Global.IsValidEvent(Event);
+            if (result.CompareTo("") != 0)
+            {
+                this.lblStatus.Text = result;
+                return;
+            }
 
             if (IsEdit)
             {                
