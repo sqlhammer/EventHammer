@@ -31,6 +31,18 @@
       <Name>ScoreCard_CoverPage.rdl</Name>
       <FullPath>ScoreCard_CoverPage.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>WeaponKataScoreCard_Master.rdl</Name>
+      <FullPath>WeaponKataScoreCard_Master.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SemiKnockdownScoreCard_Master.rdl</Name>
+      <FullPath>SemiKnockdownScoreCard_Master.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>KnockdownScoreCard_Master.rdl</Name>
+      <FullPath>KnockdownScoreCard_Master.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -39,7 +51,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2016</TargetServerVersion>
-        <TargetServerURL>http://40.121.203.217/reportserver</TargetServerURL>
+        <TargetServerURL>http://dkktest1.eastus.cloudapp.azure.com/Reportserver</TargetServerURL>
         <TargetFolder>DKK_Reports</TargetFolder>
         <TargetMobileReportFolder>Mobile Reports</TargetMobileReportFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>

@@ -17,6 +17,26 @@ namespace DKK_App
         }
 
         #region EventTriggers
+        private void btnKata_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fKataScoreCard_Master&rs:Command=Render");
+        }
+
+        private void btnWeaponKata_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fWeaponKataScoreCard_Master&rs:Command=Render");
+        }
+
+        private void btnSemiKnockdown_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fSemiKnockdownScoreCard_Master&rs:Command=Render");
+        }
+
+        private void btnKnockdown_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fKnockdownScoreCard_Master&rs:Command=Render");
+        }
+
         private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmEventManager frm = new frmEventManager();
@@ -45,7 +65,7 @@ namespace DKK_App
 
         private void pbPoweredBy_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.sqlhammer.com");
+            LaunchWebsite("https://www.sqlhammer.com");
         }
         
         private void pbPoweredBy_MouseEnter(object sender, System.EventArgs e)
@@ -83,6 +103,11 @@ namespace DKK_App
             RefreshEventSelect();
         }
         #endregion EventTriggers
+
+        private void LaunchWebsite (string URL)
+        {
+            System.Diagnostics.Process.Start(URL);
+        }
 
         private void RefreshAllEvents()
         {

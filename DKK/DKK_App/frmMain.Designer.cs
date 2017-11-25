@@ -47,13 +47,21 @@
             this.miEventManager = new System.Windows.Forms.ToolStripMenuItem();
             this.pbCompany = new System.Windows.Forms.PictureBox();
             this.pbPoweredBy = new System.Windows.Forms.PictureBox();
+            this.gbScorecards = new System.Windows.Forms.GroupBox();
+            this.btnKata = new System.Windows.Forms.Button();
+            this.btnWeaponKata = new System.Windows.Forms.Button();
+            this.btnKnockdown = new System.Windows.Forms.Button();
+            this.btnSemiKnockdown = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
+            this.gbReports.SuspendLayout();
             this.gbEvent.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.msMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).BeginInit();
+            this.gbScorecards.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -80,6 +88,8 @@
             // 
             // gbReports
             // 
+            this.gbReports.Controls.Add(this.label3);
+            this.gbReports.Controls.Add(this.gbScorecards);
             this.gbReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbReports.Location = new System.Drawing.Point(611, 6);
             this.gbReports.Name = "gbReports";
@@ -258,6 +268,69 @@
             this.pbPoweredBy.MouseLeave += new System.EventHandler(this.pbPoweredBy_MouseLeave);
             this.pbPoweredBy.MouseHover += new System.EventHandler(this.pbPoweredBy_MouseHover);
             // 
+            // gbScorecards
+            // 
+            this.gbScorecards.Controls.Add(this.btnKnockdown);
+            this.gbScorecards.Controls.Add(this.btnSemiKnockdown);
+            this.gbScorecards.Controls.Add(this.btnWeaponKata);
+            this.gbScorecards.Controls.Add(this.btnKata);
+            this.gbScorecards.Location = new System.Drawing.Point(15, 53);
+            this.gbScorecards.Name = "gbScorecards";
+            this.gbScorecards.Size = new System.Drawing.Size(1074, 213);
+            this.gbScorecards.TabIndex = 0;
+            this.gbScorecards.TabStop = false;
+            this.gbScorecards.Text = "Scorecards";
+            // 
+            // btnKata
+            // 
+            this.btnKata.Location = new System.Drawing.Point(21, 54);
+            this.btnKata.Name = "btnKata";
+            this.btnKata.Size = new System.Drawing.Size(200, 100);
+            this.btnKata.TabIndex = 0;
+            this.btnKata.Text = "Kata";
+            this.btnKata.UseVisualStyleBackColor = true;
+            this.btnKata.Click += new System.EventHandler(this.btnKata_Click);
+            // 
+            // btnWeaponKata
+            // 
+            this.btnWeaponKata.Location = new System.Drawing.Point(292, 54);
+            this.btnWeaponKata.Name = "btnWeaponKata";
+            this.btnWeaponKata.Size = new System.Drawing.Size(200, 100);
+            this.btnWeaponKata.TabIndex = 1;
+            this.btnWeaponKata.Text = "Weapon Kata";
+            this.btnWeaponKata.UseVisualStyleBackColor = true;
+            this.btnWeaponKata.Click += new System.EventHandler(this.btnWeaponKata_Click);
+            // 
+            // btnKnockdown
+            // 
+            this.btnKnockdown.Location = new System.Drawing.Point(851, 54);
+            this.btnKnockdown.Name = "btnKnockdown";
+            this.btnKnockdown.Size = new System.Drawing.Size(200, 100);
+            this.btnKnockdown.TabIndex = 3;
+            this.btnKnockdown.Text = "Knockdown";
+            this.btnKnockdown.UseVisualStyleBackColor = true;
+            this.btnKnockdown.Click += new System.EventHandler(this.btnKnockdown_Click);
+            // 
+            // btnSemiKnockdown
+            // 
+            this.btnSemiKnockdown.Location = new System.Drawing.Point(569, 54);
+            this.btnSemiKnockdown.Name = "btnSemiKnockdown";
+            this.btnSemiKnockdown.Size = new System.Drawing.Size(200, 100);
+            this.btnSemiKnockdown.TabIndex = 2;
+            this.btnSemiKnockdown.Text = "Semi Knockdown";
+            this.btnSemiKnockdown.UseVisualStyleBackColor = true;
+            this.btnSemiKnockdown.Click += new System.EventHandler(this.btnSemiKnockdown_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(329, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(427, 29);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Username: reports - Password: reports";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -279,6 +352,8 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tab1.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
+            this.gbReports.ResumeLayout(false);
+            this.gbReports.PerformLayout();
             this.gbEvent.ResumeLayout(false);
             this.gbEvent.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -287,6 +362,7 @@
             this.msMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).EndInit();
+            this.gbScorecards.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,5 +389,11 @@
         private System.Windows.Forms.MenuStrip msMenu;
         private System.Windows.Forms.ToolStripMenuItem miFile;
         private System.Windows.Forms.ToolStripMenuItem miEventManager;
+        private System.Windows.Forms.GroupBox gbScorecards;
+        private System.Windows.Forms.Button btnKnockdown;
+        private System.Windows.Forms.Button btnSemiKnockdown;
+        private System.Windows.Forms.Button btnWeaponKata;
+        private System.Windows.Forms.Button btnKata;
+        private System.Windows.Forms.Label label3;
     }
 }
