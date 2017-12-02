@@ -118,6 +118,7 @@
     <Build Include="Schemas\Event\Stored Procedures\spCreateEvent.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spUpdateEvent.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spDeleteEvent.sql" />
+    <Build Include="Schemas\Event\Views\vwMatchCompetitorDetail.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

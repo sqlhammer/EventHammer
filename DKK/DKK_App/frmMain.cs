@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DKK_App.Entities;
+using DKK_App.Models;
 
 namespace DKK_App
 {
@@ -17,24 +18,54 @@ namespace DKK_App
         }
 
         #region EventTriggers
+        private void refreshEventSelectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshEventSelect();
+        }
+
+        private void btnRetryConnection_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RefreshEventSelect();
+                this.btnRetryConnection.Visible = false;
+            }
+            catch
+            {
+                MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void btnKata_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fKataScoreCard_Master&rs:Command=Render");
+            string[] ParamNames = { "EventId" };
+            string[] Params = { CurrentEvent.EventId.ToString() };
+
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fKataScoreCard_Master", ParamNames, Params);
         }
 
         private void btnWeaponKata_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fWeaponKataScoreCard_Master&rs:Command=Render");
+            string[] ParamNames = { "EventId" };
+            string[] Params = { CurrentEvent.EventId.ToString() };
+
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fWeaponKataScoreCard_Master", ParamNames, Params);
         }
 
         private void btnSemiKnockdown_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fSemiKnockdownScoreCard_Master&rs:Command=Render");
+            string[] ParamNames = { "EventId" };
+            string[] Params = { CurrentEvent.EventId.ToString() };
+
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fSemiKnockdownScoreCard_Master", ParamNames, Params);
         }
 
         private void btnKnockdown_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fKnockdownScoreCard_Master&rs:Command=Render");
+            string[] ParamNames = { "EventId" };
+            string[] Params = { CurrentEvent.EventId.ToString() };
+
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fKnockdownScoreCard_Master", ParamNames, Params);
         }
 
         private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,7 +135,25 @@ namespace DKK_App
         }
         #endregion EventTriggers
 
-        private void LaunchWebsite (string URL)
+        private string BuildParameterString(string[] ParamNames, string[] Params)
+        {
+            string str = "";
+
+            for(int i = 0; i <= ParamNames.GetUpperBound(0); i++)
+            {
+                str = str + "&" + ParamNames[i] + "=" + Params[i];
+            }
+
+            return str;
+        }
+
+        private void LaunchWebsite (string URL, string[] ParamNames, string[] Params)
+        {
+            URL = URL + BuildParameterString(ParamNames, Params);
+            System.Diagnostics.Process.Start(URL);
+        }
+
+        private void LaunchWebsite(string URL)
         {
             System.Diagnostics.Process.Start(URL);
         }
@@ -121,12 +170,13 @@ namespace DKK_App
 
         private void RefreshFormTitle()
         {
-            CurrentEvent = SetCurrentEvent(AllEvents);
             this.Text = "Event Hammer - " + CurrentEvent.EventName + " - " + CurrentEvent.Date.ToString("MM/dd/yyyy");
         }
 
         private void RefreshEventSelect()
         {
+            RefreshAllEvents();
+
             this.cbEventSelect.Items.Clear();
             foreach(Event Event in AllEvents)
             {
@@ -183,10 +233,61 @@ namespace DKK_App
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            //Set TreeListView delegates
+            tlvMatches.CanExpandGetter = delegate (object x) { return true; };
+            tlvMatches.ChildrenGetter = delegate (object x) { return ((Models.MatchModel)x).Children; };
+
             DisableAllTabs();
             SetEventSearchDateRange();
-            RefreshAllEvents();
-            RefreshEventSelect();
+
+            try
+            {
+                RefreshEventSelect();
+            }
+            catch
+            {
+                MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.btnRetryConnection.Visible = true;
+            }
+        }        
+
+        private void RefreshMatches()
+        {
+            List<MatchCompetitor> mcs = DataAccess.GetMatchCompetitors(CurrentEvent);
+            
+            tlvMatches.Roots = Global.GetMatchModel(mcs);
+        }
+
+        private void RefreshCompetitors()
+        {
+            List<MatchCompetitor> mcs = DataAccess.GetMatchCompetitors(CurrentEvent);
+
+            tlvCompetitors.Roots = Global.GetCompetitorModel(mcs);
+        }
+
+        private void rbApplicableMatches_CheckedChanged(object sender, EventArgs e)
+        {
+            if(this.rbApplicableMatches.Checked)
+            {
+                this.rbAll.Checked = false;
+            }
+        }
+
+        private void rbAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.rbAll.Checked)
+            {
+                this.rbApplicableMatches.Checked = false;
+            }
+        }
+
+        private void tabMatch_Click(object sender, EventArgs e)
+        {
+            if (this.tabMatch.Enabled)
+            {
+                RefreshMatches();
+                RefreshCompetitors();
+            }
         }
     }
 }

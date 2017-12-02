@@ -105,13 +105,11 @@ namespace DKK_App
             if (IsEdit)
             {                
                 DataAccess.UpdateEvent(Event);
-                MessageBox.Show("Update complete.");
                 this.Close();
             }
             else
             {
                 DataAccess.InsertEvent(Event);
-                MessageBox.Show("Creation complete.");
                 this.Close();
             }
         }

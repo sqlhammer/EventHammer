@@ -1,0 +1,15 @@
+Notes:
+
+Reg form data points:
+---------------------
+Height
+
+reports
+---------------------
+payments
+scorecards
+weight in list
+all events
+competitors by school
+division numbers for ring signs
+list of schools/owners for announcements
