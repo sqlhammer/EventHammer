@@ -148,21 +148,6 @@ namespace DKK_App
         #region Division Gets
         public static async Task<List<Division>> GetDivisions()
         {
-            //string query = @"SELECT d.DivisionId
-	           //                   ,d.MinimumWeight_lb
-	           //                   ,d.MaximumWeight_lb
-	           //                   ,d.WeightClass
-	           //                   ,d.Gender
-	           //                   ,d.MinimumLevelId
-	           //                   ,d.MaximumLevelId
-	           //                   ,d.MinimumAge
-	           //                   ,d.MaximumAge
-	           //                   ,d.IsKata
-	           //                   ,d.MatchTypeId
-	           //                   ,d.MatchTypeName
-	           //                   ,d.IsSpecialConsideration
-            //                FROM [Event].[vwDivision] d";
-
             string query = @"SELECT d.DivisionId
 	                              ,d.MinimumWeight_lb
 	                              ,d.MaximumWeight_lb

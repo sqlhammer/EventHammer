@@ -13,3 +13,9 @@ all events
 competitors by school
 division numbers for ring signs
 list of schools/owners for announcements
+
+Next tasks:
+---------------------
+Drag competitor into match
+Button to delete a match entirely
+Form for create new match

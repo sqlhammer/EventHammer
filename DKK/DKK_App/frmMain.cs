@@ -21,8 +21,7 @@ namespace DKK_App
         {
             InitializeComponent();
         }
-
-        #region EventTriggers
+        
         private void btnRefreshMatchTab_Click(object sender, EventArgs e)
         {
             MatchModels = new List<MatchModel>();
@@ -305,7 +304,6 @@ namespace DKK_App
             RefreshAllEvents();
             RefreshEventSelect();
         }
-        #endregion EventTriggers
 
         private string BuildParameterString(string[] ParamNames, string[] Params)
         {
