@@ -119,6 +119,9 @@
     <Build Include="Schemas\Event\Stored Procedures\spUpdateEvent.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spDeleteEvent.sql" />
     <Build Include="Schemas\Event\Views\vwMatchCompetitorDetail.sql" />
+    <Build Include="Schemas\Event\MatchSequence.sql" />
+    <Build Include="Schemas\Event\Stored Procedures\spPurgeCompetitors.sql" />
+    <Build Include="Schemas\Event\Views\vwDivision.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />
@@ -134,5 +137,8 @@
       <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
       <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
     </ArtifactReference>
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="DKK.refactorlog" />
   </ItemGroup>
 </Project>

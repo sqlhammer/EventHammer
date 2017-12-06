@@ -3,105 +3,289 @@ using DKK_App.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DKK_App.Enums;
+using System.Threading.Tasks;
 
 namespace DKK_App
 {
     public static class Global
     {
-        private enum LengthType
+        #region Competitor Filters
+        public static async Task<List<CompetitorModel>> FilterCompetitorModelAsync(List<CompetitorModel> model, FilterType filter, string pattern)
         {
-            Short = 0,
-            Long = 1
-        }
+            pattern = pattern.ToLower();
 
-        private static string GetMatchTypeDisplayName(MatchType mt, LengthType len = LengthType.Long)
-        {
-            string dn = "";
-            string specialSuffix = "";
-
-            switch (len)
+            switch (filter)
             {
-                case LengthType.Short:
-                    specialSuffix = "*";
-                    break;
-                case LengthType.Long: 
-                    specialSuffix = " (IsSpecialConsideration)";
-                    break;
+                case FilterType.Belt:
+                    return await FilterCompetitorModelAsync_Belt(model, pattern);
+                case FilterType.DisplayName:
+                    return await FilterCompetitorModelAsync_DisplayName(model, pattern);
+                case FilterType.Weight:
+                    return await FilterCompetitorModelAsync_Weight(model, pattern);
+                case FilterType.Age:
+                    return await FilterCompetitorModelAsync_Age(model, pattern);
             }
 
-            switch (mt.IsSpecialConsideration)
-            {
-                case true:
-                    dn = mt.MatchTypeName + specialSuffix;
-                    break;
-                case false:
-                    dn = mt.MatchTypeName;
-                    break;
-            }
-
-            return dn;
+            return model;
         }
 
+        private static async Task<List<CompetitorModel>> FilterCompetitorModelAsync_Belt(List<CompetitorModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                return model.Where(m => !String.IsNullOrEmpty(m.RankName.ToLower()) && m.RankName.ToLower().Contains(pattern)).ToList();
+            });
+
+            return result;
+        }
+
+        private static async Task<List<CompetitorModel>> FilterCompetitorModelAsync_DisplayName(List<CompetitorModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                return model.Where(m => !String.IsNullOrEmpty(m.DisplayName.ToLower()) && m.DisplayName.ToLower().Contains(pattern)).ToList();
+            });
+
+            return result;
+        }
+
+        private static async Task<List<CompetitorModel>> FilterCompetitorModelAsync_Age(List<CompetitorModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                return model.Where(m => m.Age >= Convert.ToInt32(pattern) - 2 && m.Age <= Convert.ToInt32(pattern) + 2).ToList();
+            });
+
+            return result;
+        }
+
+        private static async Task<List<CompetitorModel>> FilterCompetitorModelAsync_Weight(List<CompetitorModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                return model.Where(m => m.Weight >= Convert.ToDecimal(pattern) - 5 && m.Weight <= Convert.ToDecimal(pattern) + 5).ToList();
+            });
+
+            return result;
+        }
+        #endregion
+
+        #region Match Filters
+        public static async Task<List<MatchModel>> FilterMatchModelAsync (List<MatchModel> model, FilterType filter, string pattern)
+        {
+            pattern = pattern.ToLower();
+
+            switch (filter)
+            {
+                case FilterType.Belt:
+                    return await FilterMatchModelAsync_Belt(model, pattern);
+                case FilterType.DisplayName:
+                    return await FilterMatchModelAsync_DisplayName(model, pattern);
+                case FilterType.Weight:
+                    return await FilterMatchModelAsync_Weight(model, pattern);
+                case FilterType.Age:
+                    return await FilterMatchModelAsync_Age(model, pattern);
+                case FilterType.DojoName:
+                    return await FilterMatchModelAsync_Dojo(model, pattern);
+                case FilterType.MatchDisplayName:
+                    return await FilterMatchModelAsync_MatchDisplayName(model, pattern);
+                case FilterType.MatchType:
+                    return await FilterMatchModelAsync_MatchType(model, pattern);
+            }
+
+            return model;
+        }
+
+        public static List<MatchModel> FilterMatchModelAsync_ApplicableMatches (List<MatchModel> model, CompetitorModel competitor, List<Division> divisions)
+        {
+            if (divisions.Count == 0)
+                return model;
+
+            List<Division> filteredDivs = new List<Division>();
+
+            foreach (var div in divisions)
+            {
+                if (div.MinAge <= competitor.Age &&
+                    div.MaxAge >= competitor.Age &&
+                    div.Gender == competitor.Gender &&
+                    div.MinRank.Level <= competitor.Level &&
+                    div.MaxRank.Level >= competitor.Level &&
+                    div.MinWeight_lb <= competitor.Weight &&
+                    div.MaxWeight_lb >= competitor.Weight)
+                {
+                    filteredDivs.Add(div);
+                }
+            }
+
+            List<MatchModel> filteredModel = new List<MatchModel>();
+
+            foreach (var m in model)
+            {
+                if(filteredDivs.Any(d => d.DivisionId == m.DivisionId))
+                {
+                    filteredModel.Add(m);
+                }
+            }
+
+            return filteredModel;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_Age(List<MatchModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                List<MatchModel> filteredModel = new List<MatchModel>();
+
+                foreach (var m in model)
+                {
+                    if (m.Children.Any(i => i.Age >= Convert.ToInt32(pattern) - 2 &&
+                        i.Age <= Convert.ToInt32(pattern) + 2))
+                    {
+                        filteredModel.Add(m);
+                    }
+                }
+
+                return filteredModel;
+            });
+                        
+            return result;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_Weight(List<MatchModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                List<MatchModel> filteredModel = new List<MatchModel>();
+
+                foreach (var m in model)
+                {
+                    if (m.Children.Any(i => i.Weight >= Convert.ToDecimal(pattern) - 5 &&
+                        i.Weight <= Convert.ToDecimal(pattern) + 5))
+                    {
+                        filteredModel.Add(m);
+                    }
+                }
+
+                return filteredModel;
+            });
+
+            return result;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_MatchDisplayName(List<MatchModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                return model.Where(m => !String.IsNullOrEmpty(m.MatchDisplayName.ToLower()) && m.MatchDisplayName.ToLower().Contains(pattern)).ToList();
+            });
+
+            return result;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_Dojo(List<MatchModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                List<MatchModel> filteredModel = new List<MatchModel>();
+
+                foreach (var m in model)
+                {
+                    if (m.Children.Any(i => i.DojoName.ToLower().Contains(pattern)))
+                    {
+                        filteredModel.Add(m);
+                    }
+                }
+
+                return filteredModel;
+            });
+
+            return result;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_MatchType(List<MatchModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                return model.Where(m => !String.IsNullOrEmpty(m.MatchTypeName.ToLower()) && m.MatchTypeName.ToLower().Contains(pattern)).ToList();
+            });
+
+            return result;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_Belt(List<MatchModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                List<MatchModel> filteredModel = new List<MatchModel>();
+
+                foreach (var m in model)
+                {
+                    if (m.Children.Any(i => i.RankName.ToLower().Contains(pattern)))
+                    {
+                        filteredModel.Add(m);
+                    }
+                }
+
+                return filteredModel;
+            });
+
+            return result;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_DisplayName(List<MatchModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                List<MatchModel> filteredModel = new List<MatchModel>();
+
+                foreach (var m in model)
+                {
+                    if (m.Children.Any(i => i.DisplayName.ToLower().Contains(pattern)))
+                    {
+                        filteredModel.Add(m);
+                    }
+                }
+
+                return filteredModel;
+            });
+
+            return result;
+        }
+        #endregion
+
+        #region Model Builders
         public static List<MatchModel> GetMatchModel(List<MatchCompetitor> mcs)
         {
-            //TODO: Refactor this whole process when you get smarter.
-
             List<Models.MatchModel> model = new List<Models.MatchModel>();
             List<Models.MatchModel> competitors = new List<MatchModel>();
-            List<Models.MatchModel> subdivisions = new List<MatchModel>();
             List<Models.MatchModel> divisions = new List<MatchModel>();
-            List<Models.MatchModel> matchtypes = new List<MatchModel>();
 
             //Build models
 
-            //MatchTypes
+            //Grouping
             foreach (MatchCompetitor obj in mcs)
             {
                 MatchModel mm = new MatchModel();
 
-                if (matchtypes.Any(m => m.MatchTypeId == obj.Match.MatchType.MatchTypeId))
+                if (divisions.Any(m => m.MatchTypeId == obj.Match.MatchType.MatchTypeId &&
+                    m.MatchId == obj.Match.MatchId))
+                {
                     continue;
-
-                mm.MatchTypeId = obj.Match.MatchType.MatchTypeId;
-                mm.MatchTypeName = GetMatchTypeDisplayName(obj.Match.MatchType, LengthType.Short);
-                mm.Children = new List<MatchModel>();
-
-                matchtypes.Add(mm);
-            }
-
-            //Divisions
-            foreach (MatchCompetitor obj in mcs)
-            {
-                MatchModel mm = new MatchModel();
-
-                if (divisions.Any(m => m.DivisionId == obj.Match.Division.DivisionId &&
-                    m.MatchTypeId == obj.Match.MatchType.MatchTypeId))
-                    continue;
+                }
 
                 mm.DivisionId = obj.Match.Division.DivisionId;
                 mm.MatchTypeId = obj.Match.MatchType.MatchTypeId;
+                mm.MatchId = obj.Match.MatchId;
+                mm.MatchDisplayId = obj.Match.MatchDisplayId;
+                mm.SubDivisionId = obj.Match.SubDivisionId;
+                mm.MatchTypeName = GetMatchTypeDisplayName(obj.Match.MatchType,LengthType.Long);
                 mm.Children = new List<MatchModel>();
 
                 divisions.Add(mm);
             }
 
-            //SubDivisions
-            foreach (MatchCompetitor obj in mcs)
-            {
-                MatchModel mm = new MatchModel();
-
-                if (subdivisions.Any(m => m.MatchId == obj.Match.MatchId))
-                    continue;
-
-                mm.MatchId = obj.Match.MatchId;
-                mm.DivisionId = obj.Match.Division.DivisionId;
-                mm.SubDivisionId = obj.Match.SubDivisionId;
-                mm.Children = new List<MatchModel>();
-
-                subdivisions.Add(mm);
-            }
-
-            //Competitor
+            //Details
             foreach (MatchCompetitor obj in mcs)
             {
                 MatchModel mm = new MatchModel();
@@ -114,8 +298,7 @@ namespace DKK_App
                 mm.MatchId = obj.Match.MatchId;
                 mm.Age = obj.Competitor.Age;
                 mm.DisplayName = obj.Competitor.Person.DisplayName;
-                //TODO: dojoname 
-                //mm.DojoName = obj.Competitor.
+                mm.DojoName = obj.Competitor.Dojo.Facility.FacilityName;
                 mm.Gender = obj.Competitor.Person.Gender;
                 mm.RankName = obj.Competitor.Rank.RankName;
                 mm.Weight = obj.Competitor.Weight;
@@ -125,14 +308,12 @@ namespace DKK_App
             }
 
             //Nest the models
-
-            // Comp > Sub Divs
-                        
+                                    
             foreach (MatchModel comp in competitors)
             {
                 MatchCompetitor mc = mcs.First(m => m.Competitor.CompetitorId == (int)comp.CompetitorId && 
                     m.Match.MatchId == comp.MatchId);
-                MatchModel subdiv = subdivisions.First(m => m.MatchId == mc.Match.MatchId);
+                MatchModel div = divisions.First(m => m.MatchId == mc.Match.MatchId);
 
                 MatchModel mm = new MatchModel
                 {
@@ -146,49 +327,14 @@ namespace DKK_App
                     Children = comp.Children
                 };
 
-                subdiv.Children.Add(mm);
-            }
-
-            // Sub Divs > Divs
-            
-            foreach (MatchModel subdiv in subdivisions)
-            {
-                MatchCompetitor mc = mcs.First(m => m.Match.MatchId == subdiv.MatchId);
-                MatchModel div = divisions.First(m => m.MatchTypeId == mc.Match.MatchType.MatchTypeId &&
-                    m.DivisionId == mc.Match.Division.DivisionId);
-
-                MatchModel mm = new MatchModel
-                {
-                    SubDivisionId = subdiv.SubDivisionId,
-                    MatchId = subdiv.MatchId,
-                    Children = subdiv.Children
-                };
-
                 div.Children.Add(mm);
             }
-
-            // Divs > MatchTypes
+            
+            // Divs > model
 
             foreach (MatchModel div in divisions)
             {
-                MatchCompetitor mc = mcs.First(m => m.Match.Division.DivisionId == div.DivisionId &&
-                    m.Match.MatchType.MatchTypeId == div.MatchTypeId);
-                MatchModel mt = matchtypes.First(m => m.MatchTypeId == mc.Match.MatchType.MatchTypeId);
-
-                MatchModel mm = new MatchModel
-                {
-                    DivisionId = div.DivisionId,
-                    Children = div.Children
-                };
-
-                mt.Children.Add(mm);
-            }
-
-            // MatchTypes > model
-
-            foreach (MatchModel mt in matchtypes)
-            {
-                model.Add(mt);
+                model.Add(div);
             }
 
             return model;
@@ -208,10 +354,10 @@ namespace DKK_App
                 mm.CompetitorId = obj.Competitor.CompetitorId;
                 mm.Age = obj.Competitor.Age;
                 mm.DisplayName = obj.Competitor.Person.DisplayName;
-                //TODO: dojoname 
-                //mm.DojoName = obj.Competitor.
+                mm.DojoName = obj.Competitor.Dojo.Facility.FacilityName;
                 mm.Gender = obj.Competitor.Person.Gender;
                 mm.RankName = obj.Competitor.Rank.RankName;
+                mm.Level = obj.Competitor.Rank.Level;
                 mm.Weight = obj.Competitor.Weight;
 
                 model.Add(mm);
@@ -219,6 +365,38 @@ namespace DKK_App
 
             return model;
         }
+        #endregion
+
+
+
+        private static string GetMatchTypeDisplayName(MatchType mt, LengthType len = LengthType.Long)
+        {
+            string dn = "";
+            string specialSuffix = "";
+
+            switch (len)
+            {
+                case LengthType.Short:
+                    specialSuffix = "*";
+                    break;
+                case LengthType.Long: 
+                    specialSuffix = " (Special Consideration)";
+                    break;
+            }
+
+            switch (mt.IsSpecialConsideration)
+            {
+                case true:
+                    dn = mt.MatchTypeName + specialSuffix;
+                    break;
+                case false:
+                    dn = mt.MatchTypeName;
+                    break;
+            }
+
+            return dn;
+        }
+
 
         public static string IsValidEvent(Event Event)
         {

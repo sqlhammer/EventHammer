@@ -4,32 +4,33 @@ using System.Data.SqlClient;
 using System.Configuration;
 using DKK_App.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DKK_App
 {
-    public static class DataAccess
+    public static class DataAccessAsync
     {        
         #region EventType Gets
-        public static List<EventType> GetEventTypeByName(string name)
+        public static async Task<List<EventType>> GetEventTypeByName(string name)
         {
             string query = @"SELECT et.EventTypeId
 	                                ,et.Name EventTypeName
                             FROM [Event].[EventType] et
                             WHERE et.Name = '" + name + "'";
 
-            return QueryEventTypeInformation(query);
+            return await QueryEventTypeInformation(query);
         }
 
-        public static List<EventType> GetEventTypes()
+        public static async Task<List<EventType>> GetEventTypes()
         {
             string query = @"SELECT et.EventTypeId
 	                                ,et.Name EventTypeName
                             FROM [Event].[EventType] et";
-
-            return QueryEventTypeInformation(query);
+            
+            return await QueryEventTypeInformation(query);
         }
-
-        private static List<EventType> QueryEventTypeInformation(string query)
+        
+        private static async Task<List<EventType>> QueryEventTypeInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -43,7 +44,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 types.Add(new EventType
                                 {
@@ -61,7 +62,7 @@ namespace DKK_App
         #endregion
 
         #region Competitor Gets
-        public static Competitor GetCompetitor(int id)
+        public static async Task<Competitor> GetCompetitor(int id)
         {
             string query = @"SELECT CompetitorId
 	                          ,PersonId
@@ -81,17 +82,18 @@ namespace DKK_App
                         FROM Person.Competitor
                         WHERE CompetitorId = " + id.ToString();
 
-            Competitor c = QueryCompetitorInformation(query).FirstOrDefault();
+            List<Competitor> cs = await QueryCompetitorInformation(query);
+            Competitor c = cs.FirstOrDefault();
 
-            c.Person = GetPerson(c.Person.PersonId);
-            c.Parent = GetPerson(c.Parent.PersonId);
-            c.Rank = GetRank(c.Rank.RankId);
-            c.Event = GetEventInformationById(c.Event.EventId);
+            c.Person = await GetPerson(c.Person.PersonId);
+            c.Parent = await GetPerson(c.Parent.PersonId);
+            c.Rank = await GetRank(c.Rank.RankId);
+            c.Event = await GetEventInformationById(c.Event.EventId);
 
             return c;
         }
         
-        private static List<Competitor> QueryCompetitorInformation(string query)
+        private static async Task<List<Competitor>> QueryCompetitorInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -109,7 +111,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 rank.RankId = Convert.ToInt32(reader["RankId"].ToString());
                                 person.PersonId = Convert.ToInt32(reader["PersonId"].ToString());
@@ -120,7 +122,7 @@ namespace DKK_App
                                     Age = Convert.ToInt32(reader["Age"].ToString()),
                                     CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
                                     DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
-                                    Dojo = GetDojo(Convert.ToInt32(reader["DojoId"].ToString())),
+                                    Dojo = await GetDojo(Convert.ToInt32(reader["DojoId"].ToString())),
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
                                     IsKnockdown = Convert.ToBoolean(reader["IsKnockdown"].ToString()),
                                     IsMinor = Convert.ToBoolean(reader["IsMinor"].ToString()),
@@ -144,8 +146,23 @@ namespace DKK_App
         #endregion
         
         #region Division Gets
-        public static List<Division> GetDivisions()
+        public static async Task<List<Division>> GetDivisions()
         {
+            //string query = @"SELECT d.DivisionId
+	           //                   ,d.MinimumWeight_lb
+	           //                   ,d.MaximumWeight_lb
+	           //                   ,d.WeightClass
+	           //                   ,d.Gender
+	           //                   ,d.MinimumLevelId
+	           //                   ,d.MaximumLevelId
+	           //                   ,d.MinimumAge
+	           //                   ,d.MaximumAge
+	           //                   ,d.IsKata
+	           //                   ,d.MatchTypeId
+	           //                   ,d.MatchTypeName
+	           //                   ,d.IsSpecialConsideration
+            //                FROM [Event].[vwDivision] d";
+
             string query = @"SELECT d.DivisionId
 	                              ,d.MinimumWeight_lb
 	                              ,d.MaximumWeight_lb
@@ -155,16 +172,13 @@ namespace DKK_App
 	                              ,d.MaximumLevelId
 	                              ,d.MinimumAge
 	                              ,d.MaximumAge
-	                              ,d.IsKata
-	                              ,d.MatchTypeId
-	                              ,d.MatchTypeName
-	                              ,d.IsSpecialConsideration
-                            FROM [Event].[vwDivision] d";
+	                              ,d.IsKata 
+                            FROM Event.Division d";
 
-            return QueryDivisionInformation(query);
+            return await QueryDivisionInformation(query);
         }
 
-        private static List<Division> QueryDivisionInformation(string query)
+        private static async Task<List<Division>> QueryDivisionInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -178,7 +192,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 objs.Add(new Division
                                 {
@@ -186,10 +200,10 @@ namespace DKK_App
                                     Gender = reader["Gender"].ToString(),
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
                                     MaxAge = Convert.ToInt32(reader["MaximumAge"].ToString()),
-                                    MaxRank = GetRank(Convert.ToInt32(reader["MaximumLevelId"].ToString())),
+                                    MaxRank = await GetRank(Convert.ToInt32(reader["MaximumLevelId"].ToString())),
                                     MaxWeight_lb = Convert.ToDecimal(reader["MaximumWeight_lb"].ToString()),
                                     MinAge = Convert.ToInt32(reader["MinimumAge"].ToString()),
-                                    MinRank = GetRank(Convert.ToInt32(reader["MinimumLevelId"].ToString())),
+                                    MinRank = await GetRank(Convert.ToInt32(reader["MinimumLevelId"].ToString())),
                                     MinWeight_lb = Convert.ToDecimal(reader["MinimumWeight_lb"].ToString()),
                                     WeightClass = reader["WeightClass"].ToString()
                                 });
@@ -204,7 +218,7 @@ namespace DKK_App
         #endregion
 
         #region Dojo Gets
-        public static Dojo GetDojo(int id)
+        public static async Task<Dojo> GetDojo(int id)
         {
             string query = @"SELECT d.DojoId
 	                              ,d.FacilityId
@@ -212,10 +226,13 @@ namespace DKK_App
                             FROM Facility.Dojo d
                             WHERE d.DojoId = " + id.ToString();
 
-            return QueryDojoInformation(query).FirstOrDefault();
+            var results = await QueryDojoInformation(query);
+            var result = results.FirstOrDefault();
+
+            return result;
         }
 
-        private static List<Dojo> QueryDojoInformation(string query)
+        private static async Task<List<Dojo>> QueryDojoInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -229,13 +246,13 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 objs.Add(new Dojo
                                 {
                                     DojoId = Convert.ToInt32(reader["DojoId"].ToString()),
-                                    Facility = GetFacility(Convert.ToInt32(reader["FacilityId"].ToString())),
-                                    MartialArtType = GetMartialArtType(Convert.ToInt32(reader["MartialArtTypeId"].ToString()))
+                                    Facility = await GetFacility(Convert.ToInt32(reader["FacilityId"].ToString())),
+                                    MartialArtType = await GetMartialArtType(Convert.ToInt32(reader["MartialArtTypeId"].ToString()))
                                 });
                             }
                         }
@@ -248,17 +265,20 @@ namespace DKK_App
         #endregion
 
         #region MartialArtType Gets
-        public static MartialArtType GetMartialArtType(int id)
+        public static async Task<MartialArtType> GetMartialArtType(int id)
         {
             string query = @"SELECT mat.MartialArtTypeId
 	                              ,mat.Name
                             FROM Facility.MartialArtType mat
                             WHERE mat.MartialArtTypeId = " + id.ToString();
 
-            return QueryMartialArtTypeInformation(query).FirstOrDefault();
+            var results = await QueryMartialArtTypeInformation(query);
+            var result = results.FirstOrDefault();
+
+            return result; 
         }
 
-        private static List<MartialArtType> QueryMartialArtTypeInformation(string query)
+        private static async Task<List<MartialArtType>> QueryMartialArtTypeInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -272,7 +292,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 objs.Add(new MartialArtType
                                 {
@@ -290,7 +310,7 @@ namespace DKK_App
         #endregion
 
         #region Facility Gets
-        public static Facility GetFacility(int id)
+        public static async Task<Facility> GetFacility(int id)
         {
             string query = @"SELECT f.FacilityId
 	                              ,f.Name
@@ -308,10 +328,13 @@ namespace DKK_App
                             FROM Facility.Facility f
                             WHERE f.FacilityId = " + id.ToString();
 
-            return QueryFacilityInformation(query).FirstOrDefault();
+            var results = await QueryFacilityInformation(query);
+            var result = results.FirstOrDefault();
+
+            return result;
         }
 
-        private static List<Facility> QueryFacilityInformation(string query)
+        private static async Task<List<Facility>> QueryFacilityInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -325,23 +348,29 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
+                                Person owner = new Person();
+                                if(!String.IsNullOrEmpty(reader["OwnerId"].ToString()))
+                                {
+                                    owner = await GetPerson(Convert.ToInt32(reader["OwnerId"].ToString()));
+                                }
+
                                 objs.Add(new Facility
                                 {
-                                    AppartmentCode = reader["AppartmentCode"].ToString(),
-                                    City = reader["City"].ToString(),
-                                    Country = reader["Country"].ToString(),
-                                    Email = reader["Email"].ToString(),
                                     FacilityName = reader["Name"].ToString(),
                                     FacilityId = Convert.ToInt32(reader["FacilityId"].ToString()),
-                                    Owner = (!String.IsNullOrEmpty(reader["OwnerId"].ToString())) ? GetPerson(Convert.ToInt32(reader["OwnerId"].ToString())) : null,
-                                    FacilityType = GetFacilityType(Convert.ToInt32(reader["FacilityTypeId"].ToString())),
-                                    PhoneNumber = reader["PhoneNumber"].ToString(),
-                                    PostalCode = reader["PostalCode"].ToString(),
-                                    StateProvidence = reader["StateProvidence"].ToString(),
-                                    StreetAddress1 = (!String.IsNullOrEmpty(reader["StreetAddress1"].ToString())) ? reader["StreetAddress1"].ToString() : null,
-                                    StreetAddress2 = (!String.IsNullOrEmpty(reader["StreetAddress2"].ToString())) ? reader["StreetAddress2"].ToString() : null
+                                    FacilityType = await GetFacilityType(Convert.ToInt32(reader["FacilityTypeId"].ToString())),
+                                    AppartmentCode = (reader["AppartmentCode"] != null) ? reader["AppartmentCode"].ToString() : null,
+                                    City = (reader["City"] != null) ? reader["City"].ToString() : null,
+                                    Country = (reader["Country"] != null) ? reader["Country"].ToString() : null,
+                                    Email = (reader["Email"] != null) ? reader["Email"].ToString() : null,
+                                    Owner = owner,
+                                    PhoneNumber = (reader["PhoneNumber"] != null) ? reader["PhoneNumber"].ToString() : null,
+                                    PostalCode = (reader["PostalCode"] != null) ? reader["PostalCode"].ToString() : null,
+                                    StateProvidence = (reader["StateProvidence"] != null) ? reader["StateProvidence"].ToString() : null,
+                                    StreetAddress1 = (reader["StreetAddress1"] != null) ? reader["StreetAddress1"].ToString() : null,
+                                    StreetAddress2 = (reader["StreetAddress2"] != null) ? reader["StreetAddress2"].ToString() : null
                                 });
                             }
                         }
@@ -354,17 +383,20 @@ namespace DKK_App
         #endregion
 
         #region FacilityType Gets
-        public static FacilityType GetFacilityType(int id)
+        public static async Task<FacilityType> GetFacilityType(int id)
         {
             string query = @"SELECT ft.FacilityTypeId
 	                              ,ft.Name
                             FROM Facility.FacilityType ft
                             WHERE ft.FacilityTypeId =" + id.ToString();
 
-            return QueryFacilityTypeInformation(query).FirstOrDefault();
+            var results = await QueryFacilityTypeInformation(query);
+            var result = results.FirstOrDefault();
+
+            return result;
         }
 
-        private static List<FacilityType> QueryFacilityTypeInformation(string query)
+        private static async Task<List<FacilityType>> QueryFacilityTypeInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -378,7 +410,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 objs.Add(new FacilityType
                                 {
@@ -396,7 +428,7 @@ namespace DKK_App
         #endregion
 
         #region Rank Gets
-        public static Rank GetRank(int id)
+        public static async Task<Rank> GetRank(int id)
         {
             string query = @"SELECT r.RankId
 	                              ,r.Name
@@ -405,10 +437,13 @@ namespace DKK_App
                             FROM Event.Rank r
                             WHERE r.RankId = " + id.ToString();
 
-            return QueryRankInformation(query).FirstOrDefault();
+            var results = await QueryRankInformation(query);
+            var result = results.FirstOrDefault();
+
+            return result;
         }
 
-        private static List<Rank> QueryRankInformation(string query)
+        private static async Task<List<Rank>> QueryRankInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -422,7 +457,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 objs.Add(new Rank
                                 {
@@ -442,17 +477,20 @@ namespace DKK_App
         #endregion
 
         #region Title Gets
-        public static Title GetTitle(int id)
+        public static async Task<Title> GetTitle(int id)
         {
             string query = @"SELECT t.TitleId
 	                              ,t.Name
                             FROM Person.Title t
                             WHERE t.TitleId = " + id.ToString();
             
-            return QueryTitleInformation(query).FirstOrDefault();
+            var results = await QueryTitleInformation(query);
+            var result = results.FirstOrDefault();
+
+            return result;
         }
 
-        private static List<Title> QueryTitleInformation(string query)
+        private static async Task<List<Title>> QueryTitleInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -466,7 +504,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 objs.Add(new Title
                                 {
@@ -484,7 +522,7 @@ namespace DKK_App
         #endregion
 
         #region Person Gets
-        public static Person GetPerson(int id)
+        public static async Task<Person> GetPerson(int id)
         {
             string query = @"SELECT p.PersonId
 	                          ,p.FirstName
@@ -505,13 +543,14 @@ namespace DKK_App
                         FROM Person.Person p
                         WHERE p.PersonId = " + id.ToString();
 
-            Person person = QueryPersonInformation(query).FirstOrDefault();
-            person.Title = GetTitle(person.Title.TitleId);
+            var persons = await QueryPersonInformation(query);
+            Person person = persons.FirstOrDefault();
+            person.Title = await GetTitle(person.Title.TitleId);
 
             return person;
         }
 
-        private static List<Person> QueryPersonInformation(string query)
+        private static async Task<List<Person>> QueryPersonInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -525,7 +564,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 Title t = new Title();
                                 string title = reader["TitleId"].ToString();
@@ -564,7 +603,7 @@ namespace DKK_App
         #endregion
 
         #region MatchType Gets
-        public static MatchType GetMatchType(int id)
+        public static async Task<MatchType> GetMatchType(int id)
         {
             string query = @"SELECT MatchTypeId
 	                              ,Name
@@ -572,10 +611,13 @@ namespace DKK_App
                             FROM Event.MatchType
                             WHERE MatchTypeId = " + id.ToString();
 
-            return QueryMatchTypeInformation(query).FirstOrDefault();
+            var results = await QueryMatchTypeInformation(query);
+            var result = results.FirstOrDefault();
+
+            return result;
         }
 
-        private static List<MatchType> QueryMatchTypeInformation(string query)
+        private static async Task<List<MatchType>> QueryMatchTypeInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -589,7 +631,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 objs.Add(new MatchType
                                 {
@@ -608,7 +650,7 @@ namespace DKK_App
         #endregion
 
         #region Match Gets
-        public static List<Match> GetMatches(Event Event)
+        public static async Task<List<Match>> GetMatches(Event Event)
         {
             string query = @"SELECT MatchId
                                   ,MatchDisplayId
@@ -619,10 +661,10 @@ namespace DKK_App
                             FROM [Event].[Match] m
                             WHERE m.EventId = " + Event.EventId.ToString();
 
-            return QueryMatchInformation(query);
+            return await QueryMatchInformation(query);
         }
 
-        public static Match GetMatch(int id)
+        public static async Task<Match> GetMatch(int id)
         {
             string query = @"SELECT MatchId
                                   ,MatchDisplayId
@@ -633,14 +675,15 @@ namespace DKK_App
                             FROM [Event].[Match] m
                             WHERE m.MatchId = " + id.ToString();
 
-            Match m = QueryMatchInformation(query).FirstOrDefault();
+            var results = await QueryMatchInformation(query);
+            Match m = results.FirstOrDefault();
 
-            m.MatchType = GetMatchType(m.MatchType.MatchTypeId);
+            m.MatchType = await GetMatchType(m.MatchType.MatchTypeId);
 
             return m;
         }
 
-        private static List<Match> QueryMatchInformation(string query)
+        private static async Task<List<Match>> QueryMatchInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -657,7 +700,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 div.DivisionId = Convert.ToInt32(reader["DivisionId"].ToString());
                                 mt.MatchTypeId = Convert.ToInt32(reader["MatchTypeId"].ToString());
@@ -683,7 +726,7 @@ namespace DKK_App
         #endregion
 
         #region MatchCompetitor Gets
-        public static List<MatchCompetitor> GetMatchCompetitors(Event Event)
+        public static async Task<List<MatchCompetitor>> GetMatchCompetitors(Event Event)
         {
             string query = @"SELECT mcd.MatchCompetitorId
 	                              ,mcd.MatchId
@@ -762,13 +805,11 @@ namespace DKK_App
 	                              ,mcd.DivisionMinKyn
                             FROM Event.vwMatchCompetitorDetail mcd
                             WHERE mcd.EventId = " + Event.EventId.ToString();
-
-            List<MatchCompetitor> mcs = QueryMatchCompetitorDetails(query);
-
-            return mcs;
+            
+            return await QueryMatchCompetitorDetails(query);
         }
 
-        public static List<MatchCompetitor> GetMatchCompetitors(Competitor competitor)
+        public static async Task<List<MatchCompetitor>> GetMatchCompetitors(Competitor competitor)
         {
             //Retrieve base data
             string query = @"SELECT mc.MatchCompetitorId
@@ -778,19 +819,19 @@ namespace DKK_App
                             FROM [Event].MatchCompetitor mc
                             WHERE mc.CompetitorId = " + competitor.CompetitorId.ToString();
 
-            List<MatchCompetitor> mcs = QueryMatchCompetitorInformation(query);
+            List<MatchCompetitor> mcs = await QueryMatchCompetitorInformation(query);
 
             //Populate matches and competitors
             foreach (MatchCompetitor mc in mcs)
             {
-                mc.Match = GetMatch(mc.Match.MatchId);
-                mc.Competitor = GetCompetitor(mc.Competitor.CompetitorId);
+                mc.Match = await GetMatch(mc.Match.MatchId);
+                mc.Competitor = await GetCompetitor(mc.Competitor.CompetitorId);
             }
 
             return mcs;
         }
 
-        private static List<MatchCompetitor> QueryMatchCompetitorDetails(string query)
+        private static async Task<List<MatchCompetitor>> QueryMatchCompetitorDetails(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -804,7 +845,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 //MinRank
                                 Rank min_r = new Rank
@@ -879,7 +920,7 @@ namespace DKK_App
                                     parent.DisplayName = reader["ParentDisplayName"].ToString();
                                     parent.EmailAddress = reader["ParentEmailAddress"].ToString();
                                     parent.FirstName = reader["ParentFirstName"].ToString();
-                                    parent.LastName = reader["ParentLastName"].ToString();
+                                    parent.LastName = (reader["ParentLastName"] != null) ? reader["ParentLastName"].ToString() : null;
                                     parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());                                    
                                 }
 
@@ -900,8 +941,8 @@ namespace DKK_App
                                     person.PhoneNumber = reader["PhoneNumber"].ToString();
                                     person.PostalCode = reader["PostalCode"].ToString();
                                     person.StateProvince = reader["StateProvince"].ToString();
-                                    person.StreetAddress1 = reader["StreetAddress1"].ToString();
-                                    person.StreetAddress2 = reader["StreetAddress2"].ToString();
+                                    person.StreetAddress1 = (reader["StreetAddress1"] != null) ? reader["StreetAddress1"].ToString() : null;
+                                    person.StreetAddress2 = (reader["StreetAddress2"] != null) ? reader["StreetAddress2"].ToString() : null;
                                     person.Title = ct;
                                 }
 
@@ -909,9 +950,9 @@ namespace DKK_App
                                 int dojoid = (!String.IsNullOrEmpty(reader["DojoId"].ToString())) ? Convert.ToInt32(reader["DojoId"].ToString()) : 0;
 
                                 Dojo dojo = new Dojo();
-                                if (dojoid > 0)
+                                if(dojoid > 0)
                                 {
-                                    dojo = GetDojo(dojoid);
+                                    dojo = await GetDojo(dojoid);
                                 }
 
                                 //Competitor
@@ -975,7 +1016,7 @@ namespace DKK_App
             }
         }
 
-        private static List<MatchCompetitor> QueryMatchCompetitorInformation(string query)
+        private static async Task<List<MatchCompetitor>> QueryMatchCompetitorInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -991,7 +1032,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 match.MatchId = Convert.ToInt32(reader["MatchId"].ToString());
                                 competitor.CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString());
@@ -1014,7 +1055,7 @@ namespace DKK_App
         #endregion
 
         #region Event Gets
-        public static List<Event> GetEventInformationByDateRange(DateTime minDate, DateTime maxDate)
+        public static async Task<List<Event>> GetEventInformationByDateRange(DateTime minDate, DateTime maxDate)
         {
             string query = @"SELECT e.EventId
 	                              ,e.EventName
@@ -1025,10 +1066,10 @@ namespace DKK_App
                             WHERE e.Date BETWEEN CAST('" + minDate.ToString("yyyyMMdd") + @"' AS DATE) 
                                 AND CAST('" + maxDate.ToString("yyyyMMdd") + @"' AS DATE)";
 
-            return QueryEventInformation(query);
+            return await QueryEventInformation(query);
         }
 
-        public static Event GetEventInformationById(int id)
+        public static async Task<Event> GetEventInformationById(int id)
         {
             string query = @"SELECT e.EventId
 	                              ,e.EventName
@@ -1038,10 +1079,12 @@ namespace DKK_App
                             FROM [Event].vwEvent e
                             WHERE e.EventId = " + id.ToString();
 
-            return QueryEventInformation(query).FirstOrDefault();
+            var results = await QueryEventInformation(query);
+
+            return results.FirstOrDefault();
         }
 
-        public static List<Event> GetEventInformation()
+        public static async Task<List<Event>> GetEventInformation()
         {
             string query = @"SELECT e.EventId
 	                              ,e.EventName
@@ -1050,10 +1093,10 @@ namespace DKK_App
 	                              ,e.EventTypeName
                             FROM [Event].vwEvent e";
 
-            return QueryEventInformation(query);
+            return await QueryEventInformation(query);
         }
 
-        private static List<Event> QueryEventInformation(string query)
+        private static async Task<List<Event>> QueryEventInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -1067,7 +1110,7 @@ namespace DKK_App
                     {
                         if (reader != null)
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 EventType type = new EventType
                                 {
@@ -1093,14 +1136,14 @@ namespace DKK_App
         #endregion
 
         #region Deletes
-        public static void DeleteEvent(int id)
+        public static async void DeleteEvent(int id)
         {
             string query = @"EXEC [Event].[spDeleteEvent] @EventId = " + id.ToString();
 
             ExecuteDDL(query);
         }
 
-        public static void DeleteEvent (Event Event)
+        public static async void DeleteEvent (Event Event)
         {
             string query = @"EXEC [Event].[spDeleteEvent] @EventId = " + Event.EventId.ToString();
 
@@ -1109,7 +1152,7 @@ namespace DKK_App
         #endregion
 
         #region Updates
-        public static void UpdateEvent(Event Event)
+        public static async void UpdateEvent(Event Event)
         {
             string query = @"EXEC [Event].[spUpdateEvent] @EventId = 
                 " + Event.EventId.ToString() + @", @EventName = '" +
@@ -1122,7 +1165,7 @@ namespace DKK_App
         #endregion
 
         #region Inserts
-        public static void InsertEvent(Event Event)
+        public static async void InsertEvent(Event Event)
         {
             string query = @"EXEC [Event].[spInsertEvent] @EventName = '" +
                 Event.EventName + @"', @EventTypeId = " +
@@ -1133,7 +1176,7 @@ namespace DKK_App
         }
         #endregion
 
-        public static void ExecuteDDL(string query)
+        public static async void ExecuteDDL(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
@@ -1141,7 +1184,7 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.ExecuteNonQuery();
+                    await cmd.ExecuteNonQueryAsync();
                 }
             }
         }

@@ -4,6 +4,7 @@ SELECT
 	  e.EventId
 	  ,e.Name EventName
 	  ,m.MatchId
+	  ,m.MatchDisplayId
 	  ,mt.name MatchTypeName	  
 	  ,m.DivisionId
 	  ,m.SubDivisionId

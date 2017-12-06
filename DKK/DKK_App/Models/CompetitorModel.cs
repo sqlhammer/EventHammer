@@ -7,6 +7,7 @@ namespace DKK_App.Models
         public int CompetitorId { get; set; }
         public string DisplayName { get; set; }
         public string RankName { get; set; }
+        public int Level { get; set; }
         public decimal Weight { get; set; }
         public string DojoName { get; set; }
         public int Age { get; set; }

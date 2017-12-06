@@ -7,7 +7,7 @@ namespace DKK_App.Entities
         public int CompetitorId { get; set; }
         public int Age { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public int DojoId { get; set; }
+        public Dojo Dojo { get; set; }
         public Event Event { get; set; }
         public bool IsKata { get; set; }
         public bool IsKnockdown { get; set; }

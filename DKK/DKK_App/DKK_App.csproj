@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccessAsync.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Entities\MatchCompetitor.cs" />
     <Compile Include="Entities\FacilityType.cs" />
@@ -66,6 +67,8 @@
     <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\EventType.cs" />
     <Compile Include="Entities\Event.cs" />
+    <Compile Include="Enums\FilterType.cs" />
+    <Compile Include="Enums\LengthType.cs" />
     <Compile Include="frmEditEvent.cs">
       <SubType>Form</SubType>
     </Compile>

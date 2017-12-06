@@ -2,6 +2,7 @@
 AS
 SELECT mc.MatchCompetitorId
 	  ,mc.MatchId
+	  ,m.MatchDisplayId
 	  ,mc.CompetitorId
 	  ,mc.MatchPlacement
 	  ,m.EventId

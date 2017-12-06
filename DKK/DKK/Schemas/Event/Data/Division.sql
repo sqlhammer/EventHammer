@@ -46,12 +46,11 @@ CREATE TABLE #Ages
 
 INSERT INTO #Ages ( MinimumAge, MaximumAge )
 VALUES
-	( 5, 6 ),
-	( 6, 7 ),
+	( 5, 7 ),
 	( 7, 9 ),
 	( 9, 11 ),
 	( 11, 14 ),
-	( 13, 15 ),
+	( 13, 16 ),
 	( 16, 18 ),
 	( 18, 255 )
 

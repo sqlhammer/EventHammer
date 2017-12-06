@@ -62,41 +62,72 @@ BEGIN
 											AND c.EventId = @EventId
 
 			--Person inserts
+			;WITH NewPersons AS
+			(
+				SELECT ROW_NUMBER() OVER (PARTITION BY r.FirstName, r.LastName, r.EmailAddress ORDER BY (SELECT NULL)) rownum
+					  ,r.FirstName
+					  ,r.LastName
+					  ,r.LastName + ', ' + r.FirstName DisplayName
+					  ,0 IsInstructor
+					  ,r.Gender
+					  ,r.PhoneNumber
+					  ,r.EmailAddress
+					  ,r.Street1
+					  ,r.Street2
+					  ,r.AppartmentCode
+					  ,r.City
+					  ,r.StateProvince
+					  ,r.PostalCode
+					  ,r.Country
+				FROM Stage.[Registration] r
+				LEFT JOIN Person.Person p ON p.FirstName = r.FirstName
+											AND p.LastName = r.LastName
+											AND p.EmailAddress = r.EmailAddress
+				WHERE p.PersonId IS NULL
+			)
 			INSERT INTO Person.Person ( FirstName, LastName, DisplayName
 				, IsInstructor, Gender, PhoneNumber, EmailAddress, StreetAddress1, StreetAddress2
 				, AppartmentCode, City, StateProvince, PostalCode, Country )
-			SELECT r.FirstName
-				  ,r.LastName
-				  ,r.LastName + ', ' + r.FirstName
-				  ,0
-				  ,r.Gender
-				  ,r.PhoneNumber
-				  ,r.EmailAddress
-				  ,r.Street1
-				  ,r.Street2
-				  ,r.AppartmentCode
-				  ,r.City
-				  ,r.StateProvince
-				  ,r.PostalCode
-				  ,r.Country
-			FROM Stage.[Registration] r
-			LEFT JOIN Person.Person p ON p.FirstName = r.FirstName
-										AND p.LastName = r.LastName
-										AND p.EmailAddress = r.EmailAddress
-			WHERE p.PersonId IS NULL;
+			SELECT np.FirstName
+				  ,np.LastName
+				  ,np.DisplayName
+				  ,np.IsInstructor
+				  ,np.Gender
+				  ,np.PhoneNumber
+				  ,np.EmailAddress
+				  ,np.Street1
+				  ,np.Street2
+				  ,np.AppartmentCode
+				  ,np.City
+				  ,np.StateProvince
+				  ,np.PostalCode
+				  ,np.Country
+			FROM NewPersons np
+			WHERE np.rownum = 1
 
 			--Parent inserts
+			;WITH NewPersons AS
+			(
+				SELECT ROW_NUMBER() OVER (PARTITION BY r.ParentFirstName, r.ParentLastName, r.ParentEmailAddress ORDER BY (SELECT NULL)) rownum
+					  ,r.ParentFirstName
+					  ,r.ParentLastName
+					  ,r.ParentLastName + ', ' + r.ParentFirstName DisplayName
+					  ,0 IsInstructor
+					  ,r.ParentEmailAddress 
+				FROM Stage.[Registration] r
+				LEFT JOIN Person.Person p ON p.FirstName = r.ParentFirstName
+											AND p.LastName = r.ParentLastName
+											AND p.EmailAddress = r.ParentEmailAddress
+				WHERE p.PersonId IS NULL
+			)
 			INSERT INTO Person.Person ( FirstName, LastName, DisplayName, IsInstructor, EmailAddress )
-			SELECT r.ParentFirstName
-				  ,r.ParentLastName
-				  ,r.ParentLastName + ', ' + r.ParentFirstName
-				  ,0
-				  ,r.ParentEmailAddress
-			FROM Stage.[Registration] r
-			LEFT JOIN Person.Person p ON p.FirstName = r.ParentFirstName
-										AND p.LastName = r.ParentLastName
-										AND p.EmailAddress = r.ParentEmailAddress
-			WHERE p.PersonId IS NULL;
+			SELECT np.ParentFirstName
+				  ,np.ParentLastName
+				  ,np.DisplayName
+				  ,np.IsInstructor
+				  ,np.ParentEmailAddress
+			FROM NewPersons np
+			WHERE np.rownum = 1
 
 			--Competitor inserts
 			INSERT INTO [Person].[Competitor]

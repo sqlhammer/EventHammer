@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows.Forms;
 using DKK_App.Entities;
 using DKK_App.Models;
+using DKK_App.Enums;
+using System.Threading.Tasks;
 
 namespace DKK_App
 {
@@ -11,6 +13,9 @@ namespace DKK_App
     {
         public Event CurrentEvent = new Event();
         public List<Event> AllEvents = new List<Event>();
+        public List<Models.MatchModel> MatchModels = new List<MatchModel>();
+        public List<Models.CompetitorModel> CompetitorModels = new List<CompetitorModel>();
+        public List<Division> Divisions = new List<Division>();
 
         public frmMain()
         {
@@ -18,12 +23,179 @@ namespace DKK_App
         }
 
         #region EventTriggers
+        private void btnRefreshMatchTab_Click(object sender, EventArgs e)
+        {
+            MatchModels = new List<MatchModel>();
+            CompetitorModels = new List<CompetitorModel>();
+            RefreshMatchCompetitorViews();
+        }
+
+        private async void RefreshDivisionsAsync()
+        {
+            Divisions = await DataAccessAsync.GetDivisions();
+        }
+
+        private void ResetMatchCompetitorViews()
+        {
+            RefreshMatches(MatchModels);
+            RefreshCompetitors(CompetitorModels);
+        }
+
+        private void RefreshMatchCompetitorViews()
+        {
+            this.lblLoading.Visible = true;
+            this.tmrMatchCompetitorRefresh.Enabled = true;
+
+            Task.Run(() => { RefreshMatches(); });
+            Task.Run(() => { RefreshCompetitors(); });            
+        }
+
+        private void tab1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Load only on the first click.
+            //Manual refreshes after that.
+            if (this.tabMatch.Enabled &&
+                this.tab1.SelectedTab == this.tabMatch &&
+                MatchModels.Count == 0)
+            {
+                RefreshMatchCompetitorViews();
+            }
+
+            //Toggle button visibility
+            if (this.tabMatch.Enabled &&
+                this.tab1.SelectedTab == this.tabMatch &&
+                this.btnRetryConnection.Visible == false)
+            {
+                this.btnRefreshMatchTab.Visible = true;
+                this.btnClearFilters.Visible = true;
+            }
+            else
+            {
+                this.btnRefreshMatchTab.Visible = false;
+                this.btnClearFilters.Visible = false;
+            }
+        }
+
+        private FilterType TranslateToFilterType(string strtype)
+        {
+            FilterType type = FilterType.Unknown;
+
+            switch (strtype)
+            {
+                case "Name":
+                    type = FilterType.DisplayName;
+                    break;
+                case "Belt":
+                    type = FilterType.Belt;
+                    break;
+                case "Age (+/- 2 yrs)":
+                    type = FilterType.Age;
+                    break;
+                case "Weight (+/- 5 lbs)":
+                    type = FilterType.Weight;
+                    break;
+                case "Div-SubDiv":
+                    type = FilterType.MatchDisplayName;
+                    break;
+                case "Type":
+                    type = FilterType.MatchType;
+                    break;
+                case "School":
+                    type = FilterType.DojoName;
+                    break;
+            }
+
+            return type;
+        }
+
+        private async void btnCompetitorApply_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.cbCompetitorFilterBy.SelectedItem.ToString()))
+            {
+                FilterType type = TranslateToFilterType(this.cbCompetitorFilterBy.SelectedItem.ToString());
+
+                var model = await Global.FilterCompetitorModelAsync(CompetitorModels, type, this.txtCompetitorFilter.Text);
+
+                RefreshCompetitors(model);
+            }
+        }
+
+        private async void btnMatchApply_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(this.cbMatchFilterBy.SelectedItem.ToString()))
+            {
+                FilterType type = TranslateToFilterType(this.cbMatchFilterBy.SelectedItem.ToString());
+                
+                var model = await Global.FilterMatchModelAsync(MatchModels, type, this.txtMatchFilter.Text);
+                
+                RefreshMatches(model);
+            }
+        }
+
+        private void btnClearFilters_Click(object sender, EventArgs e)
+        {
+            ResetMatchCompetitorViews();
+        }
+
+        private void RefreshDivisions()
+        {
+            Divisions = new List<Division>();
+            this.tmrDivisions.Enabled = true;
+
+            Task.Run(() => RefreshDivisionsAsync());
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            //Set TreeListView delegates
+            tlvMatches.CanExpandGetter = delegate (object x) { return true; };
+            tlvMatches.ChildrenGetter = delegate (object x) { return ((Models.MatchModel)x).Children; };
+
+            SetFilterDropdowns();
+            DisableAllTabs();
+            RefreshDivisions();
+
+            try
+            {
+                SetEventSearchDateRange();
+                //Unnecessary because the SetEventSearchDateRange() triggers this via the date time picker change events.
+                //RefreshEventSelect();
+            }
+            catch
+            {
+                MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.btnRetryConnection.Visible = true;
+            }
+        }
+
+        private void rbApplicableMatches_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.rbApplicableMatches.Checked)
+            {
+                FilterApplicableMatches();
+            }
+        }
+
+        private void FilterApplicableMatches()
+        {
+            if (tlvCompetitors.SelectedObject != null)
+            {
+                CompetitorModel competitor = (CompetitorModel)tlvCompetitors.SelectedObject;
+                RefreshMatches(Global.FilterMatchModelAsync_ApplicableMatches(MatchModels, competitor, Divisions));
+            }
+        }
+
         private void refreshEventSelectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RefreshEventSelect();
         }
 
         private void btnRetryConnection_Click(object sender, EventArgs e)
+        {
+            RetryConnection();
+        }
+
+        private void RetryConnection()
         {
             try
             {
@@ -231,45 +403,121 @@ namespace DKK_App
             DisableAllTabs();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void RefreshMatches(List<MatchModel> model)
         {
-            //Set TreeListView delegates
-            tlvMatches.CanExpandGetter = delegate (object x) { return true; };
-            tlvMatches.ChildrenGetter = delegate (object x) { return ((Models.MatchModel)x).Children; };
-
-            DisableAllTabs();
-            SetEventSearchDateRange();
-
-            try
-            {
-                RefreshEventSelect();
-            }
-            catch
-            {
-                MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.btnRetryConnection.Visible = true;
-            }
-        }        
-
-        private void RefreshMatches()
-        {
-            List<MatchCompetitor> mcs = DataAccess.GetMatchCompetitors(CurrentEvent);
-            
-            tlvMatches.Roots = Global.GetMatchModel(mcs);
+            tlvMatches.Roots = model;
+            tlvMatches.CollapseAll();
         }
 
-        private void RefreshCompetitors()
+        private void RefreshCompetitors(List<CompetitorModel> model)
         {
-            List<MatchCompetitor> mcs = DataAccess.GetMatchCompetitors(CurrentEvent);
-
-            tlvCompetitors.Roots = Global.GetCompetitorModel(mcs);
+            tlvCompetitors.Roots = model;
+            tlvCompetitors.CollapseAll();
         }
 
-        private void rbApplicableMatches_CheckedChanged(object sender, EventArgs e)
+        private async void RefreshMatches()
         {
-            if(this.rbApplicableMatches.Checked)
+            List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
+            MatchModels = Global.GetMatchModel(mcs);
+        }
+
+        private async void RefreshCompetitors()
+        {
+            List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
+            CompetitorModels = Global.GetCompetitorModel(mcs);
+        }
+
+        private void SetFilterDropdowns()
+        {
+            SetCompetitorFilterDropdowns();
+            SetMatchFilterDropdowns();
+        }
+
+        private void SetCompetitorFilterDropdowns()
+        {
+            this.cbCompetitorFilterBy.Items.Clear();
+
+            for (int i = 0; i < tlvCompetitors.Columns.Count; i++)
             {
-                this.rbAll.Checked = false;
+                string label = tlvCompetitors.Columns[i].Text;
+                switch(tlvCompetitors.Columns[i].Text)
+                {
+                    case "Weight (lb)":
+                        label = "Weight (+/- 5 lbs)";
+                        break;
+                    case "Age":
+                        label = "Age (+/- 2 yrs)";
+                        break;
+                }
+                this.cbCompetitorFilterBy.Items.Add(label);
+            }
+        }
+
+        private void SetMatchFilterDropdowns()
+        {
+            this.cbMatchFilterBy.Items.Clear();
+
+            for (int i = 0; i < tlvMatches.Columns.Count; i++)
+            {
+                string label = tlvMatches.Columns[i].Text;
+                switch (tlvMatches.Columns[i].Text)
+                {
+                    case "Weight (lb)":
+                        label = "Weight (+/- 5 lbs)";
+                        break;
+                    case "Age":
+                        label = "Age (+/- 2 yrs)";
+                        break;
+                }
+                this.cbMatchFilterBy.Items.Add(label);
+            }
+        }
+
+        private void retryConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RetryConnection();
+        }
+
+        private void clearFiltersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetMatchCompetitorViews();
+        }
+
+        private void refreshMatchAndCompetitorListsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshMatchCompetitorViews();
+        }
+
+        private void tmrMatchCompetitorRefresh_Tick(object sender, EventArgs e)
+        {
+            //this method was implemented because I was unable to refresh the treelistviews after
+            //the async calls to refresh the match and competitor models was complete
+
+            //TODO: Figure out what happens when there is a new event with no matches and no competitors.
+            if (MatchModels.Count > 0 && CompetitorModels.Count > 0)
+            {
+                this.lblLoading.Visible = false;
+                this.tmrMatchCompetitorRefresh.Enabled = false;
+
+                ResetMatchCompetitorViews();
+            }
+        }
+
+        private void tlvCompetitors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbApplicableMatches.Checked)
+            {
+                FilterApplicableMatches();
+            }
+        }
+
+        private void tmrDivisions_Tick(object sender, EventArgs e)
+        {
+            if (Divisions.Count > 0)
+            {
+                this.rbAll.Enabled = true;
+                this.rbApplicableMatches.Enabled = true;
+                this.tmrDivisions.Enabled = false;
             }
         }
 
@@ -277,16 +525,7 @@ namespace DKK_App
         {
             if (this.rbAll.Checked)
             {
-                this.rbApplicableMatches.Checked = false;
-            }
-        }
-
-        private void tabMatch_Click(object sender, EventArgs e)
-        {
-            if (this.tabMatch.Enabled)
-            {
-                RefreshMatches();
-                RefreshCompetitors();
+                RefreshMatches(MatchModels);
             }
         }
     }

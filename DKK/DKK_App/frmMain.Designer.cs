@@ -49,11 +49,15 @@
             this.cbEventSelect = new System.Windows.Forms.ComboBox();
             this.tabMatch = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnMatchApply = new System.Windows.Forms.Button();
             this.tlvMatches = new BrightIdeasSoftware.TreeListView();
+            this.olvColDivDisplay = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColMatchType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColDivisionId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColSubdivisionId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColDisplayName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColRankName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColAge = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColWeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColDojo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imgList = new System.Windows.Forms.ImageList(this.components);
             this.cbMatchFilterBy = new System.Windows.Forms.ComboBox();
             this.rbApplicableMatches = new System.Windows.Forms.RadioButton();
@@ -62,6 +66,12 @@
             this.rbAll = new System.Windows.Forms.RadioButton();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnCompetitorApply = new System.Windows.Forms.Button();
+            this.tlvCompetitors = new BrightIdeasSoftware.TreeListView();
+            this.olvColCompDisplayName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColCompRankName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColCompAge = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColCompWeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.cbCompetitorFilterBy = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtCompetitorFilter = new System.Windows.Forms.TextBox();
@@ -75,14 +85,15 @@
             this.pbPoweredBy = new System.Windows.Forms.PictureBox();
             this.btnRetryConnection = new System.Windows.Forms.Button();
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
-            this.olvColRankName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColAge = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColWeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tlvCompetitors = new BrightIdeasSoftware.TreeListView();
-            this.olvColCompDisplayName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColCompRankName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColCompAge = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColCompWeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.btnRefreshMatchTab = new System.Windows.Forms.Button();
+            this.btnClearFilters = new System.Windows.Forms.Button();
+            this.matchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshMatchAndCompetitorListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.retryConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblLoading = new System.Windows.Forms.Label();
+            this.tmrMatchCompetitorRefresh = new System.Windows.Forms.Timer(this.components);
+            this.tmrDivisions = new System.Windows.Forms.Timer(this.components);
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbReports.SuspendLayout();
@@ -92,10 +103,10 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvMatches)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).BeginInit();
             this.msMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).BeginInit();
             this.SuspendLayout();
             // 
             // tab1
@@ -107,6 +118,7 @@
             this.tab1.SelectedIndex = 0;
             this.tab1.Size = new System.Drawing.Size(2257, 988);
             this.tab1.TabIndex = 1;
+            this.tab1.SelectedIndexChanged += new System.EventHandler(this.tab1_SelectedIndexChanged);
             // 
             // tabHome
             // 
@@ -115,7 +127,7 @@
             this.tabHome.Location = new System.Drawing.Point(8, 39);
             this.tabHome.Name = "tabHome";
             this.tabHome.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHome.Size = new System.Drawing.Size(1733, 941);
+            this.tabHome.Size = new System.Drawing.Size(2241, 941);
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "Home";
             this.tabHome.UseVisualStyleBackColor = true;
@@ -283,6 +295,7 @@
             // 
             // tabMatch
             // 
+            this.tabMatch.Controls.Add(this.lblLoading);
             this.tabMatch.Controls.Add(this.groupBox2);
             this.tabMatch.Controls.Add(this.groupBox1);
             this.tabMatch.Controls.Add(this.label4);
@@ -293,10 +306,10 @@
             this.tabMatch.TabIndex = 1;
             this.tabMatch.Text = "Matches";
             this.tabMatch.UseVisualStyleBackColor = true;
-            this.tabMatch.Click += new System.EventHandler(this.tabMatch_Click);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnMatchApply);
             this.groupBox2.Controls.Add(this.tlvMatches);
             this.groupBox2.Controls.Add(this.cbMatchFilterBy);
             this.groupBox2.Controls.Add(this.rbApplicableMatches);
@@ -305,31 +318,42 @@
             this.groupBox2.Controls.Add(this.rbAll);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(1108, 18);
+            this.groupBox2.Location = new System.Drawing.Point(1108, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1127, 917);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Matches";
             // 
+            // btnMatchApply
+            // 
+            this.btnMatchApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMatchApply.Location = new System.Drawing.Point(951, 97);
+            this.btnMatchApply.Name = "btnMatchApply";
+            this.btnMatchApply.Size = new System.Drawing.Size(133, 50);
+            this.btnMatchApply.TabIndex = 13;
+            this.btnMatchApply.Text = "Apply";
+            this.btnMatchApply.UseVisualStyleBackColor = true;
+            this.btnMatchApply.Click += new System.EventHandler(this.btnMatchApply_Click);
+            // 
             // tlvMatches
             // 
+            this.tlvMatches.AllColumns.Add(this.olvColDivDisplay);
             this.tlvMatches.AllColumns.Add(this.olvColMatchType);
-            this.tlvMatches.AllColumns.Add(this.olvColDivisionId);
-            this.tlvMatches.AllColumns.Add(this.olvColSubdivisionId);
             this.tlvMatches.AllColumns.Add(this.olvColDisplayName);
             this.tlvMatches.AllColumns.Add(this.olvColRankName);
             this.tlvMatches.AllColumns.Add(this.olvColAge);
             this.tlvMatches.AllColumns.Add(this.olvColWeight);
+            this.tlvMatches.AllColumns.Add(this.olvColDojo);
             this.tlvMatches.CellEditUseWholeCell = false;
             this.tlvMatches.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColDivDisplay,
             this.olvColMatchType,
-            this.olvColDivisionId,
-            this.olvColSubdivisionId,
             this.olvColDisplayName,
             this.olvColRankName,
             this.olvColAge,
-            this.olvColWeight});
+            this.olvColWeight,
+            this.olvColDojo});
             this.tlvMatches.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvMatches.Location = new System.Drawing.Point(7, 160);
@@ -343,29 +367,47 @@
             this.tlvMatches.View = System.Windows.Forms.View.Details;
             this.tlvMatches.VirtualMode = true;
             // 
+            // olvColDivDisplay
+            // 
+            this.olvColDivDisplay.AspectName = "MatchDisplayName";
+            this.olvColDivDisplay.Text = "Div-SubDiv";
+            this.olvColDivDisplay.Width = 80;
+            // 
             // olvColMatchType
             // 
             this.olvColMatchType.AspectName = "MatchTypeName";
             this.olvColMatchType.Text = "Type";
             this.olvColMatchType.Width = 100;
             // 
-            // olvColDivisionId
-            // 
-            this.olvColDivisionId.AspectName = "DivisionId";
-            this.olvColDivisionId.Text = "Div";
-            this.olvColDivisionId.Width = 30;
-            // 
-            // olvColSubdivisionId
-            // 
-            this.olvColSubdivisionId.AspectName = "SubDivisionId";
-            this.olvColSubdivisionId.Text = "Sub-div";
-            this.olvColSubdivisionId.Width = 50;
-            // 
             // olvColDisplayName
             // 
             this.olvColDisplayName.AspectName = "DisplayName";
             this.olvColDisplayName.Text = "Name";
-            this.olvColDisplayName.Width = 100;
+            this.olvColDisplayName.Width = 110;
+            // 
+            // olvColRankName
+            // 
+            this.olvColRankName.AspectName = "RankName";
+            this.olvColRankName.Text = "Belt";
+            this.olvColRankName.Width = 80;
+            // 
+            // olvColAge
+            // 
+            this.olvColAge.AspectName = "Age";
+            this.olvColAge.Text = "Age";
+            this.olvColAge.Width = 45;
+            // 
+            // olvColWeight
+            // 
+            this.olvColWeight.AspectName = "Weight";
+            this.olvColWeight.Text = "Weight (lb)";
+            this.olvColWeight.Width = 75;
+            // 
+            // olvColDojo
+            // 
+            this.olvColDojo.AspectName = "DojoName";
+            this.olvColDojo.Text = "School";
+            this.olvColDojo.Width = 120;
             // 
             // imgList
             // 
@@ -376,14 +418,15 @@
             // cbMatchFilterBy
             // 
             this.cbMatchFilterBy.FormattingEnabled = true;
-            this.cbMatchFilterBy.Location = new System.Drawing.Point(526, 101);
+            this.cbMatchFilterBy.Location = new System.Drawing.Point(554, 101);
             this.cbMatchFilterBy.Name = "cbMatchFilterBy";
-            this.cbMatchFilterBy.Size = new System.Drawing.Size(247, 41);
+            this.cbMatchFilterBy.Size = new System.Drawing.Size(349, 41);
             this.cbMatchFilterBy.TabIndex = 8;
             // 
             // rbApplicableMatches
             // 
             this.rbApplicableMatches.AutoSize = true;
+            this.rbApplicableMatches.Enabled = false;
             this.rbApplicableMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbApplicableMatches.Location = new System.Drawing.Point(20, 91);
             this.rbApplicableMatches.Name = "rbApplicableMatches";
@@ -391,11 +434,12 @@
             this.rbApplicableMatches.TabIndex = 9;
             this.rbApplicableMatches.Text = "Applicable\r\nMatches";
             this.rbApplicableMatches.UseVisualStyleBackColor = true;
+            this.rbApplicableMatches.CheckedChanged += new System.EventHandler(this.rbApplicableMatches_CheckedChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(520, 56);
+            this.label7.Location = new System.Drawing.Point(554, 56);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(128, 33);
             this.label7.TabIndex = 7;
@@ -412,6 +456,7 @@
             // 
             this.rbAll.AutoSize = true;
             this.rbAll.Checked = true;
+            this.rbAll.Enabled = false;
             this.rbAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbAll.Location = new System.Drawing.Point(21, 56);
             this.rbAll.Name = "rbAll";
@@ -420,6 +465,7 @@
             this.rbAll.TabStop = true;
             this.rbAll.Text = "All Matches";
             this.rbAll.UseVisualStyleBackColor = true;
+            this.rbAll.CheckedChanged += new System.EventHandler(this.rbAll_CheckedChanged);
             // 
             // label8
             // 
@@ -432,6 +478,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnCompetitorApply);
             this.groupBox1.Controls.Add(this.tlvCompetitors);
             this.groupBox1.Controls.Add(this.cbCompetitorFilterBy);
             this.groupBox1.Controls.Add(this.label6);
@@ -444,6 +491,68 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Competitors";
+            // 
+            // btnCompetitorApply
+            // 
+            this.btnCompetitorApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCompetitorApply.Location = new System.Drawing.Point(784, 97);
+            this.btnCompetitorApply.Name = "btnCompetitorApply";
+            this.btnCompetitorApply.Size = new System.Drawing.Size(133, 50);
+            this.btnCompetitorApply.TabIndex = 12;
+            this.btnCompetitorApply.Text = "Apply";
+            this.btnCompetitorApply.UseVisualStyleBackColor = true;
+            this.btnCompetitorApply.Click += new System.EventHandler(this.btnCompetitorApply_Click);
+            // 
+            // tlvCompetitors
+            // 
+            this.tlvCompetitors.AllColumns.Add(this.olvColCompDisplayName);
+            this.tlvCompetitors.AllColumns.Add(this.olvColCompRankName);
+            this.tlvCompetitors.AllColumns.Add(this.olvColCompAge);
+            this.tlvCompetitors.AllColumns.Add(this.olvColCompWeight);
+            this.tlvCompetitors.AllowDrop = true;
+            this.tlvCompetitors.CellEditUseWholeCell = false;
+            this.tlvCompetitors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColCompDisplayName,
+            this.olvColCompRankName,
+            this.olvColCompAge,
+            this.olvColCompWeight});
+            this.tlvCompetitors.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tlvCompetitors.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlvCompetitors.Location = new System.Drawing.Point(0, 160);
+            this.tlvCompetitors.Name = "tlvCompetitors";
+            this.tlvCompetitors.ShowGroups = false;
+            this.tlvCompetitors.Size = new System.Drawing.Size(928, 751);
+            this.tlvCompetitors.SmallImageList = this.imgList;
+            this.tlvCompetitors.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.tlvCompetitors.TabIndex = 11;
+            this.tlvCompetitors.UseCompatibleStateImageBehavior = false;
+            this.tlvCompetitors.View = System.Windows.Forms.View.Details;
+            this.tlvCompetitors.VirtualMode = true;
+            this.tlvCompetitors.SelectedIndexChanged += new System.EventHandler(this.tlvCompetitors_SelectedIndexChanged);
+            // 
+            // olvColCompDisplayName
+            // 
+            this.olvColCompDisplayName.AspectName = "DisplayName";
+            this.olvColCompDisplayName.Text = "Name";
+            this.olvColCompDisplayName.Width = 140;
+            // 
+            // olvColCompRankName
+            // 
+            this.olvColCompRankName.AspectName = "RankName";
+            this.olvColCompRankName.Text = "Belt";
+            this.olvColCompRankName.Width = 85;
+            // 
+            // olvColCompAge
+            // 
+            this.olvColCompAge.AspectName = "Age";
+            this.olvColCompAge.Text = "Age";
+            this.olvColCompAge.Width = 76;
+            // 
+            // olvColCompWeight
+            // 
+            this.olvColCompWeight.AspectName = "Weight";
+            this.olvColCompWeight.Text = "Weight (lb)";
+            this.olvColCompWeight.Width = 111;
             // 
             // cbCompetitorFilterBy
             // 
@@ -486,14 +595,15 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(99, 378);
             this.label4.TabIndex = 2;
-            this.label4.Text = "<\r\n\r\nDrag\r\n\r\nand\r\n\r\nDrop\r\n\r\n>";
+            this.label4.Text = ">\r\n\r\nDrag\r\n\r\nand\r\n\r\nDrop\r\n\r\n>";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // msMenu
             // 
             this.msMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miFile});
+            this.miFile,
+            this.matchToolStripMenuItem});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
             this.msMenu.Size = new System.Drawing.Size(2281, 40);
@@ -503,7 +613,8 @@
             // 
             this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miEventManager,
-            this.refreshEventSelectionToolStripMenuItem});
+            this.refreshEventSelectionToolStripMenuItem,
+            this.retryConnectionToolStripMenuItem});
             this.miFile.Name = "miFile";
             this.miFile.Size = new System.Drawing.Size(64, 36);
             this.miFile.Text = "File";
@@ -566,76 +677,89 @@
             this.btnRetryConnection.Visible = false;
             this.btnRetryConnection.Click += new System.EventHandler(this.btnRetryConnection_Click);
             // 
-            // olvColRankName
+            // btnRefreshMatchTab
             // 
-            this.olvColRankName.AspectName = "RankName";
-            this.olvColRankName.Text = "Belt";
+            this.btnRefreshMatchTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefreshMatchTab.Location = new System.Drawing.Point(781, 1044);
+            this.btnRefreshMatchTab.Name = "btnRefreshMatchTab";
+            this.btnRefreshMatchTab.Size = new System.Drawing.Size(535, 73);
+            this.btnRefreshMatchTab.TabIndex = 6;
+            this.btnRefreshMatchTab.Text = "Refresh Lists";
+            this.btnRefreshMatchTab.UseVisualStyleBackColor = true;
+            this.btnRefreshMatchTab.Visible = false;
+            this.btnRefreshMatchTab.Click += new System.EventHandler(this.btnRefreshMatchTab_Click);
             // 
-            // olvColAge
+            // btnClearFilters
             // 
-            this.olvColAge.AspectName = "Age";
-            this.olvColAge.Text = "Age";
+            this.btnClearFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearFilters.Location = new System.Drawing.Point(1338, 1044);
+            this.btnClearFilters.Name = "btnClearFilters";
+            this.btnClearFilters.Size = new System.Drawing.Size(535, 73);
+            this.btnClearFilters.TabIndex = 7;
+            this.btnClearFilters.Text = "Clear Filters";
+            this.btnClearFilters.UseVisualStyleBackColor = true;
+            this.btnClearFilters.Visible = false;
+            this.btnClearFilters.Click += new System.EventHandler(this.btnClearFilters_Click);
             // 
-            // olvColWeight
+            // matchToolStripMenuItem
             // 
-            this.olvColWeight.AspectName = "Weight";
-            this.olvColWeight.Text = "Weight";
+            this.matchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearFiltersToolStripMenuItem,
+            this.refreshMatchAndCompetitorListsToolStripMenuItem});
+            this.matchToolStripMenuItem.Name = "matchToolStripMenuItem";
+            this.matchToolStripMenuItem.Size = new System.Drawing.Size(94, 36);
+            this.matchToolStripMenuItem.Text = "Match";
             // 
-            // tlvCompetitors
+            // clearFiltersToolStripMenuItem
             // 
-            this.tlvCompetitors.AllColumns.Add(this.olvColCompDisplayName);
-            this.tlvCompetitors.AllColumns.Add(this.olvColCompRankName);
-            this.tlvCompetitors.AllColumns.Add(this.olvColCompAge);
-            this.tlvCompetitors.AllColumns.Add(this.olvColCompWeight);
-            this.tlvCompetitors.AllowDrop = true;
-            this.tlvCompetitors.CellEditUseWholeCell = false;
-            this.tlvCompetitors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColCompDisplayName,
-            this.olvColCompRankName,
-            this.olvColCompAge,
-            this.olvColCompWeight});
-            this.tlvCompetitors.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tlvCompetitors.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tlvCompetitors.Location = new System.Drawing.Point(0, 160);
-            this.tlvCompetitors.Name = "tlvCompetitors";
-            this.tlvCompetitors.ShowGroups = false;
-            this.tlvCompetitors.Size = new System.Drawing.Size(928, 751);
-            this.tlvCompetitors.SmallImageList = this.imgList;
-            this.tlvCompetitors.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.tlvCompetitors.TabIndex = 11;
-            this.tlvCompetitors.UseCompatibleStateImageBehavior = false;
-            this.tlvCompetitors.View = System.Windows.Forms.View.Details;
-            this.tlvCompetitors.VirtualMode = true;
+            this.clearFiltersToolStripMenuItem.Name = "clearFiltersToolStripMenuItem";
+            this.clearFiltersToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
+            this.clearFiltersToolStripMenuItem.Text = "Clear Filters";
+            this.clearFiltersToolStripMenuItem.Click += new System.EventHandler(this.clearFiltersToolStripMenuItem_Click);
             // 
-            // olvColCompDisplayName
+            // refreshMatchAndCompetitorListsToolStripMenuItem
             // 
-            this.olvColCompDisplayName.AspectName = "DisplayName";
-            this.olvColCompDisplayName.Text = "Name";
-            this.olvColCompDisplayName.Width = 140;
+            this.refreshMatchAndCompetitorListsToolStripMenuItem.Name = "refreshMatchAndCompetitorListsToolStripMenuItem";
+            this.refreshMatchAndCompetitorListsToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
+            this.refreshMatchAndCompetitorListsToolStripMenuItem.Text = "Refresh Match and Competitor Lists";
+            this.refreshMatchAndCompetitorListsToolStripMenuItem.Click += new System.EventHandler(this.refreshMatchAndCompetitorListsToolStripMenuItem_Click);
             // 
-            // olvColCompRankName
+            // retryConnectionToolStripMenuItem
             // 
-            this.olvColCompRankName.AspectName = "RankName";
-            this.olvColCompRankName.Text = "Belt";
-            this.olvColCompRankName.Width = 85;
+            this.retryConnectionToolStripMenuItem.Name = "retryConnectionToolStripMenuItem";
+            this.retryConnectionToolStripMenuItem.Size = new System.Drawing.Size(404, 38);
+            this.retryConnectionToolStripMenuItem.Text = "Retry Connection";
+            this.retryConnectionToolStripMenuItem.Click += new System.EventHandler(this.retryConnectionToolStripMenuItem_Click);
             // 
-            // olvColCompAge
+            // lblLoading
             // 
-            this.olvColCompAge.AspectName = "Age";
-            this.olvColCompAge.Text = "Age";
-            this.olvColCompAge.Width = 45;
+            this.lblLoading.AutoSize = true;
+            this.lblLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoading.Location = new System.Drawing.Point(736, 410);
+            this.lblLoading.Name = "lblLoading";
+            this.lblLoading.Size = new System.Drawing.Size(626, 147);
+            this.lblLoading.TabIndex = 5;
+            this.lblLoading.Text = "Loading...";
+            this.lblLoading.Visible = false;
             // 
-            // olvColCompWeight
+            // tmrMatchCompetitorRefresh
             // 
-            this.olvColCompWeight.AspectName = "Weight";
-            this.olvColCompWeight.Text = "Weight";
+            this.tmrMatchCompetitorRefresh.Interval = 250;
+            this.tmrMatchCompetitorRefresh.Tick += new System.EventHandler(this.tmrMatchCompetitorRefresh_Tick);
+            // 
+            // tmrDivisions
+            // 
+            this.tmrDivisions.Interval = 250;
+            this.tmrDivisions.Tick += new System.EventHandler(this.tmrDivisions_Tick);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(2281, 1129);
+            this.ClientSize = new System.Drawing.Size(2281, 1140);
+            this.Controls.Add(this.btnClearFilters);
+            this.Controls.Add(this.btnRefreshMatchTab);
             this.Controls.Add(this.btnRetryConnection);
             this.Controls.Add(this.pbCompany);
             this.Controls.Add(this.tab1);
@@ -664,11 +788,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.tlvMatches)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).EndInit();
             this.msMenu.ResumeLayout(false);
             this.msMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -718,8 +842,7 @@
         private BrightIdeasSoftware.TreeListView tlvMatches;
         private System.Windows.Forms.ImageList imgList;
         private BrightIdeasSoftware.OLVColumn olvColMatchType;
-        private BrightIdeasSoftware.OLVColumn olvColDivisionId;
-        private BrightIdeasSoftware.OLVColumn olvColSubdivisionId;
+        private BrightIdeasSoftware.OLVColumn olvColDivDisplay;
         private BrightIdeasSoftware.OLVColumn olvColDisplayName;
         private BrightIdeasSoftware.OLVColumn olvColRankName;
         private BrightIdeasSoftware.OLVColumn olvColAge;
@@ -729,5 +852,17 @@
         private BrightIdeasSoftware.OLVColumn olvColCompRankName;
         private BrightIdeasSoftware.OLVColumn olvColCompAge;
         private BrightIdeasSoftware.OLVColumn olvColCompWeight;
+        private BrightIdeasSoftware.OLVColumn olvColDojo;
+        private System.Windows.Forms.Button btnRefreshMatchTab;
+        private System.Windows.Forms.Button btnMatchApply;
+        private System.Windows.Forms.Button btnCompetitorApply;
+        private System.Windows.Forms.Button btnClearFilters;
+        private System.Windows.Forms.ToolStripMenuItem matchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearFiltersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshMatchAndCompetitorListsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem retryConnectionToolStripMenuItem;
+        private System.Windows.Forms.Label lblLoading;
+        private System.Windows.Forms.Timer tmrMatchCompetitorRefresh;
+        private System.Windows.Forms.Timer tmrDivisions;
     }
 }

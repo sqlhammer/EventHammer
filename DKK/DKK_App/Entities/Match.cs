@@ -7,5 +7,6 @@
         public MatchType MatchType { get; set; }
         public Division Division { get; set; }
         public int SubDivisionId { get; set; }
+        public int MatchDisplayId { get; set; }
     }
 }

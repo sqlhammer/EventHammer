@@ -233,19 +233,34 @@ BEGIN
 		--TODO
 
 		--6. Load into tables where competitors are not placed in match type
+
+		DECLARE @MatchDisplayId VARCHAR(10)
+		SELECT @MatchDisplayId = CAST(ISNULL(MAX(m.MatchDisplayId),0) + 1 AS VARCHAR(10))
+		FROM [Event].[Match] m
+		WHERE m.EventId = @EventId
+
+		EXEC ('ALTER SEQUENCE [Event].[MatchSequence] RESTART WITH ' + @MatchDisplayId)
 			
 		BEGIN TRANSACTION;
 
-			INSERT INTO [Event].[Match] (EventId,MatchTypeId,DivisionId)
-			SELECT DISTINCT @EventId, cc.MatchTypeId, cc.DivisionId
-			FROM #comp_complete cc
-			LEFT JOIN [Event].[Match] m ON m.EventId = @EventId
-											AND m.MatchTypeId = cc.MatchTypeId
-											AND m.DivisionId = cc.DivisionId
-			WHERE m.MatchId IS NULL;
+			;WITH CTE AS
+			(
+				SELECT DISTINCT @EventId EventId, cc.MatchTypeId, cc.DivisionId
+				FROM #comp_complete cc
+				LEFT JOIN [Event].[Match] m ON m.EventId = @EventId
+												AND m.MatchTypeId = cc.MatchTypeId
+												AND m.DivisionId = cc.DivisionId
+				WHERE m.MatchId IS NULL
+			)
+			INSERT INTO [Event].[Match] (EventId,MatchTypeId,DivisionId,MatchDisplayId)
+			SELECT CTE.EventId
+				  ,CTE.MatchTypeId
+				  ,CTE.DivisionId 
+				  ,NEXT VALUE FOR [Event].[MatchSequence] OVER (ORDER BY CTE.MatchTypeId, CTE.DivisionId)
+			FROM CTE
 
-			INSERT INTO [Event].[MatchCompetitor] (MatchId ,CompetitorId)
-			SELECT DISTINCT m.MatchId, cc.CompetitorId
+			INSERT INTO [Event].[MatchCompetitor] (MatchId ,CompetitorId, EventId)
+			SELECT DISTINCT m.MatchId, cc.CompetitorId, cc.EventId
 			FROM #comp_complete cc
 			INNER JOIN [Event].[Match] m ON m.EventId = @EventId
 											AND m.MatchTypeId = cc.MatchTypeId

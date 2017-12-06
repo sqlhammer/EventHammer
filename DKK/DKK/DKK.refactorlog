@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="edefec9c-feb6-48d1-b810-6d815bc91cff" ChangeDateTime="12/02/2017 19:31:20">
+    <Property Name="ElementName" Value="[Event].[DivisionWide].[DivisionWideId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Event].[DivisionWide]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DivisionId" />
+  </Operation>
+</Operations>

@@ -4,7 +4,7 @@ WITH SingleCompetitorDivision AS
 (
 	SELECT e.EventId
 		,e.Name EventName
-		,mt.name MatchTypeName
+		,mt.Name MatchTypeName
 		,d.DivisionId
 		,mt.MatchTypeId
 		,mt.IsSpecialConsideration
