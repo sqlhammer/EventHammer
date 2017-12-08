@@ -91,9 +91,14 @@
             this.btnRetryConnection = new System.Windows.Forms.Button();
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
             this.btnRefreshMatchTab = new System.Windows.Forms.Button();
-            this.btnClearFilters = new System.Windows.Forms.Button();
+            this.btnClearMatchFilter = new System.Windows.Forms.Button();
             this.tmrMatchCompetitorRefresh = new System.Windows.Forms.Timer(this.components);
             this.tmrDivisions = new System.Windows.Forms.Timer(this.components);
+            this.cmsMatches = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmiMatchesExpandAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiMatchesCollapseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiDeleteMatch = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnClearCompetitorFilter = new System.Windows.Forms.Button();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbReports.SuspendLayout();
@@ -107,6 +112,7 @@
             this.msMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).BeginInit();
+            this.cmsMatches.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -466,6 +472,7 @@
             this.txtMatchFilter.Name = "txtMatchFilter";
             this.txtMatchFilter.Size = new System.Drawing.Size(286, 40);
             this.txtMatchFilter.TabIndex = 6;
+            this.txtMatchFilter.TextChanged += new System.EventHandler(this.txtMatchFilter_TextChanged);
             // 
             // rbAll
             // 
@@ -593,6 +600,7 @@
             this.txtCompetitorFilter.Name = "txtCompetitorFilter";
             this.txtCompetitorFilter.Size = new System.Drawing.Size(362, 40);
             this.txtCompetitorFilter.TabIndex = 2;
+            this.txtCompetitorFilter.TextChanged += new System.EventHandler(this.txtCompetitorFilter_TextChanged);
             // 
             // label5
             // 
@@ -726,26 +734,26 @@
             // btnRefreshMatchTab
             // 
             this.btnRefreshMatchTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefreshMatchTab.Location = new System.Drawing.Point(781, 1044);
+            this.btnRefreshMatchTab.Location = new System.Drawing.Point(956, 1044);
             this.btnRefreshMatchTab.Name = "btnRefreshMatchTab";
-            this.btnRefreshMatchTab.Size = new System.Drawing.Size(535, 73);
+            this.btnRefreshMatchTab.Size = new System.Drawing.Size(373, 73);
             this.btnRefreshMatchTab.TabIndex = 6;
-            this.btnRefreshMatchTab.Text = "Refresh Lists";
+            this.btnRefreshMatchTab.Text = "Refresh List Data";
             this.btnRefreshMatchTab.UseVisualStyleBackColor = true;
             this.btnRefreshMatchTab.Visible = false;
             this.btnRefreshMatchTab.Click += new System.EventHandler(this.btnRefreshMatchTab_Click);
             // 
-            // btnClearFilters
+            // btnClearMatchFilter
             // 
-            this.btnClearFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearFilters.Location = new System.Drawing.Point(1338, 1044);
-            this.btnClearFilters.Name = "btnClearFilters";
-            this.btnClearFilters.Size = new System.Drawing.Size(535, 73);
-            this.btnClearFilters.TabIndex = 7;
-            this.btnClearFilters.Text = "Clear Filters";
-            this.btnClearFilters.UseVisualStyleBackColor = true;
-            this.btnClearFilters.Visible = false;
-            this.btnClearFilters.Click += new System.EventHandler(this.btnClearFilters_Click);
+            this.btnClearMatchFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearMatchFilter.Location = new System.Drawing.Point(1425, 1044);
+            this.btnClearMatchFilter.Name = "btnClearMatchFilter";
+            this.btnClearMatchFilter.Size = new System.Drawing.Size(535, 73);
+            this.btnClearMatchFilter.TabIndex = 7;
+            this.btnClearMatchFilter.Text = "Clear Match Filter";
+            this.btnClearMatchFilter.UseVisualStyleBackColor = true;
+            this.btnClearMatchFilter.Visible = false;
+            this.btnClearMatchFilter.Click += new System.EventHandler(this.btnClearMatchFilter_Click);
             // 
             // tmrMatchCompetitorRefresh
             // 
@@ -757,13 +765,56 @@
             this.tmrDivisions.Interval = 250;
             this.tmrDivisions.Tick += new System.EventHandler(this.tmrDivisions_Tick);
             // 
+            // cmsMatches
+            // 
+            this.cmsMatches.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.cmsMatches.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmiMatchesExpandAll,
+            this.cmiMatchesCollapseAll,
+            this.cmiDeleteMatch});
+            this.cmsMatches.Name = "cmsMatches";
+            this.cmsMatches.Size = new System.Drawing.Size(235, 112);
+            // 
+            // cmiMatchesExpandAll
+            // 
+            this.cmiMatchesExpandAll.Name = "cmiMatchesExpandAll";
+            this.cmiMatchesExpandAll.Size = new System.Drawing.Size(234, 36);
+            this.cmiMatchesExpandAll.Text = "Expand All";
+            this.cmiMatchesExpandAll.Click += new System.EventHandler(this.cmiMatchesExpandAll_Click);
+            // 
+            // cmiMatchesCollapseAll
+            // 
+            this.cmiMatchesCollapseAll.Name = "cmiMatchesCollapseAll";
+            this.cmiMatchesCollapseAll.Size = new System.Drawing.Size(234, 36);
+            this.cmiMatchesCollapseAll.Text = "Collapse All";
+            this.cmiMatchesCollapseAll.Click += new System.EventHandler(this.cmiMatchesCollapseAll_Click);
+            // 
+            // cmiDeleteMatch
+            // 
+            this.cmiDeleteMatch.Name = "cmiDeleteMatch";
+            this.cmiDeleteMatch.Size = new System.Drawing.Size(234, 36);
+            this.cmiDeleteMatch.Text = "Delete Match";
+            // 
+            // btnClearCompetitorFilter
+            // 
+            this.btnClearCompetitorFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearCompetitorFilter.Location = new System.Drawing.Point(335, 1044);
+            this.btnClearCompetitorFilter.Name = "btnClearCompetitorFilter";
+            this.btnClearCompetitorFilter.Size = new System.Drawing.Size(535, 73);
+            this.btnClearCompetitorFilter.TabIndex = 8;
+            this.btnClearCompetitorFilter.Text = "Clear Competitor Filter";
+            this.btnClearCompetitorFilter.UseVisualStyleBackColor = true;
+            this.btnClearCompetitorFilter.Visible = false;
+            this.btnClearCompetitorFilter.Click += new System.EventHandler(this.btnClearCompetitorFilter_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2281, 1140);
-            this.Controls.Add(this.btnClearFilters);
+            this.Controls.Add(this.btnClearCompetitorFilter);
+            this.Controls.Add(this.btnClearMatchFilter);
             this.Controls.Add(this.btnRefreshMatchTab);
             this.Controls.Add(this.btnRetryConnection);
             this.Controls.Add(this.pbCompany);
@@ -798,6 +849,7 @@
             this.msMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).EndInit();
+            this.cmsMatches.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -861,7 +913,7 @@
         private System.Windows.Forms.Button btnRefreshMatchTab;
         private System.Windows.Forms.Button btnMatchApply;
         private System.Windows.Forms.Button btnCompetitorApply;
-        private System.Windows.Forms.Button btnClearFilters;
+        private System.Windows.Forms.Button btnClearMatchFilter;
         private System.Windows.Forms.ToolStripMenuItem matchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearFiltersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshMatchAndCompetitorListsToolStripMenuItem;
@@ -869,5 +921,10 @@
         private System.Windows.Forms.Label lblLoading;
         private System.Windows.Forms.Timer tmrMatchCompetitorRefresh;
         private System.Windows.Forms.Timer tmrDivisions;
+        private System.Windows.Forms.ContextMenuStrip cmsMatches;
+        private System.Windows.Forms.ToolStripMenuItem cmiMatchesExpandAll;
+        private System.Windows.Forms.ToolStripMenuItem cmiMatchesCollapseAll;
+        private System.Windows.Forms.ToolStripMenuItem cmiDeleteMatch;
+        private System.Windows.Forms.Button btnClearCompetitorFilter;
     }
 }

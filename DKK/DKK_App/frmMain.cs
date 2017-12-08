@@ -60,12 +60,14 @@ namespace DKK_App
                 this.btnRetryConnection.Visible == false)
             {
                 this.btnRefreshMatchTab.Visible = true;
-                this.btnClearFilters.Visible = true;
+                this.btnClearMatchFilter.Visible = true;
+                this.btnClearCompetitorFilter.Visible = true;
             }
             else
             {
                 this.btnRefreshMatchTab.Visible = false;
-                this.btnClearFilters.Visible = false;
+                this.btnClearMatchFilter.Visible = false;
+                this.btnClearCompetitorFilter.Visible = false;
             }
         }
 
@@ -96,12 +98,20 @@ namespace DKK_App
                 case "School":
                     type = FilterType.DojoName;
                     break;
+                case "Matches w/ <= 1 competitor":
+                    type = FilterType.MatchesWithTooFewCompetitors;
+                    break;
             }
 
             return type;
         }
 
-        private async void btnCompetitorApply_Click(object sender, EventArgs e)
+        private void btnCompetitorApply_Click(object sender, EventArgs e)
+        {
+            ApplyCompetitorFilter();
+        }
+
+        private async void ApplyCompetitorFilter()
         {
             if (!String.IsNullOrEmpty(this.cbCompetitorFilterBy.SelectedItem.ToString()))
             {
@@ -113,21 +123,27 @@ namespace DKK_App
             }
         }
 
-        private async void btnMatchApply_Click(object sender, EventArgs e)
+        private void btnMatchApply_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(this.cbMatchFilterBy.SelectedItem.ToString()))
+            ApplyMatchFilter();
+        }
+
+        private async void ApplyMatchFilter()
+        {
+            FilterType type = TranslateToFilterType(this.cbMatchFilterBy.SelectedItem.ToString());
+
+            if (!String.IsNullOrEmpty(this.cbMatchFilterBy.SelectedItem.ToString()) ||
+                type == FilterType.MatchesWithTooFewCompetitors)
             {
-                FilterType type = TranslateToFilterType(this.cbMatchFilterBy.SelectedItem.ToString());
-                
                 var model = await Global.FilterMatchModelAsync(MatchModels, type, this.txtMatchFilter.Text);
-                
+
                 RefreshMatches(model);
             }
         }
 
-        private void btnClearFilters_Click(object sender, EventArgs e)
+        private void btnClearMatchFilter_Click(object sender, EventArgs e)
         {
-            RefreshMatchesAndCompetitors();
+            RefreshMatches(MatchModels);
         }
 
         private void RefreshDivisions()
@@ -143,6 +159,7 @@ namespace DKK_App
             //Set TreeListView delegates
             tlvMatches.CanExpandGetter = delegate (object x) { return true; };
             tlvMatches.ChildrenGetter = delegate (object x) { return ((Models.MatchModel)x).Children; };
+            tlvMatches.ContextMenuStrip = this.cmsMatches;
 
             SetFilterDropdowns();
             DisableAllTabs();
@@ -456,6 +473,7 @@ namespace DKK_App
         {
             this.cbMatchFilterBy.Items.Clear();
 
+            //Add options by column
             for (int i = 0; i < tlvMatches.Columns.Count; i++)
             {
                 string label = tlvMatches.Columns[i].Text;
@@ -470,6 +488,9 @@ namespace DKK_App
                 }
                 this.cbMatchFilterBy.Items.Add(label);
             }
+
+            //Add non-columnar filters
+            this.cbMatchFilterBy.Items.Add("Matches w/ <= 1 competitor");
         }
 
         private void retryConnectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -498,7 +519,8 @@ namespace DKK_App
                 this.lblLoading.Visible = false;
                 this.tmrMatchCompetitorRefresh.Enabled = false;
 
-                RefreshMatchesAndCompetitors();
+                RefreshMatches(MatchModels);
+                RefreshCompetitors(CompetitorModels);
             }
         }
 
@@ -594,6 +616,31 @@ namespace DKK_App
         private void tlvMatches_CanDrop(object sender, BrightIdeasSoftware.OlvDropEventArgs e)
         {
             //string s = "used as break point to test event";
+        }
+
+        private void cmiMatchesExpandAll_Click(object sender, EventArgs e)
+        {
+            this.tlvMatches.ExpandAll();
+        }
+
+        private void cmiMatchesCollapseAll_Click(object sender, EventArgs e)
+        {
+            this.tlvMatches.CollapseAll();
+        }
+
+        private void btnClearCompetitorFilter_Click(object sender, EventArgs e)
+        {
+            RefreshCompetitors(CompetitorModels);
+        }
+
+        private void txtCompetitorFilter_TextChanged(object sender, EventArgs e)
+        {
+            ApplyCompetitorFilter();
+        }
+
+        private void txtMatchFilter_TextChanged(object sender, EventArgs e)
+        {
+            ApplyMatchFilter();
         }
     }
 }

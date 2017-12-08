@@ -13,6 +13,7 @@ namespace DKK_App.Enums
         Division,
         Belt,
         MatchType,
-        ApplicableMatches
+        ApplicableMatches,
+        MatchesWithTooFewCompetitors
     }
 }

@@ -123,6 +123,7 @@
     <Build Include="Schemas\Event\Stored Procedures\spPurgeCompetitors.sql" />
     <Build Include="Schemas\Event\Views\vwDivision.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spAddCompetitorToMatch.sql" />
+    <Build Include="Schemas\Event\Stored Procedures\spDeleteMatch.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

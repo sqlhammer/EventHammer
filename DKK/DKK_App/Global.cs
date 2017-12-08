@@ -92,6 +92,8 @@ namespace DKK_App
                     return await FilterMatchModelAsync_MatchDisplayName(model, pattern);
                 case FilterType.MatchType:
                     return await FilterMatchModelAsync_MatchType(model, pattern);
+                case FilterType.MatchesWithTooFewCompetitors:
+                    return await FilterMatchModelAsync_MatchesWithTooFewCompetitors(model);
             }
 
             return model;
@@ -129,6 +131,26 @@ namespace DKK_App
             }
 
             return filteredModel;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_MatchesWithTooFewCompetitors(List<MatchModel> model)
+        {
+            var result = await Task.Run(() =>
+            {
+                List<MatchModel> filteredModel = new List<MatchModel>();
+
+                foreach (var m in model)
+                {
+                    if (m.Children.Count <= 1)
+                    {
+                        filteredModel.Add(m);
+                    }
+                }
+
+                return filteredModel;
+            });
+
+            return result;
         }
 
         private static async Task<List<MatchModel>> FilterMatchModelAsync_Age(List<MatchModel> model, string pattern)
