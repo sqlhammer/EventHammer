@@ -274,6 +274,7 @@ namespace DKK_App
                     continue;
                 }
 
+                mm.EventId = obj.Match.Event.EventId;
                 mm.DivisionId = obj.Match.Division.DivisionId;
                 mm.MatchTypeId = obj.Match.MatchType.MatchTypeId;
                 mm.MatchId = obj.Match.MatchId;
@@ -367,8 +368,37 @@ namespace DKK_App
         }
         #endregion
 
+        #region Match Modification
+        public static List<MatchModel> AddCompetitorToMatch (CompetitorModel comp, MatchModel match, List<MatchModel> matches)
+        {
+            DataAccess.AddCompetitorToEvent(comp, match);
 
+            MatchModel newComp = new MatchModel();
 
+            newComp.CompetitorId = comp.CompetitorId;
+            newComp.MatchId = match.MatchId;
+            newComp.Age = comp.Age;
+            newComp.DisplayName = comp.DisplayName;
+            newComp.DojoName = comp.DojoName;
+            newComp.Gender = comp.Gender;
+            newComp.RankName = comp.RankName;
+            newComp.Weight = comp.Weight;
+            newComp.Children = new List<MatchModel>();
+
+            foreach (MatchModel m in matches)
+            {
+                if(m.MatchId == match.MatchId)
+                {
+                    m.Children.Add(newComp);
+                    break;
+                }
+            }
+            
+            return matches;
+        }
+        #endregion
+
+        #region Validators and Conversions
         private static string GetMatchTypeDisplayName(MatchType mt, LengthType len = LengthType.Long)
         {
             string dn = "";
@@ -433,5 +463,6 @@ namespace DKK_App
 
             return result;
         }
+        #endregion
     }
 }

@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using DKK_App.Entities;
 using System.Linq;
+using DKK_App.Models;
 
 namespace DKK_App
 {
@@ -39,6 +40,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -105,6 +108,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -174,6 +179,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -225,6 +232,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -268,6 +277,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -321,6 +332,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -374,6 +387,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -418,6 +433,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -462,6 +479,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -521,6 +540,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -585,6 +606,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -653,6 +676,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -987,6 +1012,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -1063,6 +1090,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader != null)
@@ -1131,6 +1160,16 @@ namespace DKK_App
 
             ExecuteDDL(query);
         }
+
+        public static void AddCompetitorToEvent(CompetitorModel comp, MatchModel match)
+        {
+            string query = @"EXEC [Event].[spAddCompetitorToMatch] @MatchId = " +
+                match.MatchId.ToString() + @", @CompetitorId = " +
+                comp.CompetitorId.ToString() + @", @EventId = " +
+                match.EventId.ToString() + @";";
+
+            ExecuteDDL(query);
+        }
         #endregion
 
         public static void ExecuteDDL(string query)
@@ -1141,6 +1180,8 @@ namespace DKK_App
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
                     cmd.ExecuteNonQuery();
                 }
             }

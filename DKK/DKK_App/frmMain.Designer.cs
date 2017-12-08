@@ -48,6 +48,7 @@
             this.lblEventSelect = new System.Windows.Forms.Label();
             this.cbEventSelect = new System.Windows.Forms.ComboBox();
             this.tabMatch = new System.Windows.Forms.TabPage();
+            this.lblLoading = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnMatchApply = new System.Windows.Forms.Button();
             this.tlvMatches = new BrightIdeasSoftware.TreeListView();
@@ -81,17 +82,16 @@
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.miEventManager = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshEventSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.retryConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.matchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshMatchAndCompetitorListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pbCompany = new System.Windows.Forms.PictureBox();
             this.pbPoweredBy = new System.Windows.Forms.PictureBox();
             this.btnRetryConnection = new System.Windows.Forms.Button();
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
             this.btnRefreshMatchTab = new System.Windows.Forms.Button();
             this.btnClearFilters = new System.Windows.Forms.Button();
-            this.matchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshMatchAndCompetitorListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.retryConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblLoading = new System.Windows.Forms.Label();
             this.tmrMatchCompetitorRefresh = new System.Windows.Forms.Timer(this.components);
             this.tmrDivisions = new System.Windows.Forms.Timer(this.components);
             this.tab1.SuspendLayout();
@@ -307,6 +307,17 @@
             this.tabMatch.Text = "Matches";
             this.tabMatch.UseVisualStyleBackColor = true;
             // 
+            // lblLoading
+            // 
+            this.lblLoading.AutoSize = true;
+            this.lblLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoading.Location = new System.Drawing.Point(736, 410);
+            this.lblLoading.Name = "lblLoading";
+            this.lblLoading.Size = new System.Drawing.Size(626, 147);
+            this.lblLoading.TabIndex = 5;
+            this.lblLoading.Text = "Loading...";
+            this.lblLoading.Visible = false;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnMatchApply);
@@ -356,6 +367,7 @@
             this.olvColDojo});
             this.tlvMatches.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlvMatches.IsSimpleDropSink = true;
             this.tlvMatches.Location = new System.Drawing.Point(7, 160);
             this.tlvMatches.Name = "tlvMatches";
             this.tlvMatches.ShowGroups = false;
@@ -366,6 +378,9 @@
             this.tlvMatches.UseCompatibleStateImageBehavior = false;
             this.tlvMatches.View = System.Windows.Forms.View.Details;
             this.tlvMatches.VirtualMode = true;
+            this.tlvMatches.CanDrop += new System.EventHandler<BrightIdeasSoftware.OlvDropEventArgs>(this.tlvMatches_CanDrop);
+            this.tlvMatches.ModelCanDrop += new System.EventHandler<BrightIdeasSoftware.ModelDropEventArgs>(this.tlvMatches_ModelCanDrop);
+            this.tlvMatches.ModelDropped += new System.EventHandler<BrightIdeasSoftware.ModelDropEventArgs>(this.tlvMatches_ModelDropped);
             // 
             // olvColDivDisplay
             // 
@@ -509,7 +524,6 @@
             this.tlvCompetitors.AllColumns.Add(this.olvColCompRankName);
             this.tlvCompetitors.AllColumns.Add(this.olvColCompAge);
             this.tlvCompetitors.AllColumns.Add(this.olvColCompWeight);
-            this.tlvCompetitors.AllowDrop = true;
             this.tlvCompetitors.CellEditUseWholeCell = false;
             this.tlvCompetitors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColCompDisplayName,
@@ -518,6 +532,7 @@
             this.olvColCompWeight});
             this.tlvCompetitors.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvCompetitors.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlvCompetitors.IsSimpleDragSource = true;
             this.tlvCompetitors.Location = new System.Drawing.Point(0, 160);
             this.tlvCompetitors.Name = "tlvCompetitors";
             this.tlvCompetitors.ShowGroups = false;
@@ -528,6 +543,7 @@
             this.tlvCompetitors.UseCompatibleStateImageBehavior = false;
             this.tlvCompetitors.View = System.Windows.Forms.View.Details;
             this.tlvCompetitors.VirtualMode = true;
+            this.tlvCompetitors.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.tlvCompetitors_ItemDrag);
             this.tlvCompetitors.SelectedIndexChanged += new System.EventHandler(this.tlvCompetitors_SelectedIndexChanged);
             // 
             // olvColCompDisplayName
@@ -635,6 +651,36 @@
             this.refreshEventSelectionToolStripMenuItem.Text = "Refresh Event Selection";
             this.refreshEventSelectionToolStripMenuItem.Click += new System.EventHandler(this.refreshEventSelectionToolStripMenuItem_Click);
             // 
+            // retryConnectionToolStripMenuItem
+            // 
+            this.retryConnectionToolStripMenuItem.Name = "retryConnectionToolStripMenuItem";
+            this.retryConnectionToolStripMenuItem.Size = new System.Drawing.Size(404, 38);
+            this.retryConnectionToolStripMenuItem.Text = "Retry Connection";
+            this.retryConnectionToolStripMenuItem.Click += new System.EventHandler(this.retryConnectionToolStripMenuItem_Click);
+            // 
+            // matchToolStripMenuItem
+            // 
+            this.matchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearFiltersToolStripMenuItem,
+            this.refreshMatchAndCompetitorListsToolStripMenuItem});
+            this.matchToolStripMenuItem.Name = "matchToolStripMenuItem";
+            this.matchToolStripMenuItem.Size = new System.Drawing.Size(94, 36);
+            this.matchToolStripMenuItem.Text = "Match";
+            // 
+            // clearFiltersToolStripMenuItem
+            // 
+            this.clearFiltersToolStripMenuItem.Name = "clearFiltersToolStripMenuItem";
+            this.clearFiltersToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
+            this.clearFiltersToolStripMenuItem.Text = "Clear Filters";
+            this.clearFiltersToolStripMenuItem.Click += new System.EventHandler(this.clearFiltersToolStripMenuItem_Click);
+            // 
+            // refreshMatchAndCompetitorListsToolStripMenuItem
+            // 
+            this.refreshMatchAndCompetitorListsToolStripMenuItem.Name = "refreshMatchAndCompetitorListsToolStripMenuItem";
+            this.refreshMatchAndCompetitorListsToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
+            this.refreshMatchAndCompetitorListsToolStripMenuItem.Text = "Refresh Match and Competitor Lists";
+            this.refreshMatchAndCompetitorListsToolStripMenuItem.Click += new System.EventHandler(this.refreshMatchAndCompetitorListsToolStripMenuItem_Click);
+            // 
             // pbCompany
             // 
             this.pbCompany.Image = global::DKK_App.Properties.Resources.dkk_logo_medium_horizontal;
@@ -700,47 +746,6 @@
             this.btnClearFilters.UseVisualStyleBackColor = true;
             this.btnClearFilters.Visible = false;
             this.btnClearFilters.Click += new System.EventHandler(this.btnClearFilters_Click);
-            // 
-            // matchToolStripMenuItem
-            // 
-            this.matchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearFiltersToolStripMenuItem,
-            this.refreshMatchAndCompetitorListsToolStripMenuItem});
-            this.matchToolStripMenuItem.Name = "matchToolStripMenuItem";
-            this.matchToolStripMenuItem.Size = new System.Drawing.Size(94, 36);
-            this.matchToolStripMenuItem.Text = "Match";
-            // 
-            // clearFiltersToolStripMenuItem
-            // 
-            this.clearFiltersToolStripMenuItem.Name = "clearFiltersToolStripMenuItem";
-            this.clearFiltersToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
-            this.clearFiltersToolStripMenuItem.Text = "Clear Filters";
-            this.clearFiltersToolStripMenuItem.Click += new System.EventHandler(this.clearFiltersToolStripMenuItem_Click);
-            // 
-            // refreshMatchAndCompetitorListsToolStripMenuItem
-            // 
-            this.refreshMatchAndCompetitorListsToolStripMenuItem.Name = "refreshMatchAndCompetitorListsToolStripMenuItem";
-            this.refreshMatchAndCompetitorListsToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
-            this.refreshMatchAndCompetitorListsToolStripMenuItem.Text = "Refresh Match and Competitor Lists";
-            this.refreshMatchAndCompetitorListsToolStripMenuItem.Click += new System.EventHandler(this.refreshMatchAndCompetitorListsToolStripMenuItem_Click);
-            // 
-            // retryConnectionToolStripMenuItem
-            // 
-            this.retryConnectionToolStripMenuItem.Name = "retryConnectionToolStripMenuItem";
-            this.retryConnectionToolStripMenuItem.Size = new System.Drawing.Size(404, 38);
-            this.retryConnectionToolStripMenuItem.Text = "Retry Connection";
-            this.retryConnectionToolStripMenuItem.Click += new System.EventHandler(this.retryConnectionToolStripMenuItem_Click);
-            // 
-            // lblLoading
-            // 
-            this.lblLoading.AutoSize = true;
-            this.lblLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoading.Location = new System.Drawing.Point(736, 410);
-            this.lblLoading.Name = "lblLoading";
-            this.lblLoading.Size = new System.Drawing.Size(626, 147);
-            this.lblLoading.TabIndex = 5;
-            this.lblLoading.Text = "Loading...";
-            this.lblLoading.Visible = false;
             // 
             // tmrMatchCompetitorRefresh
             // 

@@ -8,6 +8,7 @@ namespace DKK_App.Models
         private string _MatchDisplayName;
         private int? _MatchDisplayId;
         
+        public int? EventId { get; set; }
         public int? SubDivisionId { get; set; }
         public int? MatchId { get; set; }
         public int? DivisionId { get; set; }

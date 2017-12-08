@@ -6,6 +6,7 @@ using DKK_App.Entities;
 using DKK_App.Models;
 using DKK_App.Enums;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace DKK_App
 {
@@ -33,20 +34,13 @@ namespace DKK_App
         {
             Divisions = await DataAccessAsync.GetDivisions();
         }
-
-        private void ResetMatchCompetitorViews()
-        {
-            RefreshMatches(MatchModels);
-            RefreshCompetitors(CompetitorModels);
-        }
-
+        
         private void RefreshMatchCompetitorViews()
         {
             this.lblLoading.Visible = true;
             this.tmrMatchCompetitorRefresh.Enabled = true;
 
-            Task.Run(() => { RefreshMatches(); });
-            Task.Run(() => { RefreshCompetitors(); });            
+            Task.Run(() => { RefreshMatchesAndCompetitors(); });           
         }
 
         private void tab1_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,7 +127,7 @@ namespace DKK_App
 
         private void btnClearFilters_Click(object sender, EventArgs e)
         {
-            ResetMatchCompetitorViews();
+            RefreshMatchesAndCompetitors();
         }
 
         private void RefreshDivisions()
@@ -413,6 +407,13 @@ namespace DKK_App
             tlvCompetitors.CollapseAll();
         }
 
+        private async void RefreshMatchesAndCompetitors()
+        {
+            List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
+            MatchModels = Global.GetMatchModel(mcs);
+            CompetitorModels = Global.GetCompetitorModel(mcs);
+        }
+
         private async void RefreshMatches()
         {
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
@@ -478,7 +479,7 @@ namespace DKK_App
 
         private void clearFiltersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ResetMatchCompetitorViews();
+            RefreshMatchesAndCompetitors();
         }
 
         private void refreshMatchAndCompetitorListsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -497,7 +498,7 @@ namespace DKK_App
                 this.lblLoading.Visible = false;
                 this.tmrMatchCompetitorRefresh.Enabled = false;
 
-                ResetMatchCompetitorViews();
+                RefreshMatchesAndCompetitors();
             }
         }
 
@@ -525,6 +526,74 @@ namespace DKK_App
             {
                 RefreshMatches(MatchModels);
             }
+        }
+
+        private void tlvCompetitors_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            // Copy the dragged node when the left mouse button is used.
+            if (e.Button == MouseButtons.Left)
+            {
+                DoDragDrop(e.Item, DragDropEffects.Copy);
+            }
+        }
+
+        private void tlvMatches_ModelCanDrop(object sender, BrightIdeasSoftware.ModelDropEventArgs e)
+        {
+            if (e.TargetModel == null)
+            {
+                e.Effect = DragDropEffects.None;
+            }
+            else
+            {
+                if (e.SourceModels.Count == 1)
+                {
+                    CompetitorModel comp = new CompetitorModel();
+                    foreach (CompetitorModel c in e.SourceModels)
+                    {
+                        comp = c;
+                        break;
+                    }
+
+                    MatchModel match = e.TargetModel as MatchModel;
+                    
+                    if (match.Children.Any(m => m.CompetitorId == comp.CompetitorId))
+                    {
+                        e.Effect = DragDropEffects.None;
+                        e.InfoMessage = "Cannot add this competitor because he/she is already in the match.";
+                    }
+                    else
+                    {
+                        e.Effect = DragDropEffects.Copy;
+                    }
+                }
+                else
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+            }
+        }
+
+        private void tlvMatches_ModelDropped(object sender, BrightIdeasSoftware.ModelDropEventArgs e)
+        {
+            if (e.TargetModel == null)
+                return;
+
+            CompetitorModel comp = new CompetitorModel();
+            foreach (CompetitorModel c in e.SourceModels)
+            {
+                comp = c;
+                break;
+            }
+
+            MatchModels = Global.AddCompetitorToMatch(comp, (MatchModel)e.TargetModel, MatchModels);
+            RefreshMatches(MatchModels);
+
+            e.RefreshObjects();
+        }
+
+        private void tlvMatches_CanDrop(object sender, BrightIdeasSoftware.OlvDropEventArgs e)
+        {
+            //string s = "used as break point to test event";
         }
     }
 }
