@@ -25,8 +25,6 @@ namespace DKK_App
         
         private void btnRefreshMatchTab_Click(object sender, EventArgs e)
         {
-            MatchModels = new List<MatchModel>();
-            CompetitorModels = new List<CompetitorModel>();
             RefreshMatchCompetitorViews();
         }
 
@@ -37,8 +35,13 @@ namespace DKK_App
         
         private void RefreshMatchCompetitorViews()
         {
+            MatchModels = new List<MatchModel>();
+            CompetitorModels = new List<CompetitorModel>();
+
             this.lblLoading.Visible = true;
+            this.createNewMatchToolStripMenuItem.Enabled = false;
             this.tmrMatchCompetitorRefresh.Enabled = true;
+            this.tmrNewMatch.Enabled = true;
 
             Task.Run(() => { RefreshMatchesAndCompetitors(); });           
         }
@@ -150,6 +153,8 @@ namespace DKK_App
         {
             Divisions = new List<Division>();
             this.tmrDivisions.Enabled = true;
+            this.createNewMatchToolStripMenuItem.Enabled = false;
+            this.tmrNewMatch.Enabled = true;
 
             Task.Run(() => RefreshDivisionsAsync());
         }
@@ -300,6 +305,7 @@ namespace DKK_App
         {
             CurrentEvent = AllEvents[this.cbEventSelect.SelectedIndex];
             EnableAllTabs();
+            EnableAllContextMenus();
             RefreshFormTitle();
             DisplayEventInformation();
         }
@@ -382,6 +388,11 @@ namespace DKK_App
             this.txtEventInfo.Text = this.txtEventInfo.Text + System.Environment.NewLine + "Event Date:\t" + CurrentEvent.Date.ToString("MM/dd/yyyy");
         }
 
+        private void EnableAllContextMenus()
+        {
+            this.msMatches.Enabled = true;
+        }
+
         private void EnableAllTabs()
         {
             foreach (TabPage pg in this.tab1.TabPages)
@@ -412,7 +423,7 @@ namespace DKK_App
             DisableAllTabs();
         }
 
-        private void RefreshMatches(List<MatchModel> model)
+        public void RefreshMatches(List<MatchModel> model)
         {
             tlvMatches.Roots = model;
             tlvMatches.CollapseAll();
@@ -500,7 +511,8 @@ namespace DKK_App
 
         private void clearFiltersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RefreshMatchesAndCompetitors();
+            RefreshMatches(MatchModels);
+            RefreshCompetitors(CompetitorModels);
         }
 
         private void refreshMatchAndCompetitorListsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -641,6 +653,54 @@ namespace DKK_App
         private void txtMatchFilter_TextChanged(object sender, EventArgs e)
         {
             ApplyMatchFilter();
+        }
+
+        private void cmiDeleteMatch_Click(object sender, EventArgs e)
+        {
+            MatchModel m = this.tlvMatches.SelectedObject as MatchModel;
+
+            if (m == null)
+                return;
+
+            string msg = String.Format("Confirm: irrevocably delete match {0}.",m.MatchDisplayName);
+            string title = "Confirm delete";
+            DialogResult r = MessageBox.Show(msg,title,MessageBoxButtons.OKCancel,MessageBoxIcon.Exclamation);
+
+            if (r == DialogResult.Cancel)
+                return;
+
+            DataAccessAsync.DeleteMatchAsync(m);
+            MatchModels.Remove(m);
+            RefreshMatches(MatchModels);
+        }
+
+        private void newMatchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadNewMatchForm();
+        }
+
+        private void createNewMatchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadNewMatchForm();
+        }
+
+        private void LoadNewMatchForm()
+        {
+            frmNewMatch frm = new frmNewMatch();
+            frm.Divisions = Divisions;
+            frm.MatchModels = MatchModels;
+            frm.ParentFormMain = this;
+            frm.Show();
+        }
+
+        private void tmrNewMatch_Tick(object sender, EventArgs e)
+        {
+            if (Divisions.Count > 0 &&
+                MatchModels.Count > 0)
+            {
+                this.createNewMatchToolStripMenuItem.Enabled = true;
+                this.tmrDivisions.Enabled = false;
+            }
         }
     }
 }

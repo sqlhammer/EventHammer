@@ -83,11 +83,11 @@
             this.miEventManager = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshEventSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.retryConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.matchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.msMatches = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNewMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshMatchAndCompetitorListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pbCompany = new System.Windows.Forms.PictureBox();
-            this.pbPoweredBy = new System.Windows.Forms.PictureBox();
             this.btnRetryConnection = new System.Windows.Forms.Button();
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
             this.btnRefreshMatchTab = new System.Windows.Forms.Button();
@@ -97,8 +97,12 @@
             this.cmsMatches = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmiMatchesExpandAll = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiMatchesCollapseAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.newMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiDeleteMatch = new System.Windows.Forms.ToolStripMenuItem();
             this.btnClearCompetitorFilter = new System.Windows.Forms.Button();
+            this.pbCompany = new System.Windows.Forms.PictureBox();
+            this.pbPoweredBy = new System.Windows.Forms.PictureBox();
+            this.tmrNewMatch = new System.Windows.Forms.Timer(this.components);
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbReports.SuspendLayout();
@@ -110,9 +114,9 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).BeginInit();
             this.msMenu.SuspendLayout();
+            this.cmsMatches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).BeginInit();
-            this.cmsMatches.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -627,7 +631,7 @@
             this.msMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miFile,
-            this.matchToolStripMenuItem});
+            this.msMatches});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
             this.msMenu.Size = new System.Drawing.Size(2281, 40);
@@ -666,14 +670,31 @@
             this.retryConnectionToolStripMenuItem.Text = "Retry Connection";
             this.retryConnectionToolStripMenuItem.Click += new System.EventHandler(this.retryConnectionToolStripMenuItem_Click);
             // 
-            // matchToolStripMenuItem
+            // msMatches
             // 
-            this.matchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msMatches.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNewMatchToolStripMenuItem,
+            this.deleteMatchToolStripMenuItem,
             this.clearFiltersToolStripMenuItem,
             this.refreshMatchAndCompetitorListsToolStripMenuItem});
-            this.matchToolStripMenuItem.Name = "matchToolStripMenuItem";
-            this.matchToolStripMenuItem.Size = new System.Drawing.Size(94, 36);
-            this.matchToolStripMenuItem.Text = "Match";
+            this.msMatches.Enabled = false;
+            this.msMatches.Name = "msMatches";
+            this.msMatches.Size = new System.Drawing.Size(94, 36);
+            this.msMatches.Text = "Match";
+            // 
+            // createNewMatchToolStripMenuItem
+            // 
+            this.createNewMatchToolStripMenuItem.Enabled = false;
+            this.createNewMatchToolStripMenuItem.Name = "createNewMatchToolStripMenuItem";
+            this.createNewMatchToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
+            this.createNewMatchToolStripMenuItem.Text = "Create New Match";
+            this.createNewMatchToolStripMenuItem.Click += new System.EventHandler(this.createNewMatchToolStripMenuItem_Click);
+            // 
+            // deleteMatchToolStripMenuItem
+            // 
+            this.deleteMatchToolStripMenuItem.Name = "deleteMatchToolStripMenuItem";
+            this.deleteMatchToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
+            this.deleteMatchToolStripMenuItem.Text = "Delete Match";
             // 
             // clearFiltersToolStripMenuItem
             // 
@@ -688,36 +709,6 @@
             this.refreshMatchAndCompetitorListsToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
             this.refreshMatchAndCompetitorListsToolStripMenuItem.Text = "Refresh Match and Competitor Lists";
             this.refreshMatchAndCompetitorListsToolStripMenuItem.Click += new System.EventHandler(this.refreshMatchAndCompetitorListsToolStripMenuItem_Click);
-            // 
-            // pbCompany
-            // 
-            this.pbCompany.Image = global::DKK_App.Properties.Resources.dkk_logo_medium_horizontal;
-            this.pbCompany.Location = new System.Drawing.Point(12, 1044);
-            this.pbCompany.Margin = new System.Windows.Forms.Padding(4);
-            this.pbCompany.Name = "pbCompany";
-            this.pbCompany.Size = new System.Drawing.Size(282, 72);
-            this.pbCompany.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbCompany.TabIndex = 2;
-            this.pbCompany.TabStop = false;
-            this.pbCompany.Click += new System.EventHandler(this.pbCompany_Click);
-            this.pbCompany.MouseEnter += new System.EventHandler(this.pbCompany_MouseEnter);
-            this.pbCompany.MouseLeave += new System.EventHandler(this.pbCompany_MouseLeave);
-            this.pbCompany.MouseHover += new System.EventHandler(this.pbCompany_MouseHover);
-            // 
-            // pbPoweredBy
-            // 
-            this.pbPoweredBy.Image = global::DKK_App.Properties.Resources.powered_by_sqlhammer;
-            this.pbPoweredBy.Location = new System.Drawing.Point(1986, 1042);
-            this.pbPoweredBy.Margin = new System.Windows.Forms.Padding(4);
-            this.pbPoweredBy.Name = "pbPoweredBy";
-            this.pbPoweredBy.Size = new System.Drawing.Size(282, 72);
-            this.pbPoweredBy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbPoweredBy.TabIndex = 0;
-            this.pbPoweredBy.TabStop = false;
-            this.pbPoweredBy.Click += new System.EventHandler(this.pbPoweredBy_Click);
-            this.pbPoweredBy.MouseEnter += new System.EventHandler(this.pbPoweredBy_MouseEnter);
-            this.pbPoweredBy.MouseLeave += new System.EventHandler(this.pbPoweredBy_MouseLeave);
-            this.pbPoweredBy.MouseHover += new System.EventHandler(this.pbPoweredBy_MouseHover);
             // 
             // btnRetryConnection
             // 
@@ -771,12 +762,14 @@
             this.cmsMatches.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmiMatchesExpandAll,
             this.cmiMatchesCollapseAll,
+            this.newMatchToolStripMenuItem,
             this.cmiDeleteMatch});
             this.cmsMatches.Name = "cmsMatches";
-            this.cmsMatches.Size = new System.Drawing.Size(235, 112);
+            this.cmsMatches.Size = new System.Drawing.Size(235, 148);
             // 
             // cmiMatchesExpandAll
             // 
+            this.cmiMatchesExpandAll.Enabled = false;
             this.cmiMatchesExpandAll.Name = "cmiMatchesExpandAll";
             this.cmiMatchesExpandAll.Size = new System.Drawing.Size(234, 36);
             this.cmiMatchesExpandAll.Text = "Expand All";
@@ -784,16 +777,27 @@
             // 
             // cmiMatchesCollapseAll
             // 
+            this.cmiMatchesCollapseAll.Enabled = false;
             this.cmiMatchesCollapseAll.Name = "cmiMatchesCollapseAll";
             this.cmiMatchesCollapseAll.Size = new System.Drawing.Size(234, 36);
             this.cmiMatchesCollapseAll.Text = "Collapse All";
             this.cmiMatchesCollapseAll.Click += new System.EventHandler(this.cmiMatchesCollapseAll_Click);
             // 
+            // newMatchToolStripMenuItem
+            // 
+            this.newMatchToolStripMenuItem.Enabled = false;
+            this.newMatchToolStripMenuItem.Name = "newMatchToolStripMenuItem";
+            this.newMatchToolStripMenuItem.Size = new System.Drawing.Size(234, 36);
+            this.newMatchToolStripMenuItem.Text = "New Match";
+            this.newMatchToolStripMenuItem.Click += new System.EventHandler(this.newMatchToolStripMenuItem_Click);
+            // 
             // cmiDeleteMatch
             // 
+            this.cmiDeleteMatch.Enabled = false;
             this.cmiDeleteMatch.Name = "cmiDeleteMatch";
             this.cmiDeleteMatch.Size = new System.Drawing.Size(234, 36);
             this.cmiDeleteMatch.Text = "Delete Match";
+            this.cmiDeleteMatch.Click += new System.EventHandler(this.cmiDeleteMatch_Click);
             // 
             // btnClearCompetitorFilter
             // 
@@ -806,6 +810,41 @@
             this.btnClearCompetitorFilter.UseVisualStyleBackColor = true;
             this.btnClearCompetitorFilter.Visible = false;
             this.btnClearCompetitorFilter.Click += new System.EventHandler(this.btnClearCompetitorFilter_Click);
+            // 
+            // pbCompany
+            // 
+            this.pbCompany.Image = global::DKK_App.Properties.Resources.dkk_logo_medium_horizontal;
+            this.pbCompany.Location = new System.Drawing.Point(12, 1044);
+            this.pbCompany.Margin = new System.Windows.Forms.Padding(4);
+            this.pbCompany.Name = "pbCompany";
+            this.pbCompany.Size = new System.Drawing.Size(282, 72);
+            this.pbCompany.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbCompany.TabIndex = 2;
+            this.pbCompany.TabStop = false;
+            this.pbCompany.Click += new System.EventHandler(this.pbCompany_Click);
+            this.pbCompany.MouseEnter += new System.EventHandler(this.pbCompany_MouseEnter);
+            this.pbCompany.MouseLeave += new System.EventHandler(this.pbCompany_MouseLeave);
+            this.pbCompany.MouseHover += new System.EventHandler(this.pbCompany_MouseHover);
+            // 
+            // pbPoweredBy
+            // 
+            this.pbPoweredBy.Image = global::DKK_App.Properties.Resources.powered_by_sqlhammer;
+            this.pbPoweredBy.Location = new System.Drawing.Point(1986, 1042);
+            this.pbPoweredBy.Margin = new System.Windows.Forms.Padding(4);
+            this.pbPoweredBy.Name = "pbPoweredBy";
+            this.pbPoweredBy.Size = new System.Drawing.Size(282, 72);
+            this.pbPoweredBy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbPoweredBy.TabIndex = 0;
+            this.pbPoweredBy.TabStop = false;
+            this.pbPoweredBy.Click += new System.EventHandler(this.pbPoweredBy_Click);
+            this.pbPoweredBy.MouseEnter += new System.EventHandler(this.pbPoweredBy_MouseEnter);
+            this.pbPoweredBy.MouseLeave += new System.EventHandler(this.pbPoweredBy_MouseLeave);
+            this.pbPoweredBy.MouseHover += new System.EventHandler(this.pbPoweredBy_MouseHover);
+            // 
+            // tmrNewMatch
+            // 
+            this.tmrNewMatch.Interval = 250;
+            this.tmrNewMatch.Tick += new System.EventHandler(this.tmrNewMatch_Tick);
             // 
             // frmMain
             // 
@@ -847,9 +886,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).EndInit();
             this.msMenu.ResumeLayout(false);
             this.msMenu.PerformLayout();
+            this.cmsMatches.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).EndInit();
-            this.cmsMatches.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -914,7 +953,7 @@
         private System.Windows.Forms.Button btnMatchApply;
         private System.Windows.Forms.Button btnCompetitorApply;
         private System.Windows.Forms.Button btnClearMatchFilter;
-        private System.Windows.Forms.ToolStripMenuItem matchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem msMatches;
         private System.Windows.Forms.ToolStripMenuItem clearFiltersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshMatchAndCompetitorListsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem retryConnectionToolStripMenuItem;
@@ -926,5 +965,9 @@
         private System.Windows.Forms.ToolStripMenuItem cmiMatchesCollapseAll;
         private System.Windows.Forms.ToolStripMenuItem cmiDeleteMatch;
         private System.Windows.Forms.Button btnClearCompetitorFilter;
+        private System.Windows.Forms.ToolStripMenuItem createNewMatchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteMatchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newMatchToolStripMenuItem;
+        private System.Windows.Forms.Timer tmrNewMatch;
     }
 }

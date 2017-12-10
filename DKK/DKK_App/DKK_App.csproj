@@ -67,6 +67,7 @@
     <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\EventType.cs" />
     <Compile Include="Entities\Event.cs" />
+    <Compile Include="Enums\NewMatchErrorType.cs" />
     <Compile Include="Enums\FilterType.cs" />
     <Compile Include="Enums\LengthType.cs" />
     <Compile Include="frmEditEvent.cs">
@@ -87,9 +88,16 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmNewMatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewMatch.Designer.cs">
+      <DependentUpon>frmNewMatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="MatchTab.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
+    <Compile Include="Models\DivisionModel.cs" />
     <Compile Include="Models\MatchModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewMatch.resx">
+      <DependentUpon>frmNewMatch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -5,6 +5,7 @@ using System.Configuration;
 using DKK_App.Entities;
 using System.Linq;
 using System.Threading.Tasks;
+using DKK_App.Models;
 
 namespace DKK_App
 {
@@ -1149,18 +1150,32 @@ namespace DKK_App
         #endregion
 
         #region Deletes
-        public static async void DeleteEvent(int id)
+        public static void DeleteEventAsync(int id)
         {
             string query = @"EXEC [Event].[spDeleteEvent] @EventId = " + id.ToString();
 
-            ExecuteDDL(query);
+            Task.Run(() => { ExecuteDDL(query); });
         }
 
-        public static async void DeleteEvent (Event Event)
+        public static void DeleteEventAsync (Event Event)
         {
             string query = @"EXEC [Event].[spDeleteEvent] @EventId = " + Event.EventId.ToString();
 
-            ExecuteDDL(query);
+            Task.Run(() => { ExecuteDDL(query); });
+        }
+
+        public static void DeleteMatchAsync(Match match)
+        {
+            string query = @"EXEC [Event].[spDeleteMatch] @MatchId = " + match.MatchId.ToString();
+
+            Task.Run(() => { ExecuteDDL(query); });
+        }
+
+        public static void DeleteMatchAsync(MatchModel match)
+        {
+            string query = @"EXEC [Event].[spDeleteMatch] @MatchId = " + match.MatchId.ToString();
+
+            Task.Run(() => { ExecuteDDL(query); });
         }
         #endregion
 

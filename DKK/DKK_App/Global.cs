@@ -363,6 +363,35 @@ namespace DKK_App
             return model;
         }
 
+        public static List<DivisionModel> GetDivisionModel(List<Division> divisions)
+        {
+            List<Models.DivisionModel> model = new List<Models.DivisionModel>();
+
+            foreach (Division obj in divisions)
+            {
+                if (model.Any(m => m.DivisionId == obj.DivisionId))
+                    continue;
+
+                DivisionModel dm = new DivisionModel
+                {
+                    DivisionId = obj.DivisionId,
+                    Gender = obj.Gender,
+                    IsKata = obj.IsKata,
+                    MaxAge = obj.MaxAge,
+                    MaxBelt = obj.MaxRank.RankName,
+                    MaxWeight_lb = obj.MaxWeight_lb,
+                    MinAge = obj.MinAge,
+                    MinBelt = obj.MinRank.RankName,
+                    MinWeight_lb = obj.MinWeight_lb,
+                    WeightClass = obj.WeightClass
+                };
+
+                model.Add(dm);
+            }
+
+            return model;
+        }
+
         public static List<CompetitorModel> GetCompetitorModel(List<MatchCompetitor> mcs)
         {
             List<Models.CompetitorModel> model = new List<Models.CompetitorModel>();
@@ -421,7 +450,22 @@ namespace DKK_App
         #endregion
 
         #region Validators and Conversions
-        private static string GetMatchTypeDisplayName(MatchType mt, LengthType len = LengthType.Long)
+        public static string GetMatchDisplayName(int division, int subdivision)
+        {
+            return division.ToString() + "-" + subdivision.ToString();
+        }
+
+        public static string GetMatchDisplayName(string division, string subdivision)
+        {
+            return division + "-" + subdivision;
+        }
+
+        public static string GetMatchDisplayName(decimal division, decimal subdivision)
+        {
+            return division.ToString() + "-" + subdivision.ToString();
+        }
+
+        public static string GetMatchTypeDisplayName(MatchType mt, LengthType len = LengthType.Long)
         {
             string dn = "";
             string specialSuffix = "";

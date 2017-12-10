@@ -32,7 +32,7 @@ namespace DKK_App.Models
                 {
                     if (MatchDisplayId != null)
                     {
-                        _MatchDisplayName = MatchDisplayId.ToString() + "-" + SubDivisionId.ToString();
+                        _MatchDisplayName = Global.GetMatchDisplayName((int)MatchDisplayId, (int)SubDivisionId);
                     }
                 }
 

@@ -596,6 +596,16 @@ namespace DKK_App
             return QueryMatchTypeInformation(query).FirstOrDefault();
         }
 
+        public static List<MatchType> GetMatchTypes()
+        {
+            string query = @"SELECT MatchTypeId
+	                              ,Name
+	                              ,IsSpecialConsideration 
+                            FROM Event.MatchType;";
+
+            return QueryMatchTypeInformation(query);
+        }
+
         private static List<MatchType> QueryMatchTypeInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
@@ -1151,6 +1161,28 @@ namespace DKK_App
         #endregion
 
         #region Inserts
+        public static void InsertMatch(Match match)
+        {
+            string query = "EXEC [Event].[spInsertMatch] @EventId = " + match.Event.EventId.ToString() +
+	                            ", @MatchTypeId = " + match.MatchType.MatchTypeId.ToString() + 
+	                            ", @MatchDisplayId = " + match.MatchDisplayId.ToString() +  
+	                            ", @DivisionId = " + match.Division.DivisionId.ToString() + 
+	                            ", @SubDivisionId = " + match.SubDivisionId.ToString() + ";";
+
+            ExecuteDDL(query);
+        }
+
+        public static void InsertMatch(MatchModel match)
+        {
+            string query = "EXEC [Event].[spInsertMatch] @EventId = " + match.EventId.ToString() +
+                                ", @MatchTypeId = " + match.MatchTypeId.ToString() +
+                                ", @MatchDisplayId = " + match.MatchDisplayId.ToString() + 
+                                ", @DivisionId = " + match.DivisionId.ToString() +
+                                ", @SubDivisionId = " + match.SubDivisionId.ToString() + ";";
+
+            ExecuteDDL(query);
+        }
+
         public static void InsertEvent(Event Event)
         {
             string query = @"EXEC [Event].[spInsertEvent] @EventName = '" +
