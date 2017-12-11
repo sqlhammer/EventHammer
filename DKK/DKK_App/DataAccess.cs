@@ -1145,6 +1145,13 @@ namespace DKK_App
 
             ExecuteDDL(query);
         }
+
+        public static void DeleteCompetitor(CompetitorModel comp)
+        {
+            string query = @"EXEC [Person].[spDeleteCompetitor] @CompetitorId = " + comp.CompetitorId.ToString();
+
+            ExecuteDDL(query);
+        }
         #endregion
 
         #region Updates

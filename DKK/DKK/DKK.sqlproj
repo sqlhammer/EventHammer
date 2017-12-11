@@ -76,6 +76,7 @@
     <Folder Include="Schemas\Person\Views" />
     <Folder Include="Schemas\Event\Views" />
     <Folder Include="Schemas\Event\Functions" />
+    <Folder Include="Schemas\Person\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\Person\Person.sql" />
@@ -125,6 +126,7 @@
     <Build Include="Schemas\Event\Stored Procedures\spAddCompetitorToMatch.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spDeleteMatch.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spInsertMatch.sql" />
+    <Build Include="Schemas\Person\Stored Procedures\spDeleteCompetitor.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

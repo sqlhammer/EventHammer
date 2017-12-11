@@ -210,6 +210,16 @@ namespace DKK_App
         #endregion
 
         #region Dojo Gets
+        public static async Task<List<Dojo>> GetDojos ()
+        {
+            string query = @"SELECT d.DojoId
+	                              ,d.FacilityId
+	                              ,d.MartialArtTypeId
+                            FROM Facility.Dojo d;";
+
+            return await QueryDojoInformation(query);
+        }
+
         public static async Task<Dojo> GetDojo(int id)
         {
             string query = @"SELECT d.DojoId
@@ -428,6 +438,17 @@ namespace DKK_App
         #endregion
 
         #region Rank Gets
+        public static async Task<List<Rank>> GetRanks()
+        {
+            string query = @"SELECT r.RankId
+	                              ,r.Name
+	                              ,r.Level
+	                              ,r.Kyn
+                            FROM Event.Rank r;";
+
+            return await QueryRankInformation(query);
+        }
+
         public static async Task<Rank> GetRank(int id)
         {
             string query = @"SELECT r.RankId
@@ -479,13 +500,22 @@ namespace DKK_App
         #endregion
 
         #region Title Gets
+        public static async Task<List<Title>> GetTitles ()
+        {
+            string query = @"SELECT t.TitleId
+	                              ,t.Name
+                            FROM Person.Title t;";
+            
+            return await QueryTitleInformation(query);
+        }
+
         public static async Task<Title> GetTitle(int id)
         {
             string query = @"SELECT t.TitleId
 	                              ,t.Name
                             FROM Person.Title t
                             WHERE t.TitleId = " + id.ToString();
-            
+
             var results = await QueryTitleInformation(query);
             var result = results.FirstOrDefault();
 
