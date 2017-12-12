@@ -21,6 +21,8 @@ namespace DKK_App
                     return await FilterCompetitorModelAsync_Belt(model, pattern);
                 case FilterType.DisplayName:
                     return await FilterCompetitorModelAsync_DisplayName(model, pattern);
+                case FilterType.Height:
+                    return await FilterCompetitorModelAsync_Height(model, pattern);
                 case FilterType.Weight:
                     return await FilterCompetitorModelAsync_Weight(model, pattern);
                 case FilterType.Age:
@@ -60,6 +62,16 @@ namespace DKK_App
             return result;
         }
 
+        private static async Task<List<CompetitorModel>> FilterCompetitorModelAsync_Height(List<CompetitorModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                return model.Where(m => m.Height >= Convert.ToDecimal(pattern) - 5 && m.Height <= Convert.ToDecimal(pattern) + 5).ToList();
+            });
+
+            return result;
+        }
+
         private static async Task<List<CompetitorModel>> FilterCompetitorModelAsync_Weight(List<CompetitorModel> model, string pattern)
         {
             var result = await Task.Run(() =>
@@ -84,6 +96,8 @@ namespace DKK_App
                     return await FilterMatchModelAsync_DisplayName(model, pattern);
                 case FilterType.Weight:
                     return await FilterMatchModelAsync_Weight(model, pattern);
+                case FilterType.Height:
+                    return await FilterMatchModelAsync_Height(model, pattern);
                 case FilterType.Age:
                     return await FilterMatchModelAsync_Age(model, pattern);
                 case FilterType.DojoName:
@@ -171,6 +185,27 @@ namespace DKK_App
                 return filteredModel;
             });
                         
+            return result;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_Height(List<MatchModel> model, string pattern)
+        {
+            var result = await Task.Run(() =>
+            {
+                List<MatchModel> filteredModel = new List<MatchModel>();
+
+                foreach (var m in model)
+                {
+                    if (m.Children.Any(i => i.Height >= Convert.ToDecimal(pattern) - 5 &&
+                        i.Height <= Convert.ToDecimal(pattern) + 5))
+                    {
+                        filteredModel.Add(m);
+                    }
+                }
+
+                return filteredModel;
+            });
+
             return result;
         }
 
@@ -325,6 +360,7 @@ namespace DKK_App
                 mm.Gender = obj.Competitor.Person.Gender;
                 mm.RankName = obj.Competitor.Rank.RankName;
                 mm.Weight = obj.Competitor.Weight;
+                mm.Height = obj.Competitor.Height;
                 mm.Children = new List<MatchModel>();
 
                 competitors.Add(mm);
@@ -347,6 +383,7 @@ namespace DKK_App
                     Gender = comp.Gender,
                     RankName = comp.RankName,
                     Weight = comp.Weight,
+                    Height = comp.Height,
                     Children = comp.Children
                 };
 
@@ -411,6 +448,7 @@ namespace DKK_App
                 mm.RankName = obj.Competitor.Rank.RankName;
                 mm.Level = obj.Competitor.Rank.Level;
                 mm.Weight = obj.Competitor.Weight;
+                mm.Height = obj.Competitor.Height;
 
                 model.Add(mm);
             }

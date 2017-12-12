@@ -19,5 +19,6 @@ namespace DKK_App.Entities
         public Person Person { get; set; }
         public Rank Rank { get; set; }
         public decimal Weight { get; set; }
+        public decimal Height { get; set; }
     }
 }

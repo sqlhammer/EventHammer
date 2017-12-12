@@ -60,6 +60,7 @@
             this.olvColAge = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColWeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColDojo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imgList = new System.Windows.Forms.ImageList(this.components);
             this.cbMatchFilterBy = new System.Windows.Forms.ComboBox();
             this.rbApplicableMatches = new System.Windows.Forms.RadioButton();
@@ -74,6 +75,7 @@
             this.olvColCompRankName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColCompAge = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColCompWeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvMatchCompHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.cbCompetitorFilterBy = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtCompetitorFilter = new System.Windows.Forms.TextBox();
@@ -106,6 +108,8 @@
             this.label22 = new System.Windows.Forms.Label();
             this.txtCompPhone = new System.Windows.Forms.TextBox();
             this.gbCompDemographics = new System.Windows.Forms.GroupBox();
+            this.nudCompHeight = new System.Windows.Forms.NumericUpDown();
+            this.label31 = new System.Windows.Forms.Label();
             this.cbCompBelt = new System.Windows.Forms.ComboBox();
             this.label21 = new System.Windows.Forms.Label();
             this.txtCompSchoolOther = new System.Windows.Forms.TextBox();
@@ -142,6 +146,7 @@
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn3 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColCompHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.cbCompFilterBy = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtCompFilter = new System.Windows.Forms.TextBox();
@@ -194,6 +199,7 @@
             this.gbCompetitorDetails.SuspendLayout();
             this.gbCompAddress.SuspendLayout();
             this.gbCompDemographics.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCompHeight)).BeginInit();
             this.gbCompParent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCompWeight)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -465,6 +471,7 @@
             this.tlvMatches.AllColumns.Add(this.olvColAge);
             this.tlvMatches.AllColumns.Add(this.olvColWeight);
             this.tlvMatches.AllColumns.Add(this.olvColDojo);
+            this.tlvMatches.AllColumns.Add(this.olvColHeight);
             this.tlvMatches.CellEditUseWholeCell = false;
             this.tlvMatches.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColDivDisplay,
@@ -473,7 +480,8 @@
             this.olvColRankName,
             this.olvColAge,
             this.olvColWeight,
-            this.olvColDojo});
+            this.olvColDojo,
+            this.olvColHeight});
             this.tlvMatches.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvMatches.IsSimpleDropSink = true;
@@ -530,8 +538,15 @@
             // olvColDojo
             // 
             this.olvColDojo.AspectName = "DojoName";
+            this.olvColDojo.DisplayIndex = 7;
             this.olvColDojo.Text = "School";
             this.olvColDojo.Width = 120;
+            // 
+            // olvColHeight
+            // 
+            this.olvColHeight.AspectName = "Height";
+            this.olvColHeight.DisplayIndex = 6;
+            this.olvColHeight.Text = "Height (in)";
             // 
             // imgList
             // 
@@ -634,12 +649,14 @@
             this.tlvCompetitors.AllColumns.Add(this.olvColCompRankName);
             this.tlvCompetitors.AllColumns.Add(this.olvColCompAge);
             this.tlvCompetitors.AllColumns.Add(this.olvColCompWeight);
+            this.tlvCompetitors.AllColumns.Add(this.olvMatchCompHeight);
             this.tlvCompetitors.CellEditUseWholeCell = false;
             this.tlvCompetitors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColCompDisplayName,
             this.olvColCompRankName,
             this.olvColCompAge,
-            this.olvColCompWeight});
+            this.olvColCompWeight,
+            this.olvMatchCompHeight});
             this.tlvCompetitors.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvCompetitors.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvCompetitors.IsSimpleDragSource = true;
@@ -679,6 +696,11 @@
             this.olvColCompWeight.AspectName = "Weight";
             this.olvColCompWeight.Text = "Weight (lb)";
             this.olvColCompWeight.Width = 111;
+            // 
+            // olvMatchCompHeight
+            // 
+            this.olvMatchCompHeight.AspectName = "Height";
+            this.olvMatchCompHeight.Text = "Height (in)";
             // 
             // cbCompetitorFilterBy
             // 
@@ -985,6 +1007,8 @@
             // 
             // gbCompDemographics
             // 
+            this.gbCompDemographics.Controls.Add(this.nudCompHeight);
+            this.gbCompDemographics.Controls.Add(this.label31);
             this.gbCompDemographics.Controls.Add(this.cbCompBelt);
             this.gbCompDemographics.Controls.Add(this.label21);
             this.gbCompDemographics.Controls.Add(this.txtCompSchoolOther);
@@ -1011,19 +1035,45 @@
             this.gbCompDemographics.TabStop = false;
             this.gbCompDemographics.Text = "Demographics";
             // 
+            // nudCompHeight
+            // 
+            this.nudCompHeight.Location = new System.Drawing.Point(171, 283);
+            this.nudCompHeight.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nudCompHeight.Name = "nudCompHeight";
+            this.nudCompHeight.Size = new System.Drawing.Size(228, 40);
+            this.nudCompHeight.TabIndex = 25;
+            this.nudCompHeight.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(6, 285);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(150, 33);
+            this.label31.TabIndex = 24;
+            this.label31.Text = "Height (in)";
+            // 
             // cbCompBelt
             // 
             this.cbCompBelt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompBelt.FormattingEnabled = true;
-            this.cbCompBelt.Location = new System.Drawing.Point(171, 268);
+            this.cbCompBelt.Location = new System.Drawing.Point(528, 286);
             this.cbCompBelt.Name = "cbCompBelt";
-            this.cbCompBelt.Size = new System.Drawing.Size(228, 37);
+            this.cbCompBelt.Size = new System.Drawing.Size(212, 37);
             this.cbCompBelt.TabIndex = 23;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 271);
+            this.label21.Location = new System.Drawing.Point(436, 289);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(65, 33);
             this.label21.TabIndex = 22;
@@ -1065,7 +1115,7 @@
             this.gbCompParent.Controls.Add(this.label13);
             this.gbCompParent.Controls.Add(this.label12);
             this.gbCompParent.Controls.Add(this.label11);
-            this.gbCompParent.Location = new System.Drawing.Point(12, 329);
+            this.gbCompParent.Location = new System.Drawing.Point(12, 335);
             this.gbCompParent.Name = "gbCompParent";
             this.gbCompParent.Size = new System.Drawing.Size(1160, 122);
             this.gbCompParent.TabIndex = 1;
@@ -1125,7 +1175,7 @@
             // 
             // nudCompWeight
             // 
-            this.nudCompWeight.Location = new System.Drawing.Point(171, 201);
+            this.nudCompWeight.Location = new System.Drawing.Point(171, 207);
             this.nudCompWeight.Maximum = new decimal(new int[] {
             500,
             0,
@@ -1143,11 +1193,11 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(6, 203);
+            this.label19.Location = new System.Drawing.Point(6, 209);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(105, 33);
+            this.label19.Size = new System.Drawing.Size(156, 33);
             this.label19.TabIndex = 17;
-            this.label19.Text = "Weight";
+            this.label19.Text = "Weight (lb)";
             // 
             // groupBox3
             // 
@@ -1278,7 +1328,7 @@
             // chbCompSpecialConsideration
             // 
             this.chbCompSpecialConsideration.AutoSize = true;
-            this.chbCompSpecialConsideration.Location = new System.Drawing.Point(430, 270);
+            this.chbCompSpecialConsideration.Location = new System.Drawing.Point(838, 288);
             this.chbCompSpecialConsideration.Name = "chbCompSpecialConsideration";
             this.chbCompSpecialConsideration.Size = new System.Drawing.Size(331, 37);
             this.chbCompSpecialConsideration.TabIndex = 10;
@@ -1288,7 +1338,7 @@
             // txtCompLastName
             // 
             this.txtCompLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompLastName.Location = new System.Drawing.Point(171, 129);
+            this.txtCompLastName.Location = new System.Drawing.Point(171, 132);
             this.txtCompLastName.Name = "txtCompLastName";
             this.txtCompLastName.Size = new System.Drawing.Size(228, 35);
             this.txtCompLastName.TabIndex = 9;
@@ -1313,7 +1363,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 132);
+            this.label14.Location = new System.Drawing.Point(6, 135);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(156, 33);
             this.label14.TabIndex = 7;
@@ -1351,12 +1401,14 @@
             this.tlvComp.AllColumns.Add(this.olvColumn2);
             this.tlvComp.AllColumns.Add(this.olvColumn3);
             this.tlvComp.AllColumns.Add(this.olvColumn4);
+            this.tlvComp.AllColumns.Add(this.olvColCompHeight);
             this.tlvComp.CellEditUseWholeCell = false;
             this.tlvComp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvColumn2,
             this.olvColumn3,
-            this.olvColumn4});
+            this.olvColumn4,
+            this.olvColCompHeight});
             this.tlvComp.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvComp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvComp.IsSimpleDragSource = true;
@@ -1395,6 +1447,12 @@
             this.olvColumn4.AspectName = "Weight";
             this.olvColumn4.Text = "Weight (lb)";
             this.olvColumn4.Width = 111;
+            // 
+            // olvColCompHeight
+            // 
+            this.olvColCompHeight.AspectName = "Height";
+            this.olvColCompHeight.Text = "Height (in)";
+            this.olvColCompHeight.Width = 80;
             // 
             // cbCompFilterBy
             // 
@@ -1695,7 +1753,7 @@
             this.clearSelectionToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.cmsCompetitor.Name = "cmsCompetitor";
-            this.cmsCompetitor.Size = new System.Drawing.Size(250, 120);
+            this.cmsCompetitor.Size = new System.Drawing.Size(250, 76);
             // 
             // clearSelectionToolStripMenuItem
             // 
@@ -1761,6 +1819,7 @@
             this.gbCompAddress.PerformLayout();
             this.gbCompDemographics.ResumeLayout(false);
             this.gbCompDemographics.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCompHeight)).EndInit();
             this.gbCompParent.ResumeLayout(false);
             this.gbCompParent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCompWeight)).EndInit();
@@ -1932,5 +1991,10 @@
         private System.Windows.Forms.ToolStripMenuItem clearSelectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.Timer tmrCompTab;
+        private BrightIdeasSoftware.OLVColumn olvColHeight;
+        private BrightIdeasSoftware.OLVColumn olvMatchCompHeight;
+        private BrightIdeasSoftware.OLVColumn olvColCompHeight;
+        private System.Windows.Forms.NumericUpDown nudCompHeight;
+        private System.Windows.Forms.Label label31;
     }
 }

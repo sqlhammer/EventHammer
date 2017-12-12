@@ -11,6 +11,7 @@ SELECT c.CompetitorId
 	  ,c.DateOfBirth
 	  ,c.Age
 	  ,c.Weight
+	  ,c.Height
 	  ,r.[Level]
 	  ,r.Kyn
 	  ,djf.Name DojoName

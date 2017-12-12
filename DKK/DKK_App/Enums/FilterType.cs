@@ -7,6 +7,7 @@ namespace DKK_App.Enums
         DisplayName,
         Age,
         Weight,
+        Height,
         DojoName,
         MatchDisplayName,
         SubDivision,

@@ -71,6 +71,7 @@ namespace DKK_App
 	                          ,DateOfBirth
 	                          ,Age
 	                          ,Weight
+                              ,Height
 	                          ,RankId
 	                          ,DojoId
 	                          ,ParentId
@@ -134,6 +135,7 @@ namespace DKK_App
                                     IsWeaponKata = Convert.ToBoolean(reader["IsWeaponKata"].ToString()),
                                     Event = Event,
                                     Weight = Convert.ToDecimal(reader["Weight"].ToString()),
+                                    Height = Convert.ToDecimal(reader["Height"].ToString()),
                                     Rank = rank,
                                     Parent = parent,
                                     Person = person

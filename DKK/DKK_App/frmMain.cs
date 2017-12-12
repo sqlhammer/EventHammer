@@ -7,6 +7,7 @@ using DKK_App.Models;
 using DKK_App.Enums;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace DKK_App
 {
@@ -20,7 +21,9 @@ namespace DKK_App
         private List<Rank> Ranks = new List<Rank>();
         private List<Dojo> Dojos = new List<Dojo>();
         private List<Title> Titles = new List<Title>();
-        
+
+        private Stopwatch sw = new Stopwatch();
+
         #region Form / Multi-tab
 
         public frmMain()
@@ -408,6 +411,9 @@ namespace DKK_App
                 case "Weight (+/- 5 lbs)":
                     type = FilterType.Weight;
                     break;
+                case "Height (+/- 5 ins)":
+                    type = FilterType.Height;
+                    break;
                 case "Div-SubDiv":
                     type = FilterType.MatchDisplayName;
                     break;
@@ -432,7 +438,7 @@ namespace DKK_App
 
         private async void ApplyCompetitorFilter()
         {
-            if (!String.IsNullOrEmpty(this.cbCompetitorFilterBy.SelectedItem.ToString()))
+            if (this.cbCompetitorFilterBy.SelectedIndex != -1 && !String.IsNullOrEmpty(this.txtCompetitorFilter.Text))
             {
                 FilterType type = TranslateToFilterType(this.cbCompetitorFilterBy.SelectedItem.ToString());
 
@@ -450,8 +456,9 @@ namespace DKK_App
         private async void ApplyMatchFilter()
         {
             FilterType type = TranslateToFilterType(this.cbMatchFilterBy.SelectedItem.ToString());
-
-            if (!String.IsNullOrEmpty(this.cbMatchFilterBy.SelectedItem.ToString()) ||
+            
+            if ((this.cbMatchFilterBy.SelectedIndex != -1 && 
+                !String.IsNullOrEmpty(this.txtMatchFilter.Text)) ||
                 type == FilterType.MatchesWithTooFewCompetitors)
             {
                 var model = await Global.FilterMatchModelAsync(MatchModels, type, this.txtMatchFilter.Text);
@@ -525,6 +532,9 @@ namespace DKK_App
                     case "Weight (lb)":
                         label = "Weight (+/- 5 lbs)";
                         break;
+                    case "Height (in)":
+                        label = "Height (+/- 5 ins)";
+                        break;
                     case "Age":
                         label = "Age (+/- 2 yrs)";
                         break;
@@ -546,6 +556,9 @@ namespace DKK_App
                 {
                     case "Weight (lb)":
                         label = "Weight (+/- 5 lbs)";
+                        break;
+                    case "Height (in)":
+                        label = "Height (+/- 5 ins)";
                         break;
                     case "Age":
                         label = "Age (+/- 2 yrs)";
@@ -903,6 +916,7 @@ namespace DKK_App
             this.chbCompSpecialConsideration.Checked = comp.IsSpecialConsideration;
 
             this.nudCompWeight.Value = comp.Weight;
+            this.nudCompHeight.Value = comp.Height;
 
             LoadCompetitorBelt(comp.Rank);
             LoadCompetitorSchool(comp.Dojo);
@@ -1072,6 +1086,6 @@ namespace DKK_App
         }
 
         #endregion
-
+        
     }
 }

@@ -32,6 +32,7 @@ BEGIN
 				,c.DateOfBirth = r.[DateOfBirth]
 				,c.Age = r.[Age]
 				,c.[Weight] = r.[Weight]
+				,c.Height = r.Height
 				,c.RankId = (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.[Rank])
 				,c.DojoId = (
 					SELECT TOP 1 DojoId 
@@ -131,12 +132,13 @@ BEGIN
 
 			--Competitor inserts
 			INSERT INTO [Person].[Competitor]
-			(PersonId, DateOfBirth, Age, [Weight], RankId, DojoId, ParentId, IsMinor
+			(PersonId, DateOfBirth, Age, [Weight], Height, RankId, DojoId, ParentId, IsMinor
 				, IsSpecialConsideration, EventId, IsKata, IsWeaponKata, IsSemiKnockdown, IsKnockdown)
 			SELECT p.PersonId
 				, r.[DateOfBirth]
 				, r.[Age]
 				, r.[Weight]
+				, r.Height
 				, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.[Rank])
 				, (
 					SELECT TOP 1 DojoId 

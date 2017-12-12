@@ -787,6 +787,7 @@ namespace DKK_App
 	                              ,mcd.DateOfBirth
 	                              ,mcd.Age
 	                              ,mcd.Weight
+                                  ,mcd.Height
 	                              ,mcd.DojoId
 	                              ,mcd.IsMinor
 	                              ,mcd.IsSpecialConsideration
@@ -1012,7 +1013,8 @@ namespace DKK_App
                                     Parent = parent,
                                     Person = person,
                                     Rank = r,
-                                    Weight = Convert.ToDecimal(reader["Weight"].ToString())
+                                    Weight = Convert.ToDecimal(reader["Weight"].ToString()),
+                                    Height = Convert.ToDecimal(reader["Height"].ToString())
                                 };
 
                                 //MatchType

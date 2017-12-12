@@ -1,9 +1,5 @@
 Notes:
 
-Reg form data points:
----------------------
-Height
-
 reports
 ---------------------
 payments

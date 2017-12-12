@@ -19,6 +19,7 @@ SELECT mc.MatchCompetitorId
 	  ,c.DateOfBirth
 	  ,c.Age
 	  ,c.Weight
+	  ,c.Height
 	  ,c.DojoId
 	  ,c.IsMinor
 	  ,c.IsSpecialConsideration
