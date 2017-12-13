@@ -127,6 +127,8 @@
     <Build Include="Schemas\Event\Stored Procedures\spDeleteMatch.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spInsertMatch.sql" />
     <Build Include="Schemas\Person\Stored Procedures\spDeleteCompetitor.sql" />
+    <Build Include="Schemas\Person\Stored Procedures\spUpdateCompetitor.sql" />
+    <Build Include="Schemas\Person\Stored Procedures\spInsertCompetitor.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

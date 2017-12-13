@@ -789,7 +789,7 @@
             // 
             // btnCompDelete
             // 
-            this.btnCompDelete.Location = new System.Drawing.Point(546, 798);
+            this.btnCompDelete.Location = new System.Drawing.Point(554, 798);
             this.btnCompDelete.Name = "btnCompDelete";
             this.btnCompDelete.Size = new System.Drawing.Size(292, 70);
             this.btnCompDelete.TabIndex = 5;
@@ -809,21 +809,23 @@
             // 
             // btnNewComp
             // 
-            this.btnNewComp.Location = new System.Drawing.Point(308, 798);
+            this.btnNewComp.Location = new System.Drawing.Point(296, 798);
             this.btnNewComp.Name = "btnNewComp";
-            this.btnNewComp.Size = new System.Drawing.Size(160, 70);
+            this.btnNewComp.Size = new System.Drawing.Size(227, 70);
             this.btnNewComp.TabIndex = 3;
-            this.btnNewComp.Text = "New";
+            this.btnNewComp.Text = "Save as New";
             this.btnNewComp.UseVisualStyleBackColor = true;
+            this.btnNewComp.Click += new System.EventHandler(this.btnNewComp_Click);
             // 
             // btnSaveComp
             // 
-            this.btnSaveComp.Location = new System.Drawing.Point(64, 798);
+            this.btnSaveComp.Location = new System.Drawing.Point(28, 798);
             this.btnSaveComp.Name = "btnSaveComp";
-            this.btnSaveComp.Size = new System.Drawing.Size(159, 70);
+            this.btnSaveComp.Size = new System.Drawing.Size(236, 70);
             this.btnSaveComp.TabIndex = 2;
-            this.btnSaveComp.Text = "Save";
+            this.btnSaveComp.Text = "Save Changes";
             this.btnSaveComp.UseVisualStyleBackColor = true;
+            this.btnSaveComp.Click += new System.EventHandler(this.btnSaveComp_Click);
             // 
             // gbCompAddress
             // 
@@ -1037,6 +1039,7 @@
             // 
             // nudCompHeight
             // 
+            this.nudCompHeight.DecimalPlaces = 2;
             this.nudCompHeight.Location = new System.Drawing.Point(171, 283);
             this.nudCompHeight.Maximum = new decimal(new int[] {
             500,
@@ -1175,6 +1178,7 @@
             // 
             // nudCompWeight
             // 
+            this.nudCompWeight.DecimalPlaces = 2;
             this.nudCompWeight.Location = new System.Drawing.Point(171, 207);
             this.nudCompWeight.Maximum = new decimal(new int[] {
             500,
@@ -1328,7 +1332,7 @@
             // chbCompSpecialConsideration
             // 
             this.chbCompSpecialConsideration.AutoSize = true;
-            this.chbCompSpecialConsideration.Location = new System.Drawing.Point(838, 288);
+            this.chbCompSpecialConsideration.Location = new System.Drawing.Point(847, 288);
             this.chbCompSpecialConsideration.Name = "chbCompSpecialConsideration";
             this.chbCompSpecialConsideration.Size = new System.Drawing.Size(331, 37);
             this.chbCompSpecialConsideration.TabIndex = 10;
@@ -1595,13 +1599,15 @@
             // 
             this.newCompetitorToolStripMenuItem.Name = "newCompetitorToolStripMenuItem";
             this.newCompetitorToolStripMenuItem.Size = new System.Drawing.Size(410, 38);
-            this.newCompetitorToolStripMenuItem.Text = "New Competitor";
+            this.newCompetitorToolStripMenuItem.Text = "Save as New Competitor";
+            this.newCompetitorToolStripMenuItem.Click += new System.EventHandler(this.newCompetitorToolStripMenuItem_Click);
             // 
             // editSelectedCompetitorToolStripMenuItem
             // 
             this.editSelectedCompetitorToolStripMenuItem.Name = "editSelectedCompetitorToolStripMenuItem";
             this.editSelectedCompetitorToolStripMenuItem.Size = new System.Drawing.Size(410, 38);
             this.editSelectedCompetitorToolStripMenuItem.Text = "Save Selected Competitor";
+            this.editSelectedCompetitorToolStripMenuItem.Click += new System.EventHandler(this.editSelectedCompetitorToolStripMenuItem_Click);
             // 
             // deleteSelectedCompetitorToolStripMenuItem
             // 

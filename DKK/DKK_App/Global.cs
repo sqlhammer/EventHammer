@@ -429,26 +429,26 @@ namespace DKK_App
             return model;
         }
 
-        public static List<CompetitorModel> GetCompetitorModel(List<MatchCompetitor> mcs)
+        public static List<CompetitorModel> GetCompetitorModel(List<Competitor> mcs)
         {
             List<Models.CompetitorModel> model = new List<Models.CompetitorModel>();
             
-            foreach (MatchCompetitor obj in mcs)
+            foreach (Competitor obj in mcs)
             {
-                if (model.Any(m => m.CompetitorId == obj.Competitor.CompetitorId))
+                if (model.Any(m => m.CompetitorId == obj.CompetitorId))
                     continue;
 
                 CompetitorModel mm = new CompetitorModel();
                 
-                mm.CompetitorId = obj.Competitor.CompetitorId;
-                mm.Age = obj.Competitor.Age;
-                mm.DisplayName = obj.Competitor.Person.DisplayName;
-                mm.DojoName = obj.Competitor.Dojo.Facility.FacilityName;
-                mm.Gender = obj.Competitor.Person.Gender;
-                mm.RankName = obj.Competitor.Rank.RankName;
-                mm.Level = obj.Competitor.Rank.Level;
-                mm.Weight = obj.Competitor.Weight;
-                mm.Height = obj.Competitor.Height;
+                mm.CompetitorId = obj.CompetitorId;
+                mm.Age = obj.Age;
+                mm.DisplayName = obj.Person.DisplayName;
+                mm.DojoName = obj.Dojo.Facility.FacilityName;
+                mm.Gender = obj.Person.Gender;
+                mm.RankName = obj.Rank.RankName;
+                mm.Level = obj.Rank.Level;
+                mm.Weight = obj.Weight;
+                mm.Height = obj.Height;
 
                 model.Add(mm);
             }

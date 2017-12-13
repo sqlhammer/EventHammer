@@ -2,6 +2,7 @@
 AS
 SELECT c.CompetitorId
 	  ,c.PersonId
+	  ,c.EventId
 	  ,p.FirstName
 	  ,p.LastName
 	  ,p.DisplayName
@@ -12,8 +13,10 @@ SELECT c.CompetitorId
 	  ,c.Age
 	  ,c.Weight
 	  ,c.Height
+	  ,r.RankId
 	  ,r.[Level]
 	  ,r.Kyn
+	  ,dj.DojoId
 	  ,djf.Name DojoName
 	  ,c.IsMinor
 	  ,c.IsSpecialConsideration

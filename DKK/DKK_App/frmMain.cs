@@ -496,7 +496,9 @@ namespace DKK_App
         {
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
             MatchModels = Global.GetMatchModel(mcs);
-            CompetitorModels = Global.GetCompetitorModel(mcs);
+
+            List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
+            CompetitorModels = Global.GetCompetitorModel(cs);
         }
 
         private async void RefreshMatches()
@@ -507,8 +509,8 @@ namespace DKK_App
 
         private async void RefreshCompetitors()
         {
-            List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
-            CompetitorModels = Global.GetCompetitorModel(mcs);
+            List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
+            CompetitorModels = Global.GetCompetitorModel(cs);
         }
 
         private void SetFilterDropdowns()
@@ -1085,7 +1087,102 @@ namespace DKK_App
             RefreshCompetitors(CompetitorModels);
         }
 
+        private void btnSaveComp_Click(object sender, EventArgs e)
+        {
+            SaveCompetitor(false);
+        }
+
+        private void SaveCompetitor(bool IsNew)
+        {
+            CompetitorModel cm = this.tlvComp.SelectedObject as CompetitorModel;
+            Competitor comp = new Competitor
+            {
+                Dojo = new Dojo
+                {
+                    Facility = new Facility
+                    {
+                        FacilityType = new FacilityType()
+                    }
+                },
+                Event = CurrentEvent,
+                Rank = new Rank(),
+                Person = new Person
+                {
+                    Title = new Title()
+                },
+                Parent = new Person
+                {
+                    Title = new Title()
+                }
+            };
+
+            if (cm != null && IsNew == false)
+            {
+                comp = DataAccess.GetCompetitor(cm.CompetitorId);
+            }
+            else if (cm == null && IsNew == false)
+            {
+                //No competitor is selected to save.
+                return;
+            }
+            
+            comp.Person.FirstName = this.txtCompFirstName.Text;
+            comp.Person.LastName = this.txtCompLastName.Text;
+            comp.Weight = this.nudCompWeight.Value;
+            comp.Height = this.nudCompHeight.Value;
+            comp.Person.Gender = (this.rbCompFemale.Checked) ? "F" : "M";
+            comp.DateOfBirth = new DateTime(Convert.ToInt32(this.cbCompYear.SelectedItem.ToString()), Convert.ToInt32(this.cbCompMonth.SelectedItem.ToString()),1);
+            comp.Person.IsInstructor = this.chbCompIsInstructor.Checked;
+            comp.IsSpecialConsideration = this.chbCompSpecialConsideration.Checked;
+            comp.Parent.FirstName = this.txtCompParentFirstName.Text;
+            comp.Parent.LastName = this.txtCompParentLastName.Text;
+            comp.Parent.EmailAddress = this.txtCompParentEmail.Text;
+            comp.Person.PhoneNumber = this.txtCompPhone.Text;
+            comp.Person.EmailAddress = this.txtCompEmail.Text;
+            comp.Person.Country = this.txtCompCountry.Text;
+            comp.Person.StreetAddress1 = this.txtCompStreet1.Text;
+            comp.Person.StreetAddress2 = this.txtCompStreet2.Text;
+            comp.Person.AppartmentCode = this.txtCompApptCode.Text;
+            comp.Person.City = this.txtCompCity.Text;
+            comp.Person.StateProvince = this.txtCompState.Text;
+            comp.Person.PostalCode = this.txtCompZipCode.Text;
+
+            comp.Rank = (Ranks.Where(r => r.RankName.CompareTo(this.cbCompBelt.SelectedItem.ToString()) == 0)).First();
+            comp.Person.Title = (this.cbCompTitle.SelectedItem == null) ? new Title() : (Titles.Where(t => t.TitleName.CompareTo(this.cbCompTitle.SelectedItem.ToString()) == 0)).First();
+            comp.Dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(this.cbCompSchool.SelectedItem.ToString()) == 0)).First();
+
+            SaveCompetitor(comp, IsNew);
+        }
+
+        private void SaveCompetitor(Competitor comp, bool IsNew)
+        {
+            if (IsNew)
+            {
+                DataAccess.InsertCompetitor(comp);
+            }
+            else
+            {
+                DataAccess.UpdateCompetitor(comp);
+            }
+
+            ClearCompetitorSelection();
+        }
+
+        private void editSelectedCompetitorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveCompetitor(false);
+        }
+
+        private void btnNewComp_Click(object sender, EventArgs e)
+        {
+            SaveCompetitor(true);
+        }
+
+        private void newCompetitorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveCompetitor(true);
+        }
+
         #endregion
-        
     }
 }

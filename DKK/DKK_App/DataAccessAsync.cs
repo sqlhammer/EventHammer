@@ -95,16 +95,47 @@ namespace DKK_App
 
             return c;
         }
-        
+
+        public static async Task<List<Competitor>> GetCompetitors(Event Event)
+        {
+            string query = @"SELECT CompetitorId
+	                          ,PersonId
+	                          ,DateOfBirth
+	                          ,Age
+	                          ,Weight
+                              ,Height
+	                          ,RankId
+	                          ,DojoId
+	                          ,ParentId
+	                          ,IsMinor
+	                          ,IsSpecialConsideration
+	                          ,EventId
+	                          ,IsKata
+	                          ,IsWeaponKata
+	                          ,IsSemiKnockdown
+	                          ,IsKnockdown
+                        FROM Person.Competitor
+                        WHERE EventId = " + Event.EventId.ToString();
+
+            List<Competitor> cs = await QueryCompetitorInformation(query);
+
+            foreach (Competitor c in cs)
+            {
+                c.Person = await GetPerson(c.Person.PersonId);
+                c.Parent = await GetPerson(c.Parent.PersonId);
+                c.Rank = await GetRank(c.Rank.RankId);
+                c.Event = await GetEventInformationById(c.Event.EventId);
+            }
+
+            return cs;
+        }
+
         private static async Task<List<Competitor>> QueryCompetitorInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
                 List<Competitor> objs = new List<Competitor>();
-                Rank rank = new Rank();
                 Event Event = new Event();
-                Person person = new Person();
-                Person parent = new Person();
 
                 conn.Open();
 
@@ -118,6 +149,10 @@ namespace DKK_App
                         {
                             while (await reader.ReadAsync())
                             {
+                                Rank rank = new Rank();
+                                Person person = new Person();
+                                Person parent = new Person();
+
                                 rank.RankId = Convert.ToInt32(reader["RankId"].ToString());
                                 person.PersonId = Convert.ToInt32(reader["PersonId"].ToString());
                                 parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
@@ -136,6 +171,7 @@ namespace DKK_App
                                     IsWeaponKata = Convert.ToBoolean(reader["IsWeaponKata"].ToString()),
                                     Event = Event,
                                     Weight = Convert.ToDecimal(reader["Weight"].ToString()),
+                                    Height = Convert.ToDecimal(reader["Height"].ToString()),
                                     Rank = rank,
                                     Parent = parent,
                                     Person = person

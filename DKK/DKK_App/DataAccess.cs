@@ -1157,6 +1157,41 @@ namespace DKK_App
         #endregion
 
         #region Updates
+        public static void UpdateCompetitor(Competitor comp)
+        {
+            string query = "EXEC [Person].[spUpdateCompetitor] " +
+                               "@CompetitorId = " + comp.CompetitorId.ToString() +
+                              ",@ParentId = " + comp.Parent.PersonId.ToString() +
+                              ",@PersonId = " + comp.Person.PersonId.ToString() +
+                              ",@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
+                              ",@DojoId = " + comp.Dojo.DojoId.ToString() +
+                              ",@EventId = " + comp.Event.EventId.ToString() +
+                              ",@Height = " + comp.Height.ToString() +
+                              ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
+                              ",@RankId = " + comp.Rank.RankId.ToString() +
+                              ",@Weight = " + comp.Weight.ToString() +
+                              ",@AppartmentCode = '" + comp.Person.AppartmentCode + "'" +
+                              ",@City = '" + comp.Person.City + "'" +
+                              ",@Country = '" + comp.Person.Country + "'" +
+                              ",@DisplayName = '" + comp.Person.DisplayName + "'" +
+                              ",@EmailAddress = '" + comp.Person.EmailAddress + "'" +
+                              ",@FirstName = '" + comp.Person.FirstName + "'" +
+                              ",@Gender = '" + comp.Person.Gender + "'" +
+                              ",@IsInstructor = " + ((comp.Person.IsInstructor) ? "1" : "0") +
+                              ",@LastName = '" + comp.Person.LastName + "'" +
+                              ",@PhoneNumber = '" + comp.Person.PhoneNumber + "'" +
+                              ",@PostalCode = '" + comp.Person.PostalCode + "'" +
+                              ",@StateProvince = '" + comp.Person.StateProvince + "'" +
+                              ",@StreetAddress1 = '" + comp.Person.StreetAddress1 + "'" +
+                              ",@StreetAddress2 = '" + comp.Person.StreetAddress2 + "'" +
+                              ",@TitleId = " + ((comp.Person.Title.TitleId == 0) ? "NULL" : comp.Person.Title.TitleId.ToString()) +
+                              ",@ParentFirstName = '" + comp.Parent.FirstName + "'" +
+                              ",@ParentLastName = '" + comp.Parent.LastName + "'" +
+                              ",@ParentEmailAddress = '" + comp.Parent.EmailAddress + "';";
+
+            ExecuteDDL(query);
+        }
+
         public static void UpdateEvent(Event Event)
         {
             string query = @"EXEC [Event].[spUpdateEvent] @EventId = 
@@ -1170,6 +1205,38 @@ namespace DKK_App
         #endregion
 
         #region Inserts
+        public static void InsertCompetitor(Competitor comp)
+        {
+            string query = "EXEC [Person].[spInsertCompetitor] " +
+                               "@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
+                              ",@DojoId = " + comp.Dojo.DojoId.ToString() +
+                              ",@EventId = " + comp.Event.EventId.ToString() +
+                              ",@Height = " + comp.Height.ToString() +
+                              ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
+                              ",@RankId = " + comp.Rank.RankId.ToString() +
+                              ",@Weight = " + comp.Weight.ToString() +
+                              ",@AppartmentCode = '" + comp.Person.AppartmentCode + "'" +
+                              ",@City = '" + comp.Person.City + "'" +
+                              ",@Country = '" + comp.Person.Country + "'" +
+                              ",@DisplayName = '" + comp.Person.DisplayName + "'" +
+                              ",@EmailAddress = '" + comp.Person.EmailAddress + "'" +
+                              ",@FirstName = '" + comp.Person.FirstName + "'" +
+                              ",@Gender = '" + comp.Person.Gender + "'" +
+                              ",@IsInstructor = " + ((comp.Person.IsInstructor) ? "1" : "0") +
+                              ",@LastName = '" + comp.Person.LastName + "'" +
+                              ",@PhoneNumber = '" + comp.Person.PhoneNumber + "'" +
+                              ",@PostalCode = '" + comp.Person.PostalCode + "'" +
+                              ",@StateProvince = '" + comp.Person.StateProvince + "'" +
+                              ",@StreetAddress1 = '" + comp.Person.StreetAddress1 + "'" +
+                              ",@StreetAddress2 = '" + comp.Person.StreetAddress2 + "'" +
+                              ",@TitleId = " + ((comp.Person.Title.TitleId == 0) ? "NULL" : comp.Person.Title.TitleId.ToString()) +
+                              ",@ParentFirstName = '" + comp.Parent.FirstName + "'" +
+                              ",@ParentLastName = '" + comp.Parent.LastName + "'" +
+                              ",@ParentEmailAddress = '" + comp.Parent.EmailAddress + "';";
+
+            ExecuteDDL(query);
+        }
+
         public static void InsertMatch(Match match)
         {
             string query = "EXEC [Event].[spInsertMatch] @EventId = " + match.Event.EventId.ToString() +

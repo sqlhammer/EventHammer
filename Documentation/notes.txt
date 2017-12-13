@@ -12,7 +12,8 @@ list of schools/owners for announcements
 
 Next tasks:
 ---------------------
-Add new competitor
-Edit competitor
+Test competitor new and saves more.
+
+Competitor tab filters
 
 Build Events tab page to replace the pop-up edit window
