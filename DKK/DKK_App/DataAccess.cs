@@ -505,6 +505,70 @@ namespace DKK_App
         #endregion
 
         #region Person Gets
+        public static Person GetPerson(Person p)
+        {
+            string query = @"SELECT p.PersonId
+	                          ,p.FirstName
+	                          ,p.LastName
+	                          ,p.DisplayName
+	                          ,p.TitleId
+	                          ,p.IsInstructor
+	                          ,p.Gender
+	                          ,p.PhoneNumber
+	                          ,p.EmailAddress
+	                          ,p.StreetAddress1
+	                          ,p.StreetAddress2
+	                          ,p.AppartmentCode
+	                          ,p.City
+	                          ,p.StateProvince
+	                          ,p.PostalCode
+	                          ,p.Country
+                        FROM Person.Person p
+                        WHERE p.FirstName = '" + p.FirstName +
+                        "' AND p.LastName = '" + p.LastName +
+                        "' AND p.EmailAddress = '" + p.EmailAddress + "';";
+
+            Person person = QueryPersonInformation(query).FirstOrDefault();
+            if (person != null && person.Title != null)
+            {
+                person.Title = GetTitle(person.Title.TitleId);
+            }
+
+            return person;
+        }
+
+        public static Person GetPerson(string firstname, string lastname, string email)
+        {
+            string query = @"SELECT p.PersonId
+	                          ,p.FirstName
+	                          ,p.LastName
+	                          ,p.DisplayName
+	                          ,p.TitleId
+	                          ,p.IsInstructor
+	                          ,p.Gender
+	                          ,p.PhoneNumber
+	                          ,p.EmailAddress
+	                          ,p.StreetAddress1
+	                          ,p.StreetAddress2
+	                          ,p.AppartmentCode
+	                          ,p.City
+	                          ,p.StateProvince
+	                          ,p.PostalCode
+	                          ,p.Country
+                        FROM Person.Person p
+                        WHERE p.FirstName = '" + firstname + 
+                        "' AND p.LastName = '" + lastname + 
+                        "' AND p.EmailAddress = '" + email + "';";
+
+            Person person = QueryPersonInformation(query).FirstOrDefault();
+            if (person != null && person.Title != null)
+            {
+                person.Title = GetTitle(person.Title.TitleId);
+            }
+
+            return person;
+        }
+
         public static Person GetPerson(int id)
         {
             string query = @"SELECT p.PersonId
@@ -527,7 +591,10 @@ namespace DKK_App
                         WHERE p.PersonId = " + id.ToString();
 
             Person person = QueryPersonInformation(query).FirstOrDefault();
-            person.Title = GetTitle(person.Title.TitleId);
+            if (person != null && person.Title != null)
+            {
+                person.Title = GetTitle(person.Title.TitleId);
+            }
 
             return person;
         }

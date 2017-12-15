@@ -21,8 +21,7 @@ namespace DKK_App
         private List<Rank> Ranks = new List<Rank>();
         private List<Dojo> Dojos = new List<Dojo>();
         private List<Title> Titles = new List<Title>();
-
-        private Stopwatch sw = new Stopwatch();
+        public List<Models.EventModel> EventModels = new List<EventModel>();
 
         #region Form / Multi-tab
 
@@ -38,16 +37,7 @@ namespace DKK_App
             tlvMatches.ChildrenGetter = delegate (object x) { return ((Models.MatchModel)x).Children; };
             tlvMatches.ContextMenuStrip = this.cmsMatches;
             tlvComp.ContextMenuStrip = this.cmsCompetitor;
-
-            //Populate controls
-            SetFilterDropdowns();
-            SetBirthDateDropdowns();
-            DisableNonEventTabs();
-            RefreshDivisions();
-            RefreshRanks();
-            RefreshDojos();
-            RefreshTitles();
-
+            
             try
             {
                 SetEventSearchDateRange();
@@ -59,11 +49,34 @@ namespace DKK_App
                 MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.btnRetryConnection.Visible = true;
             }
+
+            //Populate controls
+            SetFilterDropdowns();
+            SetBirthDateDropdowns();
+            SetEventTypeDropdown();
+            DisableNonEventTabs();
+            RefreshEvents();
+            RefreshDivisions();
+            RefreshRanks();
+            RefreshDojos();
+            RefreshTitles();
         }
 
         private void btnClearMatchFilter_Click(object sender, EventArgs e)
         {
             RefreshMatches(MatchModels);
+        }
+
+        private async Task ApplyCompetitorFilter(ComboBox cb, TextBox txtbox)
+        {
+            if (cb.SelectedIndex != -1 && !String.IsNullOrEmpty(txtbox.Text))
+            {
+                FilterType type = TranslateToFilterType(cb.SelectedItem.ToString());
+
+                var model = await Global.FilterCompetitorModelAsync(CompetitorModels, type, txtbox.Text);
+
+                RefreshCompetitors(model);
+            }
         }
 
         private void RefreshMatchCompetitorViews()
@@ -127,6 +140,15 @@ namespace DKK_App
                 this.btnRefreshMatchTab.Visible = true;
                 this.btnClearMatchFilter.Visible = true;
                 this.btnClearCompetitorFilter.Visible = true;
+            }
+
+            //Toggle Event button visibility
+            if (this.tab1.SelectedTab == this.tabEvents &&
+                this.btnRetryConnection.Visible == false)
+            {
+                this.btnRefreshMatchTab.Visible = false;
+                this.btnClearMatchFilter.Visible = false;
+                this.btnClearCompetitorFilter.Visible = false;
             }
         }
 
@@ -438,14 +460,7 @@ namespace DKK_App
 
         private async void ApplyCompetitorFilter()
         {
-            if (this.cbCompetitorFilterBy.SelectedIndex != -1 && !String.IsNullOrEmpty(this.txtCompetitorFilter.Text))
-            {
-                FilterType type = TranslateToFilterType(this.cbCompetitorFilterBy.SelectedItem.ToString());
-
-                var model = await Global.FilterCompetitorModelAsync(CompetitorModels, type, this.txtCompetitorFilter.Text);
-
-                RefreshCompetitors(model);
-            }
+            await ApplyCompetitorFilter(this.cbCompetitorFilterBy, this.txtCompetitorFilter);
         }
 
         private void btnMatchApply_Click(object sender, EventArgs e)
@@ -1115,7 +1130,7 @@ namespace DKK_App
                     Title = new Title()
                 }
             };
-
+            
             if (cm != null && IsNew == false)
             {
                 comp = DataAccess.GetCompetitor(cm.CompetitorId);
@@ -1127,8 +1142,17 @@ namespace DKK_App
             }
             
             comp.Person.FirstName = this.txtCompFirstName.Text;
+            comp.Person.EmailAddress = this.txtCompEmail.Text;
             comp.Person.LastName = this.txtCompLastName.Text;
+            
+            if (IsNew && Global.IsDuplicatePerson(comp.Person))
+            {
+                MessageBox.Show("The same combination of FirstName, LastName, and EmailAddress already exists.", "Duplicate person", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
             comp.Weight = this.nudCompWeight.Value;
+            comp.Person.DisplayName = this.txtCompLastName.Text + ", " + this.txtCompFirstName.Text;
             comp.Height = this.nudCompHeight.Value;
             comp.Person.Gender = (this.rbCompFemale.Checked) ? "F" : "M";
             comp.DateOfBirth = new DateTime(Convert.ToInt32(this.cbCompYear.SelectedItem.ToString()), Convert.ToInt32(this.cbCompMonth.SelectedItem.ToString()),1);
@@ -1138,7 +1162,6 @@ namespace DKK_App
             comp.Parent.LastName = this.txtCompParentLastName.Text;
             comp.Parent.EmailAddress = this.txtCompParentEmail.Text;
             comp.Person.PhoneNumber = this.txtCompPhone.Text;
-            comp.Person.EmailAddress = this.txtCompEmail.Text;
             comp.Person.Country = this.txtCompCountry.Text;
             comp.Person.StreetAddress1 = this.txtCompStreet1.Text;
             comp.Person.StreetAddress2 = this.txtCompStreet2.Text;
@@ -1183,6 +1206,41 @@ namespace DKK_App
             SaveCompetitor(true);
         }
 
+        private void btnCompFilterApply_Click(object sender, EventArgs e)
+        {
+            ApplyCompFilter();
+        }
+
+        private void txtCompFilter_TextChanged(object sender, EventArgs e)
+        {
+            ApplyCompFilter();
+        }
+
+        private async void ApplyCompFilter()
+        {
+            await ApplyCompetitorFilter(this.cbCompFilterBy, this.txtCompFilter);
+        }
+        #endregion
+
+        #region Event Tab
+        private void RefreshEvents()
+        {
+            var events = DataAccess.GetEventInformation();
+            EventModels = Global.GetEventModel(events);
+
+            this.tlvEvents.Roots = EventModels;
+        }
+
+        private void SetEventTypeDropdown()
+        {
+            List<EventType> ets = DataAccess.GetEventTypes();
+            this.cbEventType.Items.Clear();
+
+            foreach (EventType et in ets)
+            {
+                this.cbEventType.Items.Add(et.EventTypeName);
+            }
+        }
         #endregion
     }
 }

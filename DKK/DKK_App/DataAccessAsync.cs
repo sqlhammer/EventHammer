@@ -615,7 +615,10 @@ namespace DKK_App
 
             var persons = await QueryPersonInformation(query);
             Person person = persons.FirstOrDefault();
-            person.Title = await GetTitle(person.Title.TitleId);
+            if (person != null && person.Title != null)
+            {
+                person.Title = await GetTitle(person.Title.TitleId);
+            }
 
             return person;
         }

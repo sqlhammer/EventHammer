@@ -47,7 +47,25 @@
             this.txtEventInfo = new System.Windows.Forms.TextBox();
             this.lblEventSelect = new System.Windows.Forms.Label();
             this.cbEventSelect = new System.Windows.Forms.ComboBox();
-            this.tabEvent = new System.Windows.Forms.TabPage();
+            this.tabEvents = new System.Windows.Forms.TabPage();
+            this.gbEventDetails = new System.Windows.Forms.GroupBox();
+            this.dtpEventDate = new System.Windows.Forms.DateTimePicker();
+            this.cbEventType = new System.Windows.Forms.ComboBox();
+            this.txtEventName = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.btnDeleteEvent = new System.Windows.Forms.Button();
+            this.btnClearEventSelection = new System.Windows.Forms.Button();
+            this.btnNewEvent = new System.Windows.Forms.Button();
+            this.btnSaveEvent = new System.Windows.Forms.Button();
+            this.gbEvents = new System.Windows.Forms.GroupBox();
+            this.tlvEvents = new BrightIdeasSoftware.TreeListView();
+            this.olvColEventId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColEventName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColEventDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColEventType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.imgList = new System.Windows.Forms.ImageList(this.components);
             this.tabMatch = new System.Windows.Forms.TabPage();
             this.lblLoading = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -61,7 +79,6 @@
             this.olvColWeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColDojo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.imgList = new System.Windows.Forms.ImageList(this.components);
             this.cbMatchFilterBy = new System.Windows.Forms.ComboBox();
             this.rbApplicableMatches = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
@@ -190,6 +207,10 @@
             this.gbReports.SuspendLayout();
             this.gbScorecards.SuspendLayout();
             this.gbEvent.SuspendLayout();
+            this.tabEvents.SuspendLayout();
+            this.gbEventDetails.SuspendLayout();
+            this.gbEvents.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tlvEvents)).BeginInit();
             this.tabMatch.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvMatches)).BeginInit();
@@ -215,7 +236,7 @@
             // tab1
             // 
             this.tab1.Controls.Add(this.tabHome);
-            this.tab1.Controls.Add(this.tabEvent);
+            this.tab1.Controls.Add(this.tabEvents);
             this.tab1.Controls.Add(this.tabMatch);
             this.tab1.Controls.Add(this.tabCompetitor);
             this.tab1.Location = new System.Drawing.Point(12, 49);
@@ -398,15 +419,196 @@
             this.cbEventSelect.TabIndex = 0;
             this.cbEventSelect.SelectedIndexChanged += new System.EventHandler(this.cbEventSelect_SelectedIndexChanged);
             // 
-            // tabEvent
+            // tabEvents
             // 
-            this.tabEvent.Location = new System.Drawing.Point(8, 39);
-            this.tabEvent.Name = "tabEvent";
-            this.tabEvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEvent.Size = new System.Drawing.Size(2241, 941);
-            this.tabEvent.TabIndex = 2;
-            this.tabEvent.Text = "Events";
-            this.tabEvent.UseVisualStyleBackColor = true;
+            this.tabEvents.Controls.Add(this.gbEventDetails);
+            this.tabEvents.Controls.Add(this.gbEvents);
+            this.tabEvents.Location = new System.Drawing.Point(8, 39);
+            this.tabEvents.Name = "tabEvents";
+            this.tabEvents.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEvents.Size = new System.Drawing.Size(2241, 941);
+            this.tabEvents.TabIndex = 2;
+            this.tabEvents.Text = "Events";
+            this.tabEvents.UseVisualStyleBackColor = true;
+            // 
+            // gbEventDetails
+            // 
+            this.gbEventDetails.Controls.Add(this.dtpEventDate);
+            this.gbEventDetails.Controls.Add(this.cbEventType);
+            this.gbEventDetails.Controls.Add(this.txtEventName);
+            this.gbEventDetails.Controls.Add(this.label32);
+            this.gbEventDetails.Controls.Add(this.label33);
+            this.gbEventDetails.Controls.Add(this.label34);
+            this.gbEventDetails.Controls.Add(this.btnDeleteEvent);
+            this.gbEventDetails.Controls.Add(this.btnClearEventSelection);
+            this.gbEventDetails.Controls.Add(this.btnNewEvent);
+            this.gbEventDetails.Controls.Add(this.btnSaveEvent);
+            this.gbEventDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbEventDetails.Location = new System.Drawing.Point(996, 12);
+            this.gbEventDetails.Name = "gbEventDetails";
+            this.gbEventDetails.Size = new System.Drawing.Size(1219, 911);
+            this.gbEventDetails.TabIndex = 7;
+            this.gbEventDetails.TabStop = false;
+            this.gbEventDetails.Text = "Event Details";
+            // 
+            // dtpEventDate
+            // 
+            this.dtpEventDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEventDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEventDate.Location = new System.Drawing.Point(485, 472);
+            this.dtpEventDate.Name = "dtpEventDate";
+            this.dtpEventDate.Size = new System.Drawing.Size(475, 40);
+            this.dtpEventDate.TabIndex = 11;
+            // 
+            // cbEventType
+            // 
+            this.cbEventType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbEventType.FormattingEnabled = true;
+            this.cbEventType.Location = new System.Drawing.Point(485, 375);
+            this.cbEventType.Name = "cbEventType";
+            this.cbEventType.Size = new System.Drawing.Size(475, 41);
+            this.cbEventType.TabIndex = 10;
+            // 
+            // txtEventName
+            // 
+            this.txtEventName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEventName.Location = new System.Drawing.Point(485, 276);
+            this.txtEventName.Name = "txtEventName";
+            this.txtEventName.Size = new System.Drawing.Size(475, 40);
+            this.txtEventName.TabIndex = 9;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(229, 478);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(76, 33);
+            this.label32.TabIndex = 8;
+            this.label32.Text = "Date";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(229, 378);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(162, 33);
+            this.label33.TabIndex = 7;
+            this.label33.Text = "Event Type";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(229, 279);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(175, 33);
+            this.label34.TabIndex = 6;
+            this.label34.Text = "Event Name";
+            // 
+            // btnDeleteEvent
+            // 
+            this.btnDeleteEvent.Location = new System.Drawing.Point(554, 798);
+            this.btnDeleteEvent.Name = "btnDeleteEvent";
+            this.btnDeleteEvent.Size = new System.Drawing.Size(292, 70);
+            this.btnDeleteEvent.TabIndex = 5;
+            this.btnDeleteEvent.Text = "Delete Event";
+            this.btnDeleteEvent.UseVisualStyleBackColor = true;
+            // 
+            // btnClearEventSelection
+            // 
+            this.btnClearEventSelection.Location = new System.Drawing.Point(889, 798);
+            this.btnClearEventSelection.Name = "btnClearEventSelection";
+            this.btnClearEventSelection.Size = new System.Drawing.Size(309, 70);
+            this.btnClearEventSelection.TabIndex = 4;
+            this.btnClearEventSelection.Text = "Clear Selection";
+            this.btnClearEventSelection.UseVisualStyleBackColor = true;
+            // 
+            // btnNewEvent
+            // 
+            this.btnNewEvent.Location = new System.Drawing.Point(296, 798);
+            this.btnNewEvent.Name = "btnNewEvent";
+            this.btnNewEvent.Size = new System.Drawing.Size(227, 70);
+            this.btnNewEvent.TabIndex = 3;
+            this.btnNewEvent.Text = "Save as New";
+            this.btnNewEvent.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveEvent
+            // 
+            this.btnSaveEvent.Location = new System.Drawing.Point(28, 798);
+            this.btnSaveEvent.Name = "btnSaveEvent";
+            this.btnSaveEvent.Size = new System.Drawing.Size(236, 70);
+            this.btnSaveEvent.TabIndex = 2;
+            this.btnSaveEvent.Text = "Save Changes";
+            this.btnSaveEvent.UseVisualStyleBackColor = true;
+            // 
+            // gbEvents
+            // 
+            this.gbEvents.Controls.Add(this.tlvEvents);
+            this.gbEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbEvents.Location = new System.Drawing.Point(25, 12);
+            this.gbEvents.Name = "gbEvents";
+            this.gbEvents.Size = new System.Drawing.Size(934, 917);
+            this.gbEvents.TabIndex = 6;
+            this.gbEvents.TabStop = false;
+            this.gbEvents.Text = "Events";
+            // 
+            // tlvEvents
+            // 
+            this.tlvEvents.AllColumns.Add(this.olvColEventId);
+            this.tlvEvents.AllColumns.Add(this.olvColEventName);
+            this.tlvEvents.AllColumns.Add(this.olvColEventDate);
+            this.tlvEvents.AllColumns.Add(this.olvColEventType);
+            this.tlvEvents.CellEditUseWholeCell = false;
+            this.tlvEvents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColEventId,
+            this.olvColEventName,
+            this.olvColEventDate,
+            this.olvColEventType});
+            this.tlvEvents.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tlvEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlvEvents.IsSimpleDragSource = true;
+            this.tlvEvents.Location = new System.Drawing.Point(6, 56);
+            this.tlvEvents.Name = "tlvEvents";
+            this.tlvEvents.ShowGroups = false;
+            this.tlvEvents.Size = new System.Drawing.Size(911, 848);
+            this.tlvEvents.SmallImageList = this.imgList;
+            this.tlvEvents.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.tlvEvents.TabIndex = 11;
+            this.tlvEvents.UseCompatibleStateImageBehavior = false;
+            this.tlvEvents.View = System.Windows.Forms.View.Details;
+            this.tlvEvents.VirtualMode = true;
+            // 
+            // olvColEventId
+            // 
+            this.olvColEventId.AspectName = "EventId";
+            this.olvColEventId.Text = "Id";
+            this.olvColEventId.Width = 45;
+            // 
+            // olvColEventName
+            // 
+            this.olvColEventName.AspectName = "EventName";
+            this.olvColEventName.Text = "Name";
+            this.olvColEventName.Width = 130;
+            // 
+            // olvColEventDate
+            // 
+            this.olvColEventDate.AspectName = "DateText";
+            this.olvColEventDate.Text = "Date";
+            this.olvColEventDate.Width = 100;
+            // 
+            // olvColEventType
+            // 
+            this.olvColEventType.AspectName = "EventTypeName";
+            this.olvColEventType.Text = "Type";
+            this.olvColEventType.Width = 90;
+            // 
+            // imgList
+            // 
+            this.imgList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imgList.ImageSize = new System.Drawing.Size(16, 16);
+            this.imgList.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // tabMatch
             // 
@@ -548,12 +750,6 @@
             this.olvColHeight.DisplayIndex = 6;
             this.olvColHeight.Text = "Height (in)";
             // 
-            // imgList
-            // 
-            this.imgList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imgList.ImageSize = new System.Drawing.Size(16, 16);
-            this.imgList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // cbMatchFilterBy
             // 
             this.cbMatchFilterBy.FormattingEnabled = true;
@@ -660,10 +856,10 @@
             this.tlvCompetitors.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvCompetitors.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvCompetitors.IsSimpleDragSource = true;
-            this.tlvCompetitors.Location = new System.Drawing.Point(0, 160);
+            this.tlvCompetitors.Location = new System.Drawing.Point(6, 160);
             this.tlvCompetitors.Name = "tlvCompetitors";
             this.tlvCompetitors.ShowGroups = false;
-            this.tlvCompetitors.Size = new System.Drawing.Size(928, 751);
+            this.tlvCompetitors.Size = new System.Drawing.Size(911, 749);
             this.tlvCompetitors.SmallImageList = this.imgList;
             this.tlvCompetitors.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.tlvCompetitors.TabIndex = 11;
@@ -780,7 +976,7 @@
             this.gbCompetitorDetails.Controls.Add(this.gbCompAddress);
             this.gbCompetitorDetails.Controls.Add(this.gbCompDemographics);
             this.gbCompetitorDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbCompetitorDetails.Location = new System.Drawing.Point(992, 18);
+            this.gbCompetitorDetails.Location = new System.Drawing.Point(992, 7);
             this.gbCompetitorDetails.Name = "gbCompetitorDetails";
             this.gbCompetitorDetails.Size = new System.Drawing.Size(1219, 911);
             this.gbCompetitorDetails.TabIndex = 5;
@@ -1382,7 +1578,7 @@
             this.gbComp.Controls.Add(this.txtCompFilter);
             this.gbComp.Controls.Add(this.label10);
             this.gbComp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbComp.Location = new System.Drawing.Point(21, 18);
+            this.gbComp.Location = new System.Drawing.Point(21, 7);
             this.gbComp.Name = "gbComp";
             this.gbComp.Size = new System.Drawing.Size(934, 917);
             this.gbComp.TabIndex = 4;
@@ -1398,6 +1594,7 @@
             this.btnCompFilterApply.TabIndex = 12;
             this.btnCompFilterApply.Text = "Apply";
             this.btnCompFilterApply.UseVisualStyleBackColor = true;
+            this.btnCompFilterApply.Click += new System.EventHandler(this.btnCompFilterApply_Click);
             // 
             // tlvComp
             // 
@@ -1416,10 +1613,10 @@
             this.tlvComp.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvComp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvComp.IsSimpleDragSource = true;
-            this.tlvComp.Location = new System.Drawing.Point(0, 160);
+            this.tlvComp.Location = new System.Drawing.Point(6, 153);
             this.tlvComp.Name = "tlvComp";
             this.tlvComp.ShowGroups = false;
-            this.tlvComp.Size = new System.Drawing.Size(928, 751);
+            this.tlvComp.Size = new System.Drawing.Size(911, 751);
             this.tlvComp.SmallImageList = this.imgList;
             this.tlvComp.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.tlvComp.TabIndex = 11;
@@ -1444,13 +1641,12 @@
             // 
             this.olvColumn3.AspectName = "Age";
             this.olvColumn3.Text = "Age";
-            this.olvColumn3.Width = 76;
             // 
             // olvColumn4
             // 
             this.olvColumn4.AspectName = "Weight";
             this.olvColumn4.Text = "Weight (lb)";
-            this.olvColumn4.Width = 111;
+            this.olvColumn4.Width = 90;
             // 
             // olvColCompHeight
             // 
@@ -1481,6 +1677,7 @@
             this.txtCompFilter.Name = "txtCompFilter";
             this.txtCompFilter.Size = new System.Drawing.Size(362, 40);
             this.txtCompFilter.TabIndex = 2;
+            this.txtCompFilter.TextChanged += new System.EventHandler(this.txtCompFilter_TextChanged);
             // 
             // label10
             // 
@@ -1810,6 +2007,11 @@
             this.gbScorecards.ResumeLayout(false);
             this.gbEvent.ResumeLayout(false);
             this.gbEvent.PerformLayout();
+            this.tabEvents.ResumeLayout(false);
+            this.gbEventDetails.ResumeLayout(false);
+            this.gbEventDetails.PerformLayout();
+            this.gbEvents.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tlvEvents)).EndInit();
             this.tabMatch.ResumeLayout(false);
             this.tabMatch.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1924,7 +2126,7 @@
         private System.Windows.Forms.ToolStripMenuItem newCompetitorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteSelectedCompetitorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editSelectedCompetitorToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabEvent;
+        private System.Windows.Forms.TabPage tabEvents;
         private System.Windows.Forms.TabPage tabCompetitor;
         private System.Windows.Forms.GroupBox gbComp;
         private System.Windows.Forms.Button btnCompFilterApply;
@@ -2002,5 +2204,22 @@
         private BrightIdeasSoftware.OLVColumn olvColCompHeight;
         private System.Windows.Forms.NumericUpDown nudCompHeight;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.GroupBox gbEventDetails;
+        private System.Windows.Forms.Button btnDeleteEvent;
+        private System.Windows.Forms.Button btnClearEventSelection;
+        private System.Windows.Forms.Button btnNewEvent;
+        private System.Windows.Forms.Button btnSaveEvent;
+        private System.Windows.Forms.GroupBox gbEvents;
+        private BrightIdeasSoftware.TreeListView tlvEvents;
+        private BrightIdeasSoftware.OLVColumn olvColEventId;
+        private BrightIdeasSoftware.OLVColumn olvColEventName;
+        private BrightIdeasSoftware.OLVColumn olvColEventDate;
+        private BrightIdeasSoftware.OLVColumn olvColEventType;
+        private System.Windows.Forms.DateTimePicker dtpEventDate;
+        private System.Windows.Forms.ComboBox cbEventType;
+        private System.Windows.Forms.TextBox txtEventName;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
     }
 }

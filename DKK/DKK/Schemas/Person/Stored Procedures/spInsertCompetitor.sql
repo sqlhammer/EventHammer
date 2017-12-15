@@ -38,26 +38,58 @@ BEGIN
 
 		BEGIN TRANSACTION;
 
+			IF EXISTS (	SELECT TOP 1 1 
+						FROM Person.Person 
+						WHERE FirstName = @FirstName 
+							AND LastName = @LastName 
+							AND EmailAddress = @EmailAddress)
+			BEGIN
+				DECLARE @msg VARCHAR(1000)
+				SELECT @msg = 'This person already exists and cannot be duplicated. FirstName = ' + @FirstName + ', LastName = ' + @LastName + ', EmailAddress = ' + @EmailAddress
+				;THROW 50001, @msg, 1;
+			END
+
 			DECLARE @PersonId TABLE (Id INT);
 			DECLARE @ParentId TABLE (Id INT);
 
-			--Insert Parent
-			INSERT INTO Person.Person
-			(
-				FirstName
-				,LastName
-				,DisplayName				
-				,EmailAddress
-			)
-			OUTPUT Inserted.PersonId INTO @ParentId
-			VALUES
-			(
-				@ParentFirstName,
-				@ParentLastName,
-				@ParentLastName + ', ' + @ParentFirstName,
-				@ParentEmailAddress
-			) 
-
+			IF @ParentFirstName IS NOT NULL AND @ParentFirstName <> ''
+				AND @ParentLastName IS NOT NULL AND @ParentLastName <> ''
+				AND @ParentEmailAddress IS NOT NULL AND @ParentEmailAddress <> ''
+			BEGIN
+				IF EXISTS (	SELECT TOP 1 1 
+							FROM Person.Person 
+							WHERE FirstName = @ParentFirstName 
+								AND LastName = @ParentLastName 
+								AND EmailAddress = @ParentEmailAddress)
+				BEGIN
+					INSERT INTO @ParentId ( Id )
+					SELECT [PersonId]
+					FROM Person.Person p
+					WHERE p.FirstName = @ParentFirstName
+						AND p.LastName = @ParentLastName
+						AND p.EmailAddress = @ParentEmailAddress
+				END
+				ELSE
+				BEGIN
+					--Insert Parent
+					INSERT INTO Person.Person
+					(
+						FirstName
+						,LastName
+						,DisplayName				
+						,EmailAddress
+					)
+					OUTPUT Inserted.PersonId INTO @ParentId
+					VALUES
+					(
+						@ParentFirstName,
+						@ParentLastName,
+						@ParentLastName + ', ' + @ParentFirstName,
+						@ParentEmailAddress
+					) 
+				END
+			END
+						
 			--Insert Person
 			INSERT INTO Person.Person
 			(
@@ -95,7 +127,7 @@ BEGIN
 				@StateProvince,
 				@PostalCode,
 				@Country
-			) 
+			)
 
 			--Insert Competitor
 			INSERT INTO Person.Competitor

@@ -97,6 +97,7 @@
     <Compile Include="Global.cs" />
     <Compile Include="MatchTab.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
+    <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\DivisionModel.cs" />
     <Compile Include="Models\MatchModel.cs" />
     <Compile Include="Program.cs" />

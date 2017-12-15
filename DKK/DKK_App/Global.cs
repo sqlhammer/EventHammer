@@ -400,6 +400,29 @@ namespace DKK_App
             return model;
         }
 
+        public static List<EventModel> GetEventModel(List<Event> events)
+        {
+            List<Models.EventModel> model = new List<Models.EventModel>();
+
+            foreach (Event obj in events)
+            {
+                if (model.Any(m => m.EventId == obj.EventId))
+                    continue;
+
+                EventModel em = new EventModel
+                {
+                    EventId = obj.EventId,
+                    Date = obj.Date,
+                    EventName = obj.EventName,
+                    EventTypeName = obj.EventType.EventTypeName
+                };
+
+                model.Add(em);
+            }
+
+            return model;
+        }
+
         public static List<DivisionModel> GetDivisionModel(List<Division> divisions)
         {
             List<Models.DivisionModel> model = new List<Models.DivisionModel>();
@@ -488,6 +511,18 @@ namespace DKK_App
         #endregion
 
         #region Validators and Conversions
+        public static bool IsDuplicatePerson(Person person)
+        {
+            bool IsDuplicate = true;
+
+            if (DataAccess.GetPerson(person) == null)
+            {
+                IsDuplicate = false;
+            }
+
+            return IsDuplicate;
+        }
+
         public static string GetMatchDisplayName(int division, int subdivision)
         {
             return division.ToString() + "-" + subdivision.ToString();
