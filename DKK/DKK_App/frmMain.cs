@@ -6,8 +6,6 @@ using DKK_App.Entities;
 using DKK_App.Models;
 using DKK_App.Enums;
 using System.Threading.Tasks;
-using System.Drawing;
-using System.Diagnostics;
 
 namespace DKK_App
 {
@@ -15,6 +13,7 @@ namespace DKK_App
     {
         public Event CurrentEvent = new Event();
         public List<Event> AllEvents = new List<Event>();
+        public List<Event> FilteredEvents = new List<Event>();
         public List<Models.MatchModel> MatchModels = new List<MatchModel>();
         public List<Models.CompetitorModel> CompetitorModels = new List<CompetitorModel>();
         public List<Division> Divisions = new List<Division>();
@@ -22,6 +21,9 @@ namespace DKK_App
         private List<Dojo> Dojos = new List<Dojo>();
         private List<Title> Titles = new List<Title>();
         public List<Models.EventModel> EventModels = new List<EventModel>();
+
+        private bool MatchModelLoadComplete = false;
+        private bool CompetitorModelLoadComplete = false;
 
         #region Form / Multi-tab
 
@@ -41,8 +43,7 @@ namespace DKK_App
             try
             {
                 SetEventSearchDateRange();
-                //Unnecessary because the SetEventSearchDateRange() triggers this via the date time picker change events.
-                //RefreshEventSelect();
+                RefreshEventSelect();
             }
             catch
             {
@@ -54,6 +55,7 @@ namespace DKK_App
             SetFilterDropdowns();
             SetBirthDateDropdowns();
             SetEventTypeDropdown();
+            SetEventDateTimePicker();
             DisableNonEventTabs();
             RefreshEvents();
             RefreshDivisions();
@@ -172,12 +174,7 @@ namespace DKK_App
                 RefreshMatches(Global.FilterMatchModelAsync_ApplicableMatches(MatchModels, competitor, Divisions));
             }
         }
-
-        private void refreshEventSelectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            RefreshEventSelect();
-        }
-
+        
         private void btnRetryConnection_Click(object sender, EventArgs e)
         {
             RetryConnection();
@@ -226,12 +223,6 @@ namespace DKK_App
             string[] Params = { CurrentEvent.EventId.ToString() };
 
             LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fKnockdownScoreCard_Master", ParamNames, Params);
-        }
-
-        private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmEventManager frm = new frmEventManager();
-            frm.Show();
         }
 
         private void pbCompany_Click(object sender, EventArgs e)
@@ -285,13 +276,11 @@ namespace DKK_App
 
         private void dtpEventFrom_ValueChanged(object sender, EventArgs e)
         {
-            RefreshAllEvents();
             RefreshEventSelect();
         }
 
         private void dtpEventTo_ValueChanged(object sender, EventArgs e)
         {
-            RefreshAllEvents();
             RefreshEventSelect();
         }
 
@@ -320,7 +309,12 @@ namespace DKK_App
 
         private void RefreshAllEvents()
         {
-            AllEvents = DataAccess.GetEventInformationByDateRange(dtpEventFrom.Value, dtpEventTo.Value);
+            AllEvents = DataAccess.GetEventInformation();
+        }
+
+        private void RefreshFilteredEvents(DateTime from, DateTime to)
+        {
+            FilteredEvents = DataAccess.GetEventInformationByDateRange(from, to);            
         }
 
         private Event SetCurrentEvent(List<Event> events)
@@ -335,13 +329,16 @@ namespace DKK_App
 
         private void RefreshEventSelect()
         {
-            RefreshAllEvents();
+            RefreshFilteredEvents(this.dtpEventFrom.Value,this.dtpEventTo.Value);
 
             this.cbEventSelect.Items.Clear();
-            foreach (Event Event in AllEvents)
+            foreach (Event Event in FilteredEvents)
             {
                 this.cbEventSelect.Items.Add(Event.EventName + " - " + Event.Date.ToString("MM/dd/yyyy"));
             }
+
+            EventModels = Global.GetEventModel(AllEvents);
+            this.tlvEvents.Roots = EventModels;
         }
 
         private void SetEventSearchDateRange()
@@ -494,38 +491,50 @@ namespace DKK_App
 
         public void RefreshMatches(List<MatchModel> model)
         {
+            MatchModelLoadComplete = false;
             tlvMatches.Roots = model;
             tlvMatches.CollapseAll();
+            MatchModelLoadComplete = true;
         }
 
         private void RefreshCompetitors(List<CompetitorModel> model)
         {
+            CompetitorModelLoadComplete = false;
             tlvCompetitors.Roots = model;
             tlvCompetitors.CollapseAll();
 
             tlvComp.Roots = model;
             tlvComp.CollapseAll();
+            CompetitorModelLoadComplete = true;
         }
 
         private async void RefreshMatchesAndCompetitors()
         {
+            MatchModelLoadComplete = false;
+            CompetitorModelLoadComplete = false;
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
             MatchModels = Global.GetMatchModel(mcs);
 
             List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
             CompetitorModels = Global.GetCompetitorModel(cs);
+            MatchModelLoadComplete = true;
+            CompetitorModelLoadComplete = true;
         }
 
         private async void RefreshMatches()
         {
+            MatchModelLoadComplete = false;
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
             MatchModels = Global.GetMatchModel(mcs);
+            MatchModelLoadComplete = true;
         }
 
         private async void RefreshCompetitors()
         {
+            CompetitorModelLoadComplete = false;
             List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
             CompetitorModels = Global.GetCompetitorModel(cs);
+            CompetitorModelLoadComplete = true;
         }
 
         private void SetFilterDropdowns()
@@ -610,7 +619,7 @@ namespace DKK_App
             //the async calls to refresh the match and competitor models was complete
 
             //TODO: Figure out what happens when there is a new event with no matches and no competitors.
-            if (MatchModels.Count > 0 && CompetitorModels.Count > 0)
+            if (MatchModelLoadComplete && CompetitorModelLoadComplete)
             {
                 this.lblLoading.Visible = false;
                 this.lblCompLoading.Visible = false;
@@ -1225,10 +1234,16 @@ namespace DKK_App
         #region Event Tab
         private void RefreshEvents()
         {
-            var events = DataAccess.GetEventInformation();
-            EventModels = Global.GetEventModel(events);
+            AllEvents = DataAccess.GetEventInformation();
+            EventModels = Global.GetEventModel(AllEvents);
 
-            this.tlvEvents.Roots = EventModels;
+            RefreshEvents(EventModels);
+        }
+
+        private void RefreshEvents(List<EventModel> em)
+        {
+            this.tlvEvents.Roots = em;
+            this.tlvEvents.Refresh();
         }
 
         private void SetEventTypeDropdown()
@@ -1240,6 +1255,158 @@ namespace DKK_App
             {
                 this.cbEventType.Items.Add(et.EventTypeName);
             }
+        }
+
+        private void LoadEventDetails (EventModel e)
+        {
+            this.txtEventName.Text = e.EventName;
+            this.dtpEventDate.Value = (e.Date == DateTime.MinValue) ? DateTime.Today : e.Date;
+            this.cbEventType.SelectedIndex = this.cbEventType.FindStringExact(e.EventTypeName);
+        }
+
+        private void tlvEvents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EventModel Event = this.tlvEvents.SelectedObject as EventModel;
+
+            if (Event != null)
+            {
+                LoadEventDetails ((EventModel)this.tlvEvents.SelectedObject);
+            }
+            else
+            {
+                LoadEventDetails (new EventModel());
+            }
+        }
+        
+        private void ClearEventSelection()
+        {
+            this.tlvEvents.SelectedObject = null;
+            LoadEventDetails(new EventModel());
+        }
+
+        private void submsClearEventSelection_Click(object sender, EventArgs e)
+        {
+            ClearEventSelection();
+        }
+
+        private void SaveNewEvent()
+        {
+            EventType type = DataAccess.GetEventTypeByName(this.cbEventType.SelectedItem.ToString()).First();
+
+            Event Event = new Event
+            {
+                Date = this.dtpEventDate.Value,
+                EventName = this.txtEventName.Text,
+                EventType = type
+            };
+
+            string result = Global.IsValidEvent(Event);
+            if (result.CompareTo("") != 0)
+            {
+                MessageBox.Show(result,"Invalid Event",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DataAccess.InsertEvent(Event);
+            
+            RefreshEvents();
+        }
+
+        private void SaveEvent()
+        {
+            EventModel e = this.tlvEvents.SelectedObject as EventModel;
+
+            if (e == null)
+                return;
+
+            EventType type = DataAccess.GetEventTypeByName(this.cbEventType.SelectedItem.ToString()).First();
+
+            Event Event = new Event
+            {
+                EventId = e.EventId,
+                Date = this.dtpEventDate.Value,
+                EventName = this.txtEventName.Text,
+                EventType = type
+            };
+
+            string result = Global.IsValidEvent(Event);
+            if (result.CompareTo("") != 0)
+            {
+                MessageBox.Show(result, "Invalid Event", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DataAccess.UpdateEvent(Event);
+        }
+
+        private void btnClearEventSelection_Click(object sender, EventArgs e)
+        {
+            ClearEventSelection();
+        }
+
+        private void SetEventDateTimePicker()
+        {
+            this.dtpEventDate.Value = DateTime.Today;
+        }
+
+        private void submsRefreshEvent_Click(object sender, EventArgs e)
+        {
+            RefreshEvents();
+        }
+
+        private void refreshEventSelectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshEvents();
+        }
+
+        private void btnNewEvent_Click(object sender, EventArgs e)
+        {
+            SaveNewEvent();
+        }
+
+        private void submsNewEvent_Click(object sender, EventArgs e)
+        {
+            SaveNewEvent();
+        }
+
+        private void btnSaveEvent_Click(object sender, EventArgs e)
+        {
+            SaveEvent();
+        }
+
+        private void submsSaveEvent_Click(object sender, EventArgs e)
+        {
+            SaveEvent();
+        }
+
+        private void DeleteEvent()
+        {
+            EventModel e = this.tlvEvents.SelectedObject as EventModel;
+
+            if (e == null)
+                return;
+
+            string msg = String.Format("Confirm: irrevocably delete event {0}.", e.EventName);
+            string title = "Confirm delete";
+            DialogResult r = MessageBox.Show(msg, title, MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+
+            if (r == DialogResult.Cancel)
+                return;
+
+            DataAccess.DeleteEvent(e.EventId);
+            EventModels.Remove(e);
+            RefreshEvents();
+            ClearEventSelection();
+        }
+
+        private void btnDeleteEvent_Click(object sender, EventArgs e)
+        {
+            DeleteEvent();
+        }
+
+        private void submsDeleteEvent_Click(object sender, EventArgs e)
+        {
+            DeleteEvent();
         }
         #endregion
     }

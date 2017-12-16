@@ -63,8 +63,9 @@
             this.tlvEvents = new BrightIdeasSoftware.TreeListView();
             this.olvColEventId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColEventName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColEventDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColEventDateText = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColEventType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColEventDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imgList = new System.Windows.Forms.ImageList(this.components);
             this.tabMatch = new System.Windows.Forms.TabPage();
             this.lblLoading = new System.Windows.Forms.Label();
@@ -170,9 +171,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.miEventManager = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshEventSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.retryConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.submsRefreshEvent = new System.Windows.Forms.ToolStripMenuItem();
+            this.submsNewEvent = new System.Windows.Forms.ToolStripMenuItem();
+            this.submsSaveEvent = new System.Windows.Forms.ToolStripMenuItem();
+            this.submsClearEventSelection = new System.Windows.Forms.ToolStripMenuItem();
+            this.submsDeleteEvent = new System.Windows.Forms.ToolStripMenuItem();
             this.msMatches = new System.Windows.Forms.ToolStripMenuItem();
             this.createNewMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -265,7 +270,7 @@
             this.gbReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbReports.Location = new System.Drawing.Point(611, 6);
             this.gbReports.Name = "gbReports";
-            this.gbReports.Size = new System.Drawing.Size(1107, 356);
+            this.gbReports.Size = new System.Drawing.Size(1609, 913);
             this.gbReports.TabIndex = 1;
             this.gbReports.TabStop = false;
             this.gbReports.Text = "Reports";
@@ -515,6 +520,7 @@
             this.btnDeleteEvent.TabIndex = 5;
             this.btnDeleteEvent.Text = "Delete Event";
             this.btnDeleteEvent.UseVisualStyleBackColor = true;
+            this.btnDeleteEvent.Click += new System.EventHandler(this.btnDeleteEvent_Click);
             // 
             // btnClearEventSelection
             // 
@@ -524,6 +530,7 @@
             this.btnClearEventSelection.TabIndex = 4;
             this.btnClearEventSelection.Text = "Clear Selection";
             this.btnClearEventSelection.UseVisualStyleBackColor = true;
+            this.btnClearEventSelection.Click += new System.EventHandler(this.btnClearEventSelection_Click);
             // 
             // btnNewEvent
             // 
@@ -533,6 +540,7 @@
             this.btnNewEvent.TabIndex = 3;
             this.btnNewEvent.Text = "Save as New";
             this.btnNewEvent.UseVisualStyleBackColor = true;
+            this.btnNewEvent.Click += new System.EventHandler(this.btnNewEvent_Click);
             // 
             // btnSaveEvent
             // 
@@ -542,6 +550,7 @@
             this.btnSaveEvent.TabIndex = 2;
             this.btnSaveEvent.Text = "Save Changes";
             this.btnSaveEvent.UseVisualStyleBackColor = true;
+            this.btnSaveEvent.Click += new System.EventHandler(this.btnSaveEvent_Click);
             // 
             // gbEvents
             // 
@@ -558,13 +567,14 @@
             // 
             this.tlvEvents.AllColumns.Add(this.olvColEventId);
             this.tlvEvents.AllColumns.Add(this.olvColEventName);
-            this.tlvEvents.AllColumns.Add(this.olvColEventDate);
+            this.tlvEvents.AllColumns.Add(this.olvColEventDateText);
             this.tlvEvents.AllColumns.Add(this.olvColEventType);
+            this.tlvEvents.AllColumns.Add(this.olvColEventDate);
             this.tlvEvents.CellEditUseWholeCell = false;
             this.tlvEvents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColEventId,
             this.olvColEventName,
-            this.olvColEventDate,
+            this.olvColEventDateText,
             this.olvColEventType});
             this.tlvEvents.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -579,6 +589,7 @@
             this.tlvEvents.UseCompatibleStateImageBehavior = false;
             this.tlvEvents.View = System.Windows.Forms.View.Details;
             this.tlvEvents.VirtualMode = true;
+            this.tlvEvents.SelectedIndexChanged += new System.EventHandler(this.tlvEvents_SelectedIndexChanged);
             // 
             // olvColEventId
             // 
@@ -592,17 +603,23 @@
             this.olvColEventName.Text = "Name";
             this.olvColEventName.Width = 130;
             // 
-            // olvColEventDate
+            // olvColEventDateText
             // 
-            this.olvColEventDate.AspectName = "DateText";
-            this.olvColEventDate.Text = "Date";
-            this.olvColEventDate.Width = 100;
+            this.olvColEventDateText.AspectName = "DateText";
+            this.olvColEventDateText.Text = "Date";
+            this.olvColEventDateText.Width = 100;
             // 
             // olvColEventType
             // 
             this.olvColEventType.AspectName = "EventTypeName";
             this.olvColEventType.Text = "Type";
             this.olvColEventType.Width = 90;
+            // 
+            // olvColEventDate
+            // 
+            this.olvColEventDate.AspectName = "Date";
+            this.olvColEventDate.IsVisible = false;
+            this.olvColEventDate.Text = "Date";
             // 
             // imgList
             // 
@@ -1693,6 +1710,7 @@
             this.msMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miFile,
+            this.eventToolStripMenuItem,
             this.msMatches,
             this.msCompetitor});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
@@ -1703,35 +1721,64 @@
             // miFile
             // 
             this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miEventManager,
-            this.refreshEventSelectionToolStripMenuItem,
             this.retryConnectionToolStripMenuItem});
             this.miFile.Name = "miFile";
             this.miFile.Size = new System.Drawing.Size(64, 36);
             this.miFile.Text = "File";
             // 
-            // miEventManager
-            // 
-            this.miEventManager.Name = "miEventManager";
-            this.miEventManager.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.miEventManager.Size = new System.Drawing.Size(404, 38);
-            this.miEventManager.Text = "Event Manager";
-            this.miEventManager.Click += new System.EventHandler(this.newEventToolStripMenuItem_Click);
-            // 
-            // refreshEventSelectionToolStripMenuItem
-            // 
-            this.refreshEventSelectionToolStripMenuItem.Name = "refreshEventSelectionToolStripMenuItem";
-            this.refreshEventSelectionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.refreshEventSelectionToolStripMenuItem.Size = new System.Drawing.Size(404, 38);
-            this.refreshEventSelectionToolStripMenuItem.Text = "Refresh Event Selection";
-            this.refreshEventSelectionToolStripMenuItem.Click += new System.EventHandler(this.refreshEventSelectionToolStripMenuItem_Click);
-            // 
             // retryConnectionToolStripMenuItem
             // 
             this.retryConnectionToolStripMenuItem.Name = "retryConnectionToolStripMenuItem";
-            this.retryConnectionToolStripMenuItem.Size = new System.Drawing.Size(404, 38);
+            this.retryConnectionToolStripMenuItem.Size = new System.Drawing.Size(298, 38);
             this.retryConnectionToolStripMenuItem.Text = "Retry Connection";
             this.retryConnectionToolStripMenuItem.Click += new System.EventHandler(this.retryConnectionToolStripMenuItem_Click);
+            // 
+            // eventToolStripMenuItem
+            // 
+            this.eventToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.submsRefreshEvent,
+            this.submsNewEvent,
+            this.submsSaveEvent,
+            this.submsClearEventSelection,
+            this.submsDeleteEvent});
+            this.eventToolStripMenuItem.Name = "eventToolStripMenuItem";
+            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 36);
+            this.eventToolStripMenuItem.Text = "Event";
+            // 
+            // submsRefreshEvent
+            // 
+            this.submsRefreshEvent.Name = "submsRefreshEvent";
+            this.submsRefreshEvent.Size = new System.Drawing.Size(328, 38);
+            this.submsRefreshEvent.Text = "Refresh Events";
+            this.submsRefreshEvent.Click += new System.EventHandler(this.submsRefreshEvent_Click);
+            // 
+            // submsNewEvent
+            // 
+            this.submsNewEvent.Name = "submsNewEvent";
+            this.submsNewEvent.Size = new System.Drawing.Size(328, 38);
+            this.submsNewEvent.Text = "Save as New Event";
+            this.submsNewEvent.Click += new System.EventHandler(this.submsNewEvent_Click);
+            // 
+            // submsSaveEvent
+            // 
+            this.submsSaveEvent.Name = "submsSaveEvent";
+            this.submsSaveEvent.Size = new System.Drawing.Size(328, 38);
+            this.submsSaveEvent.Text = "Save Selected Event";
+            this.submsSaveEvent.Click += new System.EventHandler(this.submsSaveEvent_Click);
+            // 
+            // submsClearEventSelection
+            // 
+            this.submsClearEventSelection.Name = "submsClearEventSelection";
+            this.submsClearEventSelection.Size = new System.Drawing.Size(328, 38);
+            this.submsClearEventSelection.Text = "Clear Selection";
+            this.submsClearEventSelection.Click += new System.EventHandler(this.submsClearEventSelection_Click);
+            // 
+            // submsDeleteEvent
+            // 
+            this.submsDeleteEvent.Name = "submsDeleteEvent";
+            this.submsDeleteEvent.Size = new System.Drawing.Size(328, 38);
+            this.submsDeleteEvent.Text = "Delete Event";
+            this.submsDeleteEvent.Click += new System.EventHandler(this.submsDeleteEvent_Click);
             // 
             // msMatches
             // 
@@ -2065,7 +2112,6 @@
         private System.Windows.Forms.GroupBox gbReports;
         private System.Windows.Forms.MenuStrip msMenu;
         private System.Windows.Forms.ToolStripMenuItem miFile;
-        private System.Windows.Forms.ToolStripMenuItem miEventManager;
         private System.Windows.Forms.GroupBox gbScorecards;
         private System.Windows.Forms.Button btnKnockdown;
         private System.Windows.Forms.Button btnSemiKnockdown;
@@ -2073,7 +2119,6 @@
         private System.Windows.Forms.Button btnKata;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnRetryConnection;
-        private System.Windows.Forms.ToolStripMenuItem refreshEventSelectionToolStripMenuItem;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -2213,7 +2258,7 @@
         private BrightIdeasSoftware.TreeListView tlvEvents;
         private BrightIdeasSoftware.OLVColumn olvColEventId;
         private BrightIdeasSoftware.OLVColumn olvColEventName;
-        private BrightIdeasSoftware.OLVColumn olvColEventDate;
+        private BrightIdeasSoftware.OLVColumn olvColEventDateText;
         private BrightIdeasSoftware.OLVColumn olvColEventType;
         private System.Windows.Forms.DateTimePicker dtpEventDate;
         private System.Windows.Forms.ComboBox cbEventType;
@@ -2221,5 +2266,12 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
+        private BrightIdeasSoftware.OLVColumn olvColEventDate;
+        private System.Windows.Forms.ToolStripMenuItem eventToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem submsClearEventSelection;
+        private System.Windows.Forms.ToolStripMenuItem submsNewEvent;
+        private System.Windows.Forms.ToolStripMenuItem submsSaveEvent;
+        private System.Windows.Forms.ToolStripMenuItem submsDeleteEvent;
+        private System.Windows.Forms.ToolStripMenuItem submsRefreshEvent;
     }
 }

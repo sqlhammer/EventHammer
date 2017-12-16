@@ -70,12 +70,6 @@
     <Compile Include="Enums\NewMatchErrorType.cs" />
     <Compile Include="Enums\FilterType.cs" />
     <Compile Include="Enums\LengthType.cs" />
-    <Compile Include="frmEditEvent.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmEditEvent.Designer.cs">
-      <DependentUpon>frmEditEvent.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmEventManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,16 +89,12 @@
       <DependentUpon>frmNewMatch.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.cs" />
-    <Compile Include="MatchTab.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\DivisionModel.cs" />
     <Compile Include="Models\MatchModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmEditEvent.resx">
-      <DependentUpon>frmEditEvent.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmEventManager.resx">
       <DependentUpon>frmEventManager.cs</DependentUpon>
     </EmbeddedResource>

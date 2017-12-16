@@ -12,4 +12,6 @@ list of schools/owners for announcements
 
 Next tasks:
 ---------------------
-Build Events tab page to replace the pop-up edit window
+reports
+
+add reports to the home tab
