@@ -24,24 +24,16 @@
       <MimeType>image/x-png</MimeType>
     </ResourceProjectItem>
     <ProjectItem>
-      <Name>KataScoreCard_Master.rdl</Name>
-      <FullPath>KataScoreCard_Master.rdl</FullPath>
+      <Name>Master_KataScoreCard.rdl</Name>
+      <FullPath>Master_KataScoreCard.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>ScoreCard_CoverPage.rdl</Name>
-      <FullPath>ScoreCard_CoverPage.rdl</FullPath>
+      <Name>CoverPage_ScoreCard.rdl</Name>
+      <FullPath>CoverPage_ScoreCard.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>WeaponKataScoreCard_Master.rdl</Name>
-      <FullPath>WeaponKataScoreCard_Master.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>SemiKnockdownScoreCard_Master.rdl</Name>
-      <FullPath>SemiKnockdownScoreCard_Master.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>KnockdownScoreCard_Master.rdl</Name>
-      <FullPath>KnockdownScoreCard_Master.rdl</FullPath>
+      <Name>SubReport_DivisionHeader.rdl</Name>
+      <FullPath>SubReport_DivisionHeader.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -53,7 +45,6 @@
         <TargetServerVersion>SSRS2016</TargetServerVersion>
         <TargetServerURL>http://dkktest1.eastus.cloudapp.azure.com/Reportserver</TargetServerURL>
         <TargetFolder>DKK_Reports</TargetFolder>
-        <TargetMobileReportFolder>Mobile Reports</TargetMobileReportFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
         <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -67,7 +58,6 @@
         <TargetServerVersion>SSRS2016</TargetServerVersion>
         <TargetServerURL>http://localhost/reportserver</TargetServerURL>
         <TargetFolder>DKK_Reports</TargetFolder>
-        <TargetMobileReportFolder>Mobile Reports</TargetMobileReportFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
         <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -81,7 +71,6 @@
         <TargetServerVersion>SSRS2016</TargetServerVersion>
         <TargetServerURL>http://localhost/reportserver</TargetServerURL>
         <TargetFolder>DKK_Reports</TargetFolder>
-        <TargetMobileReportFolder>Mobile Reports</TargetMobileReportFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
         <TargetReportPartFolder>Report Parts</TargetReportPartFolder>

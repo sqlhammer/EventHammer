@@ -114,7 +114,7 @@
     <Build Include="Schemas\Person\Views\vwCompetitor.sql" />
     <Build Include="Schemas\Event\Views\vwMatch.sql" />
     <Build Include="Schemas\Event\Views\vwSingleCompetitorDivision.sql" />
-    <Build Include="Schemas\Event\Functions\udfGetDisplayDivisionNumber.sql" />
+    <Build Include="Schemas\Event\Functions\udfGetDivisionHeader.sql" />
     <Build Include="Schemas\Event\Views\vwEvent.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spCreateEvent.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spUpdateEvent.sql" />
