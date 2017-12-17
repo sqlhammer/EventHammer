@@ -48,7 +48,7 @@
                 </Paragraphs>
                 <Top>4.14062in</Top>
                 <Height>0.39583in</Height>
-                <Width>10.75in</Width>
+                <Width>10.25in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -64,7 +64,7 @@
                 <Value>dkk_logo_medium_horizontal</Value>
                 <Sizing>FitProportional</Sizing>
                 <Top>1.71181in</Top>
-                <Left>3.10938in</Left>
+                <Left>2.73438in</Left>
                 <Height>2.32812in</Height>
                 <Width>4.69271in</Width>
                 <ZIndex>1</ZIndex>
@@ -93,7 +93,7 @@
                   </Paragraph>
                 </Paragraphs>
                 <Height>1.54167in</Height>
-                <Width>10.75in</Width>
+                <Width>10.25in</Width>
                 <ZIndex>2</ZIndex>
                 <Style>
                   <Border>

@@ -85,19 +85,7 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Rectangle Name="rctBody">
-            <KeepTogether>true</KeepTogether>
-            <Top>0.28646in</Top>
-            <Left>0in</Left>
-            <Height>2.39409in</Height>
-            <Width>10.75in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Rectangle>
-          <Rectangle Name="Rectangle2">
+          <Rectangle Name="rctCoverPage">
             <ReportItems>
               <Subreport Name="srKataReport_CoverPage">
                 <ReportName>CoverPage_ScoreCard</ReportName>
@@ -109,15 +97,30 @@
                     <Value>=IIf(Parameters!IsSpecialConsideration.Value = true,"Special Consideration","")</Value>
                   </Parameter>
                 </Parameters>
-                <Left>0in</Left>
+                <Top>0.01389in</Top>
                 <Height>0.25in</Height>
-                <Width>10.75in</Width>
+                <Width>10.25in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
                   </Border>
                 </Style>
               </Subreport>
+            </ReportItems>
+            <PageBreak>
+              <BreakLocation>End</BreakLocation>
+            </PageBreak>
+            <KeepTogether>true</KeepTogether>
+            <Height>0.26389in</Height>
+            <Width>10.25in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="rctBody">
+            <ReportItems>
               <Tablix Name="tbxDivision">
                 <TablixBody>
                   <TablixColumns>
@@ -131,7 +134,7 @@
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox4">
+                            <Textbox Name="txtRing">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -151,7 +154,6 @@
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox4</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -171,7 +173,7 @@
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox3">
+                            <Textbox Name="txtBlank3">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -185,7 +187,6 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox3</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -233,7 +234,7 @@
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox19">
+                            <Textbox Name="txtBlank1">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -247,7 +248,6 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox19</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -267,7 +267,7 @@
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="Textbox26">
+                            <Textbox Name="txtBlank2">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -283,7 +283,6 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>Textbox26</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
@@ -381,10 +380,9 @@
                     <Value>=Fields!SubDivisionId.Value</Value>
                   </SortExpression>
                 </SortExpressions>
-                <Top>0.25in</Top>
+                <Top>0.01389in</Top>
                 <Height>1.57292in</Height>
                 <Width>10.25in</Width>
-                <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -392,12 +390,10 @@
                 </Style>
               </Tablix>
             </ReportItems>
-            <PageBreak>
-              <BreakLocation>End</BreakLocation>
-            </PageBreak>
             <KeepTogether>true</KeepTogether>
-            <Height>1.82292in</Height>
-            <Width>10.75in</Width>
+            <Top>0.26389in</Top>
+            <Height>1.58681in</Height>
+            <Width>10.25in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -406,7 +402,7 @@
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>2.68055in</Height>
+        <Height>1.8507in</Height>
         <Style />
       </Body>
       <Width>10.75in</Width>
@@ -416,7 +412,7 @@
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Textbox Name="Textbox2">
+            <Textbox Name="txtTitle">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -434,11 +430,10 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.125in</Top>
               <Left>0in</Left>
               <Height>0.41667in</Height>
-              <Width>10.75in</Width>
+              <Width>10.25in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -457,7 +452,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>2.73833in</Height>
+          <Height>2.29041in</Height>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
             <Textbox Name="txtDate">
@@ -474,7 +469,7 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <Top>2.22791in</Top>
+              <Top>1.85291in</Top>
               <Left>0in</Left>
               <Height>0.38542in</Height>
               <Width>1.5in</Width>
@@ -505,7 +500,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>2.22791in</Top>
+              <Top>1.85291in</Top>
               <Left>8.85417in</Left>
               <Height>0.38542in</Height>
               <Width>1.5in</Width>
@@ -521,7 +516,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox1">
+            <Textbox Name="txtFooterTitle">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -539,8 +534,7 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>2.22791in</Top>
+              <Top>1.85291in</Top>
               <Left>1.55556in</Left>
               <Height>0.38542in</Height>
               <Width>7.24305in</Width>
@@ -556,11 +550,11 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Image Name="imgLogo2">
+            <Image Name="imgFooterLogo">
               <Source>Embedded</Source>
               <Value>dkk_logo_medium_horizontal</Value>
               <Sizing>FitProportional</Sizing>
-              <Top>1.36159in</Top>
+              <Top>0.98659in</Top>
               <Left>4.32367in</Left>
               <Height>0.83854in</Height>
               <Width>1.68924in</Width>
@@ -571,7 +565,7 @@
                 </Border>
               </Style>
             </Image>
-            <Textbox Name="Textbox5">
+            <Textbox Name="txt13MinusNote">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -588,8 +582,8 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox5</rd:DefaultName>
-              <Top>0.33556in</Top>
+              <Top>0in</Top>
+              <Left>0in</Left>
               <Height>0.29in</Height>
               <Width>9.34722in</Width>
               <ZIndex>4</ZIndex>
@@ -603,7 +597,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox6">
+            <Textbox Name="txt14PlusNote">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -620,8 +614,8 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox6</rd:DefaultName>
-              <Top>0.62556in</Top>
+              <Top>0.31778in</Top>
+              <Left>0in</Left>
               <Height>0.29in</Height>
               <Width>9.34722in</Width>
               <ZIndex>5</ZIndex>
@@ -643,7 +637,7 @@
           </Style>
         </PageFooter>
         <PageHeight>8.5in</PageHeight>
-        <PageWidth>11in</PageWidth>
+        <PageWidth>10.75in</PageWidth>
         <InteractiveHeight>8.25in</InteractiveHeight>
         <InteractiveWidth>10.75in</InteractiveWidth>
         <LeftMargin>0.25in</LeftMargin>
