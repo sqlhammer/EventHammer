@@ -86,17 +86,48 @@
       <Body>
         <ReportItems>
           <Rectangle Name="rctBody">
+            <KeepTogether>true</KeepTogether>
+            <Top>0.28646in</Top>
+            <Left>0in</Left>
+            <Height>2.39409in</Height>
+            <Width>10.75in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="Rectangle2">
             <ReportItems>
+              <Subreport Name="srKataReport_CoverPage">
+                <ReportName>CoverPage_ScoreCard</ReportName>
+                <Parameters>
+                  <Parameter Name="MatchTypeName">
+                    <Value>Kata</Value>
+                  </Parameter>
+                  <Parameter Name="SubTitle">
+                    <Value>=IIf(Parameters!IsSpecialConsideration.Value = true,"Special Consideration","")</Value>
+                  </Parameter>
+                </Parameters>
+                <Left>0in</Left>
+                <Height>0.25in</Height>
+                <Width>10.75in</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Subreport>
               <Tablix Name="tbxDivision">
                 <TablixBody>
                   <TablixColumns>
                     <TablixColumn>
-                      <Width>9.34722in</Width>
+                      <Width>10.25in</Width>
                     </TablixColumn>
                   </TablixColumns>
                   <TablixRows>
                     <TablixRow>
-                      <Height>0.25in</Height>
+                      <Height>0.32292in</Height>
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
@@ -110,11 +141,13 @@
                                       <Value>Ring: ___________</Value>
                                       <Style>
                                         <FontFamily>Arial</FontFamily>
+                                        <FontSize>14pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Left</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -348,8 +381,10 @@
                     <Value>=Fields!SubDivisionId.Value</Value>
                   </SortExpression>
                 </SortExpressions>
-                <Height>1.5in</Height>
-                <Width>9.34722in</Width>
+                <Top>0.25in</Top>
+                <Height>1.57292in</Height>
+                <Width>10.25in</Width>
+                <ZIndex>1</ZIndex>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -357,44 +392,11 @@
                 </Style>
               </Tablix>
             </ReportItems>
-            <KeepTogether>true</KeepTogether>
-            <Top>0.28646in</Top>
-            <Left>0in</Left>
-            <Height>2.39409in</Height>
-            <Width>10.75in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Rectangle>
-          <Rectangle Name="Rectangle2">
-            <ReportItems>
-              <Subreport Name="srKataReport_CoverPage">
-                <ReportName>CoverPage_ScoreCard</ReportName>
-                <Parameters>
-                  <Parameter Name="MatchTypeName">
-                    <Value>Kata</Value>
-                  </Parameter>
-                  <Parameter Name="SubTitle">
-                    <Value>=IIf(Parameters!IsSpecialConsideration.Value = true,"Special Consideration","")</Value>
-                  </Parameter>
-                </Parameters>
-                <Height>0.25in</Height>
-                <Width>9.30728in</Width>
-                <Style>
-                  <Border>
-                    <Style>None</Style>
-                  </Border>
-                </Style>
-              </Subreport>
-            </ReportItems>
             <PageBreak>
               <BreakLocation>End</BreakLocation>
             </PageBreak>
             <KeepTogether>true</KeepTogether>
-            <Left>0in</Left>
-            <Height>0.25in</Height>
+            <Height>1.82292in</Height>
             <Width>10.75in</Width>
             <ZIndex>1</ZIndex>
             <Style>

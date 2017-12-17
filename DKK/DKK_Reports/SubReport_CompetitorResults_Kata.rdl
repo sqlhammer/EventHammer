@@ -81,31 +81,31 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.13522in</Width>
+                  <Width>1.12365in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.59877in</Width>
+                  <Width>1.5872in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.04321in</Width>
+                  <Width>1.03164in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.05189in</Width>
+                  <Width>1.04032in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.07272in</Width>
+                  <Width>1.06115in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.06231in</Width>
+                  <Width>1.05074in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.17689in</Width>
+                  <Width>1.16532in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.13001in</Width>
+                  <Width>1.11844in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.08314in</Width>
+                  <Width>1.07157in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -430,7 +430,7 @@
             <DataSetName>dsMatchCompetitors</DataSetName>
             <Top>0.27778in</Top>
             <Height>0.25in</Height>
-            <Width>10.35416in</Width>
+            <Width>10.25in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -455,9 +455,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Left>0in</Left>
+            <Top>0.01389in</Top>
             <Height>0.25in</Height>
-            <Width>1.13522in</Width>
+            <Width>1.12365in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -488,9 +488,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Left>1.13522in</Left>
+            <Top>0.01389in</Top>
+            <Left>1.12365in</Left>
             <Height>0.25in</Height>
-            <Width>1.59877in</Width>
+            <Width>1.5872in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -521,9 +522,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
-            <Left>2.73399in</Left>
+            <Top>0.01389in</Top>
+            <Left>2.71084in</Left>
             <Height>0.25in</Height>
-            <Width>1.04321in</Width>
+            <Width>1.03164in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -554,9 +556,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Left>3.7772in</Left>
+            <Top>0.01389in</Top>
+            <Left>3.74248in</Left>
             <Height>0.25in</Height>
-            <Width>1.05189in</Width>
+            <Width>1.04032in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -587,9 +590,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Left>4.82909in</Left>
+            <Top>0.01389in</Top>
+            <Left>4.7828in</Left>
             <Height>0.25in</Height>
-            <Width>1.07272in</Width>
+            <Width>1.06115in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -620,9 +624,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Left>5.90181in</Left>
+            <Top>0.01389in</Top>
+            <Left>5.84394in</Left>
             <Height>0.25in</Height>
-            <Width>1.06231in</Width>
+            <Width>1.05074in</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -653,9 +658,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Left>6.96412in</Left>
+            <Top>0.01389in</Top>
+            <Left>6.89468in</Left>
             <Height>0.25in</Height>
-            <Width>1.17689in</Width>
+            <Width>1.16532in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -686,9 +692,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Left>8.14101in</Left>
+            <Top>0.01389in</Top>
+            <Left>8.06in</Left>
             <Height>0.25in</Height>
-            <Width>1.13001in</Width>
+            <Width>1.11844in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -719,9 +726,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Left>9.27102in</Left>
+            <Top>0.01389in</Top>
+            <Left>9.17843in</Left>
             <Height>0.25in</Height>
-            <Width>1.08314in</Width>
+            <Width>1.07157in</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -738,12 +746,12 @@
         <Height>0.5625in</Height>
         <Style />
       </Body>
-      <Width>10.36978in</Width>
+      <Width>10.25in</Width>
       <Page>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <PageHeight>8.25in</PageHeight>
+        <PageWidth>10.25in</PageWidth>
+        <InteractiveHeight>8.25in</InteractiveHeight>
+        <InteractiveWidth>10.25in</InteractiveWidth>
         <Style />
       </Page>
     </ReportSection>
