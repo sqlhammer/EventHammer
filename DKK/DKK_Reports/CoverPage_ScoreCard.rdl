@@ -44,7 +44,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>2.22271in</Top>
+            <Top>0.97271in</Top>
             <Height>1.15625in</Height>
             <Width>11in</Width>
             <Style>
@@ -61,7 +61,7 @@
             <Source>Embedded</Source>
             <Value>dkk_logo_medium_horizontal</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>3.40674in</Top>
+            <Top>2.15674in</Top>
             <Left>3.22396in</Left>
             <Height>2.32812in</Height>
             <Width>4.69271in</Width>
@@ -90,7 +90,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>6.11333in</Top>
+            <Top>4.61333in</Top>
             <Height>0.39583in</Height>
             <Width>11in</Width>
             <ZIndex>2</ZIndex>
@@ -105,86 +105,15 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>8.5in</Height>
+        <Height>5.27083in</Height>
         <Style />
       </Body>
       <Width>11in</Width>
       <Page>
-        <PageFooter>
-          <Height>1in</Height>
-          <PrintOnFirstPage>true</PrintOnFirstPage>
-          <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Textbox Name="txtDate">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=FormatDateTime(First(Fields!MaxEventDate.Value, "dsMaxEventDate"), DateFormat.ShortDate)</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <Top>0.36333in</Top>
-              <Left>0.29042in</Left>
-              <Height>0.25in</Height>
-              <Width>1.5in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="txtPageNumber">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>="Page " + CStr(Globals!OverallPageNumber) + " of " + CStr(Globals!OverallTotalPages)</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <Top>0.36333in</Top>
-              <Left>9.14458in</Left>
-              <Height>0.25in</Height>
-              <Width>1.5in</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-          </ReportItems>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </PageFooter>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <LeftMargin>0.25in</LeftMargin>
+        <RightMargin>0.25in</RightMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>

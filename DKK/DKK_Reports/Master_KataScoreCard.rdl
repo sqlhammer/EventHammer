@@ -371,10 +371,13 @@
           <Rectangle Name="Rectangle2">
             <ReportItems>
               <Subreport Name="srKataReport_CoverPage">
-                <ReportName>ScoreCard_CoverPage</ReportName>
+                <ReportName>CoverPage_ScoreCard</ReportName>
                 <Parameters>
                   <Parameter Name="MatchTypeName">
                     <Value>Kata</Value>
+                  </Parameter>
+                  <Parameter Name="SubTitle">
+                    <Value>=IIf(Parameters!IsSpecialConsideration.Value = true,"Special Consideration","")</Value>
                   </Parameter>
                 </Parameters>
                 <Height>0.25in</Height>
@@ -391,7 +394,7 @@
             </PageBreak>
             <KeepTogether>true</KeepTogether>
             <Height>0.28646in</Height>
-            <Width>12.00396in</Width>
+            <Width>10.92583in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -637,10 +640,12 @@
             </Border>
           </Style>
         </PageFooter>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>11in</PageWidth>
+        <LeftMargin>0.25in</LeftMargin>
+        <RightMargin>0.25in</RightMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -664,6 +669,15 @@
       </DefaultValue>
       <Prompt>EventId</Prompt>
     </ReportParameter>
+    <ReportParameter Name="IsSpecialConsideration">
+      <DataType>Boolean</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>false</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Is Special Consideration</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -679,6 +693,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>EventId</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>IsSpecialConsideration</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
