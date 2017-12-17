@@ -16,8 +16,24 @@
       <Name>MaxEventDate.rsd</Name>
       <FullPath>MaxEventDate.rsd</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>dsDivisionHeader.rsd</Name>
+      <FullPath>dsDivisionHeader.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>dsDivisionHeaderSingle.rsd</Name>
+      <FullPath>dsDivisionHeaderSingle.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>dsMatchCompetitors.rsd</Name>
+      <FullPath>dsMatchCompetitors.rsd</FullPath>
+    </ProjectItem>
   </DataSets>
   <Reports>
+    <ProjectItem>
+      <Name>CoverPage_ScoreCard.rdl</Name>
+      <FullPath>CoverPage_ScoreCard.rdl</FullPath>
+    </ProjectItem>
     <ResourceProjectItem>
       <Name>dkk_logo_medium_horizontal.png</Name>
       <FullPath>dkk_logo_medium_horizontal.png</FullPath>
@@ -28,12 +44,12 @@
       <FullPath>Master_KataScoreCard.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>CoverPage_ScoreCard.rdl</Name>
-      <FullPath>CoverPage_ScoreCard.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>SubReport_DivisionHeader.rdl</Name>
       <FullPath>SubReport_DivisionHeader.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SubReport_CompetitorResults_Kata.rdl</Name>
+      <FullPath>SubReport_CompetitorResults_Kata.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

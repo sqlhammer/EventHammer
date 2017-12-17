@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>DKK</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@MatchTypeName">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>String</rd:DbType>
+        </DataSetParameter>
+        <DataSetParameter Name="@EventId">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT dh.MatchDisplayId
+	  ,dh.SubDivisionId
+	  ,dh.MinimumWeight_lb
+	  ,dh.MaximumWeight_lb
+	  ,dh.WeightClass
+	  ,dh.Gender
+	  ,dh.MinimumBelt
+	  ,dh.MaximumBelt
+	  ,dh.MinimumAge
+	  ,dh.MaximumAge 
+	  ,dh.MatchTypeName
+FROM [Event].[vwDivisionHeader] dh
+WHERE dh.MatchTypeName = @MatchTypeName
+	AND dh.EventId = @EventId</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="MatchDisplayId">
+        <DataField>MatchDisplayId</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="SubDivisionId">
+        <DataField>SubDivisionId</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="MinimumWeight_lb">
+        <DataField>MinimumWeight_lb</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="MaximumWeight_lb">
+        <DataField>MaximumWeight_lb</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="WeightClass">
+        <DataField>WeightClass</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Gender">
+        <DataField>Gender</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="MinimumBelt">
+        <DataField>MinimumBelt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="MaximumBelt">
+        <DataField>MaximumBelt</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="MinimumAge">
+        <DataField>MinimumAge</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="MaximumAge">
+        <DataField>MaximumAge</DataField>
+        <rd:TypeName>System.Byte</rd:TypeName>
+      </Field>
+      <Field Name="MatchTypeName">
+        <DataField>MatchTypeName</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>
