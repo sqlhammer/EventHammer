@@ -26,94 +26,103 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="txtMatchTypeName">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Parameters!MatchTypeName.Value</Value>
+          <Rectangle Name="Rectangle1">
+            <ReportItems>
+              <Textbox Name="txtSubTitle">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!SubTitle.Value</Value>
+                        <Style>
+                          <FontSize>20pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
                     <Style>
-                      <FontSize>72pt</FontSize>
+                      <TextAlign>Center</TextAlign>
                     </Style>
-                  </TextRun>
-                </TextRuns>
+                  </Paragraph>
+                </Paragraphs>
+                <Top>4.14062in</Top>
+                <Height>0.39583in</Height>
+                <Width>10.75in</Width>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.97271in</Top>
-            <Height>1.15625in</Height>
-            <Width>11in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Image Name="imgLogo">
-            <Source>Embedded</Source>
-            <Value>dkk_logo_medium_horizontal</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>2.15674in</Top>
-            <Left>3.22396in</Left>
-            <Height>2.32812in</Height>
-            <Width>4.69271in</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
-          <Textbox Name="txtSubTitle">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Parameters!SubTitle.Value</Value>
+              </Textbox>
+              <Image Name="imgLogo">
+                <Source>Embedded</Source>
+                <Value>dkk_logo_medium_horizontal</Value>
+                <Sizing>FitProportional</Sizing>
+                <Top>1.71181in</Top>
+                <Left>3.10938in</Left>
+                <Height>2.32812in</Height>
+                <Width>4.69271in</Width>
+                <ZIndex>1</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Textbox Name="txtMatchTypeName">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=Parameters!MatchTypeName.Value</Value>
+                        <Style>
+                          <FontSize>72pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
                     <Style>
-                      <FontSize>20pt</FontSize>
+                      <TextAlign>Center</TextAlign>
                     </Style>
-                  </TextRun>
-                </TextRuns>
+                  </Paragraph>
+                </Paragraphs>
+                <Height>1.54167in</Height>
+                <Width>10.75in</Width>
+                <ZIndex>2</ZIndex>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                  <PaddingLeft>2pt</PaddingLeft>
+                  <PaddingRight>2pt</PaddingRight>
+                  <PaddingTop>2pt</PaddingTop>
+                  <PaddingBottom>2pt</PaddingBottom>
                 </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>4.61333in</Top>
-            <Height>0.39583in</Height>
-            <Width>11in</Width>
-            <ZIndex>2</ZIndex>
+              </Textbox>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Height>4.53645in</Height>
+            <Width>10.75in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Textbox>
+          </Rectangle>
         </ReportItems>
-        <Height>5.27083in</Height>
+        <Height>4.53645in</Height>
         <Style />
       </Body>
-      <Width>11in</Width>
+      <Width>10.75in</Width>
       <Page>
-        <LeftMargin>0.25in</LeftMargin>
-        <RightMargin>0.25in</RightMargin>
-        <TopMargin>0.25in</TopMargin>
-        <BottomMargin>0.25in</BottomMargin>
+        <InteractiveHeight>10.75in</InteractiveHeight>
+        <InteractiveWidth>8.25in</InteractiveWidth>
         <Style />
       </Page>
     </ReportSection>
