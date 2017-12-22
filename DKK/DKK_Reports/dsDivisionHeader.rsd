@@ -16,6 +16,12 @@
           <OmitFromQuery>false</OmitFromQuery>
           <rd:DbType>Int32</rd:DbType>
         </DataSetParameter>
+        <DataSetParameter Name="@IsSpecialConsideration">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Boolean</rd:DbType>
+        </DataSetParameter>
       </DataSetParameters>
       <CommandText>SELECT dh.MatchDisplayId
 	  ,dh.SubDivisionId
@@ -30,7 +36,8 @@
 	  ,dh.MatchTypeName
 FROM [Event].[vwDivisionHeader] dh
 WHERE dh.MatchTypeName = @MatchTypeName
-	AND dh.EventId = @EventId</CommandText>
+	AND dh.EventId = @EventId
+	AND dh.IsSpecialConsideration = @IsSpecialConsideration</CommandText>
     </Query>
     <Fields>
       <Field Name="MatchDisplayId">

@@ -13,6 +13,7 @@ SELECT
 		,d.MaximumAge 
 		,mt.Name MatchTypeName
 		,m.EventId
+		,mt.IsSpecialConsideration
 FROM [Event].[Division] d
 INNER JOIN [Event].[Match] m ON m.DivisionId = d.DivisionId
 INNER JOIN [Event].[MatchType] mt ON mt.MatchTypeId = m.MatchTypeId

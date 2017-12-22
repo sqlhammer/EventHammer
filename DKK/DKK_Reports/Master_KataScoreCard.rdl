@@ -31,6 +31,9 @@
           <QueryParameter Name="@EventId">
             <Value>=Parameters!EventId.Value</Value>
           </QueryParameter>
+          <QueryParameter Name="@IsSpecialConsideration">
+            <Value>=Parameters!IsSpecialConsideration.Value</Value>
+          </QueryParameter>
         </QueryParameters>
       </SharedDataSet>
       <Fields>
@@ -91,7 +94,7 @@
                 <ReportName>CoverPage_ScoreCard</ReportName>
                 <Parameters>
                   <Parameter Name="MatchTypeName">
-                    <Value>Kata</Value>
+                    <Value>=Parameters!MatchTypeName.Value</Value>
                   </Parameter>
                   <Parameter Name="SubTitle">
                     <Value>=IIf(Parameters!IsSpecialConsideration.Value = true,"Special Consideration","")</Value>
@@ -521,7 +524,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Kata</Value>
+                      <Value>=Parameters!MatchTypeName.Value + IIF(Parameters!IsSpecialConsideration.Value = true," - Special Consideration","")</Value>
                       <Style>
                         <FontSize>18pt</FontSize>
                       </Style>
@@ -644,29 +647,26 @@
   <ReportParameters>
     <ReportParameter Name="MatchTypeName">
       <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Kata</Value>
-        </Values>
-      </DefaultValue>
       <Prompt>Match Type Name</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>Kata</Value>
+            <Label>Kata</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>Weapon Kata</Value>
+            <Label>Weapon Kata</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
     </ReportParameter>
     <ReportParameter Name="EventId">
       <DataType>Integer</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>1</Value>
-        </Values>
-      </DefaultValue>
       <Prompt>EventId</Prompt>
     </ReportParameter>
     <ReportParameter Name="IsSpecialConsideration">
       <DataType>Boolean</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>false</Value>
-        </Values>
-      </DefaultValue>
       <Prompt>Is Special Consideration</Prompt>
     </ReportParameter>
   </ReportParameters>

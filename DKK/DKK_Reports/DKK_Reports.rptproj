@@ -13,10 +13,6 @@
       <FullPath>dsDisplayDivisionNumber.rsd</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>MaxEventDate.rsd</Name>
-      <FullPath>MaxEventDate.rsd</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>dsDivisionHeader.rsd</Name>
       <FullPath>dsDivisionHeader.rsd</FullPath>
     </ProjectItem>
@@ -27,6 +23,10 @@
     <ProjectItem>
       <Name>dsMatchCompetitors.rsd</Name>
       <FullPath>dsMatchCompetitors.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>MaxEventDate.rsd</Name>
+      <FullPath>MaxEventDate.rsd</FullPath>
     </ProjectItem>
   </DataSets>
   <Reports>
@@ -44,12 +44,12 @@
       <FullPath>Master_KataScoreCard.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>SubReport_DivisionHeader.rdl</Name>
-      <FullPath>SubReport_DivisionHeader.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>SubReport_CompetitorResults_Kata.rdl</Name>
       <FullPath>SubReport_CompetitorResults_Kata.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SubReport_DivisionHeader.rdl</Name>
+      <FullPath>SubReport_DivisionHeader.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
