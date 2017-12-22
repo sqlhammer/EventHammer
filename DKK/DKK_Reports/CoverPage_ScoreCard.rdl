@@ -48,7 +48,7 @@
                 </Paragraphs>
                 <Top>4.14062in</Top>
                 <Height>0.39583in</Height>
-                <Width>10.25in</Width>
+                <Width>10in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -93,7 +93,7 @@
                   </Paragraph>
                 </Paragraphs>
                 <Height>1.54167in</Height>
-                <Width>10.25in</Width>
+                <Width>10in</Width>
                 <ZIndex>2</ZIndex>
                 <Style>
                   <Border>
@@ -108,7 +108,7 @@
             </ReportItems>
             <KeepTogether>true</KeepTogether>
             <Height>4.53645in</Height>
-            <Width>10.75in</Width>
+            <Width>10in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -119,9 +119,10 @@
         <Height>4.53645in</Height>
         <Style />
       </Body>
-      <Width>10.75in</Width>
+      <Width>10in</Width>
       <Page>
-        <InteractiveHeight>10.75in</InteractiveHeight>
+        <PageHeight>10in</PageHeight>
+        <InteractiveHeight>10in</InteractiveHeight>
         <InteractiveWidth>8.25in</InteractiveWidth>
         <Style />
       </Page>

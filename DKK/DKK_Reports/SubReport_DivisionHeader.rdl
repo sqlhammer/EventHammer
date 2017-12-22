@@ -81,34 +81,34 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.98958in</Width>
+                  <Width>0.96458in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98958in</Width>
+                  <Width>0.96458in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.89236in</Width>
+                  <Width>0.86736in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98958in</Width>
+                  <Width>0.96458in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98958in</Width>
+                  <Width>0.96458in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.98958in</Width>
+                  <Width>0.96458in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.10937in</Width>
+                  <Width>1.08437in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.07812in</Width>
+                  <Width>1.05312in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.88541in</Width>
+                  <Width>0.86041in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.3368in</Width>
+                  <Width>1.3118in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -833,7 +833,7 @@
             <RepeatRowHeaders>true</RepeatRowHeaders>
             <DataSetName>dsDivisionHeaderSingle</DataSetName>
             <Height>0.5in</Height>
-            <Width>10.25in</Width>
+            <Width>10in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -844,12 +844,12 @@
         <Height>0.50521in</Height>
         <Style />
       </Body>
-      <Width>10.25in</Width>
+      <Width>10in</Width>
       <Page>
         <PageHeight>8.25in</PageHeight>
-        <PageWidth>10.25in</PageWidth>
+        <PageWidth>10in</PageWidth>
         <InteractiveHeight>8.25in</InteractiveHeight>
-        <InteractiveWidth>10.25in</InteractiveWidth>
+        <InteractiveWidth>10in</InteractiveWidth>
         <Style />
       </Page>
     </ReportSection>
