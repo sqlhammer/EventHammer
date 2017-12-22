@@ -51,6 +51,14 @@
       <Name>SubReport_DivisionHeader.rdl</Name>
       <FullPath>SubReport_DivisionHeader.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Master_KnockdownScoreCard.rdl</Name>
+      <FullPath>Master_KnockdownScoreCard.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SubReport_CompetitorResults_Knockdown.rdl</Name>
+      <FullPath>SubReport_CompetitorResults_Knockdown.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>

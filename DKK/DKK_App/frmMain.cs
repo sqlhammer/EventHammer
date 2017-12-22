@@ -195,34 +195,66 @@ namespace DKK_App
 
         private void btnKata_Click(object sender, EventArgs e)
         {
-            string[] ParamNames = { "EventId" };
-            string[] Params = { CurrentEvent.EventId.ToString() };
+            string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
+            string[] Params = { CurrentEvent.EventId.ToString(), "Kata", "false" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fKataScoreCard_Master", ParamNames, Params);
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", ParamNames, Params);
         }
 
         private void btnWeaponKata_Click(object sender, EventArgs e)
         {
-            string[] ParamNames = { "EventId" };
-            string[] Params = { CurrentEvent.EventId.ToString() };
+            string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
+            string[] Params = { CurrentEvent.EventId.ToString(), "Weapon Kata", "false" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fWeaponKataScoreCard_Master", ParamNames, Params);
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", ParamNames, Params);
         }
 
         private void btnSemiKnockdown_Click(object sender, EventArgs e)
         {
-            string[] ParamNames = { "EventId" };
-            string[] Params = { CurrentEvent.EventId.ToString() };
+            string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
+            string[] Params = { CurrentEvent.EventId.ToString(), "Semi-Knockdown", "false" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fSemiKnockdownScoreCard_Master", ParamNames, Params);
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", ParamNames, Params);
         }
 
         private void btnKnockdown_Click(object sender, EventArgs e)
         {
-            string[] ParamNames = { "EventId" };
-            string[] Params = { CurrentEvent.EventId.ToString() };
+            string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
+            string[] Params = { CurrentEvent.EventId.ToString(), "Knockdown", "false" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fKnockdownScoreCard_Master", ParamNames, Params);
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", ParamNames, Params);
+        }
+
+        private void btnKataSpecial_Click(object sender, EventArgs e)
+        {
+            string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
+            string[] Params = { CurrentEvent.EventId.ToString(), "Kata", "true" };
+
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", ParamNames, Params);
+        }
+
+        private void btnWeaponKataSpecial_Click(object sender, EventArgs e)
+        {
+            string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
+            string[] Params = { CurrentEvent.EventId.ToString(), "Weapon Kata", "true" };
+
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", ParamNames, Params);
+        }
+
+        private void btnSemiKnockdownSpecial_Click(object sender, EventArgs e)
+        {
+            string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
+            string[] Params = { CurrentEvent.EventId.ToString(), "Semi-Knockdown", "true" };
+
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", ParamNames, Params);
+        }
+
+        private void btnKnockdownSpecial_Click(object sender, EventArgs e)
+        {
+            string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
+            string[] Params = { CurrentEvent.EventId.ToString(), "Knockdown", "true" };
+
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", ParamNames, Params);
         }
 
         private void pbCompany_Click(object sender, EventArgs e)
@@ -268,6 +300,7 @@ namespace DKK_App
         private void cbEventSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentEvent = AllEvents[this.cbEventSelect.SelectedIndex];
+            EnableAllReports();
             EnableAllTabs();
             EnableAllMenus();
             RefreshFormTitle();
@@ -362,6 +395,18 @@ namespace DKK_App
         {
             this.msMatches.Enabled = true;
             this.msCompetitor.Enabled = true;
+        }
+
+        private void EnableAllReports()
+        {
+            this.btnKata.Enabled = true;
+            this.btnKataSpecial.Enabled = true;
+            this.btnWeaponKata.Enabled = true;
+            this.btnWeaponKataSpecial.Enabled = true;
+            this.btnSemiKnockdown.Enabled = true;
+            this.btnSemiKnockdownSpecial.Enabled = true;
+            this.btnKnockdown.Enabled = true;
+            this.btnKnockdownSpecial.Enabled = true;
         }
 
         private void EnableAllTabs()
