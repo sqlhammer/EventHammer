@@ -274,11 +274,11 @@
             this.gbReports.Controls.Add(this.label3);
             this.gbReports.Controls.Add(this.gbScorecards);
             this.gbReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbReports.Location = new System.Drawing.Point(306, 3);
+            this.gbReports.Location = new System.Drawing.Point(497, 3);
             this.gbReports.Margin = new System.Windows.Forms.Padding(2);
             this.gbReports.Name = "gbReports";
             this.gbReports.Padding = new System.Windows.Forms.Padding(2);
-            this.gbReports.Size = new System.Drawing.Size(804, 456);
+            this.gbReports.Size = new System.Drawing.Size(613, 456);
             this.gbReports.TabIndex = 1;
             this.gbReports.TabStop = false;
             this.gbReports.Text = "Reports";
@@ -423,7 +423,7 @@
             this.gbEvent.Margin = new System.Windows.Forms.Padding(2);
             this.gbEvent.Name = "gbEvent";
             this.gbEvent.Padding = new System.Windows.Forms.Padding(2);
-            this.gbEvent.Size = new System.Drawing.Size(286, 178);
+            this.gbEvent.Size = new System.Drawing.Size(490, 178);
             this.gbEvent.TabIndex = 0;
             this.gbEvent.TabStop = false;
             this.gbEvent.Text = "Select Event";
@@ -474,12 +474,12 @@
             // 
             // txtEventInfo
             // 
-            this.txtEventInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEventInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEventInfo.Location = new System.Drawing.Point(6, 74);
             this.txtEventInfo.Margin = new System.Windows.Forms.Padding(2);
             this.txtEventInfo.Multiline = true;
             this.txtEventInfo.Name = "txtEventInfo";
-            this.txtEventInfo.Size = new System.Drawing.Size(276, 100);
+            this.txtEventInfo.Size = new System.Drawing.Size(480, 100);
             this.txtEventInfo.TabIndex = 2;
             // 
             // lblEventSelect
@@ -500,7 +500,7 @@
             this.cbEventSelect.Location = new System.Drawing.Point(82, 46);
             this.cbEventSelect.Margin = new System.Windows.Forms.Padding(2);
             this.cbEventSelect.Name = "cbEventSelect";
-            this.cbEventSelect.Size = new System.Drawing.Size(198, 23);
+            this.cbEventSelect.Size = new System.Drawing.Size(404, 23);
             this.cbEventSelect.TabIndex = 0;
             this.cbEventSelect.SelectedIndexChanged += new System.EventHandler(this.cbEventSelect_SelectedIndexChanged);
             // 

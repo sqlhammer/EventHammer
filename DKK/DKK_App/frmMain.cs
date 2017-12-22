@@ -39,29 +39,34 @@ namespace DKK_App
             tlvMatches.ChildrenGetter = delegate (object x) { return ((Models.MatchModel)x).Children; };
             tlvMatches.ContextMenuStrip = this.cmsMatches;
             tlvComp.ContextMenuStrip = this.cmsCompetitor;
-            
+
+            InitializeFormWithDataAccess();
+
+            //Populate controls
+            SetFilterDropdowns();
+            SetBirthDateDropdowns();
+            SetEventDateTimePicker();
+            DisableNonEventTabs();
+        }
+
+        private void InitializeFormWithDataAccess()
+        {
             try
             {
                 SetEventSearchDateRange();
                 RefreshEventSelect();
+                SetEventTypeDropdown();
+                RefreshEvents();
+                RefreshDivisions();
+                RefreshRanks();
+                RefreshDojos();
+                RefreshTitles();
             }
             catch
             {
                 MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.btnRetryConnection.Visible = true;
             }
-
-            //Populate controls
-            SetFilterDropdowns();
-            SetBirthDateDropdowns();
-            SetEventTypeDropdown();
-            SetEventDateTimePicker();
-            DisableNonEventTabs();
-            RefreshEvents();
-            RefreshDivisions();
-            RefreshRanks();
-            RefreshDojos();
-            RefreshTitles();
         }
 
         private void btnClearMatchFilter_Click(object sender, EventArgs e)
@@ -182,15 +187,7 @@ namespace DKK_App
 
         private void RetryConnection()
         {
-            try
-            {
-                RefreshEventSelect();
-                this.btnRetryConnection.Visible = false;
-            }
-            catch
-            {
-                MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            InitializeFormWithDataAccess();
         }
 
         private void btnKata_Click(object sender, EventArgs e)
