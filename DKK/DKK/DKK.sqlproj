@@ -132,6 +132,7 @@
     <Build Include="Schemas\Event\Views\vwDivisionHeader.sql" />
     <Build Include="Schemas\Event\Views\vwWeighIn.sql" />
     <Build Include="Schemas\Event\Views\vwCompetitorsByDojo.sql" />
+    <Build Include="Schemas\Event\Stored Procedures\spGetDivisionHeader.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

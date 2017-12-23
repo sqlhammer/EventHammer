@@ -91,6 +91,10 @@
       <Name>Master_CompetitorsByDojo.rdl</Name>
       <FullPath>Master_CompetitorsByDojo.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Master_DivisionNumbers.rdl</Name>
+      <FullPath>Master_DivisionNumbers.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
