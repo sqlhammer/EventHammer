@@ -3,15 +3,13 @@ Notes:
 reports
 ---------------------
 payments
-scorecards
-weight in list
+scorecards - ^
+weight in list - ^
 all events
-competitors by school
+competitors by school - ^
 division numbers for ring signs
 list of schools/owners for announcements
 
 Next tasks:
 ---------------------
 reports
-
-add reports to the home tab

@@ -131,6 +131,7 @@
     <Build Include="Schemas\Person\Stored Procedures\spInsertCompetitor.sql" />
     <Build Include="Schemas\Event\Views\vwDivisionHeader.sql" />
     <Build Include="Schemas\Event\Views\vwWeighIn.sql" />
+    <Build Include="Schemas\Event\Views\vwCompetitorsByDojo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />
