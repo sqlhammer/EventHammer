@@ -7,7 +7,7 @@ scorecards - ^
 weight in list - ^
 all events
 competitors by school - ^
-division numbers for ring signs
+division numbers for ring signs - ^
 list of schools/owners for announcements
 
 Next tasks:
