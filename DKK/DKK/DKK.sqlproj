@@ -130,6 +130,7 @@
     <Build Include="Schemas\Person\Stored Procedures\spUpdateCompetitor.sql" />
     <Build Include="Schemas\Person\Stored Procedures\spInsertCompetitor.sql" />
     <Build Include="Schemas\Event\Views\vwDivisionHeader.sql" />
+    <Build Include="Schemas\Event\Views\vwWeighIn.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />

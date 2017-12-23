@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>DKK</DataSourceReference>
+      <DataSetParameters>
+        <DataSetParameter Name="@EventId">
+          <ReadOnly>false</ReadOnly>
+          <Nullable>false</Nullable>
+          <OmitFromQuery>false</OmitFromQuery>
+          <rd:DbType>Int32</rd:DbType>
+        </DataSetParameter>
+      </DataSetParameters>
+      <CommandText>SELECT CompetitorId
+	, DisplayName
+	, Weight
+	, MatchTypeName
+	, MatchDisplayId
+	, SubDivisionId
+	, MinimumWeight_lb
+	, MaximumWeight_lb
+FROM [Event].[vwWeighIn] w
+WHERE w.MatchTypeName IN ('Semi-Knockdown','Knockdown')
+	AND w.Eventid = @EventId</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="CompetitorId">
+        <DataField>CompetitorId</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="DisplayName">
+        <DataField>DisplayName</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Weight">
+        <DataField>Weight</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="MatchTypeName">
+        <DataField>MatchTypeName</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="MatchDisplayId">
+        <DataField>MatchDisplayId</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="SubDivisionId">
+        <DataField>SubDivisionId</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="MinimumWeight_lb">
+        <DataField>MinimumWeight_lb</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+      <Field Name="MaximumWeight_lb">
+        <DataField>MaximumWeight_lb</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

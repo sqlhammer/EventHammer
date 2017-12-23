@@ -28,6 +28,10 @@
       <Name>MaxEventDate.rsd</Name>
       <FullPath>MaxEventDate.rsd</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>dsWeightInCompetitors.rsd</Name>
+      <FullPath>dsWeightInCompetitors.rsd</FullPath>
+    </ProjectItem>
   </DataSets>
   <Reports>
     <ProjectItem>
@@ -44,20 +48,24 @@
       <FullPath>Master_KataScoreCard.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Master_KnockdownScoreCard.rdl</Name>
+      <FullPath>Master_KnockdownScoreCard.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>SubReport_CompetitorResults_Kata.rdl</Name>
       <FullPath>SubReport_CompetitorResults_Kata.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SubReport_CompetitorResults_Knockdown.rdl</Name>
+      <FullPath>SubReport_CompetitorResults_Knockdown.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SubReport_DivisionHeader.rdl</Name>
       <FullPath>SubReport_DivisionHeader.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Master_KnockdownScoreCard.rdl</Name>
-      <FullPath>Master_KnockdownScoreCard.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>SubReport_CompetitorResults_Knockdown.rdl</Name>
-      <FullPath>SubReport_CompetitorResults_Knockdown.rdl</FullPath>
+      <Name>Master_WeighIns.rdl</Name>
+      <FullPath>Master_WeighIns.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
