@@ -77,6 +77,7 @@
     <Folder Include="Schemas\Event\Views" />
     <Folder Include="Schemas\Event\Functions" />
     <Folder Include="Schemas\Person\Stored Procedures" />
+    <Folder Include="SQLAgentJobs" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\Person\Person.sql" />
@@ -133,6 +134,7 @@
     <Build Include="Schemas\Event\Views\vwWeighIn.sql" />
     <Build Include="Schemas\Event\Views\vwCompetitorsByDojo.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spGetDivisionHeader.sql" />
+    <Build Include="Schemas\Stage\Tables\CalderaFormEntry.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\DKK-Test.publish.xml" />
