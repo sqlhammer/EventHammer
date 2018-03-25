@@ -15,6 +15,7 @@ namespace DKK_App.Enums
         Belt,
         MatchType,
         ApplicableMatches,
-        MatchesWithTooFewCompetitors
+        MatchesWithTooFewCompetitors,
+        Minor
     }
 }

@@ -27,6 +27,8 @@ namespace DKK_App
                     return await FilterCompetitorModelAsync_Weight(model, pattern);
                 case FilterType.Age:
                     return await FilterCompetitorModelAsync_Age(model, pattern);
+                case FilterType.Minor:
+                    return await FilterCompetitorModelAsync_Minor(model);
             }
 
             return model;
@@ -47,6 +49,16 @@ namespace DKK_App
             var result = await Task.Run(() =>
             {
                 return model.Where(m => !String.IsNullOrEmpty(m.DisplayName.ToLower()) && m.DisplayName.ToLower().Contains(pattern)).ToList();
+            });
+
+            return result;
+        }
+
+        private static async Task<List<CompetitorModel>> FilterCompetitorModelAsync_Minor(List<CompetitorModel> model)
+        {
+            var result = await Task.Run(() =>
+            {
+                return model.Where(m => m.Age < 18).ToList();
             });
 
             return result;
@@ -108,6 +120,8 @@ namespace DKK_App
                     return await FilterMatchModelAsync_MatchType(model, pattern);
                 case FilterType.MatchesWithTooFewCompetitors:
                     return await FilterMatchModelAsync_MatchesWithTooFewCompetitors(model);
+                case FilterType.Minor:
+                    return await FilterMatchModelAsync_Minor(model);
             }
 
             return model;
@@ -156,6 +170,26 @@ namespace DKK_App
                 foreach (var m in model)
                 {
                     if (m.Children.Count <= 1)
+                    {
+                        filteredModel.Add(m);
+                    }
+                }
+
+                return filteredModel;
+            });
+
+            return result;
+        }
+
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_Minor(List<MatchModel> model)
+        {
+            var result = await Task.Run(() =>
+            {
+                List<MatchModel> filteredModel = new List<MatchModel>();
+
+                foreach (var m in model)
+                {
+                    if (m.Children.Any(i => i.Age < 18))
                     {
                         filteredModel.Add(m);
                     }

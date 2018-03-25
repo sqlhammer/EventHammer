@@ -487,6 +487,9 @@ namespace DKK_App
                 case "Matches w/ <= 1 competitor":
                     type = FilterType.MatchesWithTooFewCompetitors;
                     break;
+                case "Minor (Age < 18)":
+                    type = FilterType.Minor;
+                    break;
             }
 
             return type;
@@ -605,6 +608,8 @@ namespace DKK_App
                         break;
                     case "Age":
                         label = "Age (+/- 2 yrs)";
+                        this.cbCompetitorFilterBy.Items.Add("Minor (Age < 18)");
+                        this.cbCompFilterBy.Items.Add("Minor (Age < 18)");
                         break;
                 }
                 this.cbCompetitorFilterBy.Items.Add(label);
@@ -630,6 +635,7 @@ namespace DKK_App
                         break;
                     case "Age":
                         label = "Age (+/- 2 yrs)";
+                        this.cbMatchFilterBy.Items.Add("Minor (Age < 18)");
                         break;
                 }
                 this.cbMatchFilterBy.Items.Add(label);
