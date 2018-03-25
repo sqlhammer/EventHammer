@@ -21,6 +21,9 @@ namespace DKK_CloudStorage
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
+            txtStatus.Text = "Idle";
+            Refresh();
+
             DialogResult result = openFileDialog1.ShowDialog(); 
             if (result == DialogResult.OK) 
             {
@@ -88,7 +91,7 @@ namespace DKK_CloudStorage
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
+            txtStatus.Text = "Idle";
         }
     }
 }
