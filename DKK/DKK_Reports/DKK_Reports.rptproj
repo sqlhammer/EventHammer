@@ -9,6 +9,10 @@
   </DataSources>
   <DataSets>
     <ProjectItem>
+      <Name>dsCompetitorsByDojo.rsd</Name>
+      <FullPath>dsCompetitorsByDojo.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>dsDisplayDivisionNumber.rsd</Name>
       <FullPath>dsDisplayDivisionNumber.rsd</FullPath>
     </ProjectItem>
@@ -19,6 +23,14 @@
     <ProjectItem>
       <Name>dsDivisionHeaderSingle.rsd</Name>
       <FullPath>dsDivisionHeaderSingle.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>dsDojoHeader.rsd</Name>
+      <FullPath>dsDojoHeader.rsd</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>dsDojoHeaderSingle.rsd</Name>
+      <FullPath>dsDojoHeaderSingle.rsd</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>dsMatchCompetitors.rsd</Name>
@@ -32,18 +44,6 @@
       <Name>MaxEventDate.rsd</Name>
       <FullPath>MaxEventDate.rsd</FullPath>
     </ProjectItem>
-    <ProjectItem>
-      <Name>dsDojoHeader.rsd</Name>
-      <FullPath>dsDojoHeader.rsd</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>dsDojoHeaderSingle.rsd</Name>
-      <FullPath>dsDojoHeaderSingle.rsd</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>dsCompetitorsByDojo.rsd</Name>
-      <FullPath>dsCompetitorsByDojo.rsd</FullPath>
-    </ProjectItem>
   </DataSets>
   <Reports>
     <ProjectItem>
@@ -56,6 +56,14 @@
       <MimeType>image/x-png</MimeType>
     </ResourceProjectItem>
     <ProjectItem>
+      <Name>Master_CompetitorsByDojo.rdl</Name>
+      <FullPath>Master_CompetitorsByDojo.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Master_DivisionNumbers.rdl</Name>
+      <FullPath>Master_DivisionNumbers.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Master_KataScoreCard.rdl</Name>
       <FullPath>Master_KataScoreCard.rdl</FullPath>
     </ProjectItem>
@@ -66,6 +74,10 @@
     <ProjectItem>
       <Name>Master_WeighIns.rdl</Name>
       <FullPath>Master_WeighIns.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SubReport_CompetitorByDojo.rdl</Name>
+      <FullPath>SubReport_CompetitorByDojo.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SubReport_CompetitorResults_Kata.rdl</Name>
@@ -83,18 +95,6 @@
       <Name>SubReport_DojoHeader.rdl</Name>
       <FullPath>SubReport_DojoHeader.rdl</FullPath>
     </ProjectItem>
-    <ProjectItem>
-      <Name>SubReport_CompetitorByDojo.rdl</Name>
-      <FullPath>SubReport_CompetitorByDojo.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Master_CompetitorsByDojo.rdl</Name>
-      <FullPath>Master_CompetitorsByDojo.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Master_DivisionNumbers.rdl</Name>
-      <FullPath>Master_DivisionNumbers.rdl</FullPath>
-    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
@@ -107,6 +107,7 @@
         <TargetFolder>DKK_Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
+        <OverwriteDatasets>true</OverwriteDatasets>
         <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
       </Options>
     </Configuration>

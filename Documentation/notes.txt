@@ -13,3 +13,5 @@ list of schools/owners for announcements
 Next tasks:
 ---------------------
 reports
+reports > semi-knockdown & knockdown report does not appear to have underlines for the winners
+

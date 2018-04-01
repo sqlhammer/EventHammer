@@ -190,6 +190,26 @@ namespace DKK_App
             InitializeFormWithDataAccess();
         }
 
+        private void btnAllEvents_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_WeighIns");
+        }
+
+        private void btnSchoolsOwners_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_WeighIns");
+        }
+
+        private void btnWeighInList_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_WeighIns");
+        }
+
+        private void btnDivisionRingNumbers_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_DivisionNumbers");
+        }
+
         private void btnKata_Click(object sender, EventArgs e)
         {
             string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
@@ -404,6 +424,10 @@ namespace DKK_App
             this.btnSemiKnockdownSpecial.Enabled = true;
             this.btnKnockdown.Enabled = true;
             this.btnKnockdownSpecial.Enabled = true;
+            this.btnWeighInList.Enabled = true;
+            this.btnDivisionRingNumbers.Enabled = true;
+            this.btnAllEvents.Enabled = true;
+            this.btnSchoolsOwners.Enabled = true;
         }
 
         private void EnableAllTabs()
@@ -1457,5 +1481,6 @@ namespace DKK_App
             DeleteEvent();
         }
         #endregion
+
     }
 }

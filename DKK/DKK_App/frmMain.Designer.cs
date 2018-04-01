@@ -32,7 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
-            this.gbReports = new System.Windows.Forms.GroupBox();
+            this.gbAdmin = new System.Windows.Forms.GroupBox();
+            this.btnDivisionRingNumbers = new System.Windows.Forms.Button();
+            this.btnWeighInList = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.gbScorecards = new System.Windows.Forms.GroupBox();
             this.btnKnockdownSpecial = new System.Windows.Forms.Button();
@@ -211,9 +213,11 @@
             this.clearSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
+            this.btnSchoolsOwners = new System.Windows.Forms.Button();
+            this.btnAllEvents = new System.Windows.Forms.Button();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
-            this.gbReports.SuspendLayout();
+            this.gbAdmin.SuspendLayout();
             this.gbScorecards.SuspendLayout();
             this.gbEvent.SuspendLayout();
             this.tabEvents.SuspendLayout();
@@ -249,7 +253,7 @@
             this.tab1.Controls.Add(this.tabMatch);
             this.tab1.Controls.Add(this.tabCompetitor);
             this.tab1.Location = new System.Drawing.Point(12, 48);
-            this.tab1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tab1.Margin = new System.Windows.Forms.Padding(4);
             this.tab1.Name = "tab1";
             this.tab1.SelectedIndex = 0;
             this.tab1.Size = new System.Drawing.Size(2256, 988);
@@ -258,36 +262,61 @@
             // 
             // tabHome
             // 
-            this.tabHome.Controls.Add(this.gbReports);
+            this.tabHome.Controls.Add(this.gbAdmin);
             this.tabHome.Controls.Add(this.gbEvent);
+            this.tabHome.Controls.Add(this.gbScorecards);
             this.tabHome.Location = new System.Drawing.Point(8, 39);
-            this.tabHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabHome.Margin = new System.Windows.Forms.Padding(4);
             this.tabHome.Name = "tabHome";
-            this.tabHome.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabHome.Padding = new System.Windows.Forms.Padding(4);
             this.tabHome.Size = new System.Drawing.Size(2240, 941);
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "Home";
             this.tabHome.UseVisualStyleBackColor = true;
             // 
-            // gbReports
+            // gbAdmin
             // 
-            this.gbReports.Controls.Add(this.label3);
-            this.gbReports.Controls.Add(this.gbScorecards);
-            this.gbReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbReports.Location = new System.Drawing.Point(994, 6);
-            this.gbReports.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gbReports.Name = "gbReports";
-            this.gbReports.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gbReports.Size = new System.Drawing.Size(1226, 912);
-            this.gbReports.TabIndex = 1;
-            this.gbReports.TabStop = false;
-            this.gbReports.Text = "Reports";
+            this.gbAdmin.Controls.Add(this.btnSchoolsOwners);
+            this.gbAdmin.Controls.Add(this.btnAllEvents);
+            this.gbAdmin.Controls.Add(this.btnDivisionRingNumbers);
+            this.gbAdmin.Controls.Add(this.btnWeighInList);
+            this.gbAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F);
+            this.gbAdmin.Location = new System.Drawing.Point(7, 380);
+            this.gbAdmin.Name = "gbAdmin";
+            this.gbAdmin.Size = new System.Drawing.Size(979, 554);
+            this.gbAdmin.TabIndex = 5;
+            this.gbAdmin.TabStop = false;
+            this.gbAdmin.Text = "Administrative Reports";
+            // 
+            // btnDivisionRingNumbers
+            // 
+            this.btnDivisionRingNumbers.Enabled = false;
+            this.btnDivisionRingNumbers.Location = new System.Drawing.Point(532, 311);
+            this.btnDivisionRingNumbers.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDivisionRingNumbers.Name = "btnDivisionRingNumbers";
+            this.btnDivisionRingNumbers.Size = new System.Drawing.Size(410, 210);
+            this.btnDivisionRingNumbers.TabIndex = 9;
+            this.btnDivisionRingNumbers.Text = "Division Ring Numbers";
+            this.btnDivisionRingNumbers.UseVisualStyleBackColor = true;
+            this.btnDivisionRingNumbers.Click += new System.EventHandler(this.btnDivisionRingNumbers_Click);
+            // 
+            // btnWeighInList
+            // 
+            this.btnWeighInList.Enabled = false;
+            this.btnWeighInList.Location = new System.Drawing.Point(38, 311);
+            this.btnWeighInList.Margin = new System.Windows.Forms.Padding(4);
+            this.btnWeighInList.Name = "btnWeighInList";
+            this.btnWeighInList.Size = new System.Drawing.Size(410, 210);
+            this.btnWeighInList.TabIndex = 8;
+            this.btnWeighInList.Text = "Weigh-In List";
+            this.btnWeighInList.UseVisualStyleBackColor = true;
+            this.btnWeighInList.Click += new System.EventHandler(this.btnWeighInList_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(328, 28);
+            this.label3.Location = new System.Drawing.Point(392, 37);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(427, 29);
@@ -296,6 +325,7 @@
             // 
             // gbScorecards
             // 
+            this.gbScorecards.Controls.Add(this.label3);
             this.gbScorecards.Controls.Add(this.btnKnockdownSpecial);
             this.gbScorecards.Controls.Add(this.btnSemiKnockdownSpecial);
             this.gbScorecards.Controls.Add(this.btnWeaponKataSpecial);
@@ -304,11 +334,12 @@
             this.gbScorecards.Controls.Add(this.btnSemiKnockdown);
             this.gbScorecards.Controls.Add(this.btnWeaponKata);
             this.gbScorecards.Controls.Add(this.btnKata);
-            this.gbScorecards.Location = new System.Drawing.Point(16, 52);
-            this.gbScorecards.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbScorecards.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F);
+            this.gbScorecards.Location = new System.Drawing.Point(994, 8);
+            this.gbScorecards.Margin = new System.Windows.Forms.Padding(4);
             this.gbScorecards.Name = "gbScorecards";
-            this.gbScorecards.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.gbScorecards.Size = new System.Drawing.Size(1190, 354);
+            this.gbScorecards.Padding = new System.Windows.Forms.Padding(4);
+            this.gbScorecards.Size = new System.Drawing.Size(1190, 925);
             this.gbScorecards.TabIndex = 0;
             this.gbScorecards.TabStop = false;
             this.gbScorecards.Text = "Scorecards";
@@ -316,10 +347,10 @@
             // btnKnockdownSpecial
             // 
             this.btnKnockdownSpecial.Enabled = false;
-            this.btnKnockdownSpecial.Location = new System.Drawing.Point(884, 196);
-            this.btnKnockdownSpecial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnKnockdownSpecial.Location = new System.Drawing.Point(653, 663);
+            this.btnKnockdownSpecial.Margin = new System.Windows.Forms.Padding(4);
             this.btnKnockdownSpecial.Name = "btnKnockdownSpecial";
-            this.btnKnockdownSpecial.Size = new System.Drawing.Size(280, 128);
+            this.btnKnockdownSpecial.Size = new System.Drawing.Size(333, 250);
             this.btnKnockdownSpecial.TabIndex = 7;
             this.btnKnockdownSpecial.Text = "Knockdown - Special Consideration";
             this.btnKnockdownSpecial.UseVisualStyleBackColor = true;
@@ -328,10 +359,10 @@
             // btnSemiKnockdownSpecial
             // 
             this.btnSemiKnockdownSpecial.Enabled = false;
-            this.btnSemiKnockdownSpecial.Location = new System.Drawing.Point(596, 196);
-            this.btnSemiKnockdownSpecial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSemiKnockdownSpecial.Location = new System.Drawing.Point(227, 663);
+            this.btnSemiKnockdownSpecial.Margin = new System.Windows.Forms.Padding(4);
             this.btnSemiKnockdownSpecial.Name = "btnSemiKnockdownSpecial";
-            this.btnSemiKnockdownSpecial.Size = new System.Drawing.Size(280, 128);
+            this.btnSemiKnockdownSpecial.Size = new System.Drawing.Size(333, 250);
             this.btnSemiKnockdownSpecial.TabIndex = 6;
             this.btnSemiKnockdownSpecial.Text = "Semi-Knockdown - Special Consideration";
             this.btnSemiKnockdownSpecial.UseVisualStyleBackColor = true;
@@ -340,10 +371,10 @@
             // btnWeaponKataSpecial
             // 
             this.btnWeaponKataSpecial.Enabled = false;
-            this.btnWeaponKataSpecial.Location = new System.Drawing.Point(308, 196);
-            this.btnWeaponKataSpecial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnWeaponKataSpecial.Location = new System.Drawing.Point(822, 374);
+            this.btnWeaponKataSpecial.Margin = new System.Windows.Forms.Padding(4);
             this.btnWeaponKataSpecial.Name = "btnWeaponKataSpecial";
-            this.btnWeaponKataSpecial.Size = new System.Drawing.Size(280, 128);
+            this.btnWeaponKataSpecial.Size = new System.Drawing.Size(333, 250);
             this.btnWeaponKataSpecial.TabIndex = 5;
             this.btnWeaponKataSpecial.Text = "Weapon Kata - Special Consideration";
             this.btnWeaponKataSpecial.UseVisualStyleBackColor = true;
@@ -352,10 +383,10 @@
             // btnKataSpecial
             // 
             this.btnKataSpecial.Enabled = false;
-            this.btnKataSpecial.Location = new System.Drawing.Point(20, 196);
-            this.btnKataSpecial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnKataSpecial.Location = new System.Drawing.Point(822, 80);
+            this.btnKataSpecial.Margin = new System.Windows.Forms.Padding(4);
             this.btnKataSpecial.Name = "btnKataSpecial";
-            this.btnKataSpecial.Size = new System.Drawing.Size(280, 128);
+            this.btnKataSpecial.Size = new System.Drawing.Size(333, 250);
             this.btnKataSpecial.TabIndex = 4;
             this.btnKataSpecial.Text = "Kata - Special Consideration";
             this.btnKataSpecial.UseVisualStyleBackColor = true;
@@ -364,10 +395,10 @@
             // btnKnockdown
             // 
             this.btnKnockdown.Enabled = false;
-            this.btnKnockdown.Location = new System.Drawing.Point(884, 54);
-            this.btnKnockdown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnKnockdown.Location = new System.Drawing.Point(444, 374);
+            this.btnKnockdown.Margin = new System.Windows.Forms.Padding(4);
             this.btnKnockdown.Name = "btnKnockdown";
-            this.btnKnockdown.Size = new System.Drawing.Size(280, 128);
+            this.btnKnockdown.Size = new System.Drawing.Size(333, 250);
             this.btnKnockdown.TabIndex = 3;
             this.btnKnockdown.Text = "Knockdown";
             this.btnKnockdown.UseVisualStyleBackColor = true;
@@ -376,10 +407,10 @@
             // btnSemiKnockdown
             // 
             this.btnSemiKnockdown.Enabled = false;
-            this.btnSemiKnockdown.Location = new System.Drawing.Point(596, 54);
-            this.btnSemiKnockdown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSemiKnockdown.Location = new System.Drawing.Point(60, 374);
+            this.btnSemiKnockdown.Margin = new System.Windows.Forms.Padding(4);
             this.btnSemiKnockdown.Name = "btnSemiKnockdown";
-            this.btnSemiKnockdown.Size = new System.Drawing.Size(280, 128);
+            this.btnSemiKnockdown.Size = new System.Drawing.Size(333, 250);
             this.btnSemiKnockdown.TabIndex = 2;
             this.btnSemiKnockdown.Text = "Semi-Knockdown";
             this.btnSemiKnockdown.UseVisualStyleBackColor = true;
@@ -388,10 +419,10 @@
             // btnWeaponKata
             // 
             this.btnWeaponKata.Enabled = false;
-            this.btnWeaponKata.Location = new System.Drawing.Point(308, 54);
-            this.btnWeaponKata.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnWeaponKata.Location = new System.Drawing.Point(444, 80);
+            this.btnWeaponKata.Margin = new System.Windows.Forms.Padding(4);
             this.btnWeaponKata.Name = "btnWeaponKata";
-            this.btnWeaponKata.Size = new System.Drawing.Size(280, 128);
+            this.btnWeaponKata.Size = new System.Drawing.Size(333, 250);
             this.btnWeaponKata.TabIndex = 1;
             this.btnWeaponKata.Text = "Weapon Kata";
             this.btnWeaponKata.UseVisualStyleBackColor = true;
@@ -400,10 +431,10 @@
             // btnKata
             // 
             this.btnKata.Enabled = false;
-            this.btnKata.Location = new System.Drawing.Point(20, 54);
-            this.btnKata.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnKata.Location = new System.Drawing.Point(60, 80);
+            this.btnKata.Margin = new System.Windows.Forms.Padding(4);
             this.btnKata.Name = "btnKata";
-            this.btnKata.Size = new System.Drawing.Size(280, 128);
+            this.btnKata.Size = new System.Drawing.Size(333, 250);
             this.btnKata.TabIndex = 0;
             this.btnKata.Text = "Kata";
             this.btnKata.UseVisualStyleBackColor = true;
@@ -420,9 +451,9 @@
             this.gbEvent.Controls.Add(this.cbEventSelect);
             this.gbEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbEvent.Location = new System.Drawing.Point(6, 6);
-            this.gbEvent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbEvent.Margin = new System.Windows.Forms.Padding(4);
             this.gbEvent.Name = "gbEvent";
-            this.gbEvent.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbEvent.Padding = new System.Windows.Forms.Padding(4);
             this.gbEvent.Size = new System.Drawing.Size(980, 356);
             this.gbEvent.TabIndex = 0;
             this.gbEvent.TabStop = false;
@@ -444,7 +475,7 @@
             this.dtpEventTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpEventTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpEventTo.Location = new System.Drawing.Point(358, 42);
-            this.dtpEventTo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpEventTo.Margin = new System.Windows.Forms.Padding(4);
             this.dtpEventTo.Name = "dtpEventTo";
             this.dtpEventTo.Size = new System.Drawing.Size(200, 35);
             this.dtpEventTo.TabIndex = 5;
@@ -455,7 +486,7 @@
             this.dtpEventFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpEventFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpEventFrom.Location = new System.Drawing.Point(92, 42);
-            this.dtpEventFrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpEventFrom.Margin = new System.Windows.Forms.Padding(4);
             this.dtpEventFrom.Name = "dtpEventFrom";
             this.dtpEventFrom.Size = new System.Drawing.Size(200, 35);
             this.dtpEventFrom.TabIndex = 4;
@@ -476,7 +507,7 @@
             // 
             this.txtEventInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEventInfo.Location = new System.Drawing.Point(12, 148);
-            this.txtEventInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEventInfo.Margin = new System.Windows.Forms.Padding(4);
             this.txtEventInfo.Multiline = true;
             this.txtEventInfo.Name = "txtEventInfo";
             this.txtEventInfo.Size = new System.Drawing.Size(956, 196);
@@ -498,7 +529,7 @@
             this.cbEventSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbEventSelect.FormattingEnabled = true;
             this.cbEventSelect.Location = new System.Drawing.Point(164, 92);
-            this.cbEventSelect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbEventSelect.Margin = new System.Windows.Forms.Padding(4);
             this.cbEventSelect.Name = "cbEventSelect";
             this.cbEventSelect.Size = new System.Drawing.Size(804, 37);
             this.cbEventSelect.TabIndex = 0;
@@ -509,9 +540,9 @@
             this.tabEvents.Controls.Add(this.gbEventDetails);
             this.tabEvents.Controls.Add(this.gbEvents);
             this.tabEvents.Location = new System.Drawing.Point(8, 39);
-            this.tabEvents.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabEvents.Margin = new System.Windows.Forms.Padding(4);
             this.tabEvents.Name = "tabEvents";
-            this.tabEvents.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabEvents.Padding = new System.Windows.Forms.Padding(4);
             this.tabEvents.Size = new System.Drawing.Size(2240, 941);
             this.tabEvents.TabIndex = 2;
             this.tabEvents.Text = "Events";
@@ -531,9 +562,9 @@
             this.gbEventDetails.Controls.Add(this.btnSaveEvent);
             this.gbEventDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbEventDetails.Location = new System.Drawing.Point(996, 12);
-            this.gbEventDetails.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbEventDetails.Margin = new System.Windows.Forms.Padding(4);
             this.gbEventDetails.Name = "gbEventDetails";
-            this.gbEventDetails.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbEventDetails.Padding = new System.Windows.Forms.Padding(4);
             this.gbEventDetails.Size = new System.Drawing.Size(1220, 912);
             this.gbEventDetails.TabIndex = 7;
             this.gbEventDetails.TabStop = false;
@@ -544,7 +575,7 @@
             this.dtpEventDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpEventDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpEventDate.Location = new System.Drawing.Point(484, 472);
-            this.dtpEventDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpEventDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpEventDate.Name = "dtpEventDate";
             this.dtpEventDate.Size = new System.Drawing.Size(476, 40);
             this.dtpEventDate.TabIndex = 11;
@@ -554,7 +585,7 @@
             this.cbEventType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbEventType.FormattingEnabled = true;
             this.cbEventType.Location = new System.Drawing.Point(484, 376);
-            this.cbEventType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbEventType.Margin = new System.Windows.Forms.Padding(4);
             this.cbEventType.Name = "cbEventType";
             this.cbEventType.Size = new System.Drawing.Size(476, 41);
             this.cbEventType.TabIndex = 10;
@@ -563,7 +594,7 @@
             // 
             this.txtEventName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEventName.Location = new System.Drawing.Point(484, 276);
-            this.txtEventName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEventName.Margin = new System.Windows.Forms.Padding(4);
             this.txtEventName.Name = "txtEventName";
             this.txtEventName.Size = new System.Drawing.Size(476, 40);
             this.txtEventName.TabIndex = 9;
@@ -604,7 +635,7 @@
             // btnDeleteEvent
             // 
             this.btnDeleteEvent.Location = new System.Drawing.Point(554, 798);
-            this.btnDeleteEvent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDeleteEvent.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteEvent.Name = "btnDeleteEvent";
             this.btnDeleteEvent.Size = new System.Drawing.Size(292, 70);
             this.btnDeleteEvent.TabIndex = 5;
@@ -615,7 +646,7 @@
             // btnClearEventSelection
             // 
             this.btnClearEventSelection.Location = new System.Drawing.Point(888, 798);
-            this.btnClearEventSelection.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearEventSelection.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearEventSelection.Name = "btnClearEventSelection";
             this.btnClearEventSelection.Size = new System.Drawing.Size(308, 70);
             this.btnClearEventSelection.TabIndex = 4;
@@ -626,7 +657,7 @@
             // btnNewEvent
             // 
             this.btnNewEvent.Location = new System.Drawing.Point(296, 798);
-            this.btnNewEvent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNewEvent.Margin = new System.Windows.Forms.Padding(4);
             this.btnNewEvent.Name = "btnNewEvent";
             this.btnNewEvent.Size = new System.Drawing.Size(228, 70);
             this.btnNewEvent.TabIndex = 3;
@@ -637,7 +668,7 @@
             // btnSaveEvent
             // 
             this.btnSaveEvent.Location = new System.Drawing.Point(28, 798);
-            this.btnSaveEvent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSaveEvent.Margin = new System.Windows.Forms.Padding(4);
             this.btnSaveEvent.Name = "btnSaveEvent";
             this.btnSaveEvent.Size = new System.Drawing.Size(236, 70);
             this.btnSaveEvent.TabIndex = 2;
@@ -650,9 +681,9 @@
             this.gbEvents.Controls.Add(this.tlvEvents);
             this.gbEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbEvents.Location = new System.Drawing.Point(24, 12);
-            this.gbEvents.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbEvents.Margin = new System.Windows.Forms.Padding(4);
             this.gbEvents.Name = "gbEvents";
-            this.gbEvents.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbEvents.Padding = new System.Windows.Forms.Padding(4);
             this.gbEvents.Size = new System.Drawing.Size(934, 916);
             this.gbEvents.TabIndex = 6;
             this.gbEvents.TabStop = false;
@@ -675,7 +706,7 @@
             this.tlvEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvEvents.IsSimpleDragSource = true;
             this.tlvEvents.Location = new System.Drawing.Point(6, 56);
-            this.tlvEvents.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tlvEvents.Margin = new System.Windows.Forms.Padding(4);
             this.tlvEvents.Name = "tlvEvents";
             this.tlvEvents.ShowGroups = false;
             this.tlvEvents.Size = new System.Drawing.Size(912, 848);
@@ -730,9 +761,9 @@
             this.tabMatch.Controls.Add(this.groupBox1);
             this.tabMatch.Controls.Add(this.label4);
             this.tabMatch.Location = new System.Drawing.Point(8, 39);
-            this.tabMatch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabMatch.Margin = new System.Windows.Forms.Padding(4);
             this.tabMatch.Name = "tabMatch";
-            this.tabMatch.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabMatch.Padding = new System.Windows.Forms.Padding(4);
             this.tabMatch.Size = new System.Drawing.Size(2240, 941);
             this.tabMatch.TabIndex = 1;
             this.tabMatch.Text = "Matches";
@@ -762,9 +793,9 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(1108, 4);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(1128, 916);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
@@ -774,7 +805,7 @@
             // 
             this.btnMatchApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMatchApply.Location = new System.Drawing.Point(952, 96);
-            this.btnMatchApply.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMatchApply.Margin = new System.Windows.Forms.Padding(4);
             this.btnMatchApply.Name = "btnMatchApply";
             this.btnMatchApply.Size = new System.Drawing.Size(132, 50);
             this.btnMatchApply.TabIndex = 13;
@@ -806,7 +837,7 @@
             this.tlvMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvMatches.IsSimpleDropSink = true;
             this.tlvMatches.Location = new System.Drawing.Point(8, 160);
-            this.tlvMatches.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tlvMatches.Margin = new System.Windows.Forms.Padding(4);
             this.tlvMatches.Name = "tlvMatches";
             this.tlvMatches.ShowGroups = false;
             this.tlvMatches.Size = new System.Drawing.Size(1114, 752);
@@ -873,7 +904,7 @@
             // 
             this.cbMatchFilterBy.FormattingEnabled = true;
             this.cbMatchFilterBy.Location = new System.Drawing.Point(554, 100);
-            this.cbMatchFilterBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbMatchFilterBy.Margin = new System.Windows.Forms.Padding(4);
             this.cbMatchFilterBy.Name = "cbMatchFilterBy";
             this.cbMatchFilterBy.Size = new System.Drawing.Size(348, 41);
             this.cbMatchFilterBy.TabIndex = 8;
@@ -884,7 +915,7 @@
             this.rbApplicableMatches.Enabled = false;
             this.rbApplicableMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbApplicableMatches.Location = new System.Drawing.Point(20, 92);
-            this.rbApplicableMatches.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbApplicableMatches.Margin = new System.Windows.Forms.Padding(4);
             this.rbApplicableMatches.Name = "rbApplicableMatches";
             this.rbApplicableMatches.Size = new System.Drawing.Size(158, 62);
             this.rbApplicableMatches.TabIndex = 9;
@@ -905,7 +936,7 @@
             // txtMatchFilter
             // 
             this.txtMatchFilter.Location = new System.Drawing.Point(220, 100);
-            this.txtMatchFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMatchFilter.Margin = new System.Windows.Forms.Padding(4);
             this.txtMatchFilter.Name = "txtMatchFilter";
             this.txtMatchFilter.Size = new System.Drawing.Size(286, 40);
             this.txtMatchFilter.TabIndex = 6;
@@ -918,7 +949,7 @@
             this.rbAll.Enabled = false;
             this.rbAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbAll.Location = new System.Drawing.Point(20, 56);
-            this.rbAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbAll.Margin = new System.Windows.Forms.Padding(4);
             this.rbAll.Name = "rbAll";
             this.rbAll.Size = new System.Drawing.Size(167, 33);
             this.rbAll.TabIndex = 8;
@@ -947,9 +978,9 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(24, 6);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(934, 916);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
@@ -959,7 +990,7 @@
             // 
             this.btnCompetitorApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCompetitorApply.Location = new System.Drawing.Point(784, 96);
-            this.btnCompetitorApply.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCompetitorApply.Margin = new System.Windows.Forms.Padding(4);
             this.btnCompetitorApply.Name = "btnCompetitorApply";
             this.btnCompetitorApply.Size = new System.Drawing.Size(132, 50);
             this.btnCompetitorApply.TabIndex = 12;
@@ -985,7 +1016,7 @@
             this.tlvCompetitors.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvCompetitors.IsSimpleDragSource = true;
             this.tlvCompetitors.Location = new System.Drawing.Point(6, 160);
-            this.tlvCompetitors.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tlvCompetitors.Margin = new System.Windows.Forms.Padding(4);
             this.tlvCompetitors.Name = "tlvCompetitors";
             this.tlvCompetitors.ShowGroups = false;
             this.tlvCompetitors.Size = new System.Drawing.Size(912, 748);
@@ -1031,7 +1062,7 @@
             // 
             this.cbCompetitorFilterBy.FormattingEnabled = true;
             this.cbCompetitorFilterBy.Location = new System.Drawing.Point(412, 100);
-            this.cbCompetitorFilterBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompetitorFilterBy.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompetitorFilterBy.Name = "cbCompetitorFilterBy";
             this.cbCompetitorFilterBy.Size = new System.Drawing.Size(350, 41);
             this.cbCompetitorFilterBy.TabIndex = 4;
@@ -1049,7 +1080,7 @@
             // txtCompetitorFilter
             // 
             this.txtCompetitorFilter.Location = new System.Drawing.Point(24, 100);
-            this.txtCompetitorFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompetitorFilter.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompetitorFilter.Name = "txtCompetitorFilter";
             this.txtCompetitorFilter.Size = new System.Drawing.Size(362, 40);
             this.txtCompetitorFilter.TabIndex = 2;
@@ -1083,9 +1114,9 @@
             this.tabCompetitor.Controls.Add(this.gbCompetitorDetails);
             this.tabCompetitor.Controls.Add(this.gbComp);
             this.tabCompetitor.Location = new System.Drawing.Point(8, 39);
-            this.tabCompetitor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabCompetitor.Margin = new System.Windows.Forms.Padding(4);
             this.tabCompetitor.Name = "tabCompetitor";
-            this.tabCompetitor.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabCompetitor.Padding = new System.Windows.Forms.Padding(4);
             this.tabCompetitor.Size = new System.Drawing.Size(2240, 941);
             this.tabCompetitor.TabIndex = 3;
             this.tabCompetitor.Text = "Competitors";
@@ -1113,9 +1144,9 @@
             this.gbCompetitorDetails.Controls.Add(this.gbCompDemographics);
             this.gbCompetitorDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbCompetitorDetails.Location = new System.Drawing.Point(992, 8);
-            this.gbCompetitorDetails.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbCompetitorDetails.Margin = new System.Windows.Forms.Padding(4);
             this.gbCompetitorDetails.Name = "gbCompetitorDetails";
-            this.gbCompetitorDetails.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbCompetitorDetails.Padding = new System.Windows.Forms.Padding(4);
             this.gbCompetitorDetails.Size = new System.Drawing.Size(1220, 912);
             this.gbCompetitorDetails.TabIndex = 5;
             this.gbCompetitorDetails.TabStop = false;
@@ -1124,7 +1155,7 @@
             // btnCompDelete
             // 
             this.btnCompDelete.Location = new System.Drawing.Point(554, 798);
-            this.btnCompDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCompDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnCompDelete.Name = "btnCompDelete";
             this.btnCompDelete.Size = new System.Drawing.Size(292, 70);
             this.btnCompDelete.TabIndex = 5;
@@ -1135,7 +1166,7 @@
             // btnCompClear
             // 
             this.btnCompClear.Location = new System.Drawing.Point(888, 798);
-            this.btnCompClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCompClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnCompClear.Name = "btnCompClear";
             this.btnCompClear.Size = new System.Drawing.Size(308, 70);
             this.btnCompClear.TabIndex = 4;
@@ -1146,7 +1177,7 @@
             // btnNewComp
             // 
             this.btnNewComp.Location = new System.Drawing.Point(296, 798);
-            this.btnNewComp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNewComp.Margin = new System.Windows.Forms.Padding(4);
             this.btnNewComp.Name = "btnNewComp";
             this.btnNewComp.Size = new System.Drawing.Size(228, 70);
             this.btnNewComp.TabIndex = 3;
@@ -1157,7 +1188,7 @@
             // btnSaveComp
             // 
             this.btnSaveComp.Location = new System.Drawing.Point(28, 798);
-            this.btnSaveComp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSaveComp.Margin = new System.Windows.Forms.Padding(4);
             this.btnSaveComp.Name = "btnSaveComp";
             this.btnSaveComp.Size = new System.Drawing.Size(236, 70);
             this.btnSaveComp.TabIndex = 2;
@@ -1186,9 +1217,9 @@
             this.gbCompAddress.Controls.Add(this.label22);
             this.gbCompAddress.Controls.Add(this.txtCompPhone);
             this.gbCompAddress.Location = new System.Drawing.Point(8, 532);
-            this.gbCompAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbCompAddress.Margin = new System.Windows.Forms.Padding(4);
             this.gbCompAddress.Name = "gbCompAddress";
-            this.gbCompAddress.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbCompAddress.Padding = new System.Windows.Forms.Padding(4);
             this.gbCompAddress.Size = new System.Drawing.Size(1192, 222);
             this.gbCompAddress.TabIndex = 1;
             this.gbCompAddress.TabStop = false;
@@ -1208,7 +1239,7 @@
             // 
             this.txtCompZipCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompZipCode.Location = new System.Drawing.Point(1000, 156);
-            this.txtCompZipCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompZipCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompZipCode.Name = "txtCompZipCode";
             this.txtCompZipCode.Size = new System.Drawing.Size(188, 35);
             this.txtCompZipCode.TabIndex = 26;
@@ -1227,7 +1258,7 @@
             // 
             this.txtCompState.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompState.Location = new System.Drawing.Point(1000, 100);
-            this.txtCompState.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompState.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompState.Name = "txtCompState";
             this.txtCompState.Size = new System.Drawing.Size(188, 35);
             this.txtCompState.TabIndex = 24;
@@ -1246,7 +1277,7 @@
             // 
             this.txtCompCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompCity.Location = new System.Drawing.Point(1000, 44);
-            this.txtCompCity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompCity.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompCity.Name = "txtCompCity";
             this.txtCompCity.Size = new System.Drawing.Size(188, 35);
             this.txtCompCity.TabIndex = 22;
@@ -1265,7 +1296,7 @@
             // 
             this.txtCompApptCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompApptCode.Location = new System.Drawing.Point(616, 156);
-            this.txtCompApptCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompApptCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompApptCode.Name = "txtCompApptCode";
             this.txtCompApptCode.Size = new System.Drawing.Size(228, 35);
             this.txtCompApptCode.TabIndex = 20;
@@ -1284,7 +1315,7 @@
             // 
             this.txtCompStreet2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompStreet2.Location = new System.Drawing.Point(616, 100);
-            this.txtCompStreet2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompStreet2.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompStreet2.Name = "txtCompStreet2";
             this.txtCompStreet2.Size = new System.Drawing.Size(228, 35);
             this.txtCompStreet2.TabIndex = 18;
@@ -1303,7 +1334,7 @@
             // 
             this.txtCompStreet1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompStreet1.Location = new System.Drawing.Point(616, 44);
-            this.txtCompStreet1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompStreet1.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompStreet1.Name = "txtCompStreet1";
             this.txtCompStreet1.Size = new System.Drawing.Size(228, 35);
             this.txtCompStreet1.TabIndex = 16;
@@ -1322,7 +1353,7 @@
             // 
             this.txtCompCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompCountry.Location = new System.Drawing.Point(222, 156);
-            this.txtCompCountry.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompCountry.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompCountry.Name = "txtCompCountry";
             this.txtCompCountry.Size = new System.Drawing.Size(228, 35);
             this.txtCompCountry.TabIndex = 14;
@@ -1341,7 +1372,7 @@
             // 
             this.txtCompEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompEmail.Location = new System.Drawing.Point(222, 100);
-            this.txtCompEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompEmail.Name = "txtCompEmail";
             this.txtCompEmail.Size = new System.Drawing.Size(228, 35);
             this.txtCompEmail.TabIndex = 12;
@@ -1360,7 +1391,7 @@
             // 
             this.txtCompPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompPhone.Location = new System.Drawing.Point(222, 44);
-            this.txtCompPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompPhone.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompPhone.Name = "txtCompPhone";
             this.txtCompPhone.Size = new System.Drawing.Size(228, 35);
             this.txtCompPhone.TabIndex = 10;
@@ -1389,9 +1420,9 @@
             this.gbCompDemographics.Controls.Add(this.txtCompFirstName);
             this.gbCompDemographics.Controls.Add(this.label14);
             this.gbCompDemographics.Location = new System.Drawing.Point(8, 56);
-            this.gbCompDemographics.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbCompDemographics.Margin = new System.Windows.Forms.Padding(4);
             this.gbCompDemographics.Name = "gbCompDemographics";
-            this.gbCompDemographics.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbCompDemographics.Padding = new System.Windows.Forms.Padding(4);
             this.gbCompDemographics.Size = new System.Drawing.Size(1192, 468);
             this.gbCompDemographics.TabIndex = 0;
             this.gbCompDemographics.TabStop = false;
@@ -1401,7 +1432,7 @@
             // 
             this.nudCompHeight.DecimalPlaces = 2;
             this.nudCompHeight.Location = new System.Drawing.Point(172, 284);
-            this.nudCompHeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudCompHeight.Margin = new System.Windows.Forms.Padding(4);
             this.nudCompHeight.Maximum = new decimal(new int[] {
             500,
             0,
@@ -1431,7 +1462,7 @@
             this.cbCompBelt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompBelt.FormattingEnabled = true;
             this.cbCompBelt.Location = new System.Drawing.Point(528, 286);
-            this.cbCompBelt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompBelt.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompBelt.Name = "cbCompBelt";
             this.cbCompBelt.Size = new System.Drawing.Size(212, 37);
             this.cbCompBelt.TabIndex = 23;
@@ -1451,7 +1482,7 @@
             this.txtCompSchoolOther.Enabled = false;
             this.txtCompSchoolOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompSchoolOther.Location = new System.Drawing.Point(882, 228);
-            this.txtCompSchoolOther.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompSchoolOther.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompSchoolOther.Name = "txtCompSchoolOther";
             this.txtCompSchoolOther.Size = new System.Drawing.Size(290, 35);
             this.txtCompSchoolOther.TabIndex = 21;
@@ -1461,7 +1492,7 @@
             this.cbCompSchool.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompSchool.FormattingEnabled = true;
             this.cbCompSchool.Location = new System.Drawing.Point(882, 164);
-            this.cbCompSchool.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompSchool.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompSchool.Name = "cbCompSchool";
             this.cbCompSchool.Size = new System.Drawing.Size(290, 37);
             this.cbCompSchool.TabIndex = 20;
@@ -1486,9 +1517,9 @@
             this.gbCompParent.Controls.Add(this.label12);
             this.gbCompParent.Controls.Add(this.label11);
             this.gbCompParent.Location = new System.Drawing.Point(12, 336);
-            this.gbCompParent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbCompParent.Margin = new System.Windows.Forms.Padding(4);
             this.gbCompParent.Name = "gbCompParent";
-            this.gbCompParent.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbCompParent.Padding = new System.Windows.Forms.Padding(4);
             this.gbCompParent.Size = new System.Drawing.Size(1160, 122);
             this.gbCompParent.TabIndex = 1;
             this.gbCompParent.TabStop = false;
@@ -1498,7 +1529,7 @@
             // 
             this.txtCompParentEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompParentEmail.Location = new System.Drawing.Point(920, 56);
-            this.txtCompParentEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompParentEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompParentEmail.Name = "txtCompParentEmail";
             this.txtCompParentEmail.Size = new System.Drawing.Size(228, 35);
             this.txtCompParentEmail.TabIndex = 5;
@@ -1507,7 +1538,7 @@
             // 
             this.txtCompParentLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompParentLastName.Location = new System.Drawing.Point(576, 56);
-            this.txtCompParentLastName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompParentLastName.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompParentLastName.Name = "txtCompParentLastName";
             this.txtCompParentLastName.Size = new System.Drawing.Size(228, 35);
             this.txtCompParentLastName.TabIndex = 4;
@@ -1516,7 +1547,7 @@
             // 
             this.txtCompParentFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompParentFirstName.Location = new System.Drawing.Point(168, 56);
-            this.txtCompParentFirstName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompParentFirstName.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompParentFirstName.Name = "txtCompParentFirstName";
             this.txtCompParentFirstName.Size = new System.Drawing.Size(228, 35);
             this.txtCompParentFirstName.TabIndex = 3;
@@ -1555,7 +1586,7 @@
             // 
             this.nudCompWeight.DecimalPlaces = 2;
             this.nudCompWeight.Location = new System.Drawing.Point(172, 208);
-            this.nudCompWeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudCompWeight.Margin = new System.Windows.Forms.Padding(4);
             this.nudCompWeight.Maximum = new decimal(new int[] {
             500,
             0,
@@ -1588,9 +1619,9 @@
             this.groupBox3.Controls.Add(this.label17);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(428, 104);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(324, 160);
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
@@ -1613,7 +1644,7 @@
             "11",
             "12"});
             this.cbCompYear.Location = new System.Drawing.Point(100, 104);
-            this.cbCompYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompYear.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompYear.Name = "cbCompYear";
             this.cbCompYear.Size = new System.Drawing.Size(212, 37);
             this.cbCompYear.TabIndex = 3;
@@ -1635,7 +1666,7 @@
             "11",
             "12"});
             this.cbCompMonth.Location = new System.Drawing.Point(100, 48);
-            this.cbCompMonth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompMonth.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompMonth.Name = "cbCompMonth";
             this.cbCompMonth.Size = new System.Drawing.Size(212, 37);
             this.cbCompMonth.TabIndex = 2;
@@ -1664,7 +1695,7 @@
             // 
             this.rbCompMale.AutoSize = true;
             this.rbCompMale.Location = new System.Drawing.Point(632, 54);
-            this.rbCompMale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbCompMale.Margin = new System.Windows.Forms.Padding(4);
             this.rbCompMale.Name = "rbCompMale";
             this.rbCompMale.Size = new System.Drawing.Size(109, 37);
             this.rbCompMale.TabIndex = 15;
@@ -1676,7 +1707,7 @@
             // 
             this.rbCompFemale.AutoSize = true;
             this.rbCompFemale.Location = new System.Drawing.Point(454, 52);
-            this.rbCompFemale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rbCompFemale.Margin = new System.Windows.Forms.Padding(4);
             this.rbCompFemale.Name = "rbCompFemale";
             this.rbCompFemale.Size = new System.Drawing.Size(144, 37);
             this.rbCompFemale.TabIndex = 14;
@@ -1690,7 +1721,7 @@
             this.cbCompTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompTitle.FormattingEnabled = true;
             this.cbCompTitle.Location = new System.Drawing.Point(882, 104);
-            this.cbCompTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompTitle.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompTitle.Name = "cbCompTitle";
             this.cbCompTitle.Size = new System.Drawing.Size(290, 37);
             this.cbCompTitle.TabIndex = 13;
@@ -1709,7 +1740,7 @@
             // 
             this.chbCompIsInstructor.AutoSize = true;
             this.chbCompIsInstructor.Location = new System.Drawing.Point(882, 54);
-            this.chbCompIsInstructor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chbCompIsInstructor.Margin = new System.Windows.Forms.Padding(4);
             this.chbCompIsInstructor.Name = "chbCompIsInstructor";
             this.chbCompIsInstructor.Size = new System.Drawing.Size(169, 37);
             this.chbCompIsInstructor.TabIndex = 11;
@@ -1721,7 +1752,7 @@
             // 
             this.chbCompSpecialConsideration.AutoSize = true;
             this.chbCompSpecialConsideration.Location = new System.Drawing.Point(848, 288);
-            this.chbCompSpecialConsideration.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chbCompSpecialConsideration.Margin = new System.Windows.Forms.Padding(4);
             this.chbCompSpecialConsideration.Name = "chbCompSpecialConsideration";
             this.chbCompSpecialConsideration.Size = new System.Drawing.Size(331, 37);
             this.chbCompSpecialConsideration.TabIndex = 10;
@@ -1732,7 +1763,7 @@
             // 
             this.txtCompLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompLastName.Location = new System.Drawing.Point(172, 132);
-            this.txtCompLastName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompLastName.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompLastName.Name = "txtCompLastName";
             this.txtCompLastName.Size = new System.Drawing.Size(228, 35);
             this.txtCompLastName.TabIndex = 9;
@@ -1751,7 +1782,7 @@
             // 
             this.txtCompFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompFirstName.Location = new System.Drawing.Point(172, 56);
-            this.txtCompFirstName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompFirstName.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompFirstName.Name = "txtCompFirstName";
             this.txtCompFirstName.Size = new System.Drawing.Size(228, 35);
             this.txtCompFirstName.TabIndex = 8;
@@ -1776,9 +1807,9 @@
             this.gbComp.Controls.Add(this.label10);
             this.gbComp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbComp.Location = new System.Drawing.Point(20, 8);
-            this.gbComp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbComp.Margin = new System.Windows.Forms.Padding(4);
             this.gbComp.Name = "gbComp";
-            this.gbComp.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbComp.Padding = new System.Windows.Forms.Padding(4);
             this.gbComp.Size = new System.Drawing.Size(934, 916);
             this.gbComp.TabIndex = 4;
             this.gbComp.TabStop = false;
@@ -1788,7 +1819,7 @@
             // 
             this.btnCompFilterApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCompFilterApply.Location = new System.Drawing.Point(784, 96);
-            this.btnCompFilterApply.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCompFilterApply.Margin = new System.Windows.Forms.Padding(4);
             this.btnCompFilterApply.Name = "btnCompFilterApply";
             this.btnCompFilterApply.Size = new System.Drawing.Size(132, 50);
             this.btnCompFilterApply.TabIndex = 12;
@@ -1814,7 +1845,7 @@
             this.tlvComp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvComp.IsSimpleDragSource = true;
             this.tlvComp.Location = new System.Drawing.Point(6, 152);
-            this.tlvComp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tlvComp.Margin = new System.Windows.Forms.Padding(4);
             this.tlvComp.Name = "tlvComp";
             this.tlvComp.ShowGroups = false;
             this.tlvComp.Size = new System.Drawing.Size(912, 752);
@@ -1859,7 +1890,7 @@
             // 
             this.cbCompFilterBy.FormattingEnabled = true;
             this.cbCompFilterBy.Location = new System.Drawing.Point(412, 100);
-            this.cbCompFilterBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCompFilterBy.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompFilterBy.Name = "cbCompFilterBy";
             this.cbCompFilterBy.Size = new System.Drawing.Size(350, 41);
             this.cbCompFilterBy.TabIndex = 4;
@@ -1877,7 +1908,7 @@
             // txtCompFilter
             // 
             this.txtCompFilter.Location = new System.Drawing.Point(24, 100);
-            this.txtCompFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCompFilter.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompFilter.Name = "txtCompFilter";
             this.txtCompFilter.Size = new System.Drawing.Size(362, 40);
             this.txtCompFilter.TabIndex = 2;
@@ -2052,7 +2083,7 @@
             // 
             this.btnRetryConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRetryConnection.Location = new System.Drawing.Point(908, 1044);
-            this.btnRetryConnection.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRetryConnection.Margin = new System.Windows.Forms.Padding(4);
             this.btnRetryConnection.Name = "btnRetryConnection";
             this.btnRetryConnection.Size = new System.Drawing.Size(536, 72);
             this.btnRetryConnection.TabIndex = 5;
@@ -2065,7 +2096,7 @@
             // 
             this.btnRefreshMatchTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefreshMatchTab.Location = new System.Drawing.Point(956, 1044);
-            this.btnRefreshMatchTab.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRefreshMatchTab.Margin = new System.Windows.Forms.Padding(4);
             this.btnRefreshMatchTab.Name = "btnRefreshMatchTab";
             this.btnRefreshMatchTab.Size = new System.Drawing.Size(372, 72);
             this.btnRefreshMatchTab.TabIndex = 6;
@@ -2078,7 +2109,7 @@
             // 
             this.btnClearMatchFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearMatchFilter.Location = new System.Drawing.Point(1424, 1044);
-            this.btnClearMatchFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearMatchFilter.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearMatchFilter.Name = "btnClearMatchFilter";
             this.btnClearMatchFilter.Size = new System.Drawing.Size(536, 72);
             this.btnClearMatchFilter.TabIndex = 7;
@@ -2144,7 +2175,7 @@
             // 
             this.btnClearCompetitorFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearCompetitorFilter.Location = new System.Drawing.Point(336, 1044);
-            this.btnClearCompetitorFilter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearCompetitorFilter.Margin = new System.Windows.Forms.Padding(4);
             this.btnClearCompetitorFilter.Name = "btnClearCompetitorFilter";
             this.btnClearCompetitorFilter.Size = new System.Drawing.Size(536, 72);
             this.btnClearCompetitorFilter.TabIndex = 8;
@@ -2157,7 +2188,7 @@
             // 
             this.pbCompany.Image = global::DKK_App.Properties.Resources.dkk_logo_medium_horizontal;
             this.pbCompany.Location = new System.Drawing.Point(12, 1044);
-            this.pbCompany.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbCompany.Margin = new System.Windows.Forms.Padding(4);
             this.pbCompany.Name = "pbCompany";
             this.pbCompany.Size = new System.Drawing.Size(282, 72);
             this.pbCompany.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2172,7 +2203,7 @@
             // 
             this.pbPoweredBy.Image = global::DKK_App.Properties.Resources.powered_by_sqlhammer;
             this.pbPoweredBy.Location = new System.Drawing.Point(1986, 1042);
-            this.pbPoweredBy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbPoweredBy.Margin = new System.Windows.Forms.Padding(4);
             this.pbPoweredBy.Name = "pbPoweredBy";
             this.pbPoweredBy.Size = new System.Drawing.Size(282, 72);
             this.pbPoweredBy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -2216,6 +2247,30 @@
             this.tmrCompTab.Interval = 250;
             this.tmrCompTab.Tick += new System.EventHandler(this.tmrCompTab_Tick);
             // 
+            // btnSchoolsOwners
+            // 
+            this.btnSchoolsOwners.Enabled = false;
+            this.btnSchoolsOwners.Location = new System.Drawing.Point(532, 51);
+            this.btnSchoolsOwners.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSchoolsOwners.Name = "btnSchoolsOwners";
+            this.btnSchoolsOwners.Size = new System.Drawing.Size(410, 210);
+            this.btnSchoolsOwners.TabIndex = 11;
+            this.btnSchoolsOwners.Text = "Schools and Owners";
+            this.btnSchoolsOwners.UseVisualStyleBackColor = true;
+            this.btnSchoolsOwners.Click += new System.EventHandler(this.btnSchoolsOwners_Click);
+            // 
+            // btnAllEvents
+            // 
+            this.btnAllEvents.Enabled = false;
+            this.btnAllEvents.Location = new System.Drawing.Point(38, 51);
+            this.btnAllEvents.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAllEvents.Name = "btnAllEvents";
+            this.btnAllEvents.Size = new System.Drawing.Size(410, 210);
+            this.btnAllEvents.TabIndex = 10;
+            this.btnAllEvents.Text = "All Events";
+            this.btnAllEvents.UseVisualStyleBackColor = true;
+            this.btnAllEvents.Click += new System.EventHandler(this.btnAllEvents_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -2233,7 +2288,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMenu;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1740, 1007);
             this.Name = "frmMain";
@@ -2241,9 +2296,9 @@
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tab1.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
-            this.gbReports.ResumeLayout(false);
-            this.gbReports.PerformLayout();
+            this.gbAdmin.ResumeLayout(false);
             this.gbScorecards.ResumeLayout(false);
+            this.gbScorecards.PerformLayout();
             this.gbEvent.ResumeLayout(false);
             this.gbEvent.PerformLayout();
             this.tabEvents.ResumeLayout(false);
@@ -2301,7 +2356,6 @@
         private System.Windows.Forms.DateTimePicker dtpEventFrom;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtEventInfo;
-        private System.Windows.Forms.GroupBox gbReports;
         private System.Windows.Forms.MenuStrip msMenu;
         private System.Windows.Forms.ToolStripMenuItem miFile;
         private System.Windows.Forms.GroupBox gbScorecards;
@@ -2469,5 +2523,10 @@
         private System.Windows.Forms.Button btnSemiKnockdownSpecial;
         private System.Windows.Forms.Button btnWeaponKataSpecial;
         private System.Windows.Forms.Button btnKataSpecial;
+        private System.Windows.Forms.GroupBox gbAdmin;
+        private System.Windows.Forms.Button btnWeighInList;
+        private System.Windows.Forms.Button btnDivisionRingNumbers;
+        private System.Windows.Forms.Button btnSchoolsOwners;
+        private System.Windows.Forms.Button btnAllEvents;
     }
 }
