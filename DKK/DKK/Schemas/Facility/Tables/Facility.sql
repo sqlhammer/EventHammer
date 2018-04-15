@@ -14,3 +14,7 @@
 	,PostalCode NVARCHAR(10) NULL
 	,Country NVARCHAR(30) NULL
 )
+GO
+CREATE UNIQUE NONCLUSTERED INDEX UQ_Facility_Facility_Name 
+ON Facility.Facility (Name);
+GO

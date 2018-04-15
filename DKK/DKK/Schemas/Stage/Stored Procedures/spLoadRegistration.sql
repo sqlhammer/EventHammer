@@ -21,40 +21,24 @@ BEGIN
 				SELECT 
 				(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'age' AND entry_id = c.entry_id) age
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'city' AND entry_id = c.entry_id) city
-				-- ,(SELECT TOP 1 
-				--     (
-				--         SELECT TOP 1 REPLACE(REPLACE(REPLACE(value,'"',''),'{',''),'}','')  
-				--         FROM STRING_SPLIT(c1.value, ':')  
-				--         WHERE value NOT LIKE '%opt%'
-				--     ) value FROM [Stage].[CalderaFormEntry] c1 WHERE slug = 'country' AND entry_id = c.entry_id
-				-- ) country
-				,(
-					SELECT TOP 1 StringValue 
-					FROM [Stage].[CalderaFormEntry] 
-					CROSS APPLY Stage.parseJSON(value)
-					WHERE slug = 'country' 
-						AND entry_id = c.entry_id 
-						AND StringValue <> ''
-						AND StringValue NOT LIKE '%opt%'
-				) country
+				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'country' AND entry_id = c.entry_id) country
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'email_address' AND entry_id = c.entry_id) email_address
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'first_name' AND entry_id = c.entry_id) first_name
-				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'gender' AND entry_id = c.entry_id) gender
+				,(SELECT TOP 1 LEFT(value,1) FROM [Stage].[CalderaFormEntry] WHERE slug = 'gender' AND entry_id = c.entry_id) gender
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'height_inches' AND entry_id = c.entry_id) height_inches
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'instructor_name' AND entry_id = c.entry_id) instructor_name
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'last_name' AND entry_id = c.entry_id) last_name
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'parent_first_name' AND entry_id = c.entry_id) parent_first_name
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'parent_last_name' AND entry_id = c.entry_id) parent_last_name
-				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'participating_events' AND entry_id = c.entry_id) participating_events
+				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'parent_email' AND entry_id = c.entry_id) parent_email
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'rank_kyu' AND entry_id = c.entry_id) rank_kyu
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'school_name' AND entry_id = c.entry_id) school_name
-				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'special_considerations' AND entry_id = c.entry_id) special_considerations
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'state_province' AND entry_id = c.entry_id) state_province
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'street_address' AND entry_id = c.entry_id) street_address
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'weight_pounds' AND entry_id = c.entry_id) weight_pounds
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'zip_code' AND entry_id = c.entry_id) zip_code
-				,(
-					SELECT 
+				,ISNULL((
+					SELECT TOP 1
 						CAST(
 							CASE 
 								WHEN value IS NOT NULL AND value <> '' 
@@ -66,7 +50,7 @@ BEGIN
 						FROM [Stage].[CalderaFormEntry] 
 						WHERE slug = 'special_considerations' 
 							AND entry_id = c.entry_id
-				) special_considerations
+				),0) special_considerations
 			) pvt
 
 			--Person updates
@@ -89,11 +73,12 @@ BEGIN
 			--Competitor updates
 			UPDATE c
 			SET c.PersonId = p.PersonId
-				--,c.DateOfBirth = r.[DateOfBirth]
+				--,c.DateOfBirth = r.[DateOfBirth] 
 				,c.Age = r.age
 				,c.[Weight] = r.weight_pounds
 				,c.Height = r.height_inches
-				,c.RankId = (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.[Rank]) --TODO: Translate kyu
+				--,c.RankId = (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.[Rank]) --TODO: Translate kyu
+				,c.RankId = 1 --TODO: temporary rank hardcoding
 				,c.DojoId = (
 					SELECT TOP 1 DojoId 
 					FROM Facility.Dojo d 
@@ -107,22 +92,40 @@ BEGIN
 					FROM Person.Person p
 					WHERE p.FirstName = r.parent_first_name
 						AND p.LastName = r.parent_last_name
-						AND p.EmailAddress = r.ParentEmailAddress --TODO: Missing field from form
+						AND p.EmailAddress = r.parent_email
 				)
 				,c.IsMinor = CASE WHEN r.age < 18 THEN 1 ELSE 0 END
 				,c.IsSpecialConsideration = r.special_considerations
-				--, c.IsKata = r.IsKata 
-				--, c.IsWeaponKata = r.IsWeaponKata
-				--, c.IsSemiKnockdown = r.IsSemiKnockdown	  
-				--, c.IsKnockdown = r.IsKnockdown
+				,c.IsKata = ISNULL((SELECT TOP 1 1
+					FROM [Stage].[CalderaFormEntry] 
+					CROSS APPLY Stage.parseJSON(value)
+					WHERE slug = 'participating_events' 
+						AND entry_id = r.entry_id
+						AND StringValue = 'Kata'),0) 
+				,c.IsWeaponKata = ISNULL((SELECT TOP 1 1
+					FROM [Stage].[CalderaFormEntry] 
+					CROSS APPLY Stage.parseJSON(value)
+					WHERE slug = 'participating_events' 
+						AND entry_id = r.entry_id
+						AND StringValue = 'Weapons Kata'),0) 
+				,c.IsSemiKnockdown = ISNULL((SELECT TOP 1 1
+					FROM [Stage].[CalderaFormEntry] 
+					CROSS APPLY Stage.parseJSON(value)
+					WHERE slug = 'participating_events' 
+						AND entry_id = r.entry_id
+						AND StringValue = 'Semi Knockdown (with protection gear)'),0) 
+				,c.IsKnockdown = ISNULL((SELECT TOP 1 1
+					FROM [Stage].[CalderaFormEntry] 
+					CROSS APPLY Stage.parseJSON(value)
+					WHERE slug = 'participating_events' 
+						AND entry_id = r.entry_id
+						AND StringValue = 'Knockdown (without protection gear)'),0) 
 			FROM #entries r
 			INNER JOIN Person.Person p ON p.FirstName = r.first_name
 										AND p.LastName = r.last_name
 										AND p.EmailAddress = r.email_address
 			INNER JOIN Person.Competitor c ON c.PersonId = p.PersonId
 											AND c.EventId = @EventId
-
-			--TODO: make another update statement to populate a pivoted event set
 
 			--Person inserts
 			;WITH NewPersons AS
@@ -149,8 +152,8 @@ BEGIN
 				WHERE p.PersonId IS NULL
 			)
 			INSERT INTO Person.Person ( FirstName, LastName, DisplayName
-				, IsInstructor, Gender, PhoneNumber, EmailAddress, StreetAddress1, StreetAddress2
-				, AppartmentCode, City, StateProvince, PostalCode, Country )
+				, IsInstructor, Gender, EmailAddress, StreetAddress1
+				, City, StateProvince, PostalCode, Country )
 			SELECT np.first_name
 				  ,np.last_name
 				  ,np.DisplayName
@@ -162,7 +165,7 @@ BEGIN
 				  --,np.Street2
 				  --,np.AppartmentCode
 				  ,np.city
-				  ,np.street_address
+				  ,np.state_province
 				  ,np.zip_code
 				  ,np.country
 			FROM NewPersons np
@@ -171,67 +174,90 @@ BEGIN
 			--Parent inserts
 			;WITH NewPersons AS
 			(
-				SELECT ROW_NUMBER() OVER (PARTITION BY r.parent_first_name, r.parent_last_name, r.ParentEmailAddress ORDER BY (SELECT NULL)) rownum
+				SELECT ROW_NUMBER() OVER (PARTITION BY r.parent_first_name, r.parent_last_name, r.parent_email ORDER BY (SELECT NULL)) rownum
 					  ,r.parent_first_name
 					  ,r.parent_last_name
 					  ,r.parent_last_name + ', ' + r.parent_first_name DisplayName
 					  ,0 IsInstructor
-					  ,r.ParentEmailAddress 
+					  ,r.parent_email 
 				FROM #entries r
 				LEFT JOIN Person.Person p ON p.FirstName = r.parent_first_name
 											AND p.LastName = r.parent_last_name
-											AND p.EmailAddress = r.ParentEmailAddress --TODO: missing parent email field
+											AND p.EmailAddress = r.parent_email
 				WHERE p.PersonId IS NULL
+					AND r.parent_first_name IS NOT NULL
+					AND r.parent_last_name IS NOT NULL
+					AND r.parent_email IS NOT NULL
 			)
 			INSERT INTO Person.Person ( FirstName, LastName, DisplayName, IsInstructor, EmailAddress )
 			SELECT np.parent_first_name
 				  ,np.parent_last_name
 				  ,np.DisplayName
 				  ,np.IsInstructor
-				  ,np.ParentEmailAddress
+				  ,np.parent_email
 			FROM NewPersons np
 			WHERE np.rownum = 1
 
 			--Competitor inserts
 			INSERT INTO [Person].[Competitor]
-			(PersonId, DateOfBirth, Age, [Weight], Height, RankId, DojoId, ParentId, IsMinor
+			(PersonId, Age, [Weight], Height, RankId, DojoId, ParentId, IsMinor
 				, IsSpecialConsideration, EventId, IsKata, IsWeaponKata, IsSemiKnockdown, IsKnockdown)
 			SELECT p.PersonId
 				--, r.[DateOfBirth]
 				, r.age
 				, r.weight_pounds
 				, r.height_inches
-				, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.[Rank]) --TODO: Kyu
-				, (
-					SELECT TOP 1 DojoId 
-					FROM Facility.Dojo d 
-					INNER JOIN Facility.Facility f ON d.FacilityId = f.FacilityId
-					INNER JOIN Facility.MartialArtType m ON d.MartialArtTypeId = m.MartialArtTypeId
-					WHERE f.[Name] = r.school_name
-						--AND m.[Name] = r.[MartialArtName]
-				)
+				--, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.[Rank]) --TODO: Kyu
+				,1 --TODO: temporary rank hardcoding
+				--, (
+				--	SELECT TOP 1 DojoId 
+				--	FROM Facility.Dojo d 
+				--	INNER JOIN Facility.Facility f ON d.FacilityId = f.FacilityId
+				--	INNER JOIN Facility.MartialArtType m ON d.MartialArtTypeId = m.MartialArtTypeId
+				--	WHERE f.[Name] = r.school_name --TODO: translate from school_name to dojo name
+				--		--AND m.[Name] = r.[MartialArtName]
+				--)
+				,1 --TODO: temporary dojoid hardcoding
 				, (
 					SELECT TOP 1 p.PersonId
 					FROM Person.Person p
 					WHERE p.FirstName = r.parent_first_name
 						AND p.LastName = r.parent_last_name
-						AND p.EmailAddress = r.ParentEmailAddress --TODO
+						AND p.EmailAddress = r.parent_email
 				)
 				, CASE WHEN r.age < 18 THEN 1 ELSE 0 END
 				, r.special_considerations
-				, @EventId
-				--, r.IsKata	  
-				--, r.IsWeaponKata
-				--, r.IsSemiKnockdown	  
-				--, r.IsKnockdown
+				, @EventId				
+				, ISNULL((SELECT TOP 1 1
+					FROM [Stage].[CalderaFormEntry] 
+					CROSS APPLY Stage.parseJSON(value)
+					WHERE slug = 'participating_events' 
+						AND entry_id = r.entry_id
+						AND StringValue = 'Kata'),0) IsKata
+				, ISNULL((SELECT TOP 1 1
+					FROM [Stage].[CalderaFormEntry] 
+					CROSS APPLY Stage.parseJSON(value)
+					WHERE slug = 'participating_events' 
+						AND entry_id = r.entry_id
+						AND StringValue = 'Weapons Kata'),0) IsWeaponKata
+				, ISNULL((SELECT TOP 1 1
+					FROM [Stage].[CalderaFormEntry] 
+					CROSS APPLY Stage.parseJSON(value)
+					WHERE slug = 'participating_events' 
+						AND entry_id = r.entry_id
+						AND StringValue = 'Semi Knockdown (with protection gear)'),0) IsSemiKnockdown
+				, ISNULL((SELECT TOP 1 1
+					FROM [Stage].[CalderaFormEntry] 
+					CROSS APPLY Stage.parseJSON(value)
+					WHERE slug = 'participating_events' 
+						AND entry_id = r.entry_id
+						AND StringValue = 'Knockdown (without protection gear)'),0) IsKnockdown
 			FROM #entries r
 			INNER JOIN Person.Person p ON p.FirstName = r.first_name
 										AND p.LastName = r.last_name
 										AND p.EmailAddress = r.email_address
 			LEFT JOIN Person.Competitor c ON c.PersonId = p.PersonId
 			WHERE c.CompetitorId IS NULL
-			
-			--TODO: make another insert statement to populate a pivoted event set
 			
 		END TRY
 		BEGIN CATCH

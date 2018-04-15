@@ -69,7 +69,7 @@ namespace DKK_App
         {
             string query = @"SELECT CompetitorId
 	                          ,PersonId
-	                          ,DateOfBirth
+	                          --,DateOfBirth
 	                          ,Age
 	                          ,Weight
 	                          ,RankId
@@ -100,7 +100,7 @@ namespace DKK_App
         {
             string query = @"SELECT CompetitorId
 	                          ,PersonId
-	                          ,DateOfBirth
+	                          --,DateOfBirth
 	                          ,Age
 	                          ,Weight
                               ,Height
@@ -155,13 +155,16 @@ namespace DKK_App
 
                                 rank.RankId = Convert.ToInt32(reader["RankId"].ToString());
                                 person.PersonId = Convert.ToInt32(reader["PersonId"].ToString());
-                                parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
+                                if (!String.IsNullOrEmpty(reader["ParentId"].ToString()))
+                                {
+                                    parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
+                                }
 
                                 objs.Add(new Competitor
                                 {
                                     Age = Convert.ToInt32(reader["Age"].ToString()),
                                     CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
-                                    DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
+                                    //DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
                                     Dojo = await GetDojo(Convert.ToInt32(reader["DojoId"].ToString())),
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
                                     IsKnockdown = Convert.ToBoolean(reader["IsKnockdown"].ToString()),
@@ -823,7 +826,7 @@ namespace DKK_App
 	                              ,mcd.EventDate
 	                              ,mcd.EventTypeName
 	                              ,mcd.PersonId
-	                              ,mcd.DateOfBirth
+	                              --,mcd.DateOfBirth
 	                              ,mcd.Age
 	                              ,mcd.Weight
                                   ,mcd.Height
@@ -1041,7 +1044,7 @@ namespace DKK_App
                                     Age = Convert.ToInt32(reader["Age"].ToString()),
                                     CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
                                     IsSpecialConsideration = Convert.ToBoolean(reader["IsSpecialConsideration"].ToString()),
-                                    DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
+                                    //DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
                                     Dojo = dojo,
                                     Event = e,
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),

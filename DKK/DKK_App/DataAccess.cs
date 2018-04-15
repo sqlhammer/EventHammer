@@ -119,13 +119,16 @@ namespace DKK_App
                             {
                                 rank.RankId = Convert.ToInt32(reader["RankId"].ToString());
                                 person.PersonId = Convert.ToInt32(reader["PersonId"].ToString());
-                                parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
+                                if (!String.IsNullOrEmpty(reader["ParentId"].ToString()))
+                                {
+                                    parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
+                                }
 
                                 objs.Add(new Competitor
                                 {
                                     Age = Convert.ToInt32(reader["Age"].ToString()),
                                     CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
-                                    DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
+                                    //DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
                                     Dojo = GetDojo(Convert.ToInt32(reader["DojoId"].ToString())),
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
                                     IsKnockdown = Convert.ToBoolean(reader["IsKnockdown"].ToString()),
@@ -1024,7 +1027,7 @@ namespace DKK_App
                                     Age = Convert.ToInt32(reader["Age"].ToString()),
                                     CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
                                     IsSpecialConsideration = Convert.ToBoolean(reader["IsSpecialConsideration"].ToString()),
-                                    DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
+                                    //DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
                                     Dojo = dojo,
                                     Event = e,
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
@@ -1230,7 +1233,7 @@ namespace DKK_App
                                "@CompetitorId = " + comp.CompetitorId.ToString() +
                               ",@ParentId = " + comp.Parent.PersonId.ToString() +
                               ",@PersonId = " + comp.Person.PersonId.ToString() +
-                              ",@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
+                              //",@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
                               ",@DojoId = " + comp.Dojo.DojoId.ToString() +
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +
@@ -1275,7 +1278,7 @@ namespace DKK_App
         public static void InsertCompetitor(Competitor comp)
         {
             string query = "EXEC [Person].[spInsertCompetitor] " +
-                               "@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
+                              // "@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
                               ",@DojoId = " + comp.Dojo.DojoId.ToString() +
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +

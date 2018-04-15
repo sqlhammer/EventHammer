@@ -1001,9 +1001,12 @@ namespace DKK_App
             this.txtCompCity.Text = comp.Person.City;
             this.txtCompCountry.Text = comp.Person.Country;
             this.txtCompEmail.Text = comp.Person.EmailAddress;
-            this.txtCompParentEmail.Text = comp.Parent.EmailAddress;
-            this.txtCompParentFirstName.Text = comp.Parent.FirstName;
-            this.txtCompParentLastName.Text = comp.Parent.LastName;
+            if (comp.Parent != null)
+            {
+                this.txtCompParentEmail.Text = comp.Parent.EmailAddress;
+                this.txtCompParentFirstName.Text = comp.Parent.FirstName;
+                this.txtCompParentLastName.Text = comp.Parent.LastName;
+            }
             this.txtCompPhone.Text = comp.Person.PhoneNumber;
             this.txtCompState.Text = comp.Person.StateProvince;
             this.txtCompStreet1.Text = comp.Person.StreetAddress1;
@@ -1019,7 +1022,7 @@ namespace DKK_App
             LoadCompetitorBelt(comp.Rank);
             LoadCompetitorSchool(comp.Dojo);
             LoadCompetitorTitle(comp.Person.Title);
-            LoadCompetitorBirthDate(comp.DateOfBirth);
+            //LoadCompetitorBirthDate(comp.DateOfBirth);
             LoadCompetitorGender(comp.Person.Gender);
         }
 
@@ -1236,7 +1239,7 @@ namespace DKK_App
             comp.Person.DisplayName = this.txtCompLastName.Text + ", " + this.txtCompFirstName.Text;
             comp.Height = this.nudCompHeight.Value;
             comp.Person.Gender = (this.rbCompFemale.Checked) ? "F" : "M";
-            comp.DateOfBirth = new DateTime(Convert.ToInt32(this.cbCompYear.SelectedItem.ToString()), Convert.ToInt32(this.cbCompMonth.SelectedItem.ToString()),1);
+            //comp.DateOfBirth = new DateTime(Convert.ToInt32(this.cbCompYear.SelectedItem.ToString()), Convert.ToInt32(this.cbCompMonth.SelectedItem.ToString()),1);
             comp.Person.IsInstructor = this.chbCompIsInstructor.Checked;
             comp.IsSpecialConsideration = this.chbCompSpecialConsideration.Checked;
             comp.Parent.FirstName = this.txtCompParentFirstName.Text;
