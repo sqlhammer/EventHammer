@@ -44,7 +44,6 @@ namespace DKK_App
 
             //Populate controls
             SetFilterDropdowns();
-            SetBirthDateDropdowns();
             SetEventDateTimePicker();
             DisableNonEventTabs();
         }
@@ -61,9 +60,13 @@ namespace DKK_App
                 RefreshRanks();
                 RefreshDojos();
                 RefreshTitles();
+
+                this.lblConnection.Visible = false;
+                this.btnRetryConnection.Visible = false;
             }
             catch
             {
+                this.lblConnection.Visible = false;
                 MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.btnRetryConnection.Visible = true;
             }
@@ -106,6 +109,12 @@ namespace DKK_App
             this.btnClearCompetitorFilter.Visible = false;
             this.btnRefreshMatchTab.Visible = false;
             this.btnClearMatchFilter.Visible = false;
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAbout frm = new frmAbout();
+            frm.Show();
         }
 
         private void tab1_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,6 +168,11 @@ namespace DKK_App
             }
         }
 
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("https://www.sqlhammer.com/go/ehhelp");
+        }
+
         #endregion
 
         #region Home Tab
@@ -187,7 +201,11 @@ namespace DKK_App
 
         private void RetryConnection()
         {
+            this.lblConnection.Visible = true;
+            this.Refresh();
             InitializeFormWithDataAccess();
+            this.lblConnection.Visible = false;
+            this.Refresh();
         }
 
         private void btnAllEvents_Click(object sender, EventArgs e)
@@ -877,23 +895,6 @@ namespace DKK_App
 
         #region Competitor Tab
         
-        private void SetBirthDateDropdowns()
-        {
-            this.cbCompMonth.Items.Clear();
-
-            for (int i = 1; i <= 12; i++)
-            {
-                this.cbCompMonth.Items.Add(i);
-            }
-
-            this.cbCompYear.Items.Clear();
-
-            for (int i = 2020; i >= 1915; i--)
-            {
-                this.cbCompYear.Items.Add(i);
-            }
-        }
-
         private void RefreshRanks()
         {
             this.tmrCompTab.Enabled = true;
@@ -946,13 +947,7 @@ namespace DKK_App
             if (title == null)
                 return;
 
-            this.cbCompTitle.SelectedIndex = this.cbCompMonth.FindStringExact(title.TitleName);
-        }
-
-        private void LoadCompetitorBirthDate(DateTime dob)
-        {
-            this.cbCompMonth.SelectedIndex = this.cbCompMonth.FindStringExact(dob.Month.ToString());
-            this.cbCompYear.SelectedIndex = this.cbCompYear.FindStringExact(dob.Year.ToString());
+            this.cbCompTitle.SelectedIndex = this.cbCompTitle.FindStringExact(title.TitleName);
         }
 
         private void LoadCompetitorGender(string gender)
@@ -1019,10 +1014,11 @@ namespace DKK_App
             this.nudCompWeight.Value = comp.Weight;
             this.nudCompHeight.Value = comp.Height;
 
+            this.nudCompAge.Value = comp.Age;
+
             LoadCompetitorBelt(comp.Rank);
             LoadCompetitorSchool(comp.Dojo);
             LoadCompetitorTitle(comp.Person.Title);
-            //LoadCompetitorBirthDate(comp.DateOfBirth);
             LoadCompetitorGender(comp.Person.Gender);
         }
 
@@ -1484,6 +1480,5 @@ namespace DKK_App
             DeleteEvent();
         }
         #endregion
-
     }
 }

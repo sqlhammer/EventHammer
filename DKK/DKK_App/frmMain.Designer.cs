@@ -33,18 +33,10 @@
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.gbAdmin = new System.Windows.Forms.GroupBox();
+            this.btnSchoolsOwners = new System.Windows.Forms.Button();
+            this.btnAllEvents = new System.Windows.Forms.Button();
             this.btnDivisionRingNumbers = new System.Windows.Forms.Button();
             this.btnWeighInList = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.gbScorecards = new System.Windows.Forms.GroupBox();
-            this.btnKnockdownSpecial = new System.Windows.Forms.Button();
-            this.btnSemiKnockdownSpecial = new System.Windows.Forms.Button();
-            this.btnWeaponKataSpecial = new System.Windows.Forms.Button();
-            this.btnKataSpecial = new System.Windows.Forms.Button();
-            this.btnKnockdown = new System.Windows.Forms.Button();
-            this.btnSemiKnockdown = new System.Windows.Forms.Button();
-            this.btnWeaponKata = new System.Windows.Forms.Button();
-            this.btnKata = new System.Windows.Forms.Button();
             this.gbEvent = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtpEventTo = new System.Windows.Forms.DateTimePicker();
@@ -53,6 +45,16 @@
             this.txtEventInfo = new System.Windows.Forms.TextBox();
             this.lblEventSelect = new System.Windows.Forms.Label();
             this.cbEventSelect = new System.Windows.Forms.ComboBox();
+            this.gbScorecards = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnKnockdownSpecial = new System.Windows.Forms.Button();
+            this.btnSemiKnockdownSpecial = new System.Windows.Forms.Button();
+            this.btnWeaponKataSpecial = new System.Windows.Forms.Button();
+            this.btnKataSpecial = new System.Windows.Forms.Button();
+            this.btnKnockdown = new System.Windows.Forms.Button();
+            this.btnSemiKnockdown = new System.Windows.Forms.Button();
+            this.btnWeaponKata = new System.Windows.Forms.Button();
+            this.btnKata = new System.Windows.Forms.Button();
             this.tabEvents = new System.Windows.Forms.TabPage();
             this.gbEventDetails = new System.Windows.Forms.GroupBox();
             this.dtpEventDate = new System.Windows.Forms.DateTimePicker();
@@ -132,6 +134,8 @@
             this.label22 = new System.Windows.Forms.Label();
             this.txtCompPhone = new System.Windows.Forms.TextBox();
             this.gbCompDemographics = new System.Windows.Forms.GroupBox();
+            this.nudCompAge = new System.Windows.Forms.NumericUpDown();
+            this.lblAge = new System.Windows.Forms.Label();
             this.nudCompHeight = new System.Windows.Forms.NumericUpDown();
             this.label31 = new System.Windows.Forms.Label();
             this.cbCompBelt = new System.Windows.Forms.ComboBox();
@@ -148,11 +152,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.nudCompWeight = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cbCompYear = new System.Windows.Forms.ComboBox();
-            this.cbCompMonth = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.rbCompMale = new System.Windows.Forms.RadioButton();
             this.rbCompFemale = new System.Windows.Forms.RadioButton();
             this.cbCompTitle = new System.Windows.Forms.ComboBox();
@@ -194,6 +193,9 @@
             this.newCompetitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editSelectedCompetitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSelectedCompetitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRetryConnection = new System.Windows.Forms.Button();
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
             this.btnRefreshMatchTab = new System.Windows.Forms.Button();
@@ -213,13 +215,12 @@
             this.clearSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
-            this.btnSchoolsOwners = new System.Windows.Forms.Button();
-            this.btnAllEvents = new System.Windows.Forms.Button();
+            this.lblConnection = new System.Windows.Forms.Label();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
-            this.gbScorecards.SuspendLayout();
             this.gbEvent.SuspendLayout();
+            this.gbScorecards.SuspendLayout();
             this.tabEvents.SuspendLayout();
             this.gbEventDetails.SuspendLayout();
             this.gbEvents.SuspendLayout();
@@ -233,10 +234,10 @@
             this.gbCompetitorDetails.SuspendLayout();
             this.gbCompAddress.SuspendLayout();
             this.gbCompDemographics.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCompAge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCompHeight)).BeginInit();
             this.gbCompParent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCompWeight)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.gbComp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvComp)).BeginInit();
             this.msMenu.SuspendLayout();
@@ -288,6 +289,30 @@
             this.gbAdmin.TabStop = false;
             this.gbAdmin.Text = "Administrative Reports";
             // 
+            // btnSchoolsOwners
+            // 
+            this.btnSchoolsOwners.Enabled = false;
+            this.btnSchoolsOwners.Location = new System.Drawing.Point(532, 51);
+            this.btnSchoolsOwners.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSchoolsOwners.Name = "btnSchoolsOwners";
+            this.btnSchoolsOwners.Size = new System.Drawing.Size(410, 210);
+            this.btnSchoolsOwners.TabIndex = 11;
+            this.btnSchoolsOwners.Text = "Schools and Owners";
+            this.btnSchoolsOwners.UseVisualStyleBackColor = true;
+            this.btnSchoolsOwners.Click += new System.EventHandler(this.btnSchoolsOwners_Click);
+            // 
+            // btnAllEvents
+            // 
+            this.btnAllEvents.Enabled = false;
+            this.btnAllEvents.Location = new System.Drawing.Point(38, 51);
+            this.btnAllEvents.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAllEvents.Name = "btnAllEvents";
+            this.btnAllEvents.Size = new System.Drawing.Size(410, 210);
+            this.btnAllEvents.TabIndex = 10;
+            this.btnAllEvents.Text = "All Events";
+            this.btnAllEvents.UseVisualStyleBackColor = true;
+            this.btnAllEvents.Click += new System.EventHandler(this.btnAllEvents_Click);
+            // 
             // btnDivisionRingNumbers
             // 
             this.btnDivisionRingNumbers.Enabled = false;
@@ -312,16 +337,100 @@
             this.btnWeighInList.UseVisualStyleBackColor = true;
             this.btnWeighInList.Click += new System.EventHandler(this.btnWeighInList_Click);
             // 
-            // label3
+            // gbEvent
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(392, 37);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(427, 29);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Username: reports - Password: reports";
+            this.gbEvent.Controls.Add(this.label2);
+            this.gbEvent.Controls.Add(this.dtpEventTo);
+            this.gbEvent.Controls.Add(this.dtpEventFrom);
+            this.gbEvent.Controls.Add(this.label1);
+            this.gbEvent.Controls.Add(this.txtEventInfo);
+            this.gbEvent.Controls.Add(this.lblEventSelect);
+            this.gbEvent.Controls.Add(this.cbEventSelect);
+            this.gbEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbEvent.Location = new System.Drawing.Point(6, 6);
+            this.gbEvent.Margin = new System.Windows.Forms.Padding(4);
+            this.gbEvent.Name = "gbEvent";
+            this.gbEvent.Padding = new System.Windows.Forms.Padding(4);
+            this.gbEvent.Size = new System.Drawing.Size(980, 356);
+            this.gbEvent.TabIndex = 0;
+            this.gbEvent.TabStop = false;
+            this.gbEvent.Text = "Select Event";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(304, 44);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 29);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "To:";
+            // 
+            // dtpEventTo
+            // 
+            this.dtpEventTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEventTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEventTo.Location = new System.Drawing.Point(358, 42);
+            this.dtpEventTo.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpEventTo.Name = "dtpEventTo";
+            this.dtpEventTo.Size = new System.Drawing.Size(200, 35);
+            this.dtpEventTo.TabIndex = 5;
+            this.dtpEventTo.ValueChanged += new System.EventHandler(this.dtpEventTo_ValueChanged);
+            // 
+            // dtpEventFrom
+            // 
+            this.dtpEventFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEventFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEventFrom.Location = new System.Drawing.Point(92, 42);
+            this.dtpEventFrom.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpEventFrom.Name = "dtpEventFrom";
+            this.dtpEventFrom.Size = new System.Drawing.Size(200, 35);
+            this.dtpEventFrom.TabIndex = 4;
+            this.dtpEventFrom.ValueChanged += new System.EventHandler(this.dtpEventFrom_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 48);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 29);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "From:";
+            // 
+            // txtEventInfo
+            // 
+            this.txtEventInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEventInfo.Location = new System.Drawing.Point(12, 148);
+            this.txtEventInfo.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEventInfo.Multiline = true;
+            this.txtEventInfo.Name = "txtEventInfo";
+            this.txtEventInfo.Size = new System.Drawing.Size(956, 196);
+            this.txtEventInfo.TabIndex = 2;
+            // 
+            // lblEventSelect
+            // 
+            this.lblEventSelect.AutoSize = true;
+            this.lblEventSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEventSelect.Location = new System.Drawing.Point(6, 96);
+            this.lblEventSelect.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEventSelect.Name = "lblEventSelect";
+            this.lblEventSelect.Size = new System.Drawing.Size(153, 29);
+            this.lblEventSelect.TabIndex = 1;
+            this.lblEventSelect.Text = "Select Event:";
+            // 
+            // cbEventSelect
+            // 
+            this.cbEventSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbEventSelect.FormattingEnabled = true;
+            this.cbEventSelect.Location = new System.Drawing.Point(164, 92);
+            this.cbEventSelect.Margin = new System.Windows.Forms.Padding(4);
+            this.cbEventSelect.Name = "cbEventSelect";
+            this.cbEventSelect.Size = new System.Drawing.Size(804, 37);
+            this.cbEventSelect.TabIndex = 0;
+            this.cbEventSelect.SelectedIndexChanged += new System.EventHandler(this.cbEventSelect_SelectedIndexChanged);
             // 
             // gbScorecards
             // 
@@ -343,6 +452,17 @@
             this.gbScorecards.TabIndex = 0;
             this.gbScorecards.TabStop = false;
             this.gbScorecards.Text = "Scorecards";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(392, 37);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(427, 29);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Username: reports - Password: reports";
             // 
             // btnKnockdownSpecial
             // 
@@ -439,101 +559,6 @@
             this.btnKata.Text = "Kata";
             this.btnKata.UseVisualStyleBackColor = true;
             this.btnKata.Click += new System.EventHandler(this.btnKata_Click);
-            // 
-            // gbEvent
-            // 
-            this.gbEvent.Controls.Add(this.label2);
-            this.gbEvent.Controls.Add(this.dtpEventTo);
-            this.gbEvent.Controls.Add(this.dtpEventFrom);
-            this.gbEvent.Controls.Add(this.label1);
-            this.gbEvent.Controls.Add(this.txtEventInfo);
-            this.gbEvent.Controls.Add(this.lblEventSelect);
-            this.gbEvent.Controls.Add(this.cbEventSelect);
-            this.gbEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbEvent.Location = new System.Drawing.Point(6, 6);
-            this.gbEvent.Margin = new System.Windows.Forms.Padding(4);
-            this.gbEvent.Name = "gbEvent";
-            this.gbEvent.Padding = new System.Windows.Forms.Padding(4);
-            this.gbEvent.Size = new System.Drawing.Size(980, 356);
-            this.gbEvent.TabIndex = 0;
-            this.gbEvent.TabStop = false;
-            this.gbEvent.Text = "Select Event";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(304, 44);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 29);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "To:";
-            // 
-            // dtpEventTo
-            // 
-            this.dtpEventTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpEventTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEventTo.Location = new System.Drawing.Point(358, 42);
-            this.dtpEventTo.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpEventTo.Name = "dtpEventTo";
-            this.dtpEventTo.Size = new System.Drawing.Size(200, 35);
-            this.dtpEventTo.TabIndex = 5;
-            this.dtpEventTo.ValueChanged += new System.EventHandler(this.dtpEventTo_ValueChanged);
-            // 
-            // dtpEventFrom
-            // 
-            this.dtpEventFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpEventFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEventFrom.Location = new System.Drawing.Point(92, 42);
-            this.dtpEventFrom.Margin = new System.Windows.Forms.Padding(4);
-            this.dtpEventFrom.Name = "dtpEventFrom";
-            this.dtpEventFrom.Size = new System.Drawing.Size(200, 35);
-            this.dtpEventFrom.TabIndex = 4;
-            this.dtpEventFrom.ValueChanged += new System.EventHandler(this.dtpEventFrom_ValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 48);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 29);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "From:";
-            // 
-            // txtEventInfo
-            // 
-            this.txtEventInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEventInfo.Location = new System.Drawing.Point(12, 148);
-            this.txtEventInfo.Margin = new System.Windows.Forms.Padding(4);
-            this.txtEventInfo.Multiline = true;
-            this.txtEventInfo.Name = "txtEventInfo";
-            this.txtEventInfo.Size = new System.Drawing.Size(956, 196);
-            this.txtEventInfo.TabIndex = 2;
-            // 
-            // lblEventSelect
-            // 
-            this.lblEventSelect.AutoSize = true;
-            this.lblEventSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEventSelect.Location = new System.Drawing.Point(6, 96);
-            this.lblEventSelect.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblEventSelect.Name = "lblEventSelect";
-            this.lblEventSelect.Size = new System.Drawing.Size(153, 29);
-            this.lblEventSelect.TabIndex = 1;
-            this.lblEventSelect.Text = "Select Event:";
-            // 
-            // cbEventSelect
-            // 
-            this.cbEventSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbEventSelect.FormattingEnabled = true;
-            this.cbEventSelect.Location = new System.Drawing.Point(164, 92);
-            this.cbEventSelect.Margin = new System.Windows.Forms.Padding(4);
-            this.cbEventSelect.Name = "cbEventSelect";
-            this.cbEventSelect.Size = new System.Drawing.Size(804, 37);
-            this.cbEventSelect.TabIndex = 0;
-            this.cbEventSelect.SelectedIndexChanged += new System.EventHandler(this.cbEventSelect_SelectedIndexChanged);
             // 
             // tabEvents
             // 
@@ -1398,6 +1423,8 @@
             // 
             // gbCompDemographics
             // 
+            this.gbCompDemographics.Controls.Add(this.nudCompAge);
+            this.gbCompDemographics.Controls.Add(this.lblAge);
             this.gbCompDemographics.Controls.Add(this.nudCompHeight);
             this.gbCompDemographics.Controls.Add(this.label31);
             this.gbCompDemographics.Controls.Add(this.cbCompBelt);
@@ -1408,7 +1435,6 @@
             this.gbCompDemographics.Controls.Add(this.gbCompParent);
             this.gbCompDemographics.Controls.Add(this.nudCompWeight);
             this.gbCompDemographics.Controls.Add(this.label19);
-            this.gbCompDemographics.Controls.Add(this.groupBox3);
             this.gbCompDemographics.Controls.Add(this.rbCompMale);
             this.gbCompDemographics.Controls.Add(this.rbCompFemale);
             this.gbCompDemographics.Controls.Add(this.cbCompTitle);
@@ -1427,6 +1453,34 @@
             this.gbCompDemographics.TabIndex = 0;
             this.gbCompDemographics.TabStop = false;
             this.gbCompDemographics.Text = "Demographics";
+            // 
+            // nudCompAge
+            // 
+            this.nudCompAge.Location = new System.Drawing.Point(636, 134);
+            this.nudCompAge.Margin = new System.Windows.Forms.Padding(4);
+            this.nudCompAge.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.nudCompAge.Name = "nudCompAge";
+            this.nudCompAge.Size = new System.Drawing.Size(122, 40);
+            this.nudCompAge.TabIndex = 27;
+            this.nudCompAge.Value = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            // 
+            // lblAge
+            // 
+            this.lblAge.AutoSize = true;
+            this.lblAge.Location = new System.Drawing.Point(450, 136);
+            this.lblAge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAge.Name = "lblAge";
+            this.lblAge.Size = new System.Drawing.Size(66, 33);
+            this.lblAge.TabIndex = 26;
+            this.lblAge.Text = "Age";
             // 
             // nudCompHeight
             // 
@@ -1461,7 +1515,7 @@
             // 
             this.cbCompBelt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompBelt.FormattingEnabled = true;
-            this.cbCompBelt.Location = new System.Drawing.Point(528, 286);
+            this.cbCompBelt.Location = new System.Drawing.Point(546, 208);
             this.cbCompBelt.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompBelt.Name = "cbCompBelt";
             this.cbCompBelt.Size = new System.Drawing.Size(212, 37);
@@ -1470,7 +1524,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(436, 288);
+            this.label21.Location = new System.Drawing.Point(448, 208);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(65, 33);
@@ -1610,86 +1664,6 @@
             this.label19.Size = new System.Drawing.Size(156, 33);
             this.label19.TabIndex = 17;
             this.label19.Text = "Weight (lb)";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.cbCompYear);
-            this.groupBox3.Controls.Add(this.cbCompMonth);
-            this.groupBox3.Controls.Add(this.label18);
-            this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(428, 104);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(324, 160);
-            this.groupBox3.TabIndex = 16;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Date of Birth";
-            // 
-            // cbCompYear
-            // 
-            this.cbCompYear.FormattingEnabled = true;
-            this.cbCompYear.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12"});
-            this.cbCompYear.Location = new System.Drawing.Point(100, 104);
-            this.cbCompYear.Margin = new System.Windows.Forms.Padding(4);
-            this.cbCompYear.Name = "cbCompYear";
-            this.cbCompYear.Size = new System.Drawing.Size(212, 37);
-            this.cbCompYear.TabIndex = 3;
-            // 
-            // cbCompMonth
-            // 
-            this.cbCompMonth.FormattingEnabled = true;
-            this.cbCompMonth.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12"});
-            this.cbCompMonth.Location = new System.Drawing.Point(100, 48);
-            this.cbCompMonth.Margin = new System.Windows.Forms.Padding(4);
-            this.cbCompMonth.Name = "cbCompMonth";
-            this.cbCompMonth.Size = new System.Drawing.Size(212, 37);
-            this.cbCompMonth.TabIndex = 2;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(8, 108);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(64, 29);
-            this.label18.TabIndex = 1;
-            this.label18.Text = "Year";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(8, 52);
-            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(79, 29);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "Month";
             // 
             // rbCompMale
             // 
@@ -1931,10 +1905,11 @@
             this.miFile,
             this.eventToolStripMenuItem,
             this.msMatches,
-            this.msCompetitor});
+            this.msCompetitor,
+            this.miHelp});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
-            this.msMenu.Size = new System.Drawing.Size(2280, 40);
+            this.msMenu.Size = new System.Drawing.Size(2280, 42);
             this.msMenu.TabIndex = 4;
             // 
             // miFile
@@ -1942,7 +1917,7 @@
             this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.retryConnectionToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(64, 36);
+            this.miFile.Size = new System.Drawing.Size(64, 38);
             this.miFile.Text = "File";
             // 
             // retryConnectionToolStripMenuItem
@@ -1961,7 +1936,7 @@
             this.submsClearEventSelection,
             this.submsDeleteEvent});
             this.eventToolStripMenuItem.Name = "eventToolStripMenuItem";
-            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 36);
+            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 38);
             this.eventToolStripMenuItem.Text = "Event";
             // 
             // submsRefreshEvent
@@ -2008,7 +1983,7 @@
             this.refreshMatchAndCompetitorListsToolStripMenuItem});
             this.msMatches.Enabled = false;
             this.msMatches.Name = "msMatches";
-            this.msMatches.Size = new System.Drawing.Size(94, 36);
+            this.msMatches.Size = new System.Drawing.Size(94, 38);
             this.msMatches.Text = "Match";
             // 
             // createNewMatchToolStripMenuItem
@@ -2048,7 +2023,7 @@
             this.deleteSelectedCompetitorToolStripMenuItem});
             this.msCompetitor.Enabled = false;
             this.msCompetitor.Name = "msCompetitor";
-            this.msCompetitor.Size = new System.Drawing.Size(148, 36);
+            this.msCompetitor.Size = new System.Drawing.Size(148, 38);
             this.msCompetitor.Text = "Competitor";
             // 
             // clearSelectionToolStripMenuItem1
@@ -2078,6 +2053,30 @@
             this.deleteSelectedCompetitorToolStripMenuItem.Size = new System.Drawing.Size(410, 38);
             this.deleteSelectedCompetitorToolStripMenuItem.Text = "Delete Selected Competitor";
             this.deleteSelectedCompetitorToolStripMenuItem.Click += new System.EventHandler(this.deleteSelectedCompetitorToolStripMenuItem_Click);
+            // 
+            // miHelp
+            // 
+            this.miHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem1,
+            this.aboutToolStripMenuItem});
+            this.miHelp.Name = "miHelp";
+            this.miHelp.Size = new System.Drawing.Size(77, 38);
+            this.miHelp.Text = "Help";
+            // 
+            // helpToolStripMenuItem1
+            // 
+            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
+            this.helpToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(329, 38);
+            this.helpToolStripMenuItem1.Text = "Knowledge Base";
+            this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(329, 38);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // btnRetryConnection
             // 
@@ -2247,29 +2246,15 @@
             this.tmrCompTab.Interval = 250;
             this.tmrCompTab.Tick += new System.EventHandler(this.tmrCompTab_Tick);
             // 
-            // btnSchoolsOwners
+            // lblConnection
             // 
-            this.btnSchoolsOwners.Enabled = false;
-            this.btnSchoolsOwners.Location = new System.Drawing.Point(532, 51);
-            this.btnSchoolsOwners.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSchoolsOwners.Name = "btnSchoolsOwners";
-            this.btnSchoolsOwners.Size = new System.Drawing.Size(410, 210);
-            this.btnSchoolsOwners.TabIndex = 11;
-            this.btnSchoolsOwners.Text = "Schools and Owners";
-            this.btnSchoolsOwners.UseVisualStyleBackColor = true;
-            this.btnSchoolsOwners.Click += new System.EventHandler(this.btnSchoolsOwners_Click);
-            // 
-            // btnAllEvents
-            // 
-            this.btnAllEvents.Enabled = false;
-            this.btnAllEvents.Location = new System.Drawing.Point(38, 51);
-            this.btnAllEvents.Margin = new System.Windows.Forms.Padding(4);
-            this.btnAllEvents.Name = "btnAllEvents";
-            this.btnAllEvents.Size = new System.Drawing.Size(410, 210);
-            this.btnAllEvents.TabIndex = 10;
-            this.btnAllEvents.Text = "All Events";
-            this.btnAllEvents.UseVisualStyleBackColor = true;
-            this.btnAllEvents.Click += new System.EventHandler(this.btnAllEvents_Click);
+            this.lblConnection.AutoSize = true;
+            this.lblConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConnection.Location = new System.Drawing.Point(289, 432);
+            this.lblConnection.Name = "lblConnection";
+            this.lblConnection.Size = new System.Drawing.Size(1708, 108);
+            this.lblConnection.TabIndex = 9;
+            this.lblConnection.Text = "Attemping to connect to the database...";
             // 
             // frmMain
             // 
@@ -2277,6 +2262,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(2280, 1060);
+            this.Controls.Add(this.lblConnection);
             this.Controls.Add(this.btnClearCompetitorFilter);
             this.Controls.Add(this.btnClearMatchFilter);
             this.Controls.Add(this.btnRefreshMatchTab);
@@ -2297,10 +2283,10 @@
             this.tab1.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
             this.gbAdmin.ResumeLayout(false);
-            this.gbScorecards.ResumeLayout(false);
-            this.gbScorecards.PerformLayout();
             this.gbEvent.ResumeLayout(false);
             this.gbEvent.PerformLayout();
+            this.gbScorecards.ResumeLayout(false);
+            this.gbScorecards.PerformLayout();
             this.tabEvents.ResumeLayout(false);
             this.gbEventDetails.ResumeLayout(false);
             this.gbEventDetails.PerformLayout();
@@ -2321,12 +2307,11 @@
             this.gbCompAddress.PerformLayout();
             this.gbCompDemographics.ResumeLayout(false);
             this.gbCompDemographics.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCompAge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCompHeight)).EndInit();
             this.gbCompParent.ResumeLayout(false);
             this.gbCompParent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCompWeight)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.gbComp.ResumeLayout(false);
             this.gbComp.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvComp)).EndInit();
@@ -2450,11 +2435,6 @@
         private System.Windows.Forms.RadioButton rbCompFemale;
         private System.Windows.Forms.ComboBox cbCompTitle;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox cbCompYear;
-        private System.Windows.Forms.ComboBox cbCompMonth;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown nudCompWeight;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txtCompSchoolOther;
@@ -2528,5 +2508,11 @@
         private System.Windows.Forms.Button btnDivisionRingNumbers;
         private System.Windows.Forms.Button btnSchoolsOwners;
         private System.Windows.Forms.Button btnAllEvents;
+        private System.Windows.Forms.NumericUpDown nudCompAge;
+        private System.Windows.Forms.Label lblAge;
+        private System.Windows.Forms.Label lblConnection;
+        private System.Windows.Forms.ToolStripMenuItem miHelp;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }

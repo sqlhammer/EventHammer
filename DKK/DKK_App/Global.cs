@@ -600,7 +600,6 @@ namespace DKK_App
             return dn;
         }
 
-
         public static string IsValidEvent(Event Event)
         {
             string result = "";
