@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace DKK_App
 {
@@ -27,6 +28,18 @@ namespace DKK_App
         private void pbSQLHammer_Click(object sender, System.EventArgs e)
         {
             LaunchWebsite("https://www.sqlhammer.com/");
+        }
+
+        private void frmAbout_Load(object sender, System.EventArgs e)
+        {
+            Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            DateTime buildDate = new DateTime(2000, 1, 1)
+                                    .AddDays(version.Build).AddSeconds(version.Revision * 2);
+            string displayableVersion = $"{version}";
+            string displayBuildDate = buildDate.ToString("MM/dd/yyyy");
+
+            this.lblBuild.Text = $"Build: {displayableVersion}";
+            this.lblBuildDate.Text = $"Build Date: {displayBuildDate}";
         }
     }
 }

@@ -34,6 +34,7 @@
             this.lblBuild = new System.Windows.Forms.Label();
             this.lnklblSourceCode = new System.Windows.Forms.LinkLabel();
             this.lnklblContact = new System.Windows.Forms.LinkLabel();
+            this.lblBuildDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbSQLHammer)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,7 +76,7 @@
             this.lnklblSourceCode.ActiveLinkColor = System.Drawing.Color.OliveDrab;
             this.lnklblSourceCode.AutoSize = true;
             this.lnklblSourceCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblSourceCode.Location = new System.Drawing.Point(52, 385);
+            this.lnklblSourceCode.Location = new System.Drawing.Point(52, 447);
             this.lnklblSourceCode.Name = "lnklblSourceCode";
             this.lnklblSourceCode.Size = new System.Drawing.Size(272, 37);
             this.lnklblSourceCode.TabIndex = 3;
@@ -88,7 +89,7 @@
             this.lnklblContact.ActiveLinkColor = System.Drawing.Color.OliveDrab;
             this.lnklblContact.AutoSize = true;
             this.lnklblContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnklblContact.Location = new System.Drawing.Point(52, 447);
+            this.lnklblContact.Location = new System.Drawing.Point(52, 509);
             this.lnklblContact.Name = "lnklblContact";
             this.lnklblContact.Size = new System.Drawing.Size(328, 37);
             this.lnklblContact.TabIndex = 4;
@@ -96,11 +97,22 @@
             this.lnklblContact.Text = "Contact the developer";
             this.lnklblContact.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblContact_LinkClicked);
             // 
+            // lblBuildDate
+            // 
+            this.lblBuildDate.AutoSize = true;
+            this.lblBuildDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBuildDate.Location = new System.Drawing.Point(52, 386);
+            this.lblBuildDate.Name = "lblBuildDate";
+            this.lblBuildDate.Size = new System.Drawing.Size(173, 37);
+            this.lblBuildDate.TabIndex = 5;
+            this.lblBuildDate.Text = "Build Date:";
+            // 
             // frmAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 525);
+            this.ClientSize = new System.Drawing.Size(766, 589);
+            this.Controls.Add(this.lblBuildDate);
             this.Controls.Add(this.lnklblContact);
             this.Controls.Add(this.lnklblSourceCode);
             this.Controls.Add(this.lblBuild);
@@ -113,6 +125,7 @@
             this.Name = "frmAbout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About Event Hammer";
+            this.Load += new System.EventHandler(this.frmAbout_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbSQLHammer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -126,5 +139,6 @@
         private System.Windows.Forms.Label lblBuild;
         private System.Windows.Forms.LinkLabel lnklblSourceCode;
         private System.Windows.Forms.LinkLabel lnklblContact;
+        private System.Windows.Forms.Label lblBuildDate;
     }
 }
