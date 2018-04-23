@@ -51,6 +51,7 @@ BEGIN
 						WHERE slug = 'special_considerations' 
 							AND entry_id = c.entry_id
 				),0) special_considerations
+				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'special_considerations' AND entry_id = c.entry_id) consideration_description
 			) pvt
 
 			--Person updates
@@ -96,6 +97,7 @@ BEGIN
 				)
 				,c.IsMinor = CASE WHEN r.age < 18 THEN 1 ELSE 0 END
 				,c.IsSpecialConsideration = r.special_considerations
+				,c.ConsiderationDescription = r.consideration_description
 				,c.IsKata = ISNULL((SELECT TOP 1 1
 					FROM [Stage].[CalderaFormEntry] 
 					CROSS APPLY Stage.parseJSON(value)
@@ -201,7 +203,7 @@ BEGIN
 			--Competitor inserts
 			INSERT INTO [Person].[Competitor]
 			(PersonId, Age, [Weight], Height, RankId, DojoId, ParentId, IsMinor
-				, IsSpecialConsideration, EventId, IsKata, IsWeaponKata, IsSemiKnockdown, IsKnockdown)
+				, IsSpecialConsideration, ConsiderationDescription, EventId, IsKata, IsWeaponKata, IsSemiKnockdown, IsKnockdown)
 			SELECT p.PersonId
 				--, r.[DateOfBirth]
 				, r.age
@@ -227,6 +229,7 @@ BEGIN
 				)
 				, CASE WHEN r.age < 18 THEN 1 ELSE 0 END
 				, r.special_considerations
+				, r.consideration_description
 				, @EventId				
 				, ISNULL((SELECT TOP 1 1
 					FROM [Stage].[CalderaFormEntry] 

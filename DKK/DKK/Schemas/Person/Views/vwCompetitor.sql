@@ -20,6 +20,7 @@ SELECT c.CompetitorId
 	  ,djf.Name DojoName
 	  ,c.IsMinor
 	  ,c.IsSpecialConsideration
+	  ,c.ConsiderationDescription
 	  ,e.Name EventName
 	  ,c.IsKata
 	  ,c.IsWeaponKata

@@ -6,6 +6,7 @@ using DKK_App.Entities;
 using DKK_App.Models;
 using DKK_App.Enums;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace DKK_App
 {
@@ -21,6 +22,7 @@ namespace DKK_App
         private List<Dojo> Dojos = new List<Dojo>();
         private List<Title> Titles = new List<Title>();
         public List<Models.EventModel> EventModels = new List<EventModel>();
+        private Color Green_SQLHammer = Color.FromArgb(40, 190, 155);
 
         private bool MatchModelLoadComplete = false;
         private bool CompetitorModelLoadComplete = false;
@@ -176,7 +178,7 @@ namespace DKK_App
         #endregion
 
         #region Home Tab
-
+        
         private void rbApplicableMatches_CheckedChanged(object sender, EventArgs e)
         {
             if (this.rbApplicableMatches.Checked)
@@ -446,6 +448,54 @@ namespace DKK_App
             this.btnDivisionRingNumbers.Enabled = true;
             this.btnAllEvents.Enabled = true;
             this.btnSchoolsOwners.Enabled = true;
+
+            //I wanted to use SQL Hammer colors but did not get around to it.
+            /*
+            this.btnKata.BackColor = Green_SQLHammer;
+            this.btnKataSpecial.BackColor = Green_SQLHammer;
+            this.btnWeaponKata.BackColor = Green_SQLHammer;
+            this.btnWeaponKataSpecial.BackColor = Green_SQLHammer;
+            this.btnSemiKnockdown.BackColor = Green_SQLHammer;
+            this.btnSemiKnockdownSpecial.BackColor = Green_SQLHammer;
+            this.btnKnockdown.BackColor = Green_SQLHammer;
+            this.btnKnockdownSpecial.BackColor = Green_SQLHammer;
+            this.btnWeighInList.BackColor = Green_SQLHammer;
+            this.btnDivisionRingNumbers.BackColor = Green_SQLHammer;
+            this.btnAllEvents.BackColor = Green_SQLHammer;
+            this.btnSchoolsOwners.BackColor = Green_SQLHammer;
+            */
+        }
+
+        private void DisableAllReports()
+        {
+            this.btnKata.Enabled = false;
+            this.btnKataSpecial.Enabled = false;
+            this.btnWeaponKata.Enabled = false;
+            this.btnWeaponKataSpecial.Enabled = false;
+            this.btnSemiKnockdown.Enabled = false;
+            this.btnSemiKnockdownSpecial.Enabled = false;
+            this.btnKnockdown.Enabled = false;
+            this.btnKnockdownSpecial.Enabled = false;
+            this.btnWeighInList.Enabled = false;
+            this.btnDivisionRingNumbers.Enabled = false;
+            this.btnAllEvents.Enabled = false;
+            this.btnSchoolsOwners.Enabled = false;
+
+            //I wanted to use SQL Hammer colors but did not get around to it.
+            /*
+            this.btnKata.BackColor = Color.Transparent;
+            this.btnKataSpecial.BackColor = Color.Transparent;
+            this.btnWeaponKata.BackColor = Color.Transparent;
+            this.btnWeaponKataSpecial.BackColor = Color.Transparent;
+            this.btnSemiKnockdown.BackColor = Color.Transparent;
+            this.btnSemiKnockdownSpecial.BackColor = Color.Transparent;
+            this.btnKnockdown.BackColor = Color.Transparent;
+            this.btnKnockdownSpecial.BackColor = Color.Transparent;
+            this.btnWeighInList.BackColor = Color.Transparent;
+            this.btnDivisionRingNumbers.BackColor = Color.Transparent;
+            this.btnAllEvents.BackColor = Color.Transparent;
+            this.btnSchoolsOwners.BackColor = Color.Transparent;
+            */
         }
 
         private void EnableAllTabs()

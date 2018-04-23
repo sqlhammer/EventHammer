@@ -1909,7 +1909,7 @@
             this.miHelp});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
-            this.msMenu.Size = new System.Drawing.Size(2280, 42);
+            this.msMenu.Size = new System.Drawing.Size(2280, 40);
             this.msMenu.TabIndex = 4;
             // 
             // miFile
@@ -1917,7 +1917,7 @@
             this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.retryConnectionToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(64, 38);
+            this.miFile.Size = new System.Drawing.Size(64, 36);
             this.miFile.Text = "File";
             // 
             // retryConnectionToolStripMenuItem
@@ -1936,7 +1936,7 @@
             this.submsClearEventSelection,
             this.submsDeleteEvent});
             this.eventToolStripMenuItem.Name = "eventToolStripMenuItem";
-            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 38);
+            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 36);
             this.eventToolStripMenuItem.Text = "Event";
             // 
             // submsRefreshEvent
@@ -1983,7 +1983,7 @@
             this.refreshMatchAndCompetitorListsToolStripMenuItem});
             this.msMatches.Enabled = false;
             this.msMatches.Name = "msMatches";
-            this.msMatches.Size = new System.Drawing.Size(94, 38);
+            this.msMatches.Size = new System.Drawing.Size(94, 36);
             this.msMatches.Text = "Match";
             // 
             // createNewMatchToolStripMenuItem
@@ -2023,7 +2023,7 @@
             this.deleteSelectedCompetitorToolStripMenuItem});
             this.msCompetitor.Enabled = false;
             this.msCompetitor.Name = "msCompetitor";
-            this.msCompetitor.Size = new System.Drawing.Size(148, 38);
+            this.msCompetitor.Size = new System.Drawing.Size(148, 36);
             this.msCompetitor.Text = "Competitor";
             // 
             // clearSelectionToolStripMenuItem1
@@ -2060,7 +2060,7 @@
             this.helpToolStripMenuItem1,
             this.aboutToolStripMenuItem});
             this.miHelp.Name = "miHelp";
-            this.miHelp.Size = new System.Drawing.Size(77, 38);
+            this.miHelp.Size = new System.Drawing.Size(77, 36);
             this.miHelp.Text = "Help";
             // 
             // helpToolStripMenuItem1
@@ -2252,15 +2252,16 @@
             this.lblConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConnection.Location = new System.Drawing.Point(289, 432);
             this.lblConnection.Name = "lblConnection";
-            this.lblConnection.Size = new System.Drawing.Size(1708, 108);
+            this.lblConnection.Size = new System.Drawing.Size(1735, 108);
             this.lblConnection.TabIndex = 9;
-            this.lblConnection.Text = "Attemping to connect to the database...";
+            this.lblConnection.Text = "Attempting to connect to the database...";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(2280, 1060);
             this.Controls.Add(this.lblConnection);
             this.Controls.Add(this.btnClearCompetitorFilter);
