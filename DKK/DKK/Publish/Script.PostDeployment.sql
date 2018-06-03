@@ -18,6 +18,9 @@ PRINT 'Loading Facility.MartialArtType...'
 PRINT 'Loading Person.Title...'
 :r .\..\Schemas\Person\Data\Title.sql
 
+PRINT 'Loading Person.Person...'
+:r .\..\Schemas\Person\Data\Person.sql
+
 --PRINT 'Loading Stage.Registration...'
 --:r .\..\Schemas\Stage\Data\Registration.sql
 
@@ -32,6 +35,5 @@ PRINT 'Loading Facility.Dojo...'
 
 PRINT 'Loading Event.Event...'
 :r .\..\Schemas\Event\Data\Event.sql
-
 
 

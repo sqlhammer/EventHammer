@@ -81,7 +81,6 @@ BEGIN
 					INNER JOIN Facility.Facility f ON d.FacilityId = f.FacilityId
 					INNER JOIN Facility.MartialArtType m ON d.MartialArtTypeId = m.MartialArtTypeId
 					WHERE f.[Name] = r.school_name
-						--AND m.[Name] = r.[MartialArtName]
 				)
 				,c.ParentId = (
 					SELECT TOP 1 p.PersonId
@@ -198,14 +197,13 @@ BEGIN
 				, r.weight_pounds
 				, r.height_inches
 				, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.rank_kyu)
-				, ISNULL((
+				,(
 					SELECT TOP 1 DojoId
 					FROM Facility.Dojo d 
 					INNER JOIN Facility.Facility f ON d.FacilityId = f.FacilityId
 					INNER JOIN Facility.MartialArtType m ON d.MartialArtTypeId = m.MartialArtTypeId
 					WHERE f.[Name] = r.school_name
-						--AND m.[Name] = r.[MartialArtName]
-				) ,1) --TODO: remove this temp fix for having unmatched dojos (NULLs)
+				) 
 				, (
 					SELECT TOP 1 p.PersonId
 					FROM Person.Person p
@@ -247,8 +245,6 @@ BEGIN
 										AND p.EmailAddress = r.email_address
 			LEFT JOIN Person.Competitor c ON c.PersonId = p.PersonId
 			WHERE c.CompetitorId IS NULL
-			
-			--TODO: Map instructor
 
 		END TRY
 		BEGIN CATCH

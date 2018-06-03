@@ -5,7 +5,7 @@ MERGE INTO [Facility].[Facility] AS [target]
 USING
 (VALUES
 (1, 'Police Athletics League', '12037784725', NULL, NULL, 2, '35 Hayestown Rd', NULL, NULL, 'Danbury', 'CT', '06811', 'USA'),
-(2, 'Alam Kanreikai', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'Alma Kanreikai', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 'Brooklyn Kyokushin Karate', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 'Busiken Karate', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (5, 'CT Budo Karate', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -16,9 +16,9 @@ USING
 (10, 'Japanese Karate', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (11, 'Joilette Kanreikei Karate', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (12, 'Jonquiere Kanreikai Karate', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(13, 'Karate Kyokushin Quebec', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(14, 'Karate Kyokushin St-Luc', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(15, 'Karate Realite', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 'Karaté Kyokushin Québec', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 'Karaté Kyokushin St-Luc', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 'Karaté Réalité', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (16, 'Karate-Do Iwata Dojo', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (17, 'Karate-Do Ken Wa Kan', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (18, 'Kyokushin Karate', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
