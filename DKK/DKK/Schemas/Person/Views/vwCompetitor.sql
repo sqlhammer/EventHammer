@@ -42,7 +42,7 @@ SELECT c.CompetitorId
 	  ,parent.EmailAddress ParentEmailAddress
 FROM Person.Competitor c
 INNER JOIN Person.Person p ON p.PersonId = c.PersonId
-INNER JOIN Person.Person parent ON parent.PersonId = c.ParentId
+LEFT JOIN Person.Person parent ON parent.PersonId = c.ParentId
 INNER JOIN [Event].[Rank] r ON r.RankId = c.RankId
 INNER JOIN Facility.Dojo dj ON dj.DojoId = c.DojoId
 INNER JOIN Facility.Facility djf ON djf.FacilityId = dj.FacilityId

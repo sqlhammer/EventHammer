@@ -58,10 +58,7 @@ BEGIN
 			UPDATE p
 			SET p.DisplayName = r.last_name + ', ' + r.first_name
 				,p.Gender = r.gender
-				--,p.PhoneNumber = r.PhoneNumber
 				,p.StreetAddress1 = r.street_address
-				--,p.StreetAddress2 = r.Street2
-				--,p.AppartmentCode = r.AppartmentCode
 				,p.City = r.city
 				,p.StateProvince = r.state_province
 				,p.PostalCode = r.zip_code
@@ -74,12 +71,10 @@ BEGIN
 			--Competitor updates
 			UPDATE c
 			SET c.PersonId = p.PersonId
-				--,c.DateOfBirth = r.[DateOfBirth] 
 				,c.Age = r.age
 				,c.[Weight] = r.weight_pounds
 				,c.Height = r.height_inches
-				--,c.RankId = (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.[Rank]) --TODO: Translate kyu
-				,c.RankId = 1 --TODO: temporary rank hardcoding
+				,c.RankId = (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.rank_kyu) 
 				,c.DojoId = (
 					SELECT TOP 1 DojoId 
 					FROM Facility.Dojo d 
@@ -138,11 +133,8 @@ BEGIN
 					  ,r.last_name + ', ' + r.first_name DisplayName
 					  ,0 IsInstructor
 					  ,r.gender
-					  --,r.PhoneNumber
 					  ,r.email_address
 					  ,r.street_address
-					  --,r.Street2
-					  --,r.AppartmentCode
 					  ,r.city
 					  ,r.state_province
 					  ,r.zip_code
@@ -161,11 +153,8 @@ BEGIN
 				  ,np.DisplayName
 				  ,np.IsInstructor
 				  ,np.Gender
-				  --,np.PhoneNumber
 				  ,np.email_address
 				  ,np.street_address
-				  --,np.Street2
-				  --,np.AppartmentCode
 				  ,np.city
 				  ,np.state_province
 				  ,np.zip_code
@@ -205,21 +194,18 @@ BEGIN
 			(PersonId, Age, [Weight], Height, RankId, DojoId, ParentId, IsMinor
 				, IsSpecialConsideration, ConsiderationDescription, EventId, IsKata, IsWeaponKata, IsSemiKnockdown, IsKnockdown)
 			SELECT p.PersonId
-				--, r.[DateOfBirth]
 				, r.age
 				, r.weight_pounds
 				, r.height_inches
-				--, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.[Rank]) --TODO: Kyu
-				,1 --TODO: temporary rank hardcoding
-				--, (
-				--	SELECT TOP 1 DojoId 
-				--	FROM Facility.Dojo d 
-				--	INNER JOIN Facility.Facility f ON d.FacilityId = f.FacilityId
-				--	INNER JOIN Facility.MartialArtType m ON d.MartialArtTypeId = m.MartialArtTypeId
-				--	WHERE f.[Name] = r.school_name --TODO: translate from school_name to dojo name
-				--		--AND m.[Name] = r.[MartialArtName]
-				--)
-				,1 --TODO: temporary dojoid hardcoding
+				, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.rank_kyu)
+				, ISNULL((
+					SELECT TOP 1 DojoId
+					FROM Facility.Dojo d 
+					INNER JOIN Facility.Facility f ON d.FacilityId = f.FacilityId
+					INNER JOIN Facility.MartialArtType m ON d.MartialArtTypeId = m.MartialArtTypeId
+					WHERE f.[Name] = r.school_name
+						--AND m.[Name] = r.[MartialArtName]
+				) ,1) --TODO: remove this temp fix for having unmatched dojos (NULLs)
 				, (
 					SELECT TOP 1 p.PersonId
 					FROM Person.Person p
@@ -262,6 +248,8 @@ BEGIN
 			LEFT JOIN Person.Competitor c ON c.PersonId = p.PersonId
 			WHERE c.CompetitorId IS NULL
 			
+			--TODO: Map instructor
+
 		END TRY
 		BEGIN CATCH
 			

@@ -4,7 +4,7 @@ SET IDENTITY_INSERT [Facility].[MartialArtType] ON
 MERGE INTO [Facility].[MartialArtType] AS [target]
 USING
 (VALUES
-(1, 'Amercican Karate'),
+(1, 'American Karate'),
 (2, 'Bu Do Jutsu'),
 (3, 'Elite Martial Arts'),
 (4, 'Goju Yushukan'),
