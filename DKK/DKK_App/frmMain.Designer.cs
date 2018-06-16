@@ -217,6 +217,7 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
             this.lblConnection = new System.Windows.Forms.Label();
+            this.matchSelectionAssistantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -1924,7 +1925,7 @@
             this.miHelp});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
-            this.msMenu.Size = new System.Drawing.Size(2280, 40);
+            this.msMenu.Size = new System.Drawing.Size(2280, 42);
             this.msMenu.TabIndex = 4;
             // 
             // miFile
@@ -1932,7 +1933,7 @@
             this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.retryConnectionToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(64, 36);
+            this.miFile.Size = new System.Drawing.Size(64, 38);
             this.miFile.Text = "File";
             // 
             // retryConnectionToolStripMenuItem
@@ -1952,7 +1953,7 @@
             this.submsDeleteEvent});
             this.eventToolStripMenuItem.Enabled = false;
             this.eventToolStripMenuItem.Name = "eventToolStripMenuItem";
-            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 36);
+            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 38);
             this.eventToolStripMenuItem.Text = "Event";
             // 
             // submsRefreshEvent
@@ -1996,10 +1997,11 @@
             this.createNewMatchToolStripMenuItem,
             this.deleteMatchToolStripMenuItem,
             this.clearFiltersToolStripMenuItem,
-            this.refreshMatchAndCompetitorListsToolStripMenuItem});
+            this.refreshMatchAndCompetitorListsToolStripMenuItem,
+            this.matchSelectionAssistantToolStripMenuItem});
             this.msMatches.Enabled = false;
             this.msMatches.Name = "msMatches";
-            this.msMatches.Size = new System.Drawing.Size(94, 36);
+            this.msMatches.Size = new System.Drawing.Size(94, 38);
             this.msMatches.Text = "Match";
             // 
             // createNewMatchToolStripMenuItem
@@ -2039,7 +2041,7 @@
             this.deleteSelectedCompetitorToolStripMenuItem});
             this.msCompetitor.Enabled = false;
             this.msCompetitor.Name = "msCompetitor";
-            this.msCompetitor.Size = new System.Drawing.Size(148, 36);
+            this.msCompetitor.Size = new System.Drawing.Size(148, 38);
             this.msCompetitor.Text = "Competitor";
             // 
             // clearSelectionToolStripMenuItem1
@@ -2076,7 +2078,7 @@
             this.helpToolStripMenuItem1,
             this.aboutToolStripMenuItem});
             this.miHelp.Name = "miHelp";
-            this.miHelp.Size = new System.Drawing.Size(77, 36);
+            this.miHelp.Size = new System.Drawing.Size(77, 38);
             this.miHelp.Text = "Help";
             // 
             // helpToolStripMenuItem1
@@ -2271,6 +2273,13 @@
             this.lblConnection.Size = new System.Drawing.Size(1735, 108);
             this.lblConnection.TabIndex = 9;
             this.lblConnection.Text = "Attempting to connect to the database...";
+            // 
+            // matchSelectionAssistantToolStripMenuItem
+            // 
+            this.matchSelectionAssistantToolStripMenuItem.Name = "matchSelectionAssistantToolStripMenuItem";
+            this.matchSelectionAssistantToolStripMenuItem.Size = new System.Drawing.Size(494, 38);
+            this.matchSelectionAssistantToolStripMenuItem.Text = "Match Selection Assistant";
+            this.matchSelectionAssistantToolStripMenuItem.Click += new System.EventHandler(this.matchSelectionAssistantToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -2532,5 +2541,6 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button btnSpecialConsiderationDetails;
+        private System.Windows.Forms.ToolStripMenuItem matchSelectionAssistantToolStripMenuItem;
     }
 }

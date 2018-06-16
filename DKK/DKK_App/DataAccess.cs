@@ -1354,6 +1354,13 @@ namespace DKK_App
         }
         #endregion
 
+        public static void AutoSetMatches (Event Event)
+        {
+            string query = "EXEC [Event].[spAutoSetMatches] @EventId = " + Event.EventId.ToString() + ";";
+            
+            ExecuteDDL(query);
+        }
+
         public static void ExecuteDDL(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))

@@ -551,7 +551,19 @@ namespace DKK_App
         #endregion
 
         #region Match Tab
-        
+        private void matchSelectionAssistantToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string msg = @"Would you like the application to automatically place all competitors into matches which might suite them?
+
+If you do not like the placements, you will have to move the competitors to different matches or remove them from unsatisfactory matches, manually.";
+            DialogResult r = MessageBox.Show(msg,"Match Selection Assistant",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+
+            if(r == DialogResult.Yes)
+            {
+                DataAccess.AutoSetMatches(CurrentEvent);
+            }
+        }
+
         private void btnRefreshMatchTab_Click(object sender, EventArgs e)
         {
             RefreshMatchCompetitorViews();
@@ -1572,5 +1584,6 @@ namespace DKK_App
             DeleteEvent();
         }
         #endregion
+
     }
 }
