@@ -1909,7 +1909,7 @@
             this.miHelp});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
-            this.msMenu.Size = new System.Drawing.Size(2280, 40);
+            this.msMenu.Size = new System.Drawing.Size(2280, 42);
             this.msMenu.TabIndex = 4;
             // 
             // miFile
@@ -1917,7 +1917,7 @@
             this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.retryConnectionToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(64, 36);
+            this.miFile.Size = new System.Drawing.Size(64, 38);
             this.miFile.Text = "File";
             // 
             // retryConnectionToolStripMenuItem
@@ -1935,8 +1935,9 @@
             this.submsSaveEvent,
             this.submsClearEventSelection,
             this.submsDeleteEvent});
+            this.eventToolStripMenuItem.Enabled = false;
             this.eventToolStripMenuItem.Name = "eventToolStripMenuItem";
-            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 36);
+            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 38);
             this.eventToolStripMenuItem.Text = "Event";
             // 
             // submsRefreshEvent
@@ -1983,7 +1984,7 @@
             this.refreshMatchAndCompetitorListsToolStripMenuItem});
             this.msMatches.Enabled = false;
             this.msMatches.Name = "msMatches";
-            this.msMatches.Size = new System.Drawing.Size(94, 36);
+            this.msMatches.Size = new System.Drawing.Size(94, 38);
             this.msMatches.Text = "Match";
             // 
             // createNewMatchToolStripMenuItem
@@ -2023,7 +2024,7 @@
             this.deleteSelectedCompetitorToolStripMenuItem});
             this.msCompetitor.Enabled = false;
             this.msCompetitor.Name = "msCompetitor";
-            this.msCompetitor.Size = new System.Drawing.Size(148, 36);
+            this.msCompetitor.Size = new System.Drawing.Size(148, 38);
             this.msCompetitor.Text = "Competitor";
             // 
             // clearSelectionToolStripMenuItem1
@@ -2060,7 +2061,7 @@
             this.helpToolStripMenuItem1,
             this.aboutToolStripMenuItem});
             this.miHelp.Name = "miHelp";
-            this.miHelp.Size = new System.Drawing.Size(77, 36);
+            this.miHelp.Size = new System.Drawing.Size(77, 38);
             this.miHelp.Text = "Help";
             // 
             // helpToolStripMenuItem1

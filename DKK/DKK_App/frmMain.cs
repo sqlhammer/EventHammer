@@ -148,6 +148,11 @@ namespace DKK_App
                 this.btnRetryConnection.Visible == false)
             {
                 this.btnClearCompetitorFilter.Visible = true;
+                this.msCompetitor.Enabled = true;
+            }
+            else
+            {
+                this.msCompetitor.Enabled = false;
             }
 
             //Toggle Match button visibility
@@ -158,15 +163,26 @@ namespace DKK_App
                 this.btnRefreshMatchTab.Visible = true;
                 this.btnClearMatchFilter.Visible = true;
                 this.btnClearCompetitorFilter.Visible = true;
+                this.msMatches.Enabled = true;
+            }
+            else
+            {
+                this.msMatches.Enabled = false;
             }
 
-            //Toggle Event button visibility
+            //Toggle Event button visibility and Event menu options
             if (this.tab1.SelectedTab == this.tabEvents &&
                 this.btnRetryConnection.Visible == false)
             {
                 this.btnRefreshMatchTab.Visible = false;
                 this.btnClearMatchFilter.Visible = false;
                 this.btnClearCompetitorFilter.Visible = false;
+
+                this.eventToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                this.eventToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -339,7 +355,6 @@ namespace DKK_App
             CurrentEvent = AllEvents[this.cbEventSelect.SelectedIndex];
             EnableAllReports();
             EnableAllTabs();
-            EnableAllMenus();
             RefreshFormTitle();
             DisplayEventInformation();
         }
@@ -432,6 +447,7 @@ namespace DKK_App
         {
             this.msMatches.Enabled = true;
             this.msCompetitor.Enabled = true;
+            this.eventToolStripMenuItem.Enabled = true;
         }
 
         private void EnableAllReports()
