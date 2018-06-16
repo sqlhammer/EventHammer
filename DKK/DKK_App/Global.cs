@@ -203,12 +203,23 @@ namespace DKK_App
 
         private static async Task<List<MatchModel>> FilterMatchModelAsync_Age(List<MatchModel> model, string pattern)
         {
+            decimal number;
+            bool isNumber = false;
+            if (Decimal.TryParse(pattern, out number))
+                isNumber = true;
+
             var result = await Task.Run(() =>
             {
                 List<MatchModel> filteredModel = new List<MatchModel>();
 
                 foreach (var m in model)
                 {
+                    if (!isNumber)
+                    {
+                        filteredModel.Add(m);
+                        continue;
+                    }
+
                     if (m.Children.Any(i => i.Age >= Convert.ToInt32(pattern) - 2 &&
                         i.Age <= Convert.ToInt32(pattern) + 2))
                     {
@@ -224,12 +235,23 @@ namespace DKK_App
 
         private static async Task<List<MatchModel>> FilterMatchModelAsync_Height(List<MatchModel> model, string pattern)
         {
+            decimal number;
+            bool isNumber = false;
+            if (Decimal.TryParse(pattern, out number))
+                isNumber = true;
+
             var result = await Task.Run(() =>
             {
                 List<MatchModel> filteredModel = new List<MatchModel>();
 
                 foreach (var m in model)
                 {
+                    if (!isNumber)
+                    {
+                        filteredModel.Add(m);
+                        continue;
+                    }
+
                     if (m.Children.Any(i => i.Height >= Convert.ToDecimal(pattern) - 5 &&
                         i.Height <= Convert.ToDecimal(pattern) + 5))
                     {
@@ -245,12 +267,23 @@ namespace DKK_App
 
         private static async Task<List<MatchModel>> FilterMatchModelAsync_Weight(List<MatchModel> model, string pattern)
         {
+            decimal number;
+            bool isNumber = false;
+            if (Decimal.TryParse(pattern, out number))
+                isNumber = true;
+
             var result = await Task.Run(() =>
             {
                 List<MatchModel> filteredModel = new List<MatchModel>();
 
                 foreach (var m in model)
                 {
+                    if (!isNumber)
+                    {
+                        filteredModel.Add(m);
+                        continue;
+                    }
+
                     if (m.Children.Any(i => i.Weight >= Convert.ToDecimal(pattern) - 5 &&
                         i.Weight <= Convert.ToDecimal(pattern) + 5))
                     {

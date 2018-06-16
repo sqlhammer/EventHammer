@@ -604,6 +604,9 @@ namespace DKK_App
 
         private async void ApplyMatchFilter()
         {
+            if (this.cbMatchFilterBy.SelectedItem == null)
+                return;
+
             FilterType type = TranslateToFilterType(this.cbMatchFilterBy.SelectedItem.ToString());
             
             if ((this.cbMatchFilterBy.SelectedIndex != -1 && 

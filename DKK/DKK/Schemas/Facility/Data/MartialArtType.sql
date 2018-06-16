@@ -4,7 +4,7 @@ SET IDENTITY_INSERT [Facility].[MartialArtType] ON
 MERGE INTO [Facility].[MartialArtType] AS [target]
 USING
 (VALUES
-(1, 'American Karate'),
+(25, 'American Karate'),
 (2, 'Bu Do Jutsu'),
 (3, 'Elite Martial Arts'),
 (4, 'Goju Yushukan'),
@@ -24,7 +24,10 @@ USING
 (19, 'Real Fighting Dojo'),
 (20, 'Seiryoku'),
 (21, 'Shorin Kenpo Karate'),
-(22, 'Toshindo')
+(22, 'Toshindo'),
+(23, 'Mixed Martial Arts'),
+(24, 'Kyokushin'),
+(1, 'Unknown')
 )
 AS [source] ([MartialArtTypeId], [Name])
 ON [target].[MartialArtTypeId] = [source].[MartialArtTypeId]
