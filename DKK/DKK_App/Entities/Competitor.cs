@@ -20,5 +20,6 @@ namespace DKK_App.Entities
         public Rank Rank { get; set; }
         public decimal Weight { get; set; }
         public decimal Height { get; set; }
+        public string Description { get; set; }
     }
 }

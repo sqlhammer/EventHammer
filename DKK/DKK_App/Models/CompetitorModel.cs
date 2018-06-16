@@ -12,5 +12,6 @@ namespace DKK_App.Models
         public string DojoName { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
+        public string Description { get; set; }
     }
 }

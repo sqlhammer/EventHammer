@@ -1256,6 +1256,29 @@ namespace DKK_App
             SaveCompetitor(false);
         }
 
+        private void chbCompSpecialConsideration_CheckedChanged(object sender, EventArgs e)
+        {
+            btnSpecialConsiderationDetails.Enabled = this.chbCompSpecialConsideration.Checked;
+        }
+
+        private void btnSpecialConsiderationDetails_Click(object sender, EventArgs e)
+        {
+            //TODO: update the database call for competitormodel to include desc
+            frmCompSpecialConsiderationDetail frm = new frmCompSpecialConsiderationDetail();
+            CompetitorModel comp = this.tlvComp.SelectedObject as CompetitorModel;
+
+            if (comp != null)
+            {
+                frm.CompetitorModel = ((CompetitorModel)this.tlvComp.SelectedObject);
+            }
+            else
+            {
+                frm.CompetitorModel = (new CompetitorModel());
+            }
+            
+            frm.Show();
+        }
+
         private void SaveCompetitor(bool IsNew)
         {
             CompetitorModel cm = this.tlvComp.SelectedObject as CompetitorModel;

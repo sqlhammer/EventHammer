@@ -10,6 +10,7 @@
 	@EventId INT = NULL,
 	@Height DECIMAL = NULL,
 	@IsSpecialConsideration BIT = NULL,
+	@ConsiderationDescription VARCHAR(8000) = NULL,
 	@RankId INT = NULL,
 	@Weight DECIMAL = NULL,
 	@AppartmentCode NVARCHAR(10) = NULL,
@@ -81,6 +82,7 @@ BEGIN
 				,c.DojoId = @DojoId
 				,c.Height = @Height
 				,c.IsSpecialConsideration = @IsSpecialConsideration
+				,c.ConsiderationDescription = @ConsiderationDescription
 				,c.RankId = @RankId
 				,c.Weight = @Weight
 			FROM Person.Competitor c

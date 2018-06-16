@@ -134,6 +134,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.txtCompPhone = new System.Windows.Forms.TextBox();
             this.gbCompDemographics = new System.Windows.Forms.GroupBox();
+            this.btnSpecialConsiderationDetails = new System.Windows.Forms.Button();
             this.nudCompAge = new System.Windows.Forms.NumericUpDown();
             this.lblAge = new System.Windows.Forms.Label();
             this.nudCompHeight = new System.Windows.Forms.NumericUpDown();
@@ -1423,6 +1424,7 @@
             // 
             // gbCompDemographics
             // 
+            this.gbCompDemographics.Controls.Add(this.btnSpecialConsiderationDetails);
             this.gbCompDemographics.Controls.Add(this.nudCompAge);
             this.gbCompDemographics.Controls.Add(this.lblAge);
             this.gbCompDemographics.Controls.Add(this.nudCompHeight);
@@ -1453,6 +1455,18 @@
             this.gbCompDemographics.TabIndex = 0;
             this.gbCompDemographics.TabStop = false;
             this.gbCompDemographics.Text = "Demographics";
+            // 
+            // btnSpecialConsiderationDetails
+            // 
+            this.btnSpecialConsiderationDetails.Enabled = false;
+            this.btnSpecialConsiderationDetails.Location = new System.Drawing.Point(995, 275);
+            this.btnSpecialConsiderationDetails.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSpecialConsiderationDetails.Name = "btnSpecialConsiderationDetails";
+            this.btnSpecialConsiderationDetails.Size = new System.Drawing.Size(159, 70);
+            this.btnSpecialConsiderationDetails.TabIndex = 6;
+            this.btnSpecialConsiderationDetails.Text = "Details";
+            this.btnSpecialConsiderationDetails.UseVisualStyleBackColor = true;
+            this.btnSpecialConsiderationDetails.Click += new System.EventHandler(this.btnSpecialConsiderationDetails_Click);
             // 
             // nudCompAge
             // 
@@ -1725,13 +1739,14 @@
             // chbCompSpecialConsideration
             // 
             this.chbCompSpecialConsideration.AutoSize = true;
-            this.chbCompSpecialConsideration.Location = new System.Drawing.Point(848, 288);
+            this.chbCompSpecialConsideration.Location = new System.Drawing.Point(636, 287);
             this.chbCompSpecialConsideration.Margin = new System.Windows.Forms.Padding(4);
             this.chbCompSpecialConsideration.Name = "chbCompSpecialConsideration";
             this.chbCompSpecialConsideration.Size = new System.Drawing.Size(331, 37);
             this.chbCompSpecialConsideration.TabIndex = 10;
             this.chbCompSpecialConsideration.Text = "Special Consideration";
             this.chbCompSpecialConsideration.UseVisualStyleBackColor = true;
+            this.chbCompSpecialConsideration.CheckedChanged += new System.EventHandler(this.chbCompSpecialConsideration_CheckedChanged);
             // 
             // txtCompLastName
             // 
@@ -1909,7 +1924,7 @@
             this.miHelp});
             this.msMenu.Location = new System.Drawing.Point(0, 0);
             this.msMenu.Name = "msMenu";
-            this.msMenu.Size = new System.Drawing.Size(2280, 42);
+            this.msMenu.Size = new System.Drawing.Size(2280, 40);
             this.msMenu.TabIndex = 4;
             // 
             // miFile
@@ -1917,7 +1932,7 @@
             this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.retryConnectionToolStripMenuItem});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(64, 38);
+            this.miFile.Size = new System.Drawing.Size(64, 36);
             this.miFile.Text = "File";
             // 
             // retryConnectionToolStripMenuItem
@@ -1937,7 +1952,7 @@
             this.submsDeleteEvent});
             this.eventToolStripMenuItem.Enabled = false;
             this.eventToolStripMenuItem.Name = "eventToolStripMenuItem";
-            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 38);
+            this.eventToolStripMenuItem.Size = new System.Drawing.Size(86, 36);
             this.eventToolStripMenuItem.Text = "Event";
             // 
             // submsRefreshEvent
@@ -1984,7 +1999,7 @@
             this.refreshMatchAndCompetitorListsToolStripMenuItem});
             this.msMatches.Enabled = false;
             this.msMatches.Name = "msMatches";
-            this.msMatches.Size = new System.Drawing.Size(94, 38);
+            this.msMatches.Size = new System.Drawing.Size(94, 36);
             this.msMatches.Text = "Match";
             // 
             // createNewMatchToolStripMenuItem
@@ -2024,7 +2039,7 @@
             this.deleteSelectedCompetitorToolStripMenuItem});
             this.msCompetitor.Enabled = false;
             this.msCompetitor.Name = "msCompetitor";
-            this.msCompetitor.Size = new System.Drawing.Size(148, 38);
+            this.msCompetitor.Size = new System.Drawing.Size(148, 36);
             this.msCompetitor.Text = "Competitor";
             // 
             // clearSelectionToolStripMenuItem1
@@ -2061,7 +2076,7 @@
             this.helpToolStripMenuItem1,
             this.aboutToolStripMenuItem});
             this.miHelp.Name = "miHelp";
-            this.miHelp.Size = new System.Drawing.Size(77, 38);
+            this.miHelp.Size = new System.Drawing.Size(77, 36);
             this.miHelp.Text = "Help";
             // 
             // helpToolStripMenuItem1
@@ -2516,5 +2531,6 @@
         private System.Windows.Forms.ToolStripMenuItem miHelp;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button btnSpecialConsiderationDetails;
     }
 }

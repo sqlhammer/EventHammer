@@ -82,6 +82,7 @@ namespace DKK_App
 	                          ,IsWeaponKata
 	                          ,IsSemiKnockdown
 	                          ,IsKnockdown
+                              ,ConsiderationDescription
                         FROM Person.Competitor
                         WHERE CompetitorId = " + id.ToString();
 
@@ -114,6 +115,7 @@ namespace DKK_App
 	                          ,IsWeaponKata
 	                          ,IsSemiKnockdown
 	                          ,IsKnockdown
+                              ,ConsiderationDescription
                         FROM Person.Competitor
                         WHERE EventId = " + Event.EventId.ToString();
 
@@ -155,6 +157,7 @@ namespace DKK_App
 
                                 rank.RankId = Convert.ToInt32(reader["RankId"].ToString());
                                 person.PersonId = Convert.ToInt32(reader["PersonId"].ToString());
+                                Event.EventId = Convert.ToInt32(reader["EventId"].ToString());
                                 if (!String.IsNullOrEmpty(reader["ParentId"].ToString()))
                                 {
                                     parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
@@ -175,6 +178,7 @@ namespace DKK_App
                                     Event = Event,
                                     Weight = Convert.ToDecimal(reader["Weight"].ToString()),
                                     Height = Convert.ToDecimal(reader["Height"].ToString()),
+                                    Description = reader["ConsiderationDescription"].ToString(),
                                     Rank = rank,
                                     Parent = parent,
                                     Person = person

@@ -539,6 +539,7 @@ namespace DKK_App
                 mm.Level = obj.Rank.Level;
                 mm.Weight = obj.Weight;
                 mm.Height = obj.Height;
+                mm.Description = obj.Description;
 
                 model.Add(mm);
             }
@@ -578,6 +579,11 @@ namespace DKK_App
         #endregion
 
         #region Validators and Conversions
+        public static Competitor GetCompetitorFromCompetitorModel(CompetitorModel cm)
+        {
+            return DataAccess.GetCompetitor(cm.CompetitorId);
+        }
+
         public static bool IsDuplicatePerson(Person person)
         {
             bool IsDuplicate = true;

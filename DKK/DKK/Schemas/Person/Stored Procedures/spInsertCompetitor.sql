@@ -5,6 +5,7 @@
 	@EventId INT = NULL,
 	@Height DECIMAL = NULL,
 	@IsSpecialConsideration BIT = NULL,
+	@ConsiderationDescription VARCHAR(8000) = NULL,
 	@RankId INT = NULL,
 	@Weight DECIMAL = NULL,
 	@AppartmentCode NVARCHAR(10) = NULL,
@@ -142,6 +143,7 @@ BEGIN
 				,ParentId
 				,IsMinor
 				,IsSpecialConsideration
+				,ConsiderationDescription
 				,EventId
 			)
 			VALUES
@@ -159,6 +161,7 @@ BEGIN
 					ELSE 0
 				END,
 				@IsSpecialConsideration,
+				@ConsiderationDescription,
 				@EventId
 			) 
 

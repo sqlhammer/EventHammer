@@ -82,6 +82,7 @@ namespace DKK_App
 	                          ,IsWeaponKata
 	                          ,IsSemiKnockdown
 	                          ,IsKnockdown
+                              ,ConsiderationDescription
                         FROM Person.Competitor
                         WHERE CompetitorId = " + id.ToString();
 
@@ -119,6 +120,7 @@ namespace DKK_App
                             {
                                 rank.RankId = Convert.ToInt32(reader["RankId"].ToString());
                                 person.PersonId = Convert.ToInt32(reader["PersonId"].ToString());
+                                Event.EventId = Convert.ToInt32(reader["EventId"].ToString());
                                 if (!String.IsNullOrEmpty(reader["ParentId"].ToString()))
                                 {
                                     parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
@@ -139,6 +141,7 @@ namespace DKK_App
                                     Event = Event,
                                     Weight = Convert.ToDecimal(reader["Weight"].ToString()),
                                     Height = Convert.ToDecimal(reader["Height"].ToString()),
+                                    Description = reader["ConsiderationDescription"].ToString(),
                                     Rank = rank,
                                     Parent = parent,
                                     Person = person
@@ -1238,6 +1241,7 @@ namespace DKK_App
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +
                               ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
+                              ",@ConsiderationDescription = '" + comp.Description + "'" +
                               ",@RankId = " + comp.Rank.RankId.ToString() +
                               ",@Weight = " + comp.Weight.ToString() +
                               ",@AppartmentCode = '" + comp.Person.AppartmentCode + "'" +
@@ -1254,7 +1258,7 @@ namespace DKK_App
                               ",@StateProvince = '" + comp.Person.StateProvince + "'" +
                               ",@StreetAddress1 = '" + comp.Person.StreetAddress1 + "'" +
                               ",@StreetAddress2 = '" + comp.Person.StreetAddress2 + "'" +
-                              ",@TitleId = " + ((comp.Person.Title.TitleId == 0) ? "NULL" : comp.Person.Title.TitleId.ToString()) +
+                              //",@TitleId = " + ((comp.Person.Title.TitleId == 0) ? "NULL" : comp.Person.Title.TitleId.ToString()) +
                               ",@ParentFirstName = '" + comp.Parent.FirstName + "'" +
                               ",@ParentLastName = '" + comp.Parent.LastName + "'" +
                               ",@ParentEmailAddress = '" + comp.Parent.EmailAddress + "';";
