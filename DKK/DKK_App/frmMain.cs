@@ -147,6 +147,7 @@ namespace DKK_App
                 this.tab1.SelectedTab == this.tabCompetitor &&
                 this.btnRetryConnection.Visible == false)
             {
+                this.btnRefreshMatchTab.Visible = true;
                 this.btnClearCompetitorFilter.Visible = true;
                 this.msCompetitor.Enabled = true;
             }
