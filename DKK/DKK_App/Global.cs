@@ -422,10 +422,10 @@ namespace DKK_App
                 mm.CompetitorId = obj.Competitor.CompetitorId;
                 mm.MatchId = obj.Match.MatchId;
                 mm.Age = obj.Competitor.Age;
-                mm.DisplayName = obj.Competitor.Person.DisplayName;
-                mm.DojoName = obj.Competitor.Dojo.Facility.FacilityName;
-                mm.Gender = obj.Competitor.Person.Gender;
-                mm.RankName = obj.Competitor.Rank.RankName;
+                mm.DisplayName = (obj.Competitor.Person != null) ? obj.Competitor.Person.DisplayName : null;
+                mm.DojoName = (obj.Competitor.Dojo != null) ? obj.Competitor.Dojo.Facility.FacilityName : null; 
+                mm.Gender = (obj.Competitor.Person != null) ? obj.Competitor.Person.Gender : null;
+                mm.RankName = (obj.Competitor.Rank != null) ? obj.Competitor.Rank.RankName : null;
                 mm.Weight = obj.Competitor.Weight;
                 mm.Height = obj.Competitor.Height;
                 mm.Children = new List<MatchModel>();

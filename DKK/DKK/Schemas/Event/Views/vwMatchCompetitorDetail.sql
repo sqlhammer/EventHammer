@@ -1,7 +1,7 @@
 ﻿CREATE VIEW Event.vwMatchCompetitorDetail
 AS
 SELECT mc.MatchCompetitorId
-	  ,mc.MatchId
+	  ,m.MatchId
 	  ,m.MatchDisplayId
 	  ,mc.CompetitorId
 	  ,mc.MatchPlacement
@@ -76,8 +76,8 @@ SELECT mc.MatchCompetitorId
 	  ,d_min_r.Name DivisionMinBelt
 	  ,d_min_r.Level DivisionMinLevel
 	  ,d_min_r.Kyn DivisionMinKyn
-FROM Event.MatchCompetitor mc
-LEFT JOIN Event.Match m ON m.MatchId = mc.MatchId
+FROM Event.Match m
+LEFT JOIN Event.MatchCompetitor mc ON m.MatchId = mc.MatchId
 LEFT JOIN Event.MatchType mt ON mt.MatchTypeId = m.MatchTypeId
 LEFT JOIN Event.Event e ON e.EventId = m.EventId
 LEFT JOIN Event.EventType et ON et.EventTypeId = e.EventTypeId

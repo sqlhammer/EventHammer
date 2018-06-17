@@ -974,23 +974,24 @@ namespace DKK_App
                                 };
 
                                 //Rank
-                                Rank r = new Rank
+                                Rank r = new Rank();
+                                if (!String.IsNullOrEmpty(reader["RankId"].ToString()))
                                 {
-                                    Kyn = reader["Kyn"].ToString(),
-                                    Level = Convert.ToInt32(reader["Level"].ToString()),
-                                    RankId = Convert.ToInt32(reader["RankId"].ToString()),
-                                    RankName = reader["Belt"].ToString()
-                                };
+                                    r.Kyn = reader["Kyn"].ToString();
+                                    r.Level = Convert.ToInt32(reader["Level"].ToString());
+                                    r.RankId = Convert.ToInt32(reader["RankId"].ToString());
+                                    r.RankName = reader["Belt"].ToString();
+                                }
 
                                 //Parent
                                 Person parent = new Person();
                                 if (!String.IsNullOrEmpty(reader["ParentId"].ToString()))
-                                {                                    
+                                {
                                     parent.DisplayName = reader["ParentDisplayName"].ToString();
                                     parent.EmailAddress = reader["ParentEmailAddress"].ToString();
                                     parent.FirstName = reader["ParentFirstName"].ToString();
-                                    parent.LastName = reader["ParentLastName"].ToString();
-                                    parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());                                    
+                                    parent.LastName = (reader["ParentLastName"] != null) ? reader["ParentLastName"].ToString() : null;
+                                    parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
                                 }
 
                                 //Person
@@ -1010,8 +1011,8 @@ namespace DKK_App
                                     person.PhoneNumber = reader["PhoneNumber"].ToString();
                                     person.PostalCode = reader["PostalCode"].ToString();
                                     person.StateProvince = reader["StateProvince"].ToString();
-                                    person.StreetAddress1 = reader["StreetAddress1"].ToString();
-                                    person.StreetAddress2 = reader["StreetAddress2"].ToString();
+                                    person.StreetAddress1 = (reader["StreetAddress1"] != null) ? reader["StreetAddress1"].ToString() : null;
+                                    person.StreetAddress2 = (reader["StreetAddress2"] != null) ? reader["StreetAddress2"].ToString() : null;
                                     person.Title = ct;
                                 }
 
@@ -1025,52 +1026,70 @@ namespace DKK_App
                                 }
 
                                 //Competitor
-                                Competitor c = new Competitor
+                                Competitor c = new Competitor();
+                                if (!String.IsNullOrEmpty(reader["CompetitorId"].ToString()))
                                 {
-                                    Age = Convert.ToInt32(reader["Age"].ToString()),
-                                    CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
-                                    IsSpecialConsideration = Convert.ToBoolean(reader["IsSpecialConsideration"].ToString()),
-                                    //DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
-                                    Dojo = dojo,
-                                    Event = e,
-                                    IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
-                                    IsKnockdown = Convert.ToBoolean(reader["IsKnockdown"].ToString()),
-                                    IsMinor = Convert.ToBoolean(reader["IsMinor"].ToString()),
-                                    IsSemiKnockdown = Convert.ToBoolean(reader["IsSemiKnockdown"].ToString()),
-                                    IsWeaponKata = Convert.ToBoolean(reader["IsWeaponKata"].ToString()),
-                                    Parent = parent,
-                                    Person = person,
-                                    Rank = r,
-                                    Weight = Convert.ToDecimal(reader["Weight"].ToString())
-                                };
+                                    c = new Competitor
+                                    {
+                                        Age = Convert.ToInt32(reader["Age"].ToString()),
+                                        CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
+                                        IsSpecialConsideration = Convert.ToBoolean(reader["IsSpecialConsideration"].ToString()),
+                                        //DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
+                                        Dojo = dojo,
+                                        Event = e,
+                                        IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
+                                        IsKnockdown = Convert.ToBoolean(reader["IsKnockdown"].ToString()),
+                                        IsMinor = Convert.ToBoolean(reader["IsMinor"].ToString()),
+                                        IsSemiKnockdown = Convert.ToBoolean(reader["IsSemiKnockdown"].ToString()),
+                                        IsWeaponKata = Convert.ToBoolean(reader["IsWeaponKata"].ToString()),
+                                        Parent = parent,
+                                        Person = person,
+                                        Rank = r,
+                                        Weight = Convert.ToDecimal(reader["Weight"].ToString()),
+                                        Height = Convert.ToDecimal(reader["Height"].ToString())
+                                    };
+                                }
 
                                 //MatchType
-                                MatchType mt = new MatchType
+                                MatchType mt = new MatchType();
+                                if (!String.IsNullOrEmpty(reader["MatchTypeId"].ToString()))
                                 {
-                                    MatchTypeId = Convert.ToInt32(reader["MatchTypeId"].ToString()),
-                                    MatchTypeName = reader["MatchTypeName"].ToString(),
-                                    IsSpecialConsideration = Convert.ToBoolean(reader["IsSpecialConsideration"].ToString())
-                                };
+                                    mt = new MatchType
+                                    {
+                                        MatchTypeId = Convert.ToInt32(reader["MatchTypeId"].ToString()),
+                                        MatchTypeName = reader["MatchTypeName"].ToString(),
+                                        IsSpecialConsideration = Convert.ToBoolean(reader["MatchIsSpecialConsideration"].ToString())
+                                    };
+                                }
 
                                 //Match
-                                Match m = new Match
+                                Match m = new Match();
+                                if (!String.IsNullOrEmpty(reader["MatchId"].ToString()))
                                 {
-                                    MatchId = Convert.ToInt32(reader["MatchId"].ToString()),
-                                    SubDivisionId = Convert.ToInt32(reader["SubDivisionId"].ToString()),
-                                    MatchDisplayId = Convert.ToInt32(reader["MatchDisplayId"].ToString()),
-                                    Division = d,
-                                    Event = e,
-                                    MatchType = mt
-                                };
+                                    m = new Match
+                                    {
+                                        MatchId = Convert.ToInt32(reader["MatchId"].ToString()),
+                                        SubDivisionId = Convert.ToInt32(reader["SubDivisionId"].ToString()),
+                                        MatchDisplayId = Convert.ToInt32(reader["MatchDisplayId"].ToString()),
+                                        Division = d,
+                                        Event = e,
+                                        MatchType = mt
+                                    };
+                                }
 
                                 //MatchCompetitor
-                                MatchCompetitor mc = new MatchCompetitor
+                                MatchCompetitor mc = new MatchCompetitor();
+                                if (!String.IsNullOrEmpty(reader["MatchCompetitorId"].ToString()))
                                 {
-                                    MatchCompetitorId = Convert.ToInt32(reader["MatchCompetitorId"].ToString()),
-                                    Competitor = c,
-                                    Match = m
-                                };
-                                if(!String.IsNullOrEmpty(reader["MatchPlacement"].ToString()))
+                                    mc = new MatchCompetitor
+                                    {
+                                        MatchCompetitorId = Convert.ToInt32(reader["MatchCompetitorId"].ToString()),
+                                        Competitor = c,
+                                        Match = m
+                                    };
+                                }
+
+                                if (!String.IsNullOrEmpty(reader["MatchPlacement"].ToString()))
                                 {
                                     mc.MatchPlacement = Convert.ToInt32(reader["MatchPlacement"].ToString());
                                 }
