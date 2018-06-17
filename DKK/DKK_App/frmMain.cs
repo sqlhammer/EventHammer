@@ -353,7 +353,7 @@ namespace DKK_App
         private void cbEventSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentEvent = AllEvents[this.cbEventSelect.SelectedIndex];
-            EnableAllReports();
+            EnableEventButtons();
             EnableAllTabs();
             RefreshFormTitle();
             DisplayEventInformation();
@@ -448,6 +448,12 @@ namespace DKK_App
             this.msMatches.Enabled = true;
             this.msCompetitor.Enabled = true;
             this.eventToolStripMenuItem.Enabled = true;
+        }
+
+        private void EnableEventButtons()
+        {
+            EnableAllReports();
+            this.btnEventLoadReg.Enabled = true;
         }
 
         private void EnableAllReports()
@@ -560,7 +566,15 @@ If you do not like the placements, you will have to move the competitors to diff
 
             if(r == DialogResult.Yes)
             {
-                DataAccess.AutoSetMatches(CurrentEvent);
+                try
+                {
+                    DataAccess.AutoSetMatches(CurrentEvent);
+                    RefreshMatchCompetitorViews();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -1109,7 +1123,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
             if (comp != null)
             {
-                LoadCompetitorDetails((CompetitorModel)this.tlvComp.SelectedObject);
+                LoadCompetitorDetails(comp);
             }
             else
             {
@@ -1340,6 +1354,7 @@ If you do not like the placements, you will have to move the competitors to diff
             comp.Height = this.nudCompHeight.Value;
             comp.Person.Gender = (this.rbCompFemale.Checked) ? "F" : "M";
             //comp.DateOfBirth = new DateTime(Convert.ToInt32(this.cbCompYear.SelectedItem.ToString()), Convert.ToInt32(this.cbCompMonth.SelectedItem.ToString()),1);
+            comp.Age = (int)this.nudCompAge.Value;
             comp.Person.IsInstructor = this.chbCompIsInstructor.Checked;
             comp.IsSpecialConsideration = this.chbCompSpecialConsideration.Checked;
             comp.Parent.FirstName = this.txtCompParentFirstName.Text;
@@ -1359,6 +1374,8 @@ If you do not like the placements, you will have to move the competitors to diff
             comp.Dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(this.cbCompSchool.SelectedItem.ToString()) == 0)).First();
 
             SaveCompetitor(comp, IsNew);
+
+            RefreshMatchCompetitorViews();
         }
 
         private void SaveCompetitor(Competitor comp, bool IsNew)
@@ -1583,7 +1600,6 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             DeleteEvent();
         }
-        #endregion
-
+        #endregion        
     }
 }

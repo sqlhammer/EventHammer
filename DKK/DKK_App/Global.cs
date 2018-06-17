@@ -519,6 +519,24 @@ namespace DKK_App
             return model;
         }
 
+        public static CompetitorModel GetCompetitorModel(Competitor obj)
+        {
+            CompetitorModel mm = new CompetitorModel();
+
+            mm.CompetitorId = obj.CompetitorId;
+            mm.Age = obj.Age;
+            mm.DisplayName = obj.Person.DisplayName;
+            mm.DojoName = obj.Dojo.Facility.FacilityName;
+            mm.Gender = obj.Person.Gender;
+            mm.RankName = obj.Rank.RankName;
+            mm.Level = obj.Rank.Level;
+            mm.Weight = obj.Weight;
+            mm.Height = obj.Height;
+            mm.Description = obj.Description;
+            
+            return mm;
+        }
+
         public static List<CompetitorModel> GetCompetitorModel(List<Competitor> mcs)
         {
             List<Models.CompetitorModel> model = new List<Models.CompetitorModel>();

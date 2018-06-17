@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [Person].[spInsertCompetitor]
 	--Competitor
+	@Age INT = NULL,
 	@DateOfBirth DATE = NULL,
 	@DojoId INT = NULL,
 	@EventId INT = NULL,
@@ -150,14 +151,14 @@ BEGIN
 			(
 				(SELECT TOP 1 Id FROM @PersonId),
 				@DateOfBirth,
-				DATEDIFF(YEAR,@DateOfBirth,GETDATE()),
+				@Age,
 				@Weight,
 				@Height,
 				@RankId,
 				@DojoId,
 				(SELECT TOP 1 Id FROM @ParentId),
 				CASE
-					WHEN DATEDIFF(YEAR,@DateOfBirth,GETDATE()) < 18 THEN 1
+					WHEN @Age < 18 THEN 1
 					ELSE 0
 				END,
 				@IsSpecialConsideration,

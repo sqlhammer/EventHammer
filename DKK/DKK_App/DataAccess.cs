@@ -1283,7 +1283,8 @@ namespace DKK_App
         {
             string query = "EXEC [Person].[spInsertCompetitor] " +
                               // "@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
-                              ",@DojoId = " + comp.Dojo.DojoId.ToString() +
+                              "@DojoId = " + comp.Dojo.DojoId.ToString() +
+                              ",@Age = " + comp.Age.ToString() +
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +
                               ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
