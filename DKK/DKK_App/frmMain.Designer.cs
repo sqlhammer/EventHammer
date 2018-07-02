@@ -208,7 +208,7 @@
             this.cmsMatches = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmiMatchesExpandAll = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiMatchesCollapseAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.newMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiMatchNewMatch = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiDeleteMatch = new System.Windows.Forms.ToolStripMenuItem();
             this.btnClearCompetitorFilter = new System.Windows.Forms.Button();
             this.pbCompany = new System.Windows.Forms.PictureBox();
@@ -2171,14 +2171,13 @@
             this.cmsMatches.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmiMatchesExpandAll,
             this.cmiMatchesCollapseAll,
-            this.newMatchToolStripMenuItem,
+            this.cmiMatchNewMatch,
             this.cmiDeleteMatch});
             this.cmsMatches.Name = "cmsMatches";
             this.cmsMatches.Size = new System.Drawing.Size(235, 148);
             // 
             // cmiMatchesExpandAll
             // 
-            this.cmiMatchesExpandAll.Enabled = false;
             this.cmiMatchesExpandAll.Name = "cmiMatchesExpandAll";
             this.cmiMatchesExpandAll.Size = new System.Drawing.Size(234, 36);
             this.cmiMatchesExpandAll.Text = "Expand All";
@@ -2186,23 +2185,20 @@
             // 
             // cmiMatchesCollapseAll
             // 
-            this.cmiMatchesCollapseAll.Enabled = false;
             this.cmiMatchesCollapseAll.Name = "cmiMatchesCollapseAll";
             this.cmiMatchesCollapseAll.Size = new System.Drawing.Size(234, 36);
             this.cmiMatchesCollapseAll.Text = "Collapse All";
             this.cmiMatchesCollapseAll.Click += new System.EventHandler(this.cmiMatchesCollapseAll_Click);
             // 
-            // newMatchToolStripMenuItem
+            // cmiMatchNewMatch
             // 
-            this.newMatchToolStripMenuItem.Enabled = false;
-            this.newMatchToolStripMenuItem.Name = "newMatchToolStripMenuItem";
-            this.newMatchToolStripMenuItem.Size = new System.Drawing.Size(234, 36);
-            this.newMatchToolStripMenuItem.Text = "New Match";
-            this.newMatchToolStripMenuItem.Click += new System.EventHandler(this.newMatchToolStripMenuItem_Click);
+            this.cmiMatchNewMatch.Name = "cmiMatchNewMatch";
+            this.cmiMatchNewMatch.Size = new System.Drawing.Size(234, 36);
+            this.cmiMatchNewMatch.Text = "New Match";
+            this.cmiMatchNewMatch.Click += new System.EventHandler(this.newMatchToolStripMenuItem_Click);
             // 
             // cmiDeleteMatch
             // 
-            this.cmiDeleteMatch.Enabled = false;
             this.cmiDeleteMatch.Name = "cmiDeleteMatch";
             this.cmiDeleteMatch.Size = new System.Drawing.Size(234, 36);
             this.cmiDeleteMatch.Text = "Delete Match";
@@ -2439,7 +2435,7 @@
         private System.Windows.Forms.Button btnClearCompetitorFilter;
         private System.Windows.Forms.ToolStripMenuItem createNewMatchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteMatchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newMatchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cmiMatchNewMatch;
         private System.Windows.Forms.Timer tmrNewMatch;
         private System.Windows.Forms.ToolStripMenuItem msCompetitor;
         private System.Windows.Forms.ToolStripMenuItem newCompetitorToolStripMenuItem;
