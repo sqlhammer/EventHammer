@@ -1430,6 +1430,7 @@ If you do not like the placements, you will have to move the competitors to diff
             AllEvents = DataAccess.GetEventInformation();
             EventModels = Global.GetEventModel(AllEvents);
 
+            ClearEventSelection();
             RefreshEvents(EventModels);
         }
 
@@ -1493,7 +1494,7 @@ If you do not like the placements, you will have to move the competitors to diff
                 EventType = type
             };
 
-            string result = Global.IsValidEvent(Event);
+            string result = Global.IsValidEvent(Event,true);
             if (result.CompareTo("") != 0)
             {
                 MessageBox.Show(result,"Invalid Event",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
@@ -1522,7 +1523,7 @@ If you do not like the placements, you will have to move the competitors to diff
                 EventType = type
             };
 
-            string result = Global.IsValidEvent(Event);
+            string result = Global.IsValidEvent(Event,false);
             if (result.CompareTo("") != 0)
             {
                 MessageBox.Show(result, "Invalid Event", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

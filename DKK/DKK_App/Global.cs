@@ -602,6 +602,18 @@ namespace DKK_App
             return DataAccess.GetCompetitor(cm.CompetitorId);
         }
 
+        public static bool IsUniqueEventName(Event e)
+        {
+            bool IsUniqueEventName = false;
+
+            if (DataAccess.GetEventsByName(e.EventName).Count == 0)
+            {
+                IsUniqueEventName = true;
+            }
+
+            return IsUniqueEventName;
+        }
+
         public static bool IsDuplicatePerson(Person person)
         {
             bool IsDuplicate = true;
@@ -657,7 +669,7 @@ namespace DKK_App
             return dn;
         }
 
-        public static string IsValidEvent(Event Event)
+        public static string IsValidEvent(Event Event, bool IsNewEvent)
         {
             string result = "";
 
@@ -687,6 +699,13 @@ namespace DKK_App
             if (Event.Date == null)
             {
                 result = "Error: Date is not populated.";
+                return result;
+            }
+
+            //Check uniqueness
+            if(IsNewEvent && !IsUniqueEventName(Event))
+            {
+                result = "Error: EventName is not unique.";
                 return result;
             }
 

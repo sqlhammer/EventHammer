@@ -9,7 +9,7 @@ using DKK_App.Models;
 namespace DKK_App
 {
     public static class DataAccess
-    {        
+    {
         #region EventType Gets
         public static List<EventType> GetEventTypeByName(string name)
         {
@@ -1155,6 +1155,19 @@ namespace DKK_App
                             FROM [Event].vwEvent e
                             WHERE e.Date BETWEEN CAST('" + minDate.ToString("yyyyMMdd") + @"' AS DATE) 
                                 AND CAST('" + maxDate.ToString("yyyyMMdd") + @"' AS DATE)";
+
+            return QueryEventInformation(query);
+        }
+
+        public static List<Event> GetEventsByName(string name)
+        {
+            string query = @"SELECT e.EventId
+	                              ,e.EventName
+	                              ,e.Date
+	                              ,e.EventTypeId
+	                              ,e.EventTypeName
+                            FROM [Event].vwEvent e
+                            WHERE e.EventName = '" + name + "'";
 
             return QueryEventInformation(query);
         }
