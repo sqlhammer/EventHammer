@@ -7,4 +7,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DivisionId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="7fcb2419-b7a8-404e-9a92-de833789cf7b" ChangeDateTime="07/04/2018 12:00:27">
+    <Property Name="ElementName" Value="[Event].[Rank].[Kyn]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Event].[Rank]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Kyu" />
+  </Operation>
 </Operations>

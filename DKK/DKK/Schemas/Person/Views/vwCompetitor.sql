@@ -15,7 +15,7 @@ SELECT c.CompetitorId
 	  ,c.Height
 	  ,r.RankId
 	  ,r.[Level]
-	  ,r.Kyn
+	  ,r.Kyu
 	  ,dj.DojoId
 	  ,djf.Name DojoName
 	  ,c.IsMinor

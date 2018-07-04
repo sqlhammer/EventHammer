@@ -16,18 +16,18 @@ USING
 (10, 'Brown Black', 10, '1'),
 (11, 'Black', 11, 'Dan')
 )
-AS [source] ([RankId], [Name], [Level], [Kyn])
+AS [source] ([RankId], [Name], [Level], [Kyu])
 ON [target].[RankId] = [source].[RankId]
 
 WHEN MATCHED THEN
 UPDATE 
 	SET [Name] = [source].[Name],
 		[Level] = [source].[Level],
-		[Kyn] = [source].[Kyn]
+		[Kyu] = [source].[Kyu]
 
 WHEN NOT MATCHED BY TARGET THEN
-	INSERT ([RankId], [Name], [Level], [Kyn])
-	VALUES ([RankId], [Name], [Level], [Kyn])
+	INSERT ([RankId], [Name], [Level], [Kyu])
+	VALUES ([RankId], [Name], [Level], [Kyu])
 
 WHEN NOT MATCHED BY SOURCE THEN
 	DELETE;

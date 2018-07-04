@@ -74,7 +74,7 @@ BEGIN
 				,c.Age = r.age
 				,c.[Weight] = r.weight_pounds
 				,c.Height = r.height_inches
-				,c.RankId = (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.rank_kyu) 
+				,c.RankId = (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE Kyu = r.rank_kyu) 
 				,c.DojoId = (
 					SELECT TOP 1 DojoId 
 					FROM Facility.Dojo d 
@@ -196,7 +196,7 @@ BEGIN
 				, r.age
 				, r.weight_pounds
 				, r.height_inches
-				, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE [Level] = r.rank_kyu)
+				, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE Kyu = r.rank_kyu)
 				,(
 					SELECT TOP 1 DojoId
 					FROM Facility.Dojo d 

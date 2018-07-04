@@ -49,7 +49,7 @@ SELECT mc.MatchCompetitorId
 	  ,r.RankId
 	  ,r.Name Belt
 	  ,r.Level
-	  ,r.Kyn
+	  ,r.Kyu
 	  ,f.Name DojoName
 	  ,f.OwnerId
 	  ,ft.FacilityTypeId
@@ -72,10 +72,10 @@ SELECT mc.MatchCompetitorId
 	  ,d.IsKata DivisionIsKata
 	  ,d_max_r.Name DivisionMaxBelt
 	  ,d_max_r.Level DivisionMaxLevel
-	  ,d_max_r.Kyn DivisionMaxKyn
+	  ,d_max_r.Kyu DivisionMaxKyu
 	  ,d_min_r.Name DivisionMinBelt
 	  ,d_min_r.Level DivisionMinLevel
-	  ,d_min_r.Kyn DivisionMinKyn
+	  ,d_min_r.Kyu DivisionMinKyu
 FROM Event.Match m
 LEFT JOIN Event.MatchCompetitor mc ON m.MatchId = mc.MatchId
 LEFT JOIN Event.MatchType mt ON mt.MatchTypeId = m.MatchTypeId

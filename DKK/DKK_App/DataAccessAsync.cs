@@ -486,7 +486,7 @@ namespace DKK_App
             string query = @"SELECT r.RankId
 	                              ,r.Name
 	                              ,r.Level
-	                              ,r.Kyn
+	                              ,r.Kyu
                             FROM Event.Rank r;";
 
             return await QueryRankInformation(query);
@@ -497,7 +497,7 @@ namespace DKK_App
             string query = @"SELECT r.RankId
 	                              ,r.Name
 	                              ,r.Level
-	                              ,r.Kyn
+	                              ,r.Kyu
                             FROM Event.Rank r
                             WHERE r.RankId = " + id.ToString();
 
@@ -528,7 +528,7 @@ namespace DKK_App
                                 objs.Add(new Rank
                                 {
                                     RankId = Convert.ToInt32(reader["RankId"].ToString()),
-                                    Kyn = reader["Kyn"].ToString(),
+                                    Kyu = reader["Kyu"].ToString(),
                                     Level = Convert.ToInt32(reader["Level"].ToString()),
                                     RankName = reader["Name"].ToString()
                                 });
@@ -863,7 +863,7 @@ namespace DKK_App
 	                              ,mcd.RankId
 	                              ,mcd.Belt
 	                              ,mcd.Level
-	                              ,mcd.Kyn
+	                              ,mcd.Kyu
 	                              ,mcd.DojoName
 	                              ,mcd.OwnerId
 	                              ,mcd.FacilityTypeId
@@ -886,10 +886,10 @@ namespace DKK_App
 	                              ,mcd.DivisionIsKata
 	                              ,mcd.DivisionMaxBelt
 	                              ,mcd.DivisionMaxLevel
-	                              ,mcd.DivisionMaxKyn
+	                              ,mcd.DivisionMaxKyu
 	                              ,mcd.DivisionMinBelt
 	                              ,mcd.DivisionMinLevel
-	                              ,mcd.DivisionMinKyn
+	                              ,mcd.DivisionMinKyu
                             FROM Event.vwMatchCompetitorDetail mcd
                             WHERE mcd.EventId = " + Event.EventId.ToString();
             
@@ -937,7 +937,7 @@ namespace DKK_App
                                 //MinRank
                                 Rank min_r = new Rank
                                 {
-                                    Kyn = reader["DivisionMinKyn"].ToString(),
+                                    Kyu = reader["DivisionMinKyu"].ToString(),
                                     Level = Convert.ToInt32(reader["DivisionMinLevel"].ToString()),
                                     RankId = Convert.ToInt32(reader["MinimumLevelId"].ToString()),
                                     RankName = reader["DivisionMinBelt"].ToString()
@@ -946,7 +946,7 @@ namespace DKK_App
                                 //MaxRank
                                 Rank max_r = new Rank
                                 {
-                                    Kyn = reader["DivisionMaxKyn"].ToString(),
+                                    Kyu = reader["DivisionMaxKyu"].ToString(),
                                     Level = Convert.ToInt32(reader["DivisionMaxLevel"].ToString()),
                                     RankId = Convert.ToInt32(reader["MaximumLevelId"].ToString()),
                                     RankName = reader["DivisionMaxBelt"].ToString()
@@ -995,7 +995,7 @@ namespace DKK_App
                                 Rank r = new Rank();
                                 if (!String.IsNullOrEmpty(reader["RankId"].ToString()))
                                 {
-                                    r.Kyn = reader["Kyn"].ToString();
+                                    r.Kyu = reader["Kyu"].ToString();
                                     r.Level = Convert.ToInt32(reader["Level"].ToString());
                                     r.RankId = Convert.ToInt32(reader["RankId"].ToString());
                                     r.RankName = reader["Belt"].ToString();

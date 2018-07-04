@@ -25,7 +25,7 @@ SELECT
 	  ,c.Age
 	  ,c.Weight
 	  ,r.[Level]
-	  ,r.[Kyn]
+	  ,r.[Kyu]
 	  ,djf.Name DojoName
 	  ,c.IsSpecialConsideration
 FROM [Event].[Match] m
