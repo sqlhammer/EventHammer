@@ -91,7 +91,7 @@ namespace DKK_App
             }
         }
 
-        private void RefreshMatchCompetitorViews()
+        public void RefreshMatchCompetitorViews()
         {
             MatchModels = new List<MatchModel>();
             CompetitorModels = new List<CompetitorModel>();
@@ -558,6 +558,25 @@ namespace DKK_App
         #endregion
 
         #region Match Tab
+        private void removeCompetitorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadRemoveMatchCompetitorForm();
+
+        }
+        
+        private void LoadRemoveMatchCompetitorForm()
+        {
+            if (tlvMatches.SelectedObject == null)
+                return;
+
+            frmRemoveMatchCompetitor frm = new frmRemoveMatchCompetitor();
+            MatchModel m = (MatchModel)tlvMatches.SelectedObject;
+            frm.Match = m;
+            frm.frmMain = this;
+
+            frm.Show();
+        }
+
         private void matchSelectionAssistantToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string msg = @"Would you like the application to automatically place all competitors into matches which might suit them?
@@ -1602,6 +1621,6 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             DeleteEvent();
         }
-        #endregion        
+        #endregion
     }
 }

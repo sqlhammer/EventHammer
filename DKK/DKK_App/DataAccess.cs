@@ -1259,6 +1259,14 @@ namespace DKK_App
 
             ExecuteDDL(query);
         }
+
+        public static void DeleteCompetitorFromMatch(MatchModel m)
+        {
+            string query = @"EXEC [Person].[spDeleteCompetitorFromMatch] @CompetitorId = " + m.CompetitorId.ToString() +
+                ", @MatchId = " + m.MatchId + ";";
+
+            ExecuteDDL(query);
+        }
         #endregion
 
         #region Updates

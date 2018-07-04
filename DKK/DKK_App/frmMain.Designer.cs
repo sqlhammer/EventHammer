@@ -210,6 +210,7 @@
             this.cmiMatchesCollapseAll = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiMatchNewMatch = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiDeleteMatch = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeCompetitorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnClearCompetitorFilter = new System.Windows.Forms.Button();
             this.pbCompany = new System.Windows.Forms.PictureBox();
             this.pbPoweredBy = new System.Windows.Forms.PictureBox();
@@ -2172,37 +2173,45 @@
             this.cmiMatchesExpandAll,
             this.cmiMatchesCollapseAll,
             this.cmiMatchNewMatch,
-            this.cmiDeleteMatch});
+            this.cmiDeleteMatch,
+            this.removeCompetitorsToolStripMenuItem});
             this.cmsMatches.Name = "cmsMatches";
-            this.cmsMatches.Size = new System.Drawing.Size(235, 148);
+            this.cmsMatches.Size = new System.Drawing.Size(329, 184);
             // 
             // cmiMatchesExpandAll
             // 
             this.cmiMatchesExpandAll.Name = "cmiMatchesExpandAll";
-            this.cmiMatchesExpandAll.Size = new System.Drawing.Size(234, 36);
-            this.cmiMatchesExpandAll.Text = "Expand All";
+            this.cmiMatchesExpandAll.Size = new System.Drawing.Size(328, 36);
+            this.cmiMatchesExpandAll.Text = "&Expand All";
             this.cmiMatchesExpandAll.Click += new System.EventHandler(this.cmiMatchesExpandAll_Click);
             // 
             // cmiMatchesCollapseAll
             // 
             this.cmiMatchesCollapseAll.Name = "cmiMatchesCollapseAll";
-            this.cmiMatchesCollapseAll.Size = new System.Drawing.Size(234, 36);
-            this.cmiMatchesCollapseAll.Text = "Collapse All";
+            this.cmiMatchesCollapseAll.Size = new System.Drawing.Size(328, 36);
+            this.cmiMatchesCollapseAll.Text = "&Collapse All";
             this.cmiMatchesCollapseAll.Click += new System.EventHandler(this.cmiMatchesCollapseAll_Click);
             // 
             // cmiMatchNewMatch
             // 
             this.cmiMatchNewMatch.Name = "cmiMatchNewMatch";
-            this.cmiMatchNewMatch.Size = new System.Drawing.Size(234, 36);
-            this.cmiMatchNewMatch.Text = "New Match";
+            this.cmiMatchNewMatch.Size = new System.Drawing.Size(328, 36);
+            this.cmiMatchNewMatch.Text = "&New Match";
             this.cmiMatchNewMatch.Click += new System.EventHandler(this.newMatchToolStripMenuItem_Click);
             // 
             // cmiDeleteMatch
             // 
             this.cmiDeleteMatch.Name = "cmiDeleteMatch";
-            this.cmiDeleteMatch.Size = new System.Drawing.Size(234, 36);
-            this.cmiDeleteMatch.Text = "Delete Match";
+            this.cmiDeleteMatch.Size = new System.Drawing.Size(328, 36);
+            this.cmiDeleteMatch.Text = "&Delete Match";
             this.cmiDeleteMatch.Click += new System.EventHandler(this.cmiDeleteMatch_Click);
+            // 
+            // removeCompetitorsToolStripMenuItem
+            // 
+            this.removeCompetitorsToolStripMenuItem.Name = "removeCompetitorsToolStripMenuItem";
+            this.removeCompetitorsToolStripMenuItem.Size = new System.Drawing.Size(328, 36);
+            this.removeCompetitorsToolStripMenuItem.Text = "&Remove Competitor(s)";
+            this.removeCompetitorsToolStripMenuItem.Click += new System.EventHandler(this.removeCompetitorsToolStripMenuItem_Click);
             // 
             // btnClearCompetitorFilter
             // 
@@ -2265,14 +2274,14 @@
             // 
             this.clearSelectionToolStripMenuItem.Name = "clearSelectionToolStripMenuItem";
             this.clearSelectionToolStripMenuItem.Size = new System.Drawing.Size(249, 36);
-            this.clearSelectionToolStripMenuItem.Text = "Clear Selection";
+            this.clearSelectionToolStripMenuItem.Text = "&Clear Selection";
             this.clearSelectionToolStripMenuItem.Click += new System.EventHandler(this.clearSelectionToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(249, 36);
-            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Text = "&Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // tmrCompTab
@@ -2557,5 +2566,6 @@
         private System.Windows.Forms.ToolStripMenuItem matchSelectionAssistantToolStripMenuItem;
         private System.Windows.Forms.Button btnEventLoadReg;
         private System.Windows.Forms.Timer tmrRegistrations;
+        private System.Windows.Forms.ToolStripMenuItem removeCompetitorsToolStripMenuItem;
     }
 }
