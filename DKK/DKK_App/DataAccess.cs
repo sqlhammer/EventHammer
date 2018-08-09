@@ -1395,6 +1395,13 @@ namespace DKK_App
         }
         #endregion
 
+        public static void TriggerRegistrationLoad()
+        {
+            string query = "EXEC msdb.dbo.sp_start_job N'Load Registration Data';";
+
+            ExecuteDDL(query);
+        }
+
         public static void AutoSetMatches (Event Event)
         {
             string query = "EXEC [Event].[spAutoSetMatches] @EventId = " + Event.EventId.ToString() + ";";

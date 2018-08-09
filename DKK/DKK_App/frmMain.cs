@@ -195,7 +195,23 @@ namespace DKK_App
         #endregion
 
         #region Home Tab
-        
+
+        private void btnEventLoadReg_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataAccess.TriggerRegistrationLoad();
+
+                MessageBox.Show(@"This operation could take up to 5 minutes. 
+
+Please refresh the list data from the Competitors tab to verify completion.", "Registration load has been triggered", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void rbApplicableMatches_CheckedChanged(object sender, EventArgs e)
         {
             if (this.rbApplicableMatches.Checked)
@@ -1622,5 +1638,6 @@ If you do not like the placements, you will have to move the competitors to diff
             DeleteEvent();
         }
         #endregion
+        
     }
 }

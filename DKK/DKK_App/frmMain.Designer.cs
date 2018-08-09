@@ -371,6 +371,7 @@
             this.btnEventLoadReg.TabIndex = 7;
             this.btnEventLoadReg.Text = "Load new registrations";
             this.btnEventLoadReg.UseVisualStyleBackColor = true;
+            this.btnEventLoadReg.Click += new System.EventHandler(this.btnEventLoadReg_Click);
             // 
             // label2
             // 
@@ -2309,7 +2310,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(2280, 1060);
+            this.ClientSize = new System.Drawing.Size(2280, 1102);
             this.Controls.Add(this.lblConnection);
             this.Controls.Add(this.btnClearCompetitorFilter);
             this.Controls.Add(this.btnClearMatchFilter);
