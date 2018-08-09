@@ -177,6 +177,27 @@ namespace DKK_App
             return QueryDivisionInformation(query);
         }
 
+        public static Division GetDivision(int id)
+        {
+            string query = @"SELECT d.DivisionId
+	                              ,d.MinimumWeight_lb
+	                              ,d.MaximumWeight_lb
+	                              ,d.WeightClass
+	                              ,d.Gender
+	                              ,d.MinimumLevelId
+	                              ,d.MaximumLevelId
+	                              ,d.MinimumAge
+	                              ,d.MaximumAge
+	                              ,d.IsKata
+	                              ,d.MatchTypeId
+	                              ,d.MatchTypeName
+	                              ,d.IsSpecialConsideration
+                            FROM [Event].[vwDivision] d
+                            WHERE d.DivisionId = " + id.ToString() + ";";
+
+            return QueryDivisionInformation(query).First();
+        }
+
         private static List<Division> QueryDivisionInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
@@ -744,6 +765,7 @@ namespace DKK_App
             Match m = QueryMatchInformation(query).FirstOrDefault();
 
             m.MatchType = GetMatchType(m.MatchType.MatchTypeId);
+            m.Division = GetDivision(m.Division.DivisionId);
 
             return m;
         }

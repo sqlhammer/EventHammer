@@ -574,6 +574,55 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
         #endregion
 
         #region Match Tab
+        private void cmiViewMatchDetails_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (tlvMatches.SelectedObject == null)
+                    return;
+                
+                MatchModel mt = (MatchModel)tlvMatches.SelectedObject;
+
+                if (mt.MatchId == null)
+                    return;
+
+                Match m = DataAccess.GetMatch((int)mt.MatchId);
+
+                string msgTitle = "Match Details";
+                string msg = String.Format(@"Division: {0}
+Sub-Division: {1}
+Match Type: {2}
+Gender: {3}
+Minimum Weight: {4}
+Maximum Weight: {5}
+Minimum Age: {6}
+Maximum Age: {7}
+Minimum Kyu: {8}
+Maximum Kyu: {9}
+Minimum Belt: {10}
+Maximum Belt: {11}
+",
+m.MatchDisplayId.ToString(),
+m.SubDivisionId.ToString(),
+m.MatchType.MatchTypeName,
+m.Division.Gender,
+m.Division.MinWeight_lb.ToString(),
+m.Division.MaxWeight_lb.ToString(),
+m.Division.MinAge.ToString(),
+m.Division.MaxAge.ToString(),
+m.Division.MinRank.Kyu,
+m.Division.MaxRank.Kyu,
+m.Division.MinRank.RankName,
+m.Division.MaxRank.RankName);
+
+                MessageBox.Show(msg, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void removeCompetitorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadRemoveMatchCompetitorForm();
@@ -1638,6 +1687,6 @@ If you do not like the placements, you will have to move the competitors to diff
             DeleteEvent();
         }
         #endregion
-        
+
     }
 }

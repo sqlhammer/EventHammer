@@ -210,7 +210,7 @@
             this.cmiMatchesCollapseAll = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiMatchNewMatch = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiDeleteMatch = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeCompetitorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiRemoveCompetitors = new System.Windows.Forms.ToolStripMenuItem();
             this.btnClearCompetitorFilter = new System.Windows.Forms.Button();
             this.pbCompany = new System.Windows.Forms.PictureBox();
             this.pbPoweredBy = new System.Windows.Forms.PictureBox();
@@ -221,6 +221,7 @@
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
             this.lblConnection = new System.Windows.Forms.Label();
             this.tmrRegistrations = new System.Windows.Forms.Timer(this.components);
+            this.cmiViewMatchDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -2175,9 +2176,10 @@
             this.cmiMatchesCollapseAll,
             this.cmiMatchNewMatch,
             this.cmiDeleteMatch,
-            this.removeCompetitorsToolStripMenuItem});
+            this.cmiRemoveCompetitors,
+            this.cmiViewMatchDetails});
             this.cmsMatches.Name = "cmsMatches";
-            this.cmsMatches.Size = new System.Drawing.Size(329, 184);
+            this.cmsMatches.Size = new System.Drawing.Size(329, 220);
             // 
             // cmiMatchesExpandAll
             // 
@@ -2207,12 +2209,12 @@
             this.cmiDeleteMatch.Text = "&Delete Match";
             this.cmiDeleteMatch.Click += new System.EventHandler(this.cmiDeleteMatch_Click);
             // 
-            // removeCompetitorsToolStripMenuItem
+            // cmiRemoveCompetitors
             // 
-            this.removeCompetitorsToolStripMenuItem.Name = "removeCompetitorsToolStripMenuItem";
-            this.removeCompetitorsToolStripMenuItem.Size = new System.Drawing.Size(328, 36);
-            this.removeCompetitorsToolStripMenuItem.Text = "&Remove Competitor(s)";
-            this.removeCompetitorsToolStripMenuItem.Click += new System.EventHandler(this.removeCompetitorsToolStripMenuItem_Click);
+            this.cmiRemoveCompetitors.Name = "cmiRemoveCompetitors";
+            this.cmiRemoveCompetitors.Size = new System.Drawing.Size(328, 36);
+            this.cmiRemoveCompetitors.Text = "&Remove Competitor(s)";
+            this.cmiRemoveCompetitors.Click += new System.EventHandler(this.removeCompetitorsToolStripMenuItem_Click);
             // 
             // btnClearCompetitorFilter
             // 
@@ -2303,6 +2305,13 @@
             // tmrRegistrations
             // 
             this.tmrRegistrations.Interval = 1000;
+            // 
+            // cmiViewMatchDetails
+            // 
+            this.cmiViewMatchDetails.Name = "cmiViewMatchDetails";
+            this.cmiViewMatchDetails.Size = new System.Drawing.Size(328, 36);
+            this.cmiViewMatchDetails.Text = "View Match Details";
+            this.cmiViewMatchDetails.Click += new System.EventHandler(this.cmiViewMatchDetails_Click);
             // 
             // frmMain
             // 
@@ -2567,6 +2576,7 @@
         private System.Windows.Forms.ToolStripMenuItem matchSelectionAssistantToolStripMenuItem;
         private System.Windows.Forms.Button btnEventLoadReg;
         private System.Windows.Forms.Timer tmrRegistrations;
-        private System.Windows.Forms.ToolStripMenuItem removeCompetitorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cmiRemoveCompetitors;
+        private System.Windows.Forms.ToolStripMenuItem cmiViewMatchDetails;
     }
 }
