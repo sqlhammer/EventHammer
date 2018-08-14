@@ -288,3 +288,5 @@ __pycache__/
 *.xsd.cs
 /Documentation/DKK Tournament DB 2017.ldb
 /Documentation/DKK Tournament DB 2017.mdb
+/DKK/DKK_Installer/DKK_Installer-cache
+/DKK/DKK_Installer/DKK_Installer-SetupFiles
