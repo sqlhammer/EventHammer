@@ -211,6 +211,7 @@
             this.cmiMatchNewMatch = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiDeleteMatch = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiRemoveCompetitors = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiViewMatchDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.btnClearCompetitorFilter = new System.Windows.Forms.Button();
             this.pbCompany = new System.Windows.Forms.PictureBox();
             this.pbPoweredBy = new System.Windows.Forms.PictureBox();
@@ -221,7 +222,9 @@
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
             this.lblConnection = new System.Windows.Forms.Label();
             this.tmrRegistrations = new System.Windows.Forms.Timer(this.components);
-            this.cmiViewMatchDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtCompInstructor = new System.Windows.Forms.TextBox();
+            this.lblCompInstructor = new System.Windows.Forms.Label();
+            this.lblCompSchoolOther = new System.Windows.Forms.Label();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -1153,7 +1156,6 @@
             // 
             // tabCompetitor
             // 
-            this.tabCompetitor.Controls.Add(this.lblCompLoading);
             this.tabCompetitor.Controls.Add(this.gbCompetitorDetails);
             this.tabCompetitor.Controls.Add(this.gbComp);
             this.tabCompetitor.Location = new System.Drawing.Point(8, 39);
@@ -1441,12 +1443,16 @@
             // 
             // gbCompDemographics
             // 
+            this.gbCompDemographics.Controls.Add(this.lblCompSchoolOther);
+            this.gbCompDemographics.Controls.Add(this.lblCompInstructor);
+            this.gbCompDemographics.Controls.Add(this.txtCompInstructor);
             this.gbCompDemographics.Controls.Add(this.btnSpecialConsiderationDetails);
             this.gbCompDemographics.Controls.Add(this.nudCompAge);
             this.gbCompDemographics.Controls.Add(this.lblAge);
             this.gbCompDemographics.Controls.Add(this.nudCompHeight);
             this.gbCompDemographics.Controls.Add(this.label31);
             this.gbCompDemographics.Controls.Add(this.cbCompBelt);
+            this.gbCompDemographics.Controls.Add(this.chbCompIsInstructor);
             this.gbCompDemographics.Controls.Add(this.label21);
             this.gbCompDemographics.Controls.Add(this.txtCompSchoolOther);
             this.gbCompDemographics.Controls.Add(this.cbCompSchool);
@@ -1458,7 +1464,6 @@
             this.gbCompDemographics.Controls.Add(this.rbCompFemale);
             this.gbCompDemographics.Controls.Add(this.cbCompTitle);
             this.gbCompDemographics.Controls.Add(this.label16);
-            this.gbCompDemographics.Controls.Add(this.chbCompIsInstructor);
             this.gbCompDemographics.Controls.Add(this.chbCompSpecialConsideration);
             this.gbCompDemographics.Controls.Add(this.txtCompLastName);
             this.gbCompDemographics.Controls.Add(this.label15);
@@ -1476,10 +1481,10 @@
             // btnSpecialConsiderationDetails
             // 
             this.btnSpecialConsiderationDetails.Enabled = false;
-            this.btnSpecialConsiderationDetails.Location = new System.Drawing.Point(995, 275);
+            this.btnSpecialConsiderationDetails.Location = new System.Drawing.Point(995, 289);
             this.btnSpecialConsiderationDetails.Margin = new System.Windows.Forms.Padding(4);
             this.btnSpecialConsiderationDetails.Name = "btnSpecialConsiderationDetails";
-            this.btnSpecialConsiderationDetails.Size = new System.Drawing.Size(159, 70);
+            this.btnSpecialConsiderationDetails.Size = new System.Drawing.Size(159, 50);
             this.btnSpecialConsiderationDetails.TabIndex = 6;
             this.btnSpecialConsiderationDetails.Text = "Details";
             this.btnSpecialConsiderationDetails.UseVisualStyleBackColor = true;
@@ -1487,7 +1492,7 @@
             // 
             // nudCompAge
             // 
-            this.nudCompAge.Location = new System.Drawing.Point(636, 134);
+            this.nudCompAge.Location = new System.Drawing.Point(592, 134);
             this.nudCompAge.Margin = new System.Windows.Forms.Padding(4);
             this.nudCompAge.Maximum = new decimal(new int[] {
             120,
@@ -1506,7 +1511,7 @@
             // lblAge
             // 
             this.lblAge.AutoSize = true;
-            this.lblAge.Location = new System.Drawing.Point(450, 136);
+            this.lblAge.Location = new System.Drawing.Point(427, 136);
             this.lblAge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAge.Name = "lblAge";
             this.lblAge.Size = new System.Drawing.Size(66, 33);
@@ -1546,7 +1551,7 @@
             // 
             this.cbCompBelt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompBelt.FormattingEnabled = true;
-            this.cbCompBelt.Location = new System.Drawing.Point(546, 208);
+            this.cbCompBelt.Location = new System.Drawing.Point(502, 208);
             this.cbCompBelt.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompBelt.Name = "cbCompBelt";
             this.cbCompBelt.Size = new System.Drawing.Size(212, 37);
@@ -1555,7 +1560,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(448, 208);
+            this.label21.Location = new System.Drawing.Point(425, 208);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(65, 33);
@@ -1566,7 +1571,7 @@
             // 
             this.txtCompSchoolOther.Enabled = false;
             this.txtCompSchoolOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompSchoolOther.Location = new System.Drawing.Point(882, 228);
+            this.txtCompSchoolOther.Location = new System.Drawing.Point(881, 177);
             this.txtCompSchoolOther.Margin = new System.Windows.Forms.Padding(4);
             this.txtCompSchoolOther.Name = "txtCompSchoolOther";
             this.txtCompSchoolOther.Size = new System.Drawing.Size(290, 35);
@@ -1576,7 +1581,7 @@
             // 
             this.cbCompSchool.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompSchool.FormattingEnabled = true;
-            this.cbCompSchool.Location = new System.Drawing.Point(882, 164);
+            this.cbCompSchool.Location = new System.Drawing.Point(880, 127);
             this.cbCompSchool.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompSchool.Name = "cbCompSchool";
             this.cbCompSchool.Size = new System.Drawing.Size(290, 37);
@@ -1586,7 +1591,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(772, 168);
+            this.label20.Location = new System.Drawing.Point(767, 131);
             this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(104, 33);
@@ -1699,7 +1704,7 @@
             // rbCompMale
             // 
             this.rbCompMale.AutoSize = true;
-            this.rbCompMale.Location = new System.Drawing.Point(632, 54);
+            this.rbCompMale.Location = new System.Drawing.Point(609, 54);
             this.rbCompMale.Margin = new System.Windows.Forms.Padding(4);
             this.rbCompMale.Name = "rbCompMale";
             this.rbCompMale.Size = new System.Drawing.Size(109, 37);
@@ -1711,7 +1716,7 @@
             // rbCompFemale
             // 
             this.rbCompFemale.AutoSize = true;
-            this.rbCompFemale.Location = new System.Drawing.Point(454, 52);
+            this.rbCompFemale.Location = new System.Drawing.Point(431, 52);
             this.rbCompFemale.Margin = new System.Windows.Forms.Padding(4);
             this.rbCompFemale.Name = "rbCompFemale";
             this.rbCompFemale.Size = new System.Drawing.Size(144, 37);
@@ -1725,7 +1730,7 @@
             this.cbCompTitle.Enabled = false;
             this.cbCompTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompTitle.FormattingEnabled = true;
-            this.cbCompTitle.Location = new System.Drawing.Point(882, 104);
+            this.cbCompTitle.Location = new System.Drawing.Point(882, 48);
             this.cbCompTitle.Margin = new System.Windows.Forms.Padding(4);
             this.cbCompTitle.Name = "cbCompTitle";
             this.cbCompTitle.Size = new System.Drawing.Size(290, 37);
@@ -1734,7 +1739,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(772, 108);
+            this.label16.Location = new System.Drawing.Point(776, 52);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(71, 33);
@@ -1744,19 +1749,19 @@
             // chbCompIsInstructor
             // 
             this.chbCompIsInstructor.AutoSize = true;
-            this.chbCompIsInstructor.Location = new System.Drawing.Point(882, 54);
+            this.chbCompIsInstructor.Location = new System.Drawing.Point(434, 292);
             this.chbCompIsInstructor.Margin = new System.Windows.Forms.Padding(4);
             this.chbCompIsInstructor.Name = "chbCompIsInstructor";
-            this.chbCompIsInstructor.Size = new System.Drawing.Size(169, 37);
+            this.chbCompIsInstructor.Size = new System.Drawing.Size(200, 37);
             this.chbCompIsInstructor.TabIndex = 11;
-            this.chbCompIsInstructor.Text = "Instructor";
+            this.chbCompIsInstructor.Text = "Is Instructor";
             this.chbCompIsInstructor.UseVisualStyleBackColor = true;
             this.chbCompIsInstructor.CheckedChanged += new System.EventHandler(this.chbCompIsInstructor_CheckedChanged);
             // 
             // chbCompSpecialConsideration
             // 
             this.chbCompSpecialConsideration.AutoSize = true;
-            this.chbCompSpecialConsideration.Location = new System.Drawing.Point(636, 287);
+            this.chbCompSpecialConsideration.Location = new System.Drawing.Point(645, 292);
             this.chbCompSpecialConsideration.Margin = new System.Windows.Forms.Padding(4);
             this.chbCompSpecialConsideration.Name = "chbCompSpecialConsideration";
             this.chbCompSpecialConsideration.Size = new System.Drawing.Size(331, 37);
@@ -2216,6 +2221,13 @@
             this.cmiRemoveCompetitors.Text = "&Remove Competitor(s)";
             this.cmiRemoveCompetitors.Click += new System.EventHandler(this.removeCompetitorsToolStripMenuItem_Click);
             // 
+            // cmiViewMatchDetails
+            // 
+            this.cmiViewMatchDetails.Name = "cmiViewMatchDetails";
+            this.cmiViewMatchDetails.Size = new System.Drawing.Size(328, 36);
+            this.cmiViewMatchDetails.Text = "View Match Details";
+            this.cmiViewMatchDetails.Click += new System.EventHandler(this.cmiViewMatchDetails_Click);
+            // 
             // btnClearCompetitorFilter
             // 
             this.btnClearCompetitorFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2306,12 +2318,35 @@
             // 
             this.tmrRegistrations.Interval = 1000;
             // 
-            // cmiViewMatchDetails
+            // txtCompInstructor
             // 
-            this.cmiViewMatchDetails.Name = "cmiViewMatchDetails";
-            this.cmiViewMatchDetails.Size = new System.Drawing.Size(328, 36);
-            this.cmiViewMatchDetails.Text = "View Match Details";
-            this.cmiViewMatchDetails.Click += new System.EventHandler(this.cmiViewMatchDetails_Click);
+            this.txtCompInstructor.Enabled = false;
+            this.txtCompInstructor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCompInstructor.Location = new System.Drawing.Point(880, 238);
+            this.txtCompInstructor.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCompInstructor.Name = "txtCompInstructor";
+            this.txtCompInstructor.Size = new System.Drawing.Size(290, 35);
+            this.txtCompInstructor.TabIndex = 28;
+            // 
+            // lblCompInstructor
+            // 
+            this.lblCompInstructor.AutoSize = true;
+            this.lblCompInstructor.Location = new System.Drawing.Point(738, 237);
+            this.lblCompInstructor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCompInstructor.Name = "lblCompInstructor";
+            this.lblCompInstructor.Size = new System.Drawing.Size(137, 33);
+            this.lblCompInstructor.TabIndex = 29;
+            this.lblCompInstructor.Text = "Instructor";
+            // 
+            // lblCompSchoolOther
+            // 
+            this.lblCompSchoolOther.AutoSize = true;
+            this.lblCompSchoolOther.Location = new System.Drawing.Point(767, 176);
+            this.lblCompSchoolOther.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCompSchoolOther.Name = "lblCompSchoolOther";
+            this.lblCompSchoolOther.Size = new System.Drawing.Size(108, 33);
+            this.lblCompSchoolOther.TabIndex = 30;
+            this.lblCompSchoolOther.Text = "(Other)";
             // 
             // frmMain
             // 
@@ -2320,6 +2355,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(2280, 1102);
+            this.Controls.Add(this.lblCompLoading);
             this.Controls.Add(this.lblConnection);
             this.Controls.Add(this.btnClearCompetitorFilter);
             this.Controls.Add(this.btnClearMatchFilter);
@@ -2359,7 +2395,6 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).EndInit();
             this.tabCompetitor.ResumeLayout(false);
-            this.tabCompetitor.PerformLayout();
             this.gbCompetitorDetails.ResumeLayout(false);
             this.gbCompAddress.ResumeLayout(false);
             this.gbCompAddress.PerformLayout();
@@ -2578,5 +2613,8 @@
         private System.Windows.Forms.Timer tmrRegistrations;
         private System.Windows.Forms.ToolStripMenuItem cmiRemoveCompetitors;
         private System.Windows.Forms.ToolStripMenuItem cmiViewMatchDetails;
+        private System.Windows.Forms.Label lblCompInstructor;
+        private System.Windows.Forms.TextBox txtCompInstructor;
+        private System.Windows.Forms.Label lblCompSchoolOther;
     }
 }

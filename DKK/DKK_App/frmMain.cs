@@ -1120,6 +1120,14 @@ If you do not like the placements, you will have to move the competitors to diff
                 return;
 
             this.cbCompSchool.SelectedIndex = this.cbCompSchool.FindStringExact(dojo.Facility.FacilityName);
+
+            if (dojo.Facility.Owner == null)
+            {
+                this.txtCompInstructor.Text = "";
+                return;
+            }
+
+            this.txtCompInstructor.Text = dojo.Facility.Owner.DisplayName;
         }
 
         private void LoadCompetitorTitle(Title title)
