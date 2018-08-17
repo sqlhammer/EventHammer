@@ -13,5 +13,6 @@ namespace DKK_App.Models
         public int Age { get; set; }
         public string Gender { get; set; }
         public string Description { get; set; }
+        public bool IsSpecialConsideration { get; set; }
     }
 }

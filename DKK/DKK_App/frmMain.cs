@@ -709,6 +709,9 @@ If you do not like the placements, you will have to move the competitors to diff
                 case "Minor (Age < 18)":
                     type = FilterType.Minor;
                     break;
+                case "Is Special Consideration":
+                    type = FilterType.IsSpecialConsideration;
+                    break;
             }
 
             return type;
@@ -837,6 +840,9 @@ If you do not like the placements, you will have to move the competitors to diff
                 this.cbCompetitorFilterBy.Items.Add(label);
                 this.cbCompFilterBy.Items.Add(label);
             }
+
+            this.cbCompetitorFilterBy.Items.Add("Is Special Consideration");
+            this.cbCompFilterBy.Items.Add("Is Special Consideration");
         }
 
         private void SetMatchFilterDropdowns()

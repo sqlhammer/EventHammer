@@ -16,6 +16,7 @@ namespace DKK_App.Enums
         MatchType,
         ApplicableMatches,
         MatchesWithTooFewCompetitors,
-        Minor
+        Minor,
+        IsSpecialConsideration
     }
 }

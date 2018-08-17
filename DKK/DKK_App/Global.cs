@@ -29,9 +29,21 @@ namespace DKK_App
                     return await FilterCompetitorModelAsync_Age(model, pattern);
                 case FilterType.Minor:
                     return await FilterCompetitorModelAsync_Minor(model);
+                case FilterType.IsSpecialConsideration:
+                    return await FilterCompetitorModelAsync_IsSpecialConsideration(model);
             }
 
             return model;
+        }
+
+        private static async Task<List<CompetitorModel>> FilterCompetitorModelAsync_IsSpecialConsideration(List<CompetitorModel> model)
+        {
+            var result = await Task.Run(() =>
+            {
+                return model.Where(m => m.IsSpecialConsideration).ToList();
+            });
+
+            return result;
         }
 
         private static async Task<List<CompetitorModel>> FilterCompetitorModelAsync_Belt(List<CompetitorModel> model, string pattern)
@@ -558,6 +570,7 @@ namespace DKK_App
                 mm.Weight = obj.Weight;
                 mm.Height = obj.Height;
                 mm.Description = obj.Description;
+                mm.IsSpecialConsideration = obj.IsSpecialConsideration;
 
                 model.Add(mm);
             }
