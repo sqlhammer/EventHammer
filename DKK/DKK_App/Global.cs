@@ -27,6 +27,15 @@ namespace DKK_App
                     return await FilterCompetitorModelAsync_Weight(model, pattern);
                 case FilterType.Age:
                     return await FilterCompetitorModelAsync_Age(model, pattern);
+            }
+
+            return model;
+        }
+
+        public static async Task<List<CompetitorModel>> FilterCompetitorModelAsync(List<CompetitorModel> model, FilterType filter)
+        {
+            switch (filter)
+            {
                 case FilterType.Minor:
                     return await FilterCompetitorModelAsync_Minor(model);
                 case FilterType.IsSpecialConsideration:

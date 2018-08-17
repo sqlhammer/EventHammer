@@ -81,14 +81,36 @@ namespace DKK_App
 
         private async Task ApplyCompetitorFilter(ComboBox cb, TextBox txtbox)
         {
-            if (cb.SelectedIndex != -1 && !String.IsNullOrEmpty(txtbox.Text))
+            if (cb.SelectedIndex == -1)
+                return;
+
+            FilterType type = TranslateToFilterType(cb.SelectedItem.ToString());
+            
+            if (type == FilterType.Minor || type == FilterType.IsSpecialConsideration)
             {
-                FilterType type = TranslateToFilterType(cb.SelectedItem.ToString());
-
-                var model = await Global.FilterCompetitorModelAsync(CompetitorModels, type, txtbox.Text);
-
-                RefreshCompetitors(model);
+                await ApplyCompetitorFilter(type);
             }
+            else if (!String.IsNullOrEmpty(txtbox.Text))
+            {
+                await ApplyCompetitorFilter(type, txtbox.Text);
+            }
+        }
+
+        private async Task ApplyCompetitorFilter(FilterType type, string pattern)
+        {
+            if (String.IsNullOrEmpty(pattern))
+                return;
+            
+            var model = await Global.FilterCompetitorModelAsync(CompetitorModels, type, pattern);
+
+            RefreshCompetitors(model);
+        }
+
+        private async Task ApplyCompetitorFilter(FilterType type)
+        {
+            var model = await Global.FilterCompetitorModelAsync(CompetitorModels, type);
+
+            RefreshCompetitors(model);
         }
 
         public void RefreshMatchCompetitorViews()
