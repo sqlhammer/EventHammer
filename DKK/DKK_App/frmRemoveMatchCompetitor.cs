@@ -48,16 +48,18 @@ namespace DKK_App
         private void btnRemove_Click(object sender, System.EventArgs e)
         {
             List<MatchModel> mm = new List<MatchModel>();
-            
+            MatchModel match = new MatchModel();
+
+
             foreach (int i in lbCompetitors.SelectedIndices)
             {
-                MatchModel match = Match.Children.FirstOrDefault(m => m.DisplayName == lbCompetitors.Items[i].ToString());
+                match = Match.Children.FirstOrDefault(m => m.DisplayName == lbCompetitors.Items[i].ToString());
                 match.MatchId = Match.MatchId;
                 mm.Add(match);
             }
 
             RemoveMatchCompetitors(mm);
-            frmMain.RefreshMatchCompetitorViews();
+            frmMain.RemoveCompetitorFromMatchView(match.MatchId, match.CompetitorId);
             CloseForm();
         }
 

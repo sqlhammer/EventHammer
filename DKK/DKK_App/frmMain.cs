@@ -645,10 +645,57 @@ m.Division.MaxRank.RankName);
             }
         }
 
+        public void RemoveCompetitorFromMatchView(int? MatchId, int? CompetitorId)
+        {
+            if (MatchId == null || CompetitorId == null)
+                return;
+
+            MatchModel match = MatchModels.Where(m => m.MatchId == MatchId).FirstOrDefault();
+            MatchModel newMatch = match;
+
+            if (match == null)
+                return;
+
+            MatchModel competitor = match.Children.Where(m => m.CompetitorId == CompetitorId).FirstOrDefault();
+
+            if (competitor == null)
+                return;
+
+            newMatch.Children.Remove(competitor);
+
+            MatchModels.Remove(match);
+            MatchModels.Add(newMatch);
+
+            //We need to resort for display purposes
+            MatchModels.Sort(delegate (MatchModel x, MatchModel y)
+            {
+                //Handle NULLs even though I do not expect them
+                if (x.MatchDisplayId == null && y.MatchDisplayId == null) return 0;
+                if (x.MatchDisplayId == null) return -1;
+                if (y.MatchDisplayId == null) return 1;
+
+                //Sort by division
+                if (x.MatchDisplayId < y.MatchDisplayId) return -1;
+                if (x.MatchDisplayId > y.MatchDisplayId) return 1;
+
+                //Sort by sub-division if divisions match
+                if (x.MatchDisplayId == y.MatchDisplayId)
+                {
+                    if (x.SubDivisionId == y.SubDivisionId) return 0;
+                    if (x.SubDivisionId < y.SubDivisionId) return -1;
+                    if (x.SubDivisionId > y.SubDivisionId) return 1;
+                }
+
+                //It should never get here but I needed to guarantee all code paths return a value.
+                return 0;
+            });
+
+            RefreshMatches(MatchModels);
+        }
+
         private void removeCompetitorsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadRemoveMatchCompetitorForm();
-
         }
         
         private void LoadRemoveMatchCompetitorForm()
