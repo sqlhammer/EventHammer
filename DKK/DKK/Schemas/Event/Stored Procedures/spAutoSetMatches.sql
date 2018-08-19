@@ -89,10 +89,12 @@ BEGIN
 			MatchCompetitorId
 			, CompetitorId
 			, MatchPlacement 
+			, MatchId
 		)
 		SELECT MatchCompetitorId
 			, CompetitorId
 			, MatchPlacement
+			, MatchId
 		FROM [Event].[MatchCompetitor];
 
 		SET IDENTITY_INSERT #MatchCompetitor OFF;
