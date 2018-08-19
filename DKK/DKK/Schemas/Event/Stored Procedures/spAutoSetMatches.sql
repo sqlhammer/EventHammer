@@ -230,7 +230,22 @@ BEGIN
 
 		--5. Split matches when there are too many competitors in one match.
 
-		--TODO
+		UPDATE c
+		SET c.SubDivisionId = new_sub_div.SubDivisionId
+		FROM #comp_complete c
+		INNER JOIN 
+		(
+			SELECT 
+				FLOOR(dt.rownum / 9) + 1 SubDivisionId --Maximum of 8 per sub-division
+				,dt.CompetitorId,dt.DivisionId
+			FROM 
+			(
+				SELECT 
+					ROW_NUMBER() OVER (PARTITION BY cc.DivisionId ORDER BY (SELECT NEWID())) rownum
+					,cc.CompetitorId,cc.DivisionId
+				FROM #comp_complete cc 
+			) dt
+		) new_sub_div ON new_sub_div.DivisionId = c.DivisionId AND new_sub_div.CompetitorId = c.CompetitorId
 
 		--6. Load into tables where competitors are not placed in match type
 
