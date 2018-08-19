@@ -149,28 +149,28 @@ BEGIN
 		),
 		comp_complete AS
 		(
-			SELECT c.CompetitorId,c.PersonId,c.DateOfBirth,c.Age,c.Weight,c.RankId,c.DojoId,c.ParentId,c.IsMinor,c.EventId,c.IsKata,c.IsWeaponKata,c.IsSemiKnockdown,c.IsKnockdown,c.FirstName,c.LastName,c.DisplayName,c.TitleId,c.IsInstructor,c.Gender,c.PhoneNumber,c.EmailAddress,c.StreetAddress1,c.StreetAddress2,c.AppartmentCode,c.City,c.StateProvince,c.PostalCode,c.Country,c.Name,c.Level,c.Kyu,c.DivisionId,c.MinimumWeight_lb,c.MaximumWeight_lb,c.WeightClass,c.MinimumLevelId,c.MaximumLevelId,c.MinimumAge,c.MaximumAge,mt.MatchTypeId,mt.Name MatchTypeName,mt.IsSpecialConsideration 
+			SELECT c.CompetitorId,c.PersonId,c.DateOfBirth,c.Age,c.Weight,c.RankId,c.DojoId,c.ParentId,c.IsMinor,c.EventId,c.IsKata,c.IsWeaponKata,c.IsSemiKnockdown,c.IsKnockdown,c.FirstName,c.LastName,c.DisplayName,c.TitleId,c.IsInstructor,c.Gender,c.PhoneNumber,c.EmailAddress,c.StreetAddress1,c.StreetAddress2,c.AppartmentCode,c.City,c.StateProvince,c.PostalCode,c.Country,c.Name,c.Level,c.Kyu,c.DivisionId,c.MinimumWeight_lb,c.MaximumWeight_lb,c.WeightClass,c.MinimumLevelId,c.MaximumLevelId,c.MinimumAge,c.MaximumAge,mt.MatchTypeId,mt.Name MatchTypeName,mt.IsSpecialConsideration ,1 SubDivisionId
 			FROM comp c
 			INNER JOIN [Event].[MatchType] mt ON mt.IsSpecialConsideration = c.IsSpecialConsideration
 												AND mt.[name] = 'Kata'
 												AND c.IsKata = 1
 												AND c.IsKataDivision = 1
 			UNION ALL
-			SELECT c.CompetitorId,c.PersonId,c.DateOfBirth,c.Age,c.Weight,c.RankId,c.DojoId,c.ParentId,c.IsMinor,c.EventId,c.IsKata,c.IsWeaponKata,c.IsSemiKnockdown,c.IsKnockdown,c.FirstName,c.LastName,c.DisplayName,c.TitleId,c.IsInstructor,c.Gender,c.PhoneNumber,c.EmailAddress,c.StreetAddress1,c.StreetAddress2,c.AppartmentCode,c.City,c.StateProvince,c.PostalCode,c.Country,c.Name,c.Level,c.Kyu,c.DivisionId,c.MinimumWeight_lb,c.MaximumWeight_lb,c.WeightClass,c.MinimumLevelId,c.MaximumLevelId,c.MinimumAge,c.MaximumAge,mt.MatchTypeId,mt.Name MatchTypeName,mt.IsSpecialConsideration 
+			SELECT c.CompetitorId,c.PersonId,c.DateOfBirth,c.Age,c.Weight,c.RankId,c.DojoId,c.ParentId,c.IsMinor,c.EventId,c.IsKata,c.IsWeaponKata,c.IsSemiKnockdown,c.IsKnockdown,c.FirstName,c.LastName,c.DisplayName,c.TitleId,c.IsInstructor,c.Gender,c.PhoneNumber,c.EmailAddress,c.StreetAddress1,c.StreetAddress2,c.AppartmentCode,c.City,c.StateProvince,c.PostalCode,c.Country,c.Name,c.Level,c.Kyu,c.DivisionId,c.MinimumWeight_lb,c.MaximumWeight_lb,c.WeightClass,c.MinimumLevelId,c.MaximumLevelId,c.MinimumAge,c.MaximumAge,mt.MatchTypeId,mt.Name MatchTypeName,mt.IsSpecialConsideration ,1 SubDivisionId
 			FROM comp c
 			INNER JOIN [Event].[MatchType] mt ON mt.IsSpecialConsideration = c.IsSpecialConsideration
 												AND mt.[name] = 'Weapon Kata'
 												AND c.IsWeaponKata = 1
 												AND c.IsKataDivision = 1
 			UNION ALL
-			SELECT c.CompetitorId,c.PersonId,c.DateOfBirth,c.Age,c.Weight,c.RankId,c.DojoId,c.ParentId,c.IsMinor,c.EventId,c.IsKata,c.IsWeaponKata,c.IsSemiKnockdown,c.IsKnockdown,c.FirstName,c.LastName,c.DisplayName,c.TitleId,c.IsInstructor,c.Gender,c.PhoneNumber,c.EmailAddress,c.StreetAddress1,c.StreetAddress2,c.AppartmentCode,c.City,c.StateProvince,c.PostalCode,c.Country,c.Name,c.Level,c.Kyu,c.DivisionId,c.MinimumWeight_lb,c.MaximumWeight_lb,c.WeightClass,c.MinimumLevelId,c.MaximumLevelId,c.MinimumAge,c.MaximumAge,mt.MatchTypeId,mt.Name MatchTypeName,mt.IsSpecialConsideration 
+			SELECT c.CompetitorId,c.PersonId,c.DateOfBirth,c.Age,c.Weight,c.RankId,c.DojoId,c.ParentId,c.IsMinor,c.EventId,c.IsKata,c.IsWeaponKata,c.IsSemiKnockdown,c.IsKnockdown,c.FirstName,c.LastName,c.DisplayName,c.TitleId,c.IsInstructor,c.Gender,c.PhoneNumber,c.EmailAddress,c.StreetAddress1,c.StreetAddress2,c.AppartmentCode,c.City,c.StateProvince,c.PostalCode,c.Country,c.Name,c.Level,c.Kyu,c.DivisionId,c.MinimumWeight_lb,c.MaximumWeight_lb,c.WeightClass,c.MinimumLevelId,c.MaximumLevelId,c.MinimumAge,c.MaximumAge,mt.MatchTypeId,mt.Name MatchTypeName,mt.IsSpecialConsideration ,1 SubDivisionId
 			FROM comp c
 			INNER JOIN [Event].[MatchType] mt ON mt.IsSpecialConsideration = c.IsSpecialConsideration
 												AND mt.[name] = 'Semi-Knockdown'
 												AND c.IsSemiKnockdown = 1
 												AND c.IsKataDivision = 0
 			UNION ALL
-			SELECT c.CompetitorId,c.PersonId,c.DateOfBirth,c.Age,c.Weight,c.RankId,c.DojoId,c.ParentId,c.IsMinor,c.EventId,c.IsKata,c.IsWeaponKata,c.IsSemiKnockdown,c.IsKnockdown,c.FirstName,c.LastName,c.DisplayName,c.TitleId,c.IsInstructor,c.Gender,c.PhoneNumber,c.EmailAddress,c.StreetAddress1,c.StreetAddress2,c.AppartmentCode,c.City,c.StateProvince,c.PostalCode,c.Country,c.Name,c.Level,c.Kyu,c.DivisionId,c.MinimumWeight_lb,c.MaximumWeight_lb,c.WeightClass,c.MinimumLevelId,c.MaximumLevelId,c.MinimumAge,c.MaximumAge,mt.MatchTypeId,mt.Name MatchTypeName,mt.IsSpecialConsideration 
+			SELECT c.CompetitorId,c.PersonId,c.DateOfBirth,c.Age,c.Weight,c.RankId,c.DojoId,c.ParentId,c.IsMinor,c.EventId,c.IsKata,c.IsWeaponKata,c.IsSemiKnockdown,c.IsKnockdown,c.FirstName,c.LastName,c.DisplayName,c.TitleId,c.IsInstructor,c.Gender,c.PhoneNumber,c.EmailAddress,c.StreetAddress1,c.StreetAddress2,c.AppartmentCode,c.City,c.StateProvince,c.PostalCode,c.Country,c.Name,c.Level,c.Kyu,c.DivisionId,c.MinimumWeight_lb,c.MaximumWeight_lb,c.WeightClass,c.MinimumLevelId,c.MaximumLevelId,c.MinimumAge,c.MaximumAge,mt.MatchTypeId,mt.Name MatchTypeName,mt.IsSpecialConsideration,1 SubDivisionId
 			FROM comp c
 			INNER JOIN [Event].[MatchType] mt ON mt.IsSpecialConsideration = c.IsSpecialConsideration
 												AND mt.[name] = 'Knockdown'
