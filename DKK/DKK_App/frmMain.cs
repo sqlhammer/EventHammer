@@ -645,29 +645,10 @@ m.Division.MaxRank.RankName);
             }
         }
 
-        public void RemoveCompetitorFromMatchView(int? MatchId, int? CompetitorId)
+        private List<MatchModel> SortMatchModels(List<MatchModel> models)
         {
-            if (MatchId == null || CompetitorId == null)
-                return;
-
-            MatchModel match = MatchModels.Where(m => m.MatchId == MatchId).FirstOrDefault();
-            MatchModel newMatch = match;
-
-            if (match == null)
-                return;
-
-            MatchModel competitor = match.Children.Where(m => m.CompetitorId == CompetitorId).FirstOrDefault();
-
-            if (competitor == null)
-                return;
-
-            newMatch.Children.Remove(competitor);
-
-            MatchModels.Remove(match);
-            MatchModels.Add(newMatch);
-
             //We need to resort for display purposes
-            MatchModels.Sort(delegate (MatchModel x, MatchModel y)
+            models.Sort(delegate (MatchModel x, MatchModel y)
             {
                 //Handle NULLs even though I do not expect them
                 if (x.MatchDisplayId == null && y.MatchDisplayId == null) return 0;
@@ -690,6 +671,32 @@ m.Division.MaxRank.RankName);
                 return 0;
             });
 
+            return models;
+        }
+
+        public void RemoveCompetitorFromMatchView(int? MatchId, int? CompetitorId)
+        {
+            if (MatchId == null || CompetitorId == null)
+                return;
+
+            List<MatchModel> models = MatchModels;
+            MatchModel match = models.Where(m => m.MatchId == MatchId).FirstOrDefault();
+            MatchModel newMatch = match;
+
+            if (match == null)
+                return;
+
+            MatchModel competitor = match.Children.Where(m => m.CompetitorId == CompetitorId).FirstOrDefault();
+
+            if (competitor == null)
+                return;
+
+            newMatch.Children.Remove(competitor);
+
+            models.Remove(match);
+            models.Add(newMatch);
+
+            MatchModels = SortMatchModels(models);
             RefreshMatches(MatchModels);
         }
 
