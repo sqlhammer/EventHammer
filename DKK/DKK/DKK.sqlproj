@@ -138,9 +138,10 @@
     <Build Include="Schemas\Stage\Functions\parseJSON.sql" />
     <None Include="Schemas\Person\Data\Person.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spDeleteCompetitorFromMatch.sql" />
+    <Build Include="Schemas\Event\Views\vwReportSchoolList.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Publish\DKK-Test.publish.xml" />
+    <None Include="Publish\dev-eventhammer.publish.xml" />
     <None Include="Schemas\Event\Data\Rank.sql" />
     <None Include="DKK-TestDataGeneration.sqlgen" />
     <None Include="Schemas\Stage\Data\CalderaFormEntry.sql" />
