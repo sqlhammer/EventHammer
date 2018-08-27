@@ -7,6 +7,7 @@ using DKK_App.Models;
 using DKK_App.Enums;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Configuration;
 
 namespace DKK_App
 {
@@ -267,22 +268,26 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
 
         private void btnAllEvents_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_WeighIns");
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_WeighIns", report_url));
         }
 
         private void btnSchoolsOwners_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_WeighIns");
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_WeighIns", report_url));
         }
 
         private void btnWeighInList_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_WeighIns");
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_WeighIns", report_url));
         }
 
         private void btnDivisionRingNumbers_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_DivisionNumbers");
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_DivisionNumbers", report_url));
         }
 
         private void btnKata_Click(object sender, EventArgs e)
@@ -290,7 +295,8 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
             string[] Params = { CurrentEvent.EventId.ToString(), "Kata", "false" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", ParamNames, Params);
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", report_url), ParamNames, Params);
         }
 
         private void btnWeaponKata_Click(object sender, EventArgs e)
@@ -298,7 +304,8 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
             string[] Params = { CurrentEvent.EventId.ToString(), "Weapon Kata", "false" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", ParamNames, Params);
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", report_url), ParamNames, Params);
         }
 
         private void btnSemiKnockdown_Click(object sender, EventArgs e)
@@ -306,7 +313,8 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
             string[] Params = { CurrentEvent.EventId.ToString(), "Semi-Knockdown", "false" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", ParamNames, Params);
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", report_url), ParamNames, Params);
         }
 
         private void btnKnockdown_Click(object sender, EventArgs e)
@@ -314,7 +322,8 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
             string[] Params = { CurrentEvent.EventId.ToString(), "Knockdown", "false" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", ParamNames, Params);
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", report_url), ParamNames, Params);
         }
 
         private void btnKataSpecial_Click(object sender, EventArgs e)
@@ -322,7 +331,8 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
             string[] Params = { CurrentEvent.EventId.ToString(), "Kata", "true" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", ParamNames, Params);
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", report_url), ParamNames, Params);
         }
 
         private void btnWeaponKataSpecial_Click(object sender, EventArgs e)
@@ -330,7 +340,8 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
             string[] Params = { CurrentEvent.EventId.ToString(), "Weapon Kata", "true" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", ParamNames, Params);
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_KataScoreCard", report_url), ParamNames, Params);
         }
 
         private void btnSemiKnockdownSpecial_Click(object sender, EventArgs e)
@@ -338,7 +349,8 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
             string[] Params = { CurrentEvent.EventId.ToString(), "Semi-Knockdown", "true" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", ParamNames, Params);
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", report_url), ParamNames, Params);
         }
 
         private void btnKnockdownSpecial_Click(object sender, EventArgs e)
@@ -346,7 +358,8 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             string[] ParamNames = { "EventId", "MatchTypeName", "IsSpecialConsideration" };
             string[] Params = { CurrentEvent.EventId.ToString(), "Knockdown", "true" };
 
-            LaunchWebsite("http://dkktest1.eastus.cloudapp.azure.com/ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", ParamNames, Params);
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_KnockdownScoreCard", report_url), ParamNames, Params);
         }
 
         private void pbCompany_Click(object sender, EventArgs e)

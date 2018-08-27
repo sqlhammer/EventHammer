@@ -145,6 +145,7 @@
     <None Include="Schemas\Event\Data\Rank.sql" />
     <None Include="DKK-TestDataGeneration.sqlgen" />
     <None Include="Schemas\Stage\Data\CalderaFormEntry.sql" />
+    <None Include="Publish\eventhammer.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Publish\Script.PostDeployment.sql" />
