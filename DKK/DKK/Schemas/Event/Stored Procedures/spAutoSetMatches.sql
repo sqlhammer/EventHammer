@@ -252,29 +252,45 @@ BEGIN
 		--6. Load into tables where competitors are not placed in match type
 
 		DECLARE @MatchDisplayId VARCHAR(10)
-		SELECT @MatchDisplayId = CAST(ISNULL(MAX(m.MatchDisplayId),0) + 1 AS VARCHAR(10))
+		SELECT @MatchDisplayId = CAST(ISNULL(MAX(m.MatchDisplayId),0) AS VARCHAR(10))
 		FROM [Event].[Match] m
 		WHERE m.EventId = @EventId
-
-		EXEC ('ALTER SEQUENCE [Event].[MatchSequence] RESTART WITH ' + @MatchDisplayId)
-			
+					
 		BEGIN TRANSACTION;
 
 			;WITH CTE AS
 			(
-				SELECT DISTINCT @EventId EventId, cc.MatchTypeId, cc.DivisionId
+				SELECT DISTINCT @EventId EventId, cc.MatchTypeId, cc.DivisionId, cc.SubDivisionId
 				FROM #comp_complete cc
 				LEFT JOIN [Event].[Match] m ON m.EventId = @EventId
 												AND m.MatchTypeId = cc.MatchTypeId
 												AND m.DivisionId = cc.DivisionId
+												AND m.SubDivisionId = cc.SubDivisionId
 				WHERE m.MatchId IS NULL
+			),
+			Divisions AS
+			(
+				SELECT CTE.EventId
+					  ,CTE.MatchTypeId
+					  ,CTE.DivisionId 
+					  ,CTE.SubDivisionId
+					,(ROW_NUMBER() OVER (ORDER BY CTE.MatchTypeId, CTE.DivisionId)) + @MatchDisplayId MatchDisplayId
+				FROM CTE
+				WHERE CTE.SubDivisionId = 1
+			),
+			DivisionsAndSubDivisions AS
+			(
+				SELECT c.EventId
+					  ,c.MatchTypeId
+					  ,c.DivisionId
+					  ,c.SubDivisionId
+					  ,d.MatchDisplayId
+				FROM Divisions d
+				INNER JOIN CTE c ON c.MatchTypeId = d.MatchTypeId AND c.DivisionId = d.DivisionId
 			)
-			INSERT INTO [Event].[Match] (EventId,MatchTypeId,DivisionId,MatchDisplayId)
-			SELECT CTE.EventId
-				  ,CTE.MatchTypeId
-				  ,CTE.DivisionId 
-				  ,NEXT VALUE FOR [Event].[MatchSequence] OVER (ORDER BY CTE.MatchTypeId, CTE.DivisionId)
-			FROM CTE
+			INSERT INTO [Event].[Match] (EventId,MatchTypeId,DivisionId,MatchDisplayId,SubDivisionId)
+			SELECT EventId,MatchTypeId,DivisionId,MatchDisplayId,SubDivisionId
+			FROM DivisionsAndSubDivisions
 
 			INSERT INTO [Event].[MatchCompetitor] (MatchId ,CompetitorId, EventId)
 			SELECT DISTINCT m.MatchId, cc.CompetitorId, cc.EventId
@@ -282,6 +298,7 @@ BEGIN
 			INNER JOIN [Event].[Match] m ON m.EventId = @EventId
 											AND m.MatchTypeId = cc.MatchTypeId
 											AND m.DivisionId = cc.DivisionId
+											AND m.SubDivisionId = cc.SubDivisionId
 			LEFT JOIN [Event].[MatchCompetitor] mc ON mc.MatchId = m.MatchId
 														AND mc.CompetitorId = cc.CompetitorId
 			WHERE mc.MatchCompetitorId IS NULL;

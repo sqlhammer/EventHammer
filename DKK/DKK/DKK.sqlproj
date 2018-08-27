@@ -122,7 +122,6 @@
     <Build Include="Schemas\Event\Stored Procedures\spUpdateEvent.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spDeleteEvent.sql" />
     <Build Include="Schemas\Event\Views\vwMatchCompetitorDetail.sql" />
-    <Build Include="Schemas\Event\MatchSequence.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spPurgeCompetitors.sql" />
     <Build Include="Schemas\Event\Views\vwDivision.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spAddCompetitorToMatch.sql" />
@@ -146,6 +145,7 @@
     <None Include="DKK-TestDataGeneration.sqlgen" />
     <None Include="Schemas\Stage\Data\CalderaFormEntry.sql" />
     <None Include="Publish\eventhammer.publish.xml" />
+    <None Include="SQLAgentJobs\SQLAgentJob-Load-Registration-Data.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Publish\Script.PostDeployment.sql" />

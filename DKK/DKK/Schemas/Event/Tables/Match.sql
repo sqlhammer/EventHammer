@@ -8,6 +8,6 @@
 	,SubDivisionId INT NOT NULL CONSTRAINT DF_Event_Match_SubDivisionId DEFAULT (1)
 )
 GO
-CREATE UNIQUE INDEX UQ_Event_Match_MatchDisplayId_EventId
-ON [Event].[Match] (MatchDisplayId, SubDivisionId, EventId)
+CREATE UNIQUE INDEX UQ_Event_Match_MatchDisplayId_DivisionId_SubDivisionId_EventId
+ON [Event].[Match] (MatchDisplayId, DivisionId, SubDivisionId, EventId)
 GO
