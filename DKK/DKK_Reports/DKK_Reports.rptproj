@@ -56,6 +56,10 @@
       <MimeType>image/x-png</MimeType>
     </ResourceProjectItem>
     <ProjectItem>
+      <Name>Master_CompetitorRegistrationForm.rdl</Name>
+      <FullPath>Master_CompetitorRegistrationForm.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Master_CompetitorsByDojo.rdl</Name>
       <FullPath>Master_CompetitorsByDojo.rdl</FullPath>
     </ProjectItem>
@@ -96,8 +100,8 @@
       <FullPath>SubReport_DojoHeader.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Master_CompetitorRegistrationForm.rdl</Name>
-      <FullPath>Master_CompetitorRegistrationForm.rdl</FullPath>
+      <Name>Master_SchoolList.rdl</Name>
+      <FullPath>Master_SchoolList.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -110,7 +114,6 @@
         <TargetServerURL>http://dev-eventhammer.eastus2.cloudapp.azure.com/Reportserver</TargetServerURL>
         <TargetFolder>DKK_Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
-        <OverwriteDataSources>true</OverwriteDataSources>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
         <OverwriteDatasets>true</OverwriteDatasets>
         <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
@@ -138,7 +141,6 @@
         <TargetServerURL>http://eventhammer.eastus2.cloudapp.azure.com/reportserver</TargetServerURL>
         <TargetFolder>DKK_Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
-        <OverwriteDataSources>true</OverwriteDataSources>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
         <OverwriteDatasets>true</OverwriteDatasets>
         <TargetReportPartFolder>Report Parts</TargetReportPartFolder>

@@ -4,7 +4,7 @@ SET IDENTITY_INSERT [Event].[Event] ON
 MERGE INTO [Event].[Event] AS [target]
 USING
 (VALUES
-(1, 'World Kanreikai Open', 1, '20181015')
+(1, 'World Kanreikai Open', 1, '20181013')
 )
 AS [source] ([EventId] ,[Name] ,[EventTypeId] ,[Date])
 ON [target].[EventId] = [source].[EventId]
