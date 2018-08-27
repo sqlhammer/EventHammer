@@ -109,6 +109,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tabCompetitor = new System.Windows.Forms.TabPage();
+            this.lblCompLoading = new System.Windows.Forms.Label();
             this.gbCompetitorDetails = new System.Windows.Forms.GroupBox();
             this.btnCompDelete = new System.Windows.Forms.Button();
             this.btnCompClear = new System.Windows.Forms.Button();
@@ -178,7 +179,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtCompFilter = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.lblCompLoading = new System.Windows.Forms.Label();
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.retryConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -225,6 +225,7 @@
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
             this.lblConnection = new System.Windows.Forms.Label();
             this.tmrRegistrations = new System.Windows.Forms.Timer(this.components);
+            this.btnRegForm = new System.Windows.Forms.Button();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -286,6 +287,7 @@
             // 
             // gbAdmin
             // 
+            this.gbAdmin.Controls.Add(this.btnRegForm);
             this.gbAdmin.Controls.Add(this.btnSchoolsOwners);
             this.gbAdmin.Controls.Add(this.btnAllEvents);
             this.gbAdmin.Controls.Add(this.btnDivisionRingNumbers);
@@ -293,7 +295,7 @@
             this.gbAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F);
             this.gbAdmin.Location = new System.Drawing.Point(7, 380);
             this.gbAdmin.Name = "gbAdmin";
-            this.gbAdmin.Size = new System.Drawing.Size(979, 554);
+            this.gbAdmin.Size = new System.Drawing.Size(1092, 554);
             this.gbAdmin.TabIndex = 5;
             this.gbAdmin.TabStop = false;
             this.gbAdmin.Text = "Administrative Reports";
@@ -301,10 +303,10 @@
             // btnSchoolsOwners
             // 
             this.btnSchoolsOwners.Enabled = false;
-            this.btnSchoolsOwners.Location = new System.Drawing.Point(532, 51);
+            this.btnSchoolsOwners.Location = new System.Drawing.Point(377, 51);
             this.btnSchoolsOwners.Margin = new System.Windows.Forms.Padding(4);
             this.btnSchoolsOwners.Name = "btnSchoolsOwners";
-            this.btnSchoolsOwners.Size = new System.Drawing.Size(410, 210);
+            this.btnSchoolsOwners.Size = new System.Drawing.Size(330, 210);
             this.btnSchoolsOwners.TabIndex = 11;
             this.btnSchoolsOwners.Text = "Schools and Owners";
             this.btnSchoolsOwners.UseVisualStyleBackColor = true;
@@ -313,10 +315,10 @@
             // btnAllEvents
             // 
             this.btnAllEvents.Enabled = false;
-            this.btnAllEvents.Location = new System.Drawing.Point(38, 51);
+            this.btnAllEvents.Location = new System.Drawing.Point(18, 51);
             this.btnAllEvents.Margin = new System.Windows.Forms.Padding(4);
             this.btnAllEvents.Name = "btnAllEvents";
-            this.btnAllEvents.Size = new System.Drawing.Size(410, 210);
+            this.btnAllEvents.Size = new System.Drawing.Size(330, 210);
             this.btnAllEvents.TabIndex = 10;
             this.btnAllEvents.Text = "All Events";
             this.btnAllEvents.UseVisualStyleBackColor = true;
@@ -325,10 +327,10 @@
             // btnDivisionRingNumbers
             // 
             this.btnDivisionRingNumbers.Enabled = false;
-            this.btnDivisionRingNumbers.Location = new System.Drawing.Point(532, 311);
+            this.btnDivisionRingNumbers.Location = new System.Drawing.Point(601, 311);
             this.btnDivisionRingNumbers.Margin = new System.Windows.Forms.Padding(4);
             this.btnDivisionRingNumbers.Name = "btnDivisionRingNumbers";
-            this.btnDivisionRingNumbers.Size = new System.Drawing.Size(410, 210);
+            this.btnDivisionRingNumbers.Size = new System.Drawing.Size(330, 210);
             this.btnDivisionRingNumbers.TabIndex = 9;
             this.btnDivisionRingNumbers.Text = "Division Ring Numbers";
             this.btnDivisionRingNumbers.UseVisualStyleBackColor = true;
@@ -337,10 +339,10 @@
             // btnWeighInList
             // 
             this.btnWeighInList.Enabled = false;
-            this.btnWeighInList.Location = new System.Drawing.Point(38, 311);
+            this.btnWeighInList.Location = new System.Drawing.Point(163, 311);
             this.btnWeighInList.Margin = new System.Windows.Forms.Padding(4);
             this.btnWeighInList.Name = "btnWeighInList";
-            this.btnWeighInList.Size = new System.Drawing.Size(410, 210);
+            this.btnWeighInList.Size = new System.Drawing.Size(330, 210);
             this.btnWeighInList.TabIndex = 8;
             this.btnWeighInList.Text = "Weigh-In List";
             this.btnWeighInList.UseVisualStyleBackColor = true;
@@ -361,7 +363,7 @@
             this.gbEvent.Margin = new System.Windows.Forms.Padding(4);
             this.gbEvent.Name = "gbEvent";
             this.gbEvent.Padding = new System.Windows.Forms.Padding(4);
-            this.gbEvent.Size = new System.Drawing.Size(980, 356);
+            this.gbEvent.Size = new System.Drawing.Size(1093, 356);
             this.gbEvent.TabIndex = 0;
             this.gbEvent.TabStop = false;
             this.gbEvent.Text = "Select Event";
@@ -369,9 +371,9 @@
             // btnEventLoadReg
             // 
             this.btnEventLoadReg.Enabled = false;
-            this.btnEventLoadReg.Location = new System.Drawing.Point(759, 92);
+            this.btnEventLoadReg.Location = new System.Drawing.Point(778, 92);
             this.btnEventLoadReg.Name = "btnEventLoadReg";
-            this.btnEventLoadReg.Size = new System.Drawing.Size(214, 252);
+            this.btnEventLoadReg.Size = new System.Drawing.Size(288, 252);
             this.btnEventLoadReg.TabIndex = 7;
             this.btnEventLoadReg.Text = "Load new registrations";
             this.btnEventLoadReg.UseVisualStyleBackColor = true;
@@ -465,11 +467,11 @@
             this.gbScorecards.Controls.Add(this.btnWeaponKata);
             this.gbScorecards.Controls.Add(this.btnKata);
             this.gbScorecards.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F);
-            this.gbScorecards.Location = new System.Drawing.Point(994, 8);
+            this.gbScorecards.Location = new System.Drawing.Point(1129, 8);
             this.gbScorecards.Margin = new System.Windows.Forms.Padding(4);
             this.gbScorecards.Name = "gbScorecards";
             this.gbScorecards.Padding = new System.Windows.Forms.Padding(4);
-            this.gbScorecards.Size = new System.Drawing.Size(1190, 925);
+            this.gbScorecards.Size = new System.Drawing.Size(1100, 925);
             this.gbScorecards.TabIndex = 0;
             this.gbScorecards.TabStop = false;
             this.gbScorecards.Text = "Scorecards";
@@ -488,7 +490,7 @@
             // btnKnockdownSpecial
             // 
             this.btnKnockdownSpecial.Enabled = false;
-            this.btnKnockdownSpecial.Location = new System.Drawing.Point(653, 663);
+            this.btnKnockdownSpecial.Location = new System.Drawing.Point(578, 663);
             this.btnKnockdownSpecial.Margin = new System.Windows.Forms.Padding(4);
             this.btnKnockdownSpecial.Name = "btnKnockdownSpecial";
             this.btnKnockdownSpecial.Size = new System.Drawing.Size(333, 250);
@@ -500,7 +502,7 @@
             // btnSemiKnockdownSpecial
             // 
             this.btnSemiKnockdownSpecial.Enabled = false;
-            this.btnSemiKnockdownSpecial.Location = new System.Drawing.Point(227, 663);
+            this.btnSemiKnockdownSpecial.Location = new System.Drawing.Point(177, 663);
             this.btnSemiKnockdownSpecial.Margin = new System.Windows.Forms.Padding(4);
             this.btnSemiKnockdownSpecial.Name = "btnSemiKnockdownSpecial";
             this.btnSemiKnockdownSpecial.Size = new System.Drawing.Size(333, 250);
@@ -512,7 +514,7 @@
             // btnWeaponKataSpecial
             // 
             this.btnWeaponKataSpecial.Enabled = false;
-            this.btnWeaponKataSpecial.Location = new System.Drawing.Point(822, 374);
+            this.btnWeaponKataSpecial.Location = new System.Drawing.Point(747, 374);
             this.btnWeaponKataSpecial.Margin = new System.Windows.Forms.Padding(4);
             this.btnWeaponKataSpecial.Name = "btnWeaponKataSpecial";
             this.btnWeaponKataSpecial.Size = new System.Drawing.Size(333, 250);
@@ -524,7 +526,7 @@
             // btnKataSpecial
             // 
             this.btnKataSpecial.Enabled = false;
-            this.btnKataSpecial.Location = new System.Drawing.Point(822, 80);
+            this.btnKataSpecial.Location = new System.Drawing.Point(747, 80);
             this.btnKataSpecial.Margin = new System.Windows.Forms.Padding(4);
             this.btnKataSpecial.Name = "btnKataSpecial";
             this.btnKataSpecial.Size = new System.Drawing.Size(333, 250);
@@ -536,7 +538,7 @@
             // btnKnockdown
             // 
             this.btnKnockdown.Enabled = false;
-            this.btnKnockdown.Location = new System.Drawing.Point(444, 374);
+            this.btnKnockdown.Location = new System.Drawing.Point(386, 374);
             this.btnKnockdown.Margin = new System.Windows.Forms.Padding(4);
             this.btnKnockdown.Name = "btnKnockdown";
             this.btnKnockdown.Size = new System.Drawing.Size(333, 250);
@@ -548,7 +550,7 @@
             // btnSemiKnockdown
             // 
             this.btnSemiKnockdown.Enabled = false;
-            this.btnSemiKnockdown.Location = new System.Drawing.Point(60, 374);
+            this.btnSemiKnockdown.Location = new System.Drawing.Point(17, 374);
             this.btnSemiKnockdown.Margin = new System.Windows.Forms.Padding(4);
             this.btnSemiKnockdown.Name = "btnSemiKnockdown";
             this.btnSemiKnockdown.Size = new System.Drawing.Size(333, 250);
@@ -560,7 +562,7 @@
             // btnWeaponKata
             // 
             this.btnWeaponKata.Enabled = false;
-            this.btnWeaponKata.Location = new System.Drawing.Point(444, 80);
+            this.btnWeaponKata.Location = new System.Drawing.Point(386, 80);
             this.btnWeaponKata.Margin = new System.Windows.Forms.Padding(4);
             this.btnWeaponKata.Name = "btnWeaponKata";
             this.btnWeaponKata.Size = new System.Drawing.Size(333, 250);
@@ -572,7 +574,7 @@
             // btnKata
             // 
             this.btnKata.Enabled = false;
-            this.btnKata.Location = new System.Drawing.Point(60, 80);
+            this.btnKata.Location = new System.Drawing.Point(17, 80);
             this.btnKata.Margin = new System.Windows.Forms.Padding(4);
             this.btnKata.Name = "btnKata";
             this.btnKata.Size = new System.Drawing.Size(333, 250);
@@ -1167,6 +1169,18 @@
             this.tabCompetitor.TabIndex = 3;
             this.tabCompetitor.Text = "Competitors";
             this.tabCompetitor.UseVisualStyleBackColor = true;
+            // 
+            // lblCompLoading
+            // 
+            this.lblCompLoading.AutoSize = true;
+            this.lblCompLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompLoading.Location = new System.Drawing.Point(808, 392);
+            this.lblCompLoading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCompLoading.Name = "lblCompLoading";
+            this.lblCompLoading.Size = new System.Drawing.Size(626, 147);
+            this.lblCompLoading.TabIndex = 6;
+            this.lblCompLoading.Text = "Loading...";
+            this.lblCompLoading.Visible = false;
             // 
             // gbCompetitorDetails
             // 
@@ -1954,18 +1968,6 @@
             this.label10.TabIndex = 1;
             this.label10.Text = "Filter:";
             // 
-            // lblCompLoading
-            // 
-            this.lblCompLoading.AutoSize = true;
-            this.lblCompLoading.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCompLoading.Location = new System.Drawing.Point(808, 392);
-            this.lblCompLoading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCompLoading.Name = "lblCompLoading";
-            this.lblCompLoading.Size = new System.Drawing.Size(626, 147);
-            this.lblCompLoading.TabIndex = 6;
-            this.lblCompLoading.Text = "Loading...";
-            this.lblCompLoading.Visible = false;
-            // 
             // msMenu
             // 
             this.msMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -2349,6 +2351,18 @@
             // 
             this.tmrRegistrations.Interval = 1000;
             // 
+            // btnRegForm
+            // 
+            this.btnRegForm.Enabled = false;
+            this.btnRegForm.Location = new System.Drawing.Point(735, 51);
+            this.btnRegForm.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRegForm.Name = "btnRegForm";
+            this.btnRegForm.Size = new System.Drawing.Size(330, 210);
+            this.btnRegForm.TabIndex = 12;
+            this.btnRegForm.Text = "Competitor Registration Form";
+            this.btnRegForm.UseVisualStyleBackColor = true;
+            this.btnRegForm.Click += new System.EventHandler(this.btnRegForm_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
@@ -2617,5 +2631,6 @@
         private System.Windows.Forms.Label lblCompInstructor;
         private System.Windows.Forms.TextBox txtCompInstructor;
         private System.Windows.Forms.Label lblCompSchoolOther;
+        private System.Windows.Forms.Button btnRegForm;
     }
 }

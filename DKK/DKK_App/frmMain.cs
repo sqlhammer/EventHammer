@@ -275,6 +275,12 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_WeighIns", report_url));
         }
 
+        private void btnRegForm_Click(object sender, EventArgs e)
+        {
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_CompetitorRegistrationForm", report_url));
+        }
+
         private void btnSchoolsOwners_Click(object sender, EventArgs e)
         {
             string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
@@ -1792,6 +1798,6 @@ If you do not like the placements, you will have to move the competitors to diff
             DeleteEvent();
         }
         #endregion
-
+        
     }
 }
