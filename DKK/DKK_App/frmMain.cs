@@ -159,7 +159,10 @@ namespace DKK_App
                         this.tab1.SelectedTab == this.tabCompetitor
                     )
                     &&
-                    MatchModels.Count == 0
+                    (
+                        MatchModelLoadComplete == false
+                        && CompetitorModelLoadComplete == false
+                    )
                )
             {
                 RefreshMatchCompetitorViews();
@@ -982,8 +985,7 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             //this method was implemented because I was unable to refresh the treelistviews after
             //the async calls to refresh the match and competitor models was complete
-
-            //TODO: Figure out what happens when there is a new event with no matches and no competitors.
+            
             if (MatchModelLoadComplete && CompetitorModelLoadComplete)
             {
                 this.lblLoading.Visible = false;
