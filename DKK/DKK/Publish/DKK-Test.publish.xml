@@ -4,7 +4,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseName>dkk</TargetDatabaseName>
     <DeployScriptFileName>DKK.sql</DeployScriptFileName>
-    <TargetConnectionString>Data Source=dkktest1.eastus.cloudapp.azure.com,49001;Initial Catalog=dkk;Persist Security Info=True;User ID=SQLHammer;Password=111monkeyAPPLEjumping@@@;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=false;TrustServerCertificate=False</TargetConnectionString>
+    <TargetConnectionString>Data Source=dev-eventhammer.eastus2.cloudapp.azure.com;Initial Catalog=dkk;Persist Security Info=True;User ID=SQLHammer;Password=111monkeyAPPLEjumping@@@;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=false;TrustServerCertificate=False</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <DropObjectsNotInSource>True</DropObjectsNotInSource>

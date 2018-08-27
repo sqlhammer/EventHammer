@@ -103,7 +103,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2016</TargetServerVersion>
-        <TargetServerURL>http://dkktest2.eastus.cloudapp.azure.com/Reportserver</TargetServerURL>
+        <TargetServerURL>http://dev-eventhammer.eastus2.cloudapp.azure.com/Reportserver</TargetServerURL>
         <TargetFolder>DKK_Reports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <OverwriteDataSources>true</OverwriteDataSources>
