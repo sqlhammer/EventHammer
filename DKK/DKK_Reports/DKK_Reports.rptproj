@@ -95,6 +95,10 @@
       <Name>SubReport_DojoHeader.rdl</Name>
       <FullPath>SubReport_DojoHeader.rdl</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Master_CompetitorRegistrationForm.rdl</Name>
+      <FullPath>Master_CompetitorRegistrationForm.rdl</FullPath>
+    </ProjectItem>
   </Reports>
   <Configurations>
     <Configuration>
