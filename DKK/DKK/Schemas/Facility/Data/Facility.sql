@@ -65,3 +65,55 @@ WHEN NOT MATCHED BY SOURCE THEN
 	DELETE;
 
 SET IDENTITY_INSERT [Facility].[Facility] OFF
+
+
+--Associate instructors to owners
+
+;WITH InstructorIds AS
+(
+	SELECT p.PersonId
+		,i.FacilityId
+	FROM Person.Person p
+	INNER JOIN	(
+					VALUES
+					('Clement', 'Bouchard', 2),
+					('Raul', 'Dueno', 3),
+					('Mike', 'Skinner', 4),
+					('Bob', 'Hopwood', 5),
+					('Manny', 'Matias', 6),
+					('Sean', 'Schenker', 7),
+					('Karl', 'Biedlingmaier', 8),
+					('John', 'Pendergast', 9),
+					('Kenji', 'Fujiwara', 10),
+					('Dominic', 'Morin', 11),
+					('Carl', 'Tremblay', 12),
+					('Jonathan', 'Ouellet', 13),
+					('Fouad', 'El Harrif', 14),
+					('Andre', 'Lafond', 15),
+					('Hiro', 'Iwata', 16),
+					('Michelle', 'Gay', 17),
+					('Mike', 'Monaco', 18),
+					('Marty', 'Petrovich', 19),
+					('Denis', 'Cordeiro', 20),
+					('Anthony', 'Celestine', 21),
+					('Daiki', 'Nazuka', 22),
+					('Jose', 'Irizariy', 23),
+					('Robert', 'Cuda', 24),
+					('Jose', 'Cotton', 25),
+					('Doug', 'Brown', 26),
+					('Calvin', 'Ortiz', 27),
+					('Junior', 'Russo', 28),
+					('Sincere', 'Marvin', 29),
+					('Eric', 'Mercado', 30),
+					('Philip', 'Lehram', 31),
+					('Michael', 'Cordeiro', 32),
+					('Claibourne', 'Henry', 33),
+					('Kristen', 'O''Connor', 34)
+				) i (FirstName, LastName, FacilityId) 
+					ON p.FirstName = i.FirstName 
+					AND p.LastName = i.LastName
+)
+UPDATE f
+SET f.OwnerId = ii.PersonId
+FROM [Facility].[Facility] f
+INNER JOIN InstructorIds ii ON f.FacilityId = ii.FacilityId

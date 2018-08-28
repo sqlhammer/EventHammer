@@ -5,8 +5,8 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DKK_App.exe" Value="..\DKK_App\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DKK_App.exe.config" Value="..\DKK_App\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DKK_App.exe" Value="..\DKK_App\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DKK_App.exe.config" Value="..\DKK_App\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ObjectListView.dll" Value="..\packages\ObjectListView.Official.2.9.1\lib\net20"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DKK_App.exe" Value="DKK_App.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DKK_App.exe.config" Value="DKK_App.exe.config"/>

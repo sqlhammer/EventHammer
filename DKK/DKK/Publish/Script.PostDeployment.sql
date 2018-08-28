@@ -30,6 +30,7 @@ PRINT 'Loading Stage.CalderaFormEntry...'
 PRINT 'Loading Facility.FacilityType...'
 :r .\..\Schemas\Facility\Data\FacilityType.sql
 
+--This must go after the Person table so the ownerids can be set.
 PRINT 'Loading Facility.Facility...'
 :r .\..\Schemas\Facility\Data\Facility.sql
 
