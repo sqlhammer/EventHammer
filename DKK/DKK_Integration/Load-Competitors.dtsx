@@ -7,28 +7,28 @@
   DTS:CreatorName="HAMMER-SURFACE\derik"
   DTS:DTSID="{3F71BB06-A89E-4AFA-93D8-1BEE9DDB4E9C}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.3006.16"
+  DTS:LastModifiedProductVersion="14.0.3025.39"
   DTS:LocaleID="1033"
   DTS:ObjectName="Load-Competitors"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{96371223-7573-43CC-90D9-F33709DB6059}">
+  DTS:VersionBuild="16"
+  DTS:VersionGUID="{435E0F0D-B866-4597-B1EB-4707B076FFA2}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[dkktest1.eastus.cloudapp.azure.com,49001.dkk.sqlhammer]"
+      DTS:refId="Package.ConnectionManagers[dkk]"
       DTS:CreationName="OLEDB"
       DTS:DTSID="{978BC3CC-FFDF-46AC-AF8B-1C12C60553BE}"
-      DTS:ObjectName="dkktest1.eastus.cloudapp.azure.com,49001.dkk.sqlhammer">
+      DTS:ObjectName="dkk">
       <DTS:PropertyExpression
         DTS:Name="Password">@[User::dkk_password]</DTS:PropertyExpression>
       <DTS:PropertyExpression
         DTS:Name="UserName">@[User::dkk_username]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=dkktest1.eastus.cloudapp.azure.com,49001;User ID=sqlhammer;Initial Catalog=dkk;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+          DTS:ConnectionString="Data Source=dev-eventhammer.eastus2.cloudapp.azure.com;User ID=sqlhammer;Initial Catalog=dkk;Provider=SQLNCLI11.1;Persist Security Info=True;Connect Timeout=10;Auto Translate=False;">
           <DTS:Password
             DTS:Name="Password"
             Sensitive="1"></DTS:Password>
@@ -167,8 +167,8 @@
               <connections>
                 <connection
                   refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[dkktest1.eastus.cloudapp.azure.com,49001.dkk.sqlhammer]"
-                  connectionManagerRefId="Package.ConnectionManagers[dkktest1.eastus.cloudapp.azure.com,49001.dkk.sqlhammer]"
+                  connectionManagerID="Package.ConnectionManagers[dkk]"
+                  connectionManagerRefId="Package.ConnectionManagers[dkk]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
