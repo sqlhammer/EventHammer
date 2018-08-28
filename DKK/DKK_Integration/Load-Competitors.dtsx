@@ -12,8 +12,8 @@
   DTS:ObjectName="Load-Competitors"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="16"
-  DTS:VersionGUID="{435E0F0D-B866-4597-B1EB-4707B076FFA2}">
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{2ABE201A-91CA-46F3-B933-848D7F125E84}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -239,6 +239,11 @@
                       refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[value]"
                       dataType="nText"
                       name="value" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[dtcreated]"
+                      dataType="dbTimeStamp2"
+                      name="dtcreated"
+                      scale="3" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -274,6 +279,7 @@
               description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
               name="MySQL - kanreikaikarate"
               usesDispositions="true"
+              validateExternalMetadata="False"
               version="4">
               <properties>
                 <property
