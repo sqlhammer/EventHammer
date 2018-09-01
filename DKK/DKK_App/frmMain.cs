@@ -618,11 +618,21 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
         #region Match Tab
         private void cmiViewMatchDetails_Click(object sender, EventArgs e)
         {
+            ViewMatchDetails();
+        }
+
+        private void cmiViewSelectedMatchDetails_Click(object sender, EventArgs e)
+        {
+            ViewMatchDetails();
+        }
+
+        private void ViewMatchDetails()
+        {
             try
             {
                 if (tlvMatches.SelectedObject == null)
                     return;
-                
+
                 MatchModel mt = (MatchModel)tlvMatches.SelectedObject;
 
                 if (mt.MatchId == null)
@@ -1884,6 +1894,5 @@ If you do not like the placements, you will have to move the competitors to diff
             DeleteEvent();
         }
         #endregion
-        
     }
 }
