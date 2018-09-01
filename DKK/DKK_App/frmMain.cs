@@ -667,6 +667,23 @@ m.Division.MaxRank.RankName);
             }
         }
 
+        private List<CompetitorModel> SortCompetitorModels(List<CompetitorModel> models)
+        {
+            //We need to resort for display purposes
+            models.Sort(delegate (CompetitorModel x, CompetitorModel y)
+            {
+                //Handle NULLs even though I do not expect them
+                if (x.DisplayName == null && y.DisplayName == null) return 0;
+                if (x.DisplayName == null) return -1;
+                if (y.DisplayName == null) return 1;
+
+                //Sort by name
+                return x.DisplayName.CompareTo(y.DisplayName);
+            });
+
+            return models;
+        }
+
         private List<MatchModel> SortMatchModels(List<MatchModel> models)
         {
             //We need to resort for display purposes
@@ -881,10 +898,10 @@ If you do not like the placements, you will have to move the competitors to diff
             MatchModelLoadComplete = false;
             CompetitorModelLoadComplete = false;
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
-            MatchModels = Global.GetMatchModel(mcs);
+            MatchModels = SortMatchModels(Global.GetMatchModel(mcs));
 
             List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
-            CompetitorModels = Global.GetCompetitorModel(cs);
+            CompetitorModels = SortCompetitorModels(Global.GetCompetitorModel(cs));
             MatchModelLoadComplete = true;
             CompetitorModelLoadComplete = true;
         }
@@ -1571,7 +1588,34 @@ If you do not like the placements, you will have to move the competitors to diff
 
             SaveCompetitor(comp, IsNew);
 
-            RefreshMatchCompetitorViews();
+            //RefreshMatchCompetitorViews();
+            UpdateCompetitorModel(comp);
+        }
+
+        private void UpdateCompetitorModel(Competitor updatedCompetitor)
+        {
+            CompetitorModel cm = new CompetitorModel
+            {
+                Age = updatedCompetitor.Age,
+                CompetitorId = updatedCompetitor.CompetitorId,
+                Description = updatedCompetitor.Description,
+                DisplayName = updatedCompetitor.Person.DisplayName,
+                DojoName = updatedCompetitor.Dojo.Facility.FacilityName,
+                Gender = updatedCompetitor.Person.Gender,
+                Height = updatedCompetitor.Height,
+                IsSpecialConsideration = updatedCompetitor.IsSpecialConsideration,
+                Level = updatedCompetitor.Rank.Level,
+                RankName = updatedCompetitor.Rank.RankName,
+                Weight = updatedCompetitor.Weight
+            };
+
+            var existing_cm = CompetitorModels.Where(c => c.CompetitorId == cm.CompetitorId).First();
+
+            CompetitorModels.Remove(existing_cm);
+            CompetitorModels.Add(cm);
+
+            CompetitorModels = SortCompetitorModels(CompetitorModels);
+            RefreshCompetitors(CompetitorModels);
         }
 
         private void SaveCompetitor(Competitor comp, bool IsNew)
