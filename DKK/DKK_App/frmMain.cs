@@ -616,6 +616,82 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
         #endregion
 
         #region Match Tab
+        private void cmiChangeDivisionNumber_Click(object sender, EventArgs e)
+        {
+            ChangeDivisionNumber();
+        }
+
+        private void cmiChangeSelectedDivisionNumber_Click(object sender, EventArgs e)
+        {
+            ChangeDivisionNumber();
+        }
+
+        private void ChangeDivisionNumber()
+        {
+            /*
+             * pop up to ask for new division and sub-division numbers
+             * send async db update
+             * update match model
+             * */
+
+            // Begin user input and validation
+
+            if (tlvMatches.SelectedObject == null)
+                return;
+
+            MatchModel mt = (MatchModel)tlvMatches.SelectedObject;
+
+            if (mt.MatchId == null)
+                return;
+
+            string newDisplayId = "";
+            var result = Global.InputBox("Select new division and sub-division number"
+                , "Type in a new division and sub-division number. Follow the pattern #-#. Example: 12-2"
+                , ref newDisplayId);
+                        
+            if (result == DialogResult.Cancel)
+                return;
+
+            if (!Global.IsValidMatchDisplayIsString(newDisplayId))
+            {
+                MessageBox.Show("You must follow the pattern #-#. Example: 12-2. No changes were made.",
+                    "Invalid text pattern",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            string[] split = newDisplayId.Split('-');
+            int matchDisplayId = Convert.ToInt32(split[0]);
+            int subDivisionId = Convert.ToInt32(split[1]);
+
+            if (Global.IsDuplicateMatchDisplayId(MatchModels, matchDisplayId, subDivisionId))
+            {
+                MessageBox.Show("Division Id: {0} combined with Sub-Division Id: {1} already exists. Please chose a different number.", 
+                    "Duplicate Division / Sub-division combination.", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            // End user input and validation 
+
+            // Begin database update
+
+            mt.MatchDisplayId = matchDisplayId;
+            mt.SubDivisionId = subDivisionId;
+
+            DataAccessAsync.UpdateMatchDisplayId(mt);
+
+            // End database update
+
+            // Begin model update
+
+            UpdateMatchModel(mt);
+
+            // End model update
+        }
+
         private void cmiViewMatchDetails_Click(object sender, EventArgs e)
         {
             ViewMatchDetails();
@@ -1645,6 +1721,17 @@ If you do not like the placements, you will have to move the competitors to diff
 
             CompetitorModels = SortCompetitorModels(CompetitorModels);
             RefreshCompetitors(CompetitorModels);
+        }
+
+        private void UpdateMatchModel(MatchModel updatedMatch)
+        {
+            var existing_mm = MatchModels.Where(m => m.MatchId == updatedMatch.MatchId).First();
+
+            MatchModels.Remove(existing_mm);
+            MatchModels.Add(updatedMatch);
+
+            MatchModels = SortMatchModels(MatchModels);
+            RefreshMatches(MatchModels);
         }
 
         private void SaveCompetitor(Competitor comp, bool IsNew)

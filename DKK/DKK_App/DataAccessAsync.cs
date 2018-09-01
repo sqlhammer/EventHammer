@@ -1283,6 +1283,16 @@ namespace DKK_App
 
             ExecuteDDL(query);
         }
+
+        public static async void UpdateMatchDisplayId(MatchModel match)
+        {
+            string query = @"EXEC [Event].[spUpdateMatchDisplayId] @MatchId = 
+                " + match.MatchId.ToString() + @", @MatchDisplayId = " +
+                match.MatchDisplayId.ToString() + @", @SubDivisionId = " +
+                match.SubDivisionId.ToString() + @";";
+
+            ExecuteDDL(query);
+        }
         #endregion
 
         #region Inserts

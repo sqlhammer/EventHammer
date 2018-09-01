@@ -192,6 +192,7 @@
             this.msMatches = new System.Windows.Forms.ToolStripMenuItem();
             this.createNewMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiViewSelectedMatchDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.clearFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshMatchAndCompetitorListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.matchSelectionAssistantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -213,6 +214,7 @@
             this.cmiMatchesExpandAll = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiMatchesCollapseAll = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiMatchNewMatch = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiChangeDivisionNumber = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiDeleteMatch = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiRemoveCompetitors = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiViewMatchDetails = new System.Windows.Forms.ToolStripMenuItem();
@@ -226,7 +228,7 @@
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
             this.lblConnection = new System.Windows.Forms.Label();
             this.tmrRegistrations = new System.Windows.Forms.Timer(this.components);
-            this.cmiViewSelectedMatchDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiChangeSelectedDivisionNumber = new System.Windows.Forms.ToolStripMenuItem();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -2067,6 +2069,7 @@
             this.createNewMatchToolStripMenuItem,
             this.deleteMatchToolStripMenuItem,
             this.cmiViewSelectedMatchDetails,
+            this.cmiChangeSelectedDivisionNumber,
             this.clearFiltersToolStripMenuItem,
             this.refreshMatchAndCompetitorListsToolStripMenuItem,
             this.matchSelectionAssistantToolStripMenuItem});
@@ -2088,6 +2091,13 @@
             this.deleteMatchToolStripMenuItem.Name = "deleteMatchToolStripMenuItem";
             this.deleteMatchToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.deleteMatchToolStripMenuItem.Text = "Delete Selected Match";
+            // 
+            // cmiViewSelectedMatchDetails
+            // 
+            this.cmiViewSelectedMatchDetails.Name = "cmiViewSelectedMatchDetails";
+            this.cmiViewSelectedMatchDetails.Size = new System.Drawing.Size(263, 22);
+            this.cmiViewSelectedMatchDetails.Text = "View Selected Match Details";
+            this.cmiViewSelectedMatchDetails.Click += new System.EventHandler(this.cmiViewSelectedMatchDetails_Click);
             // 
             // clearFiltersToolStripMenuItem
             // 
@@ -2230,51 +2240,59 @@
             this.cmiMatchesExpandAll,
             this.cmiMatchesCollapseAll,
             this.cmiMatchNewMatch,
+            this.cmiChangeDivisionNumber,
             this.cmiDeleteMatch,
             this.cmiRemoveCompetitors,
             this.cmiViewMatchDetails});
             this.cmsMatches.Name = "cmsMatches";
-            this.cmsMatches.Size = new System.Drawing.Size(195, 136);
+            this.cmsMatches.Size = new System.Drawing.Size(208, 158);
             // 
             // cmiMatchesExpandAll
             // 
             this.cmiMatchesExpandAll.Name = "cmiMatchesExpandAll";
-            this.cmiMatchesExpandAll.Size = new System.Drawing.Size(194, 22);
+            this.cmiMatchesExpandAll.Size = new System.Drawing.Size(207, 22);
             this.cmiMatchesExpandAll.Text = "&Expand All";
             this.cmiMatchesExpandAll.Click += new System.EventHandler(this.cmiMatchesExpandAll_Click);
             // 
             // cmiMatchesCollapseAll
             // 
             this.cmiMatchesCollapseAll.Name = "cmiMatchesCollapseAll";
-            this.cmiMatchesCollapseAll.Size = new System.Drawing.Size(194, 22);
+            this.cmiMatchesCollapseAll.Size = new System.Drawing.Size(207, 22);
             this.cmiMatchesCollapseAll.Text = "&Collapse All";
             this.cmiMatchesCollapseAll.Click += new System.EventHandler(this.cmiMatchesCollapseAll_Click);
             // 
             // cmiMatchNewMatch
             // 
             this.cmiMatchNewMatch.Name = "cmiMatchNewMatch";
-            this.cmiMatchNewMatch.Size = new System.Drawing.Size(194, 22);
+            this.cmiMatchNewMatch.Size = new System.Drawing.Size(207, 22);
             this.cmiMatchNewMatch.Text = "&New Match";
             this.cmiMatchNewMatch.Click += new System.EventHandler(this.newMatchToolStripMenuItem_Click);
+            // 
+            // cmiChangeDivisionNumber
+            // 
+            this.cmiChangeDivisionNumber.Name = "cmiChangeDivisionNumber";
+            this.cmiChangeDivisionNumber.Size = new System.Drawing.Size(207, 22);
+            this.cmiChangeDivisionNumber.Text = "Change Division Number";
+            this.cmiChangeDivisionNumber.Click += new System.EventHandler(this.cmiChangeDivisionNumber_Click);
             // 
             // cmiDeleteMatch
             // 
             this.cmiDeleteMatch.Name = "cmiDeleteMatch";
-            this.cmiDeleteMatch.Size = new System.Drawing.Size(194, 22);
+            this.cmiDeleteMatch.Size = new System.Drawing.Size(207, 22);
             this.cmiDeleteMatch.Text = "&Delete Match";
             this.cmiDeleteMatch.Click += new System.EventHandler(this.cmiDeleteMatch_Click);
             // 
             // cmiRemoveCompetitors
             // 
             this.cmiRemoveCompetitors.Name = "cmiRemoveCompetitors";
-            this.cmiRemoveCompetitors.Size = new System.Drawing.Size(194, 22);
+            this.cmiRemoveCompetitors.Size = new System.Drawing.Size(207, 22);
             this.cmiRemoveCompetitors.Text = "&Remove Competitor(s)";
             this.cmiRemoveCompetitors.Click += new System.EventHandler(this.removeCompetitorsToolStripMenuItem_Click);
             // 
             // cmiViewMatchDetails
             // 
             this.cmiViewMatchDetails.Name = "cmiViewMatchDetails";
-            this.cmiViewMatchDetails.Size = new System.Drawing.Size(194, 22);
+            this.cmiViewMatchDetails.Size = new System.Drawing.Size(207, 22);
             this.cmiViewMatchDetails.Text = "View Match Details";
             this.cmiViewMatchDetails.Click += new System.EventHandler(this.cmiViewMatchDetails_Click);
             // 
@@ -2369,12 +2387,12 @@
             // 
             this.tmrRegistrations.Interval = 1000;
             // 
-            // cmiViewSelectedMatchDetails
+            // cmiChangeSelectedDivisionNumber
             // 
-            this.cmiViewSelectedMatchDetails.Name = "cmiViewSelectedMatchDetails";
-            this.cmiViewSelectedMatchDetails.Size = new System.Drawing.Size(263, 22);
-            this.cmiViewSelectedMatchDetails.Text = "View Selected Match Details";
-            this.cmiViewSelectedMatchDetails.Click += new System.EventHandler(this.cmiViewSelectedMatchDetails_Click);
+            this.cmiChangeSelectedDivisionNumber.Name = "cmiChangeSelectedDivisionNumber";
+            this.cmiChangeSelectedDivisionNumber.Size = new System.Drawing.Size(263, 22);
+            this.cmiChangeSelectedDivisionNumber.Text = "Change Selected Division Number";
+            this.cmiChangeSelectedDivisionNumber.Click += new System.EventHandler(this.cmiChangeSelectedDivisionNumber_Click);
             // 
             // frmMain
             // 
@@ -2646,5 +2664,7 @@
         private System.Windows.Forms.Label lblCompSchoolOther;
         private System.Windows.Forms.Button btnRegForm;
         private System.Windows.Forms.ToolStripMenuItem cmiViewSelectedMatchDetails;
+        private System.Windows.Forms.ToolStripMenuItem cmiChangeDivisionNumber;
+        private System.Windows.Forms.ToolStripMenuItem cmiChangeSelectedDivisionNumber;
     }
 }

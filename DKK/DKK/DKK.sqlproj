@@ -139,6 +139,7 @@
     <None Include="Schemas\Person\Data\Person.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spDeleteCompetitorFromMatch.sql" />
     <Build Include="Schemas\Event\Views\vwReportSchoolList.sql" />
+    <Build Include="Schemas\Event\Stored Procedures\spUpdateMatchDisplayId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\dev-eventhammer.publish.xml" />
