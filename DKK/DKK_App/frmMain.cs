@@ -57,6 +57,7 @@ namespace DKK_App
             {
                 SetEventSearchDateRange();
                 RefreshEventSelect();
+                RefreshEvents();
                 SetEventTypeDropdown();
                 RefreshEvents();
                 RefreshDivisions();
@@ -482,9 +483,6 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             {
                 this.cbEventSelect.Items.Add(Event.EventName + " - " + Event.Date.ToString("MM/dd/yyyy"));
             }
-
-            EventModels = Global.GetEventModel(AllEvents);
-            this.tlvEvents.Roots = EventModels;
         }
 
         private void SetEventSearchDateRange()
@@ -679,6 +677,27 @@ m.Division.MaxRank.RankName);
 
                 //Sort by name
                 return x.DisplayName.CompareTo(y.DisplayName);
+            });
+
+            return models;
+        }
+
+        private List<EventModel> SortEventModels(List<EventModel> models)
+        {
+            //We need to resort for display purposes
+            models.Sort(delegate (EventModel x, EventModel y)
+            {
+                //Handle NULLs even though I do not expect them
+                if (x.Date == null && y.Date == null) return 0;
+                if (x.Date == null) return -1;
+                if (y.Date == null) return 1;
+
+                //Sort by Event Date
+                if (x.Date < y.Date) return -1;
+                if (x.Date > y.Date) return 1;
+                
+                //It should never get here but I needed to guarantee all code paths return a value.
+                return 0;
             });
 
             return models;
@@ -1770,6 +1789,29 @@ If you do not like the placements, you will have to move the competitors to diff
             }
 
             DataAccess.UpdateEvent(Event);
+
+            UpdateEventModel(Event);
+            //This will reset the home tab dropdown and it will refresh the entire event models.
+            RefreshEventSelect();
+        }
+
+        private void UpdateEventModel(Event Event)
+        {
+            EventModel em = new EventModel
+            {
+                EventId = Event.EventId,
+                Date = Event.Date,
+                EventName = Event.EventName,
+                EventTypeName = Event.EventType.EventTypeName
+            };
+
+            var existing_em = EventModels.Where(e => e.EventId == em.EventId).First();
+
+            EventModels.Remove(existing_em);
+            EventModels.Add(em);
+
+            EventModels = SortEventModels(EventModels);
+            RefreshEvents(EventModels);
         }
 
         private void btnClearEventSelection_Click(object sender, EventArgs e)
