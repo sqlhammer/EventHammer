@@ -622,6 +622,13 @@ namespace DKK_App
             {
                 person.Title = GetTitle(person.Title.TitleId);
             }
+            else if (person == null)
+            {
+                person = new Person
+                {
+                    Title = new Title()
+                };
+            }
 
             return person;
         }
