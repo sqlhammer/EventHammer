@@ -81,6 +81,11 @@ namespace DKK_App
             RefreshMatches(MatchModels);
         }
 
+        private void cmiDownloadLatestVersion_Click(object sender, EventArgs e)
+        {
+            LaunchWebsite("https://www.sqlhammer.com/go/ehsetup");
+        }
+
         private async Task ApplyCompetitorFilter(ComboBox cb, TextBox txtbox)
         {
             if (cb.SelectedIndex == -1)
@@ -1689,11 +1694,14 @@ If you do not like the placements, you will have to move the competitors to diff
 
             comp.Rank = (Ranks.Where(r => r.RankName.CompareTo(this.cbCompBelt.SelectedItem.ToString()) == 0)).First();
             comp.Person.Title = (this.cbCompTitle.SelectedItem == null) ? new Title() : (Titles.Where(t => t.TitleName.CompareTo(this.cbCompTitle.SelectedItem.ToString()) == 0)).First();
-            comp.Dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(this.cbCompSchool.SelectedItem.ToString()) == 0)).First();
+
+            string selectedSchool = "";
+            if (this.cbCompSchool.SelectedItem != null)
+                selectedSchool = this.cbCompSchool.SelectedItem.ToString();
+            comp.Dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(selectedSchool) == 0)).FirstOrDefault();
 
             SaveCompetitor(comp, IsNew);
 
-            //RefreshMatchCompetitorViews();
             UpdateCompetitorModel(comp);
         }
 
@@ -1705,7 +1713,7 @@ If you do not like the placements, you will have to move the competitors to diff
                 CompetitorId = updatedCompetitor.CompetitorId,
                 Description = updatedCompetitor.Description,
                 DisplayName = updatedCompetitor.Person.DisplayName,
-                DojoName = updatedCompetitor.Dojo.Facility.FacilityName,
+                DojoName = (updatedCompetitor.Dojo != null) ? updatedCompetitor.Dojo.Facility.FacilityName : null,
                 Gender = updatedCompetitor.Person.Gender,
                 Height = updatedCompetitor.Height,
                 IsSpecialConsideration = updatedCompetitor.IsSpecialConsideration,

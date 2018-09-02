@@ -193,6 +193,7 @@
             this.createNewMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteMatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiViewSelectedMatchDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiChangeSelectedDivisionNumber = new System.Windows.Forms.ToolStripMenuItem();
             this.clearFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshMatchAndCompetitorListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.matchSelectionAssistantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -228,7 +229,7 @@
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
             this.lblConnection = new System.Windows.Forms.Label();
             this.tmrRegistrations = new System.Windows.Forms.Timer(this.components);
-            this.cmiChangeSelectedDivisionNumber = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiDownloadLatestVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -2099,6 +2100,13 @@
             this.cmiViewSelectedMatchDetails.Text = "View Selected Match Details";
             this.cmiViewSelectedMatchDetails.Click += new System.EventHandler(this.cmiViewSelectedMatchDetails_Click);
             // 
+            // cmiChangeSelectedDivisionNumber
+            // 
+            this.cmiChangeSelectedDivisionNumber.Name = "cmiChangeSelectedDivisionNumber";
+            this.cmiChangeSelectedDivisionNumber.Size = new System.Drawing.Size(263, 22);
+            this.cmiChangeSelectedDivisionNumber.Text = "Change Selected Division Number";
+            this.cmiChangeSelectedDivisionNumber.Click += new System.EventHandler(this.cmiChangeSelectedDivisionNumber_Click);
+            // 
             // clearFiltersToolStripMenuItem
             // 
             this.clearFiltersToolStripMenuItem.Name = "clearFiltersToolStripMenuItem";
@@ -2164,6 +2172,7 @@
             // 
             this.miHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem1,
+            this.cmiDownloadLatestVersion,
             this.aboutToolStripMenuItem});
             this.miHelp.Name = "miHelp";
             this.miHelp.Size = new System.Drawing.Size(44, 22);
@@ -2173,14 +2182,14 @@
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
             this.helpToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(179, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(200, 22);
             this.helpToolStripMenuItem1.Text = "Knowledge Base";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -2387,12 +2396,12 @@
             // 
             this.tmrRegistrations.Interval = 1000;
             // 
-            // cmiChangeSelectedDivisionNumber
+            // cmiDownloadLatestVersion
             // 
-            this.cmiChangeSelectedDivisionNumber.Name = "cmiChangeSelectedDivisionNumber";
-            this.cmiChangeSelectedDivisionNumber.Size = new System.Drawing.Size(263, 22);
-            this.cmiChangeSelectedDivisionNumber.Text = "Change Selected Division Number";
-            this.cmiChangeSelectedDivisionNumber.Click += new System.EventHandler(this.cmiChangeSelectedDivisionNumber_Click);
+            this.cmiDownloadLatestVersion.Name = "cmiDownloadLatestVersion";
+            this.cmiDownloadLatestVersion.Size = new System.Drawing.Size(200, 22);
+            this.cmiDownloadLatestVersion.Text = "Download latest version";
+            this.cmiDownloadLatestVersion.Click += new System.EventHandler(this.cmiDownloadLatestVersion_Click);
             // 
             // frmMain
             // 
@@ -2666,5 +2675,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmiViewSelectedMatchDetails;
         private System.Windows.Forms.ToolStripMenuItem cmiChangeDivisionNumber;
         private System.Windows.Forms.ToolStripMenuItem cmiChangeSelectedDivisionNumber;
+        private System.Windows.Forms.ToolStripMenuItem cmiDownloadLatestVersion;
     }
 }

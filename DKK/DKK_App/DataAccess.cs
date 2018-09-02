@@ -1310,12 +1310,16 @@ namespace DKK_App
         #region Updates
         public static void UpdateCompetitor(Competitor comp)
         {
+            string dojoId = "NULL";
+            if (comp.Dojo != null && comp.Dojo.DojoId != 0)
+                dojoId = comp.Dojo.DojoId.ToString();
+
             string query = "EXEC [Person].[spUpdateCompetitor] " +
                                "@CompetitorId = " + comp.CompetitorId.ToString() +
                               ",@ParentId = " + comp.Parent.PersonId.ToString() +
                               ",@PersonId = " + comp.Person.PersonId.ToString() +
                               //",@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
-                              ",@DojoId = " + comp.Dojo.DojoId.ToString() +
+                              ",@DojoId = " + dojoId +
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +
                               ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
@@ -1359,9 +1363,13 @@ namespace DKK_App
         #region Inserts
         public static void InsertCompetitor(Competitor comp)
         {
+            string dojoId = "NULL";
+            if (comp.Dojo != null && comp.Dojo.DojoId != 0)
+                dojoId = comp.Dojo.DojoId.ToString();
+
             string query = "EXEC [Person].[spInsertCompetitor] " +
                               // "@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
-                              "@DojoId = " + comp.Dojo.DojoId.ToString() +
+                              "@DojoId = " + dojoId +
                               ",@Age = " + comp.Age.ToString() +
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +
