@@ -54,6 +54,12 @@ BEGIN
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'special_considerations' AND entry_id = c.entry_id) consideration_description
 			) pvt
 
+			/* 
+			
+			Removing updates because the load pulls in all competitors every time, not deltas.
+			This is a problem because changes in the app will be over-ridden by the next hourly load.
+
+
 			--Person updates
 			UPDATE p
 			SET p.DisplayName = r.last_name + ', ' + r.first_name
@@ -122,6 +128,8 @@ BEGIN
 										AND p.EmailAddress = r.email_address
 			INNER JOIN Person.Competitor c ON c.PersonId = p.PersonId
 											AND c.EventId = @EventId
+
+			--*/
 
 			--Person inserts
 			;WITH NewPersons AS
