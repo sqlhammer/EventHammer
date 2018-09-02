@@ -2081,6 +2081,7 @@
             // 
             // createNewMatchToolStripMenuItem
             // 
+            this.createNewMatchToolStripMenuItem.Enabled = false;
             this.createNewMatchToolStripMenuItem.Name = "createNewMatchToolStripMenuItem";
             this.createNewMatchToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.createNewMatchToolStripMenuItem.Text = "New Match";
@@ -2278,6 +2279,7 @@
             // 
             // cmiMatchNewMatch
             // 
+            this.cmiMatchNewMatch.Enabled = false;
             this.cmiMatchNewMatch.Name = "cmiMatchNewMatch";
             this.cmiMatchNewMatch.Size = new System.Drawing.Size(207, 22);
             this.cmiMatchNewMatch.Text = "&New Match";

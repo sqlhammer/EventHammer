@@ -988,6 +988,7 @@ If you do not like the placements, you will have to move the competitors to diff
             Divisions = new List<Division>();
             this.tmrDivisions.Enabled = true;
             this.createNewMatchToolStripMenuItem.Enabled = false;
+            this.cmiMatchNewMatch.Enabled = false;
             this.tmrNewMatch.Enabled = true;
 
             Task.Run(() => RefreshDivisionsAsync());
@@ -1311,9 +1312,9 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void tmrNewMatch_Tick(object sender, EventArgs e)
         {
-            if (Divisions.Count > 0 &&
-                MatchModels.Count > 0)
+            if (Divisions.Count > 0 && MatchModelLoadComplete)
             {
+                this.cmiMatchNewMatch.Enabled = true;
                 this.createNewMatchToolStripMenuItem.Enabled = true;
                 this.tmrDivisions.Enabled = false;
             }
