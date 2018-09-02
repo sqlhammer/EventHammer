@@ -765,6 +765,23 @@ m.Division.MaxRank.RankName);
             return models;
         }
 
+        private List<Dojo> SortDojos(List<Dojo> models)
+        {
+            //We need to resort for display purposes
+            models.Sort(delegate (Dojo x, Dojo y)
+            {
+                //Handle NULLs even though I do not expect them
+                if (x.Facility.FacilityName == null && y.Facility.FacilityName == null) return 0;
+                if (x.Facility.FacilityName == null) return -1;
+                if (y.Facility.FacilityName == null) return 1;
+
+                //Sort by name
+                return x.Facility.FacilityName.CompareTo(y.Facility.FacilityName);
+            });
+
+            return models;
+        }
+
         private List<EventModel> SortEventModels(List<EventModel> models)
         {
             //We need to resort for display purposes
@@ -1334,7 +1351,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private async void RefreshDojosAsync()
         {
-            Dojos = await DataAccessAsync.GetDojos();
+            Dojos = SortDojos(await DataAccessAsync.GetDojos());
         }
 
         private void LoadCompetitorBelt(Rank rank)
@@ -1478,12 +1495,12 @@ If you do not like the placements, you will have to move the competitors to diff
                 return;
 
             this.cbCompSchool.Items.Clear();
+            this.cbCompSchool.Items.Add("Other");
+
             foreach (var dojo in Dojos)
             {
                 this.cbCompSchool.Items.Add(dojo.Facility.FacilityName);
             }
-
-            this.cbCompSchool.Items.Add("Other");
         }
 
         private void SetCompetitorTitleDropdown()
