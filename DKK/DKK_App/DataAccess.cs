@@ -1318,6 +1318,7 @@ namespace DKK_App
                                "@CompetitorId = " + comp.CompetitorId.ToString() +
                               ",@ParentId = " + comp.Parent.PersonId.ToString() +
                               ",@PersonId = " + comp.Person.PersonId.ToString() +
+                              ",@Age = " + comp.Age.ToString() +
                               //",@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
                               ",@DojoId = " + dojoId +
                               ",@EventId = " + comp.Event.EventId.ToString() +

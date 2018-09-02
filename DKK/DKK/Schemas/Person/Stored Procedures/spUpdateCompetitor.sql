@@ -6,6 +6,7 @@
 
 	--Competitor
 	@DateOfBirth DATE = NULL,
+	@Age INT = NULL,
 	@DojoId INT = NULL,
 	@EventId INT = NULL,
 	@Height DECIMAL = NULL,
@@ -79,6 +80,7 @@ BEGIN
 			UPDATE c
 			SET
 				c.DateOfBirth = @DateOfBirth
+				,c.Age = @Age
 				,c.DojoId = @DojoId
 				,c.Height = @Height
 				,c.IsSpecialConsideration = @IsSpecialConsideration
