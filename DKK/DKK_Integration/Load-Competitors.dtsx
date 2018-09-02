@@ -7,13 +7,13 @@
   DTS:CreatorName="HAMMER-SURFACE\derik"
   DTS:DTSID="{3F71BB06-A89E-4AFA-93D8-1BEE9DDB4E9C}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="14.0.3025.39"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
   DTS:LocaleID="1033"
   DTS:ObjectName="Load-Competitors"
   DTS:PackageType="5"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="18"
-  DTS:VersionGUID="{2ABE201A-91CA-46F3-B933-848D7F125E84}">
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{0E1A5285-3F93-4AA5-B524-26B183CB508C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -48,7 +48,7 @@
         <DTS:ConnectionManager
           DTS:ConnectionString="server=kanreikaikarate.db.10015251.hostedresource.com;user id=kanreikaikarate;connectiontimeout=10;database=kanreikaikarate;defaultcommandtimeout=300;port=3306;compress=True;">
           <DTS:Password
-            DTS:Name="Password"
+            DTS:Name="password"
             Sensitive="1"></DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
@@ -96,6 +96,7 @@
     <DTS:Executable
       DTS:refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk"
       DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
       DTS:Description="Data Flow Task"
       DTS:DTSID="{3C485214-09F5-4EDA-A767-CF6B56AA6833}"
       DTS:ExecutableType="Microsoft.Pipeline"
@@ -513,11 +514,11 @@ where f.form_id = 'CF5aad1517b9cc9' /*WKK Tournament 2018*/
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="255.5,42"
+          Size="256,42"
           Id="Package\MySQL kanreikaikarate &gt; MSSQL dkk"
           TopLeft="75.5,114.562499430962" />
         <NodeLayout
-          Size="242.5,42"
+          Size="242,42"
           Id="Package\Truncate Stage_CalderaFormEntry"
           TopLeft="89.25,34.1249998304993" />
         <EdgeLayout
@@ -551,13 +552,13 @@ where f.form_id = 'CF5aad1517b9cc9' /*WKK Tournament 2018*/
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="194,42"
+          Id="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate"
+          TopLeft="53,24.3749998789281" />
+        <NodeLayout
           Size="141,42"
           Id="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk"
           TopLeft="75.25,110.49999945114" />
-        <NodeLayout
-          Size="194.5,42"
-          Id="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate"
-          TopLeft="53,24.3749998789281" />
         <EdgeLayout
           Id="Package\MySQL kanreikaikarate &gt; MSSQL dkk.Paths[ADO NET Source Output]"
           TopLeft="148,66.3749998789281">

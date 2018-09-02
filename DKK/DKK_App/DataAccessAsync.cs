@@ -154,6 +154,11 @@ namespace DKK_App
                                 Rank rank = new Rank();
                                 Person person = new Person();
                                 Person parent = new Person();
+                                Dojo dojo = new Dojo
+                                {
+                                    MartialArtType = new MartialArtType(),
+                                    Facility = new Facility()
+                                };
 
                                 rank.RankId = Convert.ToInt32(reader["RankId"].ToString());
                                 person.PersonId = Convert.ToInt32(reader["PersonId"].ToString());
@@ -162,13 +167,17 @@ namespace DKK_App
                                 {
                                     parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
                                 }
+                                if (!String.IsNullOrEmpty(reader["DojoId"].ToString()))
+                                {
+                                    dojo = await GetDojo(Convert.ToInt32(reader["DojoId"].ToString()));
+                                }
 
                                 objs.Add(new Competitor
                                 {
                                     Age = Convert.ToInt32(reader["Age"].ToString()),
                                     CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
                                     //DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
-                                    Dojo = await GetDojo(Convert.ToInt32(reader["DojoId"].ToString())),
+                                    Dojo = dojo,
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
                                     IsKnockdown = Convert.ToBoolean(reader["IsKnockdown"].ToString()),
                                     IsMinor = Convert.ToBoolean(reader["IsMinor"].ToString()),

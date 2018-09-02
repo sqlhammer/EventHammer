@@ -24,8 +24,8 @@ PRINT 'Loading Person.Person...'
 --PRINT 'Loading Stage.Registration...'
 --:r .\..\Schemas\Stage\Data\Registration.sql
 
-PRINT 'Loading Stage.CalderaFormEntry...'
-:r .\..\Schemas\Stage\Data\CalderaFormEntry.sql
+--PRINT 'Loading Stage.CalderaFormEntry...'
+--:r .\..\Schemas\Stage\Data\CalderaFormEntry.sql
 
 PRINT 'Loading Facility.FacilityType...'
 :r .\..\Schemas\Facility\Data\FacilityType.sql
@@ -40,6 +40,6 @@ PRINT 'Loading Facility.Dojo...'
 PRINT 'Loading Event.Event...'
 :r .\..\Schemas\Event\Data\Event.sql
 
-PRINT 'Executing SQLAgentJob-Load-Registration-Data.sql...'
-:r .\..\SQLAgentJobs\SQLAgentJob-Load-Registration-Data.sql
+--PRINT 'Executing SQLAgentJob-Load-Registration-Data.sql...'
+--:r .\..\SQLAgentJobs\SQLAgentJob-Load-Registration-Data.sql
 
