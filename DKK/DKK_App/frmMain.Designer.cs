@@ -110,6 +110,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tabCompetitor = new System.Windows.Forms.TabPage();
+            this.lblConnection = new System.Windows.Forms.Label();
             this.lblCompLoading = new System.Windows.Forms.Label();
             this.gbCompetitorDetails = new System.Windows.Forms.GroupBox();
             this.btnCompDelete = new System.Windows.Forms.Button();
@@ -226,7 +227,6 @@
             this.clearSelectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
-            this.lblConnection = new System.Windows.Forms.Label();
             this.tmrRegistrations = new System.Windows.Forms.Timer(this.components);
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
@@ -1187,6 +1187,17 @@
             this.tabCompetitor.Text = "Competitors";
             this.tabCompetitor.UseVisualStyleBackColor = true;
             // 
+            // lblConnection
+            // 
+            this.lblConnection.AutoSize = true;
+            this.lblConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConnection.Location = new System.Drawing.Point(144, 216);
+            this.lblConnection.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblConnection.Name = "lblConnection";
+            this.lblConnection.Size = new System.Drawing.Size(872, 55);
+            this.lblConnection.TabIndex = 9;
+            this.lblConnection.Text = "Attempting to connect to the database...";
+            // 
             // lblCompLoading
             // 
             this.lblCompLoading.AutoSize = true;
@@ -1509,7 +1520,7 @@
             // lblCompInstructor
             // 
             this.lblCompInstructor.AutoSize = true;
-            this.lblCompInstructor.Location = new System.Drawing.Point(369, 118);
+            this.lblCompInstructor.Location = new System.Drawing.Point(369, 140);
             this.lblCompInstructor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCompInstructor.Name = "lblCompInstructor";
             this.lblCompInstructor.Size = new System.Drawing.Size(70, 18);
@@ -1520,7 +1531,7 @@
             // 
             this.txtCompInstructor.Enabled = false;
             this.txtCompInstructor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompInstructor.Location = new System.Drawing.Point(440, 119);
+            this.txtCompInstructor.Location = new System.Drawing.Point(440, 139);
             this.txtCompInstructor.Margin = new System.Windows.Forms.Padding(2);
             this.txtCompInstructor.Name = "txtCompInstructor";
             this.txtCompInstructor.Size = new System.Drawing.Size(147, 21);
@@ -2362,17 +2373,6 @@
             // 
             this.tmrCompTab.Interval = 250;
             this.tmrCompTab.Tick += new System.EventHandler(this.tmrCompTab_Tick);
-            // 
-            // lblConnection
-            // 
-            this.lblConnection.AutoSize = true;
-            this.lblConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConnection.Location = new System.Drawing.Point(144, 216);
-            this.lblConnection.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblConnection.Name = "lblConnection";
-            this.lblConnection.Size = new System.Drawing.Size(872, 55);
-            this.lblConnection.TabIndex = 9;
-            this.lblConnection.Text = "Attempting to connect to the database...";
             // 
             // tmrRegistrations
             // 

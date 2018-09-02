@@ -998,7 +998,7 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             MatchModelLoadComplete = false;
             tlvMatches.Roots = model;
-            tlvMatches.CollapseAll();
+            tlvMatches.ExpandAll();
             MatchModelLoadComplete = true;
         }
 
@@ -1032,6 +1032,7 @@ If you do not like the placements, you will have to move the competitors to diff
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
             MatchModels = Global.GetMatchModel(mcs);
             MatchModelLoadComplete = true;
+            this.tlvMatches.ExpandAll();
         }
 
         private async void RefreshCompetitors()
