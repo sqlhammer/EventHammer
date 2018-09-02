@@ -1363,20 +1363,46 @@ If you do not like the placements, you will have to move the competitors to diff
             this.cbCompBelt.SelectedIndex = this.cbCompBelt.FindStringExact(rank.RankName);
         }
 
-        private void LoadCompetitorSchool(Dojo dojo)
+        private void LoadCompetitorSchool(Competitor comp)
         {
-            if (dojo == null)
-                return;
-
-            this.cbCompSchool.SelectedIndex = this.cbCompSchool.FindStringExact(dojo.Facility.FacilityName);
-
-            if (dojo.Facility.Owner == null)
+            if (comp.Dojo != null && comp.Dojo.DojoId != 0)
             {
-                this.txtCompInstructor.Text = "";
-                return;
-            }
+                SetCompetitorSchoolControls(true);
 
-            this.txtCompInstructor.Text = dojo.Facility.Owner.DisplayName;
+                this.cbCompSchool.SelectedIndex = this.cbCompSchool.FindStringExact(comp.Dojo.Facility.FacilityName);
+
+                if (comp.Dojo.Facility.Owner == null)
+                {
+                    this.txtCompInstructor.Text = "";
+                    return;
+                }
+
+                this.txtCompInstructor.Text = comp.Dojo.Facility.Owner.DisplayName;
+            }
+            else
+            {
+                SetCompetitorSchoolControls(false);
+                this.txtCompSchoolOther.Text = comp.OtherDojoName;
+                this.txtCompInstructor.Text = "";
+            }
+        }
+
+        private void SetCompetitorSchoolControls(bool HasDojoId)
+        {
+            if (HasDojoId)
+            {
+                this.txtCompSchoolOther.Enabled = false;
+                this.txtCompSchoolOther.Text = "";
+
+                this.cbCompSchool.Enabled = true;
+            }
+            else
+            {
+                this.txtCompSchoolOther.Enabled = true;
+
+                this.cbCompSchool.Enabled = false;
+                this.cbCompSchool.SelectedIndex = -1;
+            }
         }
 
         private void LoadCompetitorTitle(Title title)
@@ -1445,8 +1471,8 @@ If you do not like the placements, you will have to move the competitors to diff
             this.txtCompStreet2.Text = comp.Person.StreetAddress2;
             this.txtCompZipCode.Text = comp.Person.PostalCode;
 
-            this.chbCompIsInstructor.Checked = comp.Person.IsInstructor;
-            this.chbCompSpecialConsideration.Checked = comp.IsSpecialConsideration;
+            //this.chbCompIsInstructor.Checked = comp.Person.IsInstructor;
+            this.btnSpecialConsiderationDetails.Enabled = comp.IsSpecialConsideration;
 
             this.nudCompWeight.Value = comp.Weight;
             this.nudCompHeight.Value = comp.Height;
@@ -1454,7 +1480,7 @@ If you do not like the placements, you will have to move the competitors to diff
             this.nudCompAge.Value = comp.Age;
 
             LoadCompetitorBelt(comp.Rank);
-            LoadCompetitorSchool(comp.Dojo);
+            LoadCompetitorSchool(comp);
             LoadCompetitorTitle(comp.Person.Title);
             LoadCompetitorGender(comp.Person.Gender);
         }
@@ -1471,11 +1497,6 @@ If you do not like the placements, you will have to move the competitors to diff
             {
                 LoadCompetitorDetails(new CompetitorModel());
             }
-        }
-
-        private void chbCompIsInstructor_CheckedChanged(object sender, EventArgs e)
-        {
-            this.cbCompTitle.Enabled = this.chbCompIsInstructor.Checked;
         }
 
         private void SetCompetitorBeltDropdown()
@@ -1624,11 +1645,6 @@ If you do not like the placements, you will have to move the competitors to diff
             SaveCompetitor(false);
         }
 
-        private void chbCompSpecialConsideration_CheckedChanged(object sender, EventArgs e)
-        {
-            btnSpecialConsiderationDetails.Enabled = this.chbCompSpecialConsideration.Checked;
-        }
-
         private void btnSpecialConsiderationDetails_Click(object sender, EventArgs e)
         {
             //TODO: update the database call for competitormodel to include desc
@@ -1697,8 +1713,8 @@ If you do not like the placements, you will have to move the competitors to diff
             comp.Person.Gender = (this.rbCompFemale.Checked) ? "F" : "M";
             //comp.DateOfBirth = new DateTime(Convert.ToInt32(this.cbCompYear.SelectedItem.ToString()), Convert.ToInt32(this.cbCompMonth.SelectedItem.ToString()),1);
             comp.Age = (int)this.nudCompAge.Value;
-            comp.Person.IsInstructor = this.chbCompIsInstructor.Checked;
-            comp.IsSpecialConsideration = this.chbCompSpecialConsideration.Checked;
+            //comp.Person.IsInstructor = this.chbCompIsInstructor.Checked;
+            //comp.IsSpecialConsideration = this.chbCompSpecialConsideration.Checked;
             comp.Parent.FirstName = this.txtCompParentFirstName.Text;
             comp.Parent.LastName = this.txtCompParentLastName.Text;
             comp.Parent.EmailAddress = this.txtCompParentEmail.Text;
@@ -1713,6 +1729,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
             comp.Rank = (Ranks.Where(r => r.RankName.CompareTo(this.cbCompBelt.SelectedItem.ToString()) == 0)).First();
             comp.Person.Title = (this.cbCompTitle.SelectedItem == null) ? new Title() : (Titles.Where(t => t.TitleName.CompareTo(this.cbCompTitle.SelectedItem.ToString()) == 0)).First();
+            comp.OtherDojoName = this.txtCompSchoolOther.Text;
 
             string selectedSchool = "";
             if (this.cbCompSchool.SelectedItem != null)
@@ -1720,8 +1737,6 @@ If you do not like the placements, you will have to move the competitors to diff
             comp.Dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(selectedSchool) == 0)).FirstOrDefault();
 
             SaveCompetitor(comp, IsNew);
-
-            UpdateCompetitorModel(comp);
         }
 
         private void UpdateCompetitorModel(Competitor updatedCompetitor)
@@ -1733,6 +1748,7 @@ If you do not like the placements, you will have to move the competitors to diff
                 Description = updatedCompetitor.Description,
                 DisplayName = updatedCompetitor.Person.DisplayName,
                 DojoName = (updatedCompetitor.Dojo != null) ? updatedCompetitor.Dojo.Facility.FacilityName : null,
+                OtherDojoName = updatedCompetitor.OtherDojoName,
                 Gender = updatedCompetitor.Person.Gender,
                 Height = updatedCompetitor.Height,
                 IsSpecialConsideration = updatedCompetitor.IsSpecialConsideration,

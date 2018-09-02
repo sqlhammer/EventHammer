@@ -10,6 +10,7 @@ namespace DKK_App.Models
         public decimal Weight { get; set; }
         public decimal Height { get; set; }
         public string DojoName { get; set; }
+        public string OtherDojoName { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
         public string Description { get; set; }

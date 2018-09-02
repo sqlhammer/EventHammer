@@ -75,6 +75,7 @@ namespace DKK_App
                               ,Height
 	                          ,RankId
 	                          ,DojoId
+                              ,OtherDojoName
 	                          ,ParentId
 	                          ,IsMinor
 	                          ,IsSpecialConsideration
@@ -154,7 +155,8 @@ namespace DKK_App
                                     Description = reader["ConsiderationDescription"].ToString(),
                                     Rank = rank,
                                     Parent = parent,
-                                    Person = person
+                                    Person = person,
+                                    OtherDojoName = reader["OtherDojoName"].ToString()
                                 });
                             }
                         }
@@ -854,6 +856,7 @@ namespace DKK_App
 	                              ,mcd.Age
 	                              ,mcd.Weight
 	                              ,mcd.DojoId
+	                              ,mcd.OtherDojoName
 	                              ,mcd.IsMinor
 	                              ,mcd.IsSpecialConsideration
 	                              ,mcd.IsKata
@@ -1085,7 +1088,8 @@ namespace DKK_App
                                         Person = person,
                                         Rank = r,
                                         Weight = Convert.ToDecimal(reader["Weight"].ToString()),
-                                        Height = Convert.ToDecimal(reader["Height"].ToString())
+                                        Height = Convert.ToDecimal(reader["Height"].ToString()),
+                                        OtherDojoName = reader["OtherDojoName"].ToString()
                                     };
                                 }
 
@@ -1322,6 +1326,7 @@ namespace DKK_App
                               ",@Age = " + comp.Age.ToString() +
                               //",@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
                               ",@DojoId = " + dojoId +
+                              ",@OtherDojoName = " + comp.OtherDojoName +
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +
                               ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
@@ -1374,6 +1379,7 @@ namespace DKK_App
             SqlParameter[] parameters = new SqlParameter[25];
 
             parameters[0] = new SqlParameter("@DojoId", dojoId);
+            parameters[0] = new SqlParameter("@OtherDojoName", comp.OtherDojoName);
             parameters[1] = new SqlParameter("@Age", comp.Age);
             parameters[2] = new SqlParameter("@EventId", comp.Event.EventId);
             parameters[3] = new SqlParameter("@Height", comp.Height);

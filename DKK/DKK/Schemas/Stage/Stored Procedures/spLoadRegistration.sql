@@ -27,12 +27,14 @@ BEGIN
 				,(SELECT TOP 1 LEFT(value,1) FROM [Stage].[CalderaFormEntry] WHERE slug = 'gender' AND entry_id = c.entry_id) gender
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'height_inches' AND entry_id = c.entry_id) height_inches
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'instructor_name' AND entry_id = c.entry_id) instructor_name
+				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'other_instructor' AND entry_id = c.entry_id) other_instructor
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'last_name' AND entry_id = c.entry_id) last_name
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'parent_first_name' AND entry_id = c.entry_id) parent_first_name
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'parent_last_name' AND entry_id = c.entry_id) parent_last_name
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'parent_email' AND entry_id = c.entry_id) parent_email
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'rank_kyu' AND entry_id = c.entry_id) rank_kyu
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'school_name' AND entry_id = c.entry_id) school_name
+				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'other_school' AND entry_id = c.entry_id) other_school
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'state_province' AND entry_id = c.entry_id) state_province
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'street_address' AND entry_id = c.entry_id) street_address
 				,(SELECT TOP 1 value FROM [Stage].[CalderaFormEntry] WHERE slug = 'weight_pounds' AND entry_id = c.entry_id) weight_pounds
@@ -198,7 +200,7 @@ BEGIN
 
 			--Competitor inserts
 			INSERT INTO [Person].[Competitor]
-			(PersonId, Age, [Weight], Height, RankId, DojoId, ParentId, IsMinor
+			(PersonId, Age, [Weight], Height, RankId, DojoId, OtherDojoName, ParentId, IsMinor
 				, IsSpecialConsideration, ConsiderationDescription, EventId, IsKata, IsWeaponKata, IsSemiKnockdown, IsKnockdown)
 			SELECT p.PersonId
 				, r.age
@@ -211,7 +213,8 @@ BEGIN
 					INNER JOIN Facility.Facility f ON d.FacilityId = f.FacilityId
 					INNER JOIN Facility.MartialArtType m ON d.MartialArtTypeId = m.MartialArtTypeId
 					WHERE f.[Name] = r.school_name
-				) 
+				)
+				, r.other_school 
 				, (
 					SELECT TOP 1 p.PersonId
 					FROM Person.Person p

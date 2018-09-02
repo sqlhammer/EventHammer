@@ -74,6 +74,7 @@ namespace DKK_App
 	                          ,Weight
 	                          ,RankId
 	                          ,DojoId
+                              ,OtherDojoName
 	                          ,ParentId
 	                          ,IsMinor
 	                          ,IsSpecialConsideration
@@ -107,6 +108,7 @@ namespace DKK_App
                               ,Height
 	                          ,RankId
 	                          ,DojoId
+                              ,OtherDojoName
 	                          ,ParentId
 	                          ,IsMinor
 	                          ,IsSpecialConsideration
@@ -190,7 +192,8 @@ namespace DKK_App
                                     Description = reader["ConsiderationDescription"].ToString(),
                                     Rank = rank,
                                     Parent = parent,
-                                    Person = person
+                                    Person = person,
+                                    OtherDojoName = reader["OtherDojoName"].ToString()
                                 });
                             }
                         }
@@ -844,6 +847,7 @@ namespace DKK_App
 	                              ,mcd.Weight
                                   ,mcd.Height
 	                              ,mcd.DojoId
+                                  ,mcd.OtherDojoName
 	                              ,mcd.IsMinor
 	                              ,mcd.IsSpecialConsideration
 	                              ,mcd.IsKata
@@ -1077,7 +1081,8 @@ namespace DKK_App
                                         Person = person,
                                         Rank = r,
                                         Weight = Convert.ToDecimal(reader["Weight"].ToString()),
-                                        Height = Convert.ToDecimal(reader["Height"].ToString())
+                                        Height = Convert.ToDecimal(reader["Height"].ToString()),
+                                        OtherDojoName = reader["OtherDojoName"].ToString()
                                     };
                                 }
 

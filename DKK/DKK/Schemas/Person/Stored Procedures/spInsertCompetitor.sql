@@ -3,6 +3,7 @@
 	@Age INT = NULL,
 	@DateOfBirth DATE = NULL,
 	@DojoId INT = NULL,
+	@OtherDojoName VARCHAR(120) = NULL,
 	@EventId INT = NULL,
 	@Height DECIMAL = NULL,
 	@IsSpecialConsideration BIT = NULL,
@@ -144,6 +145,7 @@ BEGIN
 				,Height
 				,RankId
 				,DojoId
+				,OtherDojoName
 				,ParentId
 				,IsMinor
 				,IsSpecialConsideration
@@ -160,6 +162,7 @@ BEGIN
 				@Height,
 				@RankId,
 				@DojoId,
+				@OtherDojoName,
 				(SELECT TOP 1 Id FROM @ParentId),
 				CASE
 					WHEN @Age < 18 THEN 1

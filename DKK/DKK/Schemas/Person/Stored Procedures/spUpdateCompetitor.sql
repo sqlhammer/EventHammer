@@ -8,6 +8,7 @@
 	@DateOfBirth DATE = NULL,
 	@Age INT = NULL,
 	@DojoId INT = NULL,
+	@OtherDojoName VARCHAR(120) = NULL,
 	@EventId INT = NULL,
 	@Height DECIMAL = NULL,
 	@IsSpecialConsideration BIT = NULL,
@@ -82,6 +83,7 @@ BEGIN
 				c.DateOfBirth = @DateOfBirth
 				,c.Age = @Age
 				,c.DojoId = @DojoId
+				,c.OtherDojoName = @OtherDojoName
 				,c.Height = @Height
 				,c.IsSpecialConsideration = @IsSpecialConsideration
 				,c.ConsiderationDescription = @ConsiderationDescription

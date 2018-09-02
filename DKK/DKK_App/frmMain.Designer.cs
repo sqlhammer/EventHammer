@@ -145,7 +145,6 @@
             this.nudCompHeight = new System.Windows.Forms.NumericUpDown();
             this.label31 = new System.Windows.Forms.Label();
             this.cbCompBelt = new System.Windows.Forms.ComboBox();
-            this.chbCompIsInstructor = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
             this.txtCompSchoolOther = new System.Windows.Forms.TextBox();
             this.cbCompSchool = new System.Windows.Forms.ComboBox();
@@ -163,7 +162,6 @@
             this.rbCompFemale = new System.Windows.Forms.RadioButton();
             this.cbCompTitle = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.chbCompSpecialConsideration = new System.Windows.Forms.CheckBox();
             this.txtCompLastName = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.txtCompFirstName = new System.Windows.Forms.TextBox();
@@ -1176,6 +1174,7 @@
             // 
             // tabCompetitor
             // 
+            this.tabCompetitor.Controls.Add(this.lblConnection);
             this.tabCompetitor.Controls.Add(this.lblCompLoading);
             this.tabCompetitor.Controls.Add(this.gbCompetitorDetails);
             this.tabCompetitor.Controls.Add(this.gbComp);
@@ -1473,7 +1472,6 @@
             this.gbCompDemographics.Controls.Add(this.nudCompHeight);
             this.gbCompDemographics.Controls.Add(this.label31);
             this.gbCompDemographics.Controls.Add(this.cbCompBelt);
-            this.gbCompDemographics.Controls.Add(this.chbCompIsInstructor);
             this.gbCompDemographics.Controls.Add(this.label21);
             this.gbCompDemographics.Controls.Add(this.txtCompSchoolOther);
             this.gbCompDemographics.Controls.Add(this.cbCompSchool);
@@ -1485,7 +1483,6 @@
             this.gbCompDemographics.Controls.Add(this.rbCompFemale);
             this.gbCompDemographics.Controls.Add(this.cbCompTitle);
             this.gbCompDemographics.Controls.Add(this.label16);
-            this.gbCompDemographics.Controls.Add(this.chbCompSpecialConsideration);
             this.gbCompDemographics.Controls.Add(this.txtCompLastName);
             this.gbCompDemographics.Controls.Add(this.label15);
             this.gbCompDemographics.Controls.Add(this.txtCompFirstName);
@@ -1532,12 +1529,13 @@
             // btnSpecialConsiderationDetails
             // 
             this.btnSpecialConsiderationDetails.Enabled = false;
-            this.btnSpecialConsiderationDetails.Location = new System.Drawing.Point(498, 144);
+            this.btnSpecialConsiderationDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSpecialConsiderationDetails.Location = new System.Drawing.Point(217, 137);
             this.btnSpecialConsiderationDetails.Margin = new System.Windows.Forms.Padding(2);
             this.btnSpecialConsiderationDetails.Name = "btnSpecialConsiderationDetails";
-            this.btnSpecialConsiderationDetails.Size = new System.Drawing.Size(80, 25);
+            this.btnSpecialConsiderationDetails.Size = new System.Drawing.Size(142, 30);
             this.btnSpecialConsiderationDetails.TabIndex = 6;
-            this.btnSpecialConsiderationDetails.Text = "Details";
+            this.btnSpecialConsiderationDetails.Text = "Special Considerations";
             this.btnSpecialConsiderationDetails.UseVisualStyleBackColor = true;
             this.btnSpecialConsiderationDetails.Click += new System.EventHandler(this.btnSpecialConsiderationDetails_Click);
             // 
@@ -1607,18 +1605,6 @@
             this.cbCompBelt.Name = "cbCompBelt";
             this.cbCompBelt.Size = new System.Drawing.Size(108, 23);
             this.cbCompBelt.TabIndex = 23;
-            // 
-            // chbCompIsInstructor
-            // 
-            this.chbCompIsInstructor.AutoSize = true;
-            this.chbCompIsInstructor.Location = new System.Drawing.Point(217, 146);
-            this.chbCompIsInstructor.Margin = new System.Windows.Forms.Padding(2);
-            this.chbCompIsInstructor.Name = "chbCompIsInstructor";
-            this.chbCompIsInstructor.Size = new System.Drawing.Size(104, 22);
-            this.chbCompIsInstructor.TabIndex = 11;
-            this.chbCompIsInstructor.Text = "Is Instructor";
-            this.chbCompIsInstructor.UseVisualStyleBackColor = true;
-            this.chbCompIsInstructor.CheckedChanged += new System.EventHandler(this.chbCompIsInstructor_CheckedChanged);
             // 
             // label21
             // 
@@ -1808,18 +1794,6 @@
             this.label16.Size = new System.Drawing.Size(35, 18);
             this.label16.TabIndex = 12;
             this.label16.Text = "Title";
-            // 
-            // chbCompSpecialConsideration
-            // 
-            this.chbCompSpecialConsideration.AutoSize = true;
-            this.chbCompSpecialConsideration.Location = new System.Drawing.Point(322, 146);
-            this.chbCompSpecialConsideration.Margin = new System.Windows.Forms.Padding(2);
-            this.chbCompSpecialConsideration.Name = "chbCompSpecialConsideration";
-            this.chbCompSpecialConsideration.Size = new System.Drawing.Size(171, 22);
-            this.chbCompSpecialConsideration.TabIndex = 10;
-            this.chbCompSpecialConsideration.Text = "Special Consideration";
-            this.chbCompSpecialConsideration.UseVisualStyleBackColor = true;
-            this.chbCompSpecialConsideration.CheckedChanged += new System.EventHandler(this.chbCompSpecialConsideration_CheckedChanged);
             // 
             // txtCompLastName
             // 
@@ -2411,7 +2385,6 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1140, 530);
-            this.Controls.Add(this.lblConnection);
             this.Controls.Add(this.btnClearCompetitorFilter);
             this.Controls.Add(this.btnClearMatchFilter);
             this.Controls.Add(this.btnRefreshMatchTab);
@@ -2574,8 +2547,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox chbCompIsInstructor;
-        private System.Windows.Forms.CheckBox chbCompSpecialConsideration;
         private System.Windows.Forms.TextBox txtCompLastName;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtCompFirstName;

@@ -8,6 +8,7 @@
 	,[Height] DECIMAL(5,2) NOT NULL
 	,RankId INT NOT NULL CONSTRAINT FK_Person_Rank_RankId FOREIGN KEY REFERENCES [Event].[Rank] (RankId)
 	,DojoId INT NULL CONSTRAINT FK_Facility_Dojo_DojoId FOREIGN KEY REFERENCES Facility.Dojo (DojoId)
+	,OtherDojoName VARCHAR(120) NULL
 	,ParentId INT NULL CONSTRAINT FK_Person_Person_ParentId FOREIGN KEY REFERENCES Person.Person (PersonId)
 	,IsMinor BIT NOT NULL CONSTRAINT DF_Person_Competitor_IsMinor DEFAULT(0)
 	,IsSpecialConsideration BIT NOT NULL CONSTRAINT DF_Person_Competitor_IsSpecialConsideration DEFAULT(0)

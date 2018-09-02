@@ -18,6 +18,7 @@ SELECT c.CompetitorId
 	  ,r.Kyu
 	  ,dj.DojoId
 	  ,djf.Name DojoName
+	  ,c.OtherDojoName
 	  ,c.IsMinor
 	  ,c.IsSpecialConsideration
 	  ,c.ConsiderationDescription

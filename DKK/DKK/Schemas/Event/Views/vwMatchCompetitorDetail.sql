@@ -21,6 +21,7 @@ SELECT mc.MatchCompetitorId
 	  ,c.Weight
 	  ,c.Height
 	  ,c.DojoId
+	  ,c.OtherDojoName
 	  ,c.IsMinor
 	  ,c.IsSpecialConsideration
 	  ,c.IsKata
