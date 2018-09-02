@@ -1046,7 +1046,11 @@ namespace DKK_App
                                 //Dojo
                                 int dojoid = (!String.IsNullOrEmpty(reader["DojoId"].ToString())) ? Convert.ToInt32(reader["DojoId"].ToString()) : 0;
 
-                                Dojo dojo = new Dojo();
+                                Dojo dojo = new Dojo
+                                {
+                                    MartialArtType = new MartialArtType(),
+                                    Facility = new Facility()
+                                };
                                 if(dojoid > 0)
                                 {
                                     dojo = await GetDojo(dojoid);
