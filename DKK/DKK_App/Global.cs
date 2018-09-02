@@ -606,6 +606,7 @@ namespace DKK_App
             newComp.Gender = comp.Gender;
             newComp.RankName = comp.RankName;
             newComp.Weight = comp.Weight;
+            newComp.Height = comp.Height;
             newComp.Children = new List<MatchModel>();
 
             foreach (MatchModel m in matches)

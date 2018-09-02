@@ -9,6 +9,7 @@ namespace DKK_App
 {
     public partial class frmNewMatch : Form
     {
+        public Event CurrentEvent = new Event();
         public List<Division> Divisions = new List<Division>();
         private List<MatchType> MatchTypes = new List<MatchType>();
         public List<MatchModel> MatchModels = new List<MatchModel>();
@@ -35,7 +36,11 @@ namespace DKK_App
              * 4. A division must be selected
              * 5. A match with the same display div and subdiv cannot already exist
              * 6. Must be appropriate IsKata type
+             * 7. A display division number cannot already exist
              */
+
+            if (Global.IsDuplicateMatchDisplayId(MatchModels,(int)this.nudDivision.Value, (int)this.nudSubDivision.Value))
+                return NewMatchErrorType.DuplicateMatchDisplayId;
 
             if (this.cbMatchType.SelectedItem == null)
                 return NewMatchErrorType.MatchTypeNotSelected;
@@ -184,13 +189,13 @@ namespace DKK_App
                     break;
             }
 
-            match.EventId = (int)MatchModels.First().EventId;
+            match.EventId = CurrentEvent.EventId;
             match.DivisionId = ((DivisionModel)this.tlvDivisions.SelectedObject).DivisionId;
             match.MatchDisplayId = (int)this.nudDivision.Value;
             match.SubDivisionId = (int)this.nudSubDivision.Value;
             match.Children = new List<MatchModel>();
 
-            DataAccess.InsertMatch(match);
+            match.MatchId = DataAccess.InsertMatch(match);
 
             //update the matchmodels
             MatchModels.Add(match);
@@ -228,6 +233,9 @@ namespace DKK_App
                     break;
                 case NewMatchErrorType.NonKataDivisionWithKataSelection:
                     MessageBox.Show("To select a Kata match type, you must select a Kata division, as well.", "Match type / division type mismatch", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case NewMatchErrorType.DuplicateMatchDisplayId:
+                    MessageBox.Show("That combination of Division and Sub-division numbers is already taken. Please select another.", "Duplicate Division / Sub-division combination", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }

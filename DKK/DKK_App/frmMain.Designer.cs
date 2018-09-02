@@ -204,6 +204,7 @@
             this.deleteSelectedCompetitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiDownloadLatestVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRetryConnection = new System.Windows.Forms.Button();
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
@@ -229,7 +230,6 @@
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
             this.lblConnection = new System.Windows.Forms.Label();
             this.tmrRegistrations = new System.Windows.Forms.Timer(this.components);
-            this.cmiDownloadLatestVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -2081,7 +2081,6 @@
             // 
             // createNewMatchToolStripMenuItem
             // 
-            this.createNewMatchToolStripMenuItem.Enabled = false;
             this.createNewMatchToolStripMenuItem.Name = "createNewMatchToolStripMenuItem";
             this.createNewMatchToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.createNewMatchToolStripMenuItem.Text = "New Match";
@@ -2185,6 +2184,13 @@
             this.helpToolStripMenuItem1.Size = new System.Drawing.Size(200, 22);
             this.helpToolStripMenuItem1.Text = "Knowledge Base";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
+            // 
+            // cmiDownloadLatestVersion
+            // 
+            this.cmiDownloadLatestVersion.Name = "cmiDownloadLatestVersion";
+            this.cmiDownloadLatestVersion.Size = new System.Drawing.Size(200, 22);
+            this.cmiDownloadLatestVersion.Text = "Download latest version";
+            this.cmiDownloadLatestVersion.Click += new System.EventHandler(this.cmiDownloadLatestVersion_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -2395,13 +2401,6 @@
             // tmrRegistrations
             // 
             this.tmrRegistrations.Interval = 1000;
-            // 
-            // cmiDownloadLatestVersion
-            // 
-            this.cmiDownloadLatestVersion.Name = "cmiDownloadLatestVersion";
-            this.cmiDownloadLatestVersion.Size = new System.Drawing.Size(200, 22);
-            this.cmiDownloadLatestVersion.Text = "Download latest version";
-            this.cmiDownloadLatestVersion.Click += new System.EventHandler(this.cmiDownloadLatestVersion_Click);
             // 
             // frmMain
             // 

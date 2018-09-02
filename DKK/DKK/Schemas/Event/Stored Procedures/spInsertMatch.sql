@@ -13,7 +13,11 @@ BEGIN
 
 		BEGIN TRANSACTION;
 
+			DECLARE @returnTable TABLE (matchid INT NOT NULL);
+			DECLARE @matchid INT = 0;
+
 			INSERT INTO [Event].[Match] ( EventId, MatchTypeId, DivisionId, SubDivisionId, MatchDisplayId )
+			OUTPUT inserted.MatchId INTO @returnTable
 			VALUES
 			(
 				@EventId -- EventId - int
@@ -22,6 +26,8 @@ BEGIN
 				,@SubDivisionId -- SubDivisionId - int
 				,@MatchDisplayId -- MatchDisplayId - int
 			) 
+
+			SELECT TOP 1 @matchid = matchid FROM @returnTable;
 
 	END TRY
 	BEGIN CATCH
@@ -42,5 +48,7 @@ BEGIN
 
 	WHILE @@TRANCOUNT > 0
 		COMMIT;
+
+	RETURN @matchid;
 END;
 GO

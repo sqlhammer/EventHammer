@@ -244,14 +244,6 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             }
         }
 
-        private void rbApplicableMatches_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.rbApplicableMatches.Checked)
-            {
-                FilterApplicableMatches();
-            }
-        }
-
         private void FilterApplicableMatches()
         {
             if (tlvCompetitors.SelectedObject != null)
@@ -1124,6 +1116,8 @@ If you do not like the placements, you will have to move the competitors to diff
                 this.lblLoading.Visible = false;
                 this.lblCompLoading.Visible = false;
                 this.tmrMatchCompetitorRefresh.Enabled = false;
+                this.rbAll.Enabled = true;
+                this.rbApplicableMatches.Enabled = true;
 
                 RefreshMatches(MatchModels);
                 RefreshCompetitors(CompetitorModels);
@@ -1142,9 +1136,15 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             if (Divisions.Count > 0)
             {
-                this.rbAll.Enabled = true;
-                this.rbApplicableMatches.Enabled = true;
                 this.tmrDivisions.Enabled = false;
+            }
+        }
+
+        private void rbApplicableMatches_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.rbApplicableMatches.Checked)
+            {
+                FilterApplicableMatches();
             }
         }
 
@@ -1287,6 +1287,7 @@ If you do not like the placements, you will have to move the competitors to diff
             frmNewMatch frm = new frmNewMatch();
             frm.Divisions = Divisions;
             frm.MatchModels = MatchModels;
+            frm.CurrentEvent = CurrentEvent;
             frm.ParentFormMain = this;
             frm.Show();
         }
@@ -1722,9 +1723,15 @@ If you do not like the placements, you will have to move the competitors to diff
                 Weight = updatedCompetitor.Weight
             };
 
-            var existing_cm = CompetitorModels.Where(c => c.CompetitorId == cm.CompetitorId).First();
+            //It will throw an exception if this is a new competitor to be inserted.
+            //In that case, we will just skip the removal step of this process.
+            try
+            {
+                var existing_cm = CompetitorModels.Where(c => c.CompetitorId == cm.CompetitorId).First();
+                CompetitorModels.Remove(existing_cm);
+            }
+            catch { }
 
-            CompetitorModels.Remove(existing_cm);
             CompetitorModels.Add(cm);
 
             CompetitorModels = SortCompetitorModels(CompetitorModels);
@@ -1746,13 +1753,14 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             if (IsNew)
             {
-                DataAccess.InsertCompetitor(comp);
+                comp.CompetitorId = DataAccess.InsertCompetitor(comp);
             }
             else
             {
                 DataAccess.UpdateCompetitor(comp);
             }
 
+            UpdateCompetitorModel(comp);
             ClearCompetitorSelection();
         }
 

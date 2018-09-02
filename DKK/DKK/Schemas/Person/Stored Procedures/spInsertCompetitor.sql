@@ -132,6 +132,9 @@ BEGIN
 			)
 
 			--Insert Competitor
+			DECLARE @returnTable TABLE (competitorid INT NOT NULL);
+			DECLARE @competitorid INT = 0;
+
 			INSERT INTO Person.Competitor
 			(
 				PersonId
@@ -147,6 +150,7 @@ BEGIN
 				,ConsiderationDescription
 				,EventId
 			)
+			OUTPUT inserted.CompetitorId INTO @returnTable
 			VALUES
 			(
 				(SELECT TOP 1 Id FROM @PersonId),
@@ -166,6 +170,8 @@ BEGIN
 				@EventId
 			) 
 
+			SELECT TOP 1 @competitorid = competitorid FROM @returnTable;
+			
 	END TRY
 	BEGIN CATCH
 			
@@ -185,5 +191,7 @@ BEGIN
 
 	WHILE @@TRANCOUNT > 0
 		COMMIT;
+
+	RETURN @competitorid;
 END;
 GO

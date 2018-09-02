@@ -9,6 +9,7 @@ namespace DKK_App.Enums
         DivisionNotSelected,
         MatchTypeNotSelected,
         KataDivisionWithNonKataSelection,
-        NonKataDivisionWithKataSelection
+        NonKataDivisionWithKataSelection,
+        DuplicateMatchDisplayId
     }
 }

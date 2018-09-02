@@ -5,6 +5,7 @@ using System.Configuration;
 using DKK_App.Entities;
 using System.Linq;
 using DKK_App.Models;
+using System.Data;
 
 namespace DKK_App
 {
@@ -1324,7 +1325,7 @@ namespace DKK_App
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +
                               ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
-                              ",@ConsiderationDescription = '" + comp.Description + "'" +
+                              ",@ConsiderationDescription = '" + ((comp.Description != null) ? comp.Description.Replace("'", "''") : "") + "'" +
                               ",@RankId = " + comp.Rank.RankId.ToString() +
                               ",@Weight = " + comp.Weight.ToString() +
                               ",@AppartmentCode = '" + comp.Person.AppartmentCode + "'" +
@@ -1342,9 +1343,9 @@ namespace DKK_App
                               ",@StreetAddress1 = '" + comp.Person.StreetAddress1 + "'" +
                               ",@StreetAddress2 = '" + comp.Person.StreetAddress2 + "'" +
                               //",@TitleId = " + ((comp.Person.Title.TitleId == 0) ? "NULL" : comp.Person.Title.TitleId.ToString()) +
-                              ",@ParentFirstName = '" + comp.Parent.FirstName + "'" +
-                              ",@ParentLastName = '" + comp.Parent.LastName + "'" +
-                              ",@ParentEmailAddress = '" + comp.Parent.EmailAddress + "';";
+                              ",@ParentFirstName = " + ((comp.Parent != null) ? "'" + comp.Parent.FirstName + "'" : "") +
+                              ",@ParentLastName = " + ((comp.Parent != null) ? "'" + comp.Parent.LastName + "'" : "") +
+                              ",@ParentEmailAddress = " + ((comp.Parent != null) ? "'" + comp.Parent.EmailAddress + "'" : "");
 
             ExecuteDDL(query);
         }
@@ -1362,63 +1363,73 @@ namespace DKK_App
         #endregion
 
         #region Inserts
-        public static void InsertCompetitor(Competitor comp)
+        public static int InsertCompetitor(Competitor comp)
         {
-            string dojoId = "NULL";
+            int? dojoId = null;
             if (comp.Dojo != null && comp.Dojo.DojoId != 0)
-                dojoId = comp.Dojo.DojoId.ToString();
+                dojoId = comp.Dojo.DojoId;
 
-            string query = "EXEC [Person].[spInsertCompetitor] " +
-                              // "@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
-                              "@DojoId = " + dojoId +
-                              ",@Age = " + comp.Age.ToString() +
-                              ",@EventId = " + comp.Event.EventId.ToString() +
-                              ",@Height = " + comp.Height.ToString() +
-                              ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
-                              ",@RankId = " + comp.Rank.RankId.ToString() +
-                              ",@Weight = " + comp.Weight.ToString() +
-                              ",@AppartmentCode = '" + comp.Person.AppartmentCode + "'" +
-                              ",@City = '" + comp.Person.City + "'" +
-                              ",@Country = '" + comp.Person.Country + "'" +
-                              ",@DisplayName = '" + comp.Person.DisplayName + "'" +
-                              ",@EmailAddress = '" + comp.Person.EmailAddress + "'" +
-                              ",@FirstName = '" + comp.Person.FirstName + "'" +
-                              ",@Gender = '" + comp.Person.Gender + "'" +
-                              ",@IsInstructor = " + ((comp.Person.IsInstructor) ? "1" : "0") +
-                              ",@LastName = '" + comp.Person.LastName + "'" +
-                              ",@PhoneNumber = '" + comp.Person.PhoneNumber + "'" +
-                              ",@PostalCode = '" + comp.Person.PostalCode + "'" +
-                              ",@StateProvince = '" + comp.Person.StateProvince + "'" +
-                              ",@StreetAddress1 = '" + comp.Person.StreetAddress1 + "'" +
-                              ",@StreetAddress2 = '" + comp.Person.StreetAddress2 + "'" +
-                              ",@TitleId = " + ((comp.Person.Title.TitleId == 0) ? "NULL" : comp.Person.Title.TitleId.ToString()) +
-                              ",@ParentFirstName = '" + comp.Parent.FirstName + "'" +
-                              ",@ParentLastName = '" + comp.Parent.LastName + "'" +
-                              ",@ParentEmailAddress = '" + comp.Parent.EmailAddress + "';";
+            string sproc_name = "[Person].[spInsertCompetitor]";
 
-            ExecuteDDL(query);
+            SqlParameter[] parameters = new SqlParameter[25];
+
+            parameters[0] = new SqlParameter("@DojoId", dojoId);
+            parameters[1] = new SqlParameter("@Age", comp.Age);
+            parameters[2] = new SqlParameter("@EventId", comp.Event.EventId);
+            parameters[3] = new SqlParameter("@Height", comp.Height);
+            parameters[4] = new SqlParameter("@IsSpecialConsideration", ((comp.IsSpecialConsideration) ? true : false));
+            parameters[5] = new SqlParameter("@ConsiderationDescription", ((comp.Description != null) ? comp.Description.Replace("'", "''") : ""));
+            parameters[6] = new SqlParameter("@RankId", comp.Rank.RankId);
+            parameters[7] = new SqlParameter("@Weight", comp.Weight);
+            parameters[8] = new SqlParameter("@AppartmentCode", comp.Person.AppartmentCode);
+            parameters[9] = new SqlParameter("@City", comp.Person.City);
+            parameters[10] = new SqlParameter("@Country", comp.Person.Country);
+            parameters[11] = new SqlParameter("@DisplayName", comp.Person.DisplayName);
+            parameters[12] = new SqlParameter("@EmailAddress", comp.Person.EmailAddress);
+            parameters[13] = new SqlParameter("@FirstName", comp.Person.FirstName);
+            parameters[14] = new SqlParameter("@Gender", comp.Person.Gender);
+            parameters[15] = new SqlParameter("@IsInstructor", ((comp.Person.IsInstructor) ? "1" : "0"));
+            parameters[16] = new SqlParameter("@LastName", comp.Person.LastName);
+            parameters[17] = new SqlParameter("@PhoneNumber", comp.Person.PhoneNumber);
+            parameters[18] = new SqlParameter("@PostalCode", comp.Person.PostalCode);
+            parameters[19] = new SqlParameter("@StateProvince", comp.Person.StateProvince);
+            parameters[20] = new SqlParameter("@StreetAddress1", comp.Person.StreetAddress1);
+            parameters[21] = new SqlParameter("@StreetAddress2", comp.Person.StreetAddress2);
+            parameters[22] = new SqlParameter("@ParentFirstName", ((comp.Parent != null) ? comp.Parent.FirstName : null));
+            parameters[23] = new SqlParameter("@ParentLastName", ((comp.Parent != null) ? comp.Parent.LastName : null));
+            parameters[24] = new SqlParameter("@ParentEmailAddress", ((comp.Parent != null) ? comp.Parent.EmailAddress : null));
+
+            return ExecuteDDLAsStoredProcedure(sproc_name, parameters);
         }
 
-        public static void InsertMatch(Match match)
+        public static int InsertMatch(Match match)
         {
-            string query = "EXEC [Event].[spInsertMatch] @EventId = " + match.Event.EventId.ToString() +
-	                            ", @MatchTypeId = " + match.MatchType.MatchTypeId.ToString() + 
-	                            ", @MatchDisplayId = " + match.MatchDisplayId.ToString() +  
-	                            ", @DivisionId = " + match.Division.DivisionId.ToString() + 
-	                            ", @SubDivisionId = " + match.SubDivisionId.ToString() + ";";
+            string sproc_name = "[Event].[spInsertMatch]";
 
-            ExecuteDDL(query);
+            SqlParameter[] parameters = new SqlParameter[5];
+
+            parameters[0] = new SqlParameter("@EventId", match.Event.EventId);
+            parameters[1] = new SqlParameter("@MatchTypeId", match.MatchType.MatchTypeId);
+            parameters[2] = new SqlParameter("@MatchDisplayId", match.MatchDisplayId);
+            parameters[3] = new SqlParameter("@DivisionId", match.Division.DivisionId);
+            parameters[4] = new SqlParameter("@SubDivisionId", match.SubDivisionId);
+
+            return ExecuteDDLAsStoredProcedure(sproc_name, parameters);
         }
 
-        public static void InsertMatch(MatchModel match)
+        public static int InsertMatch(MatchModel match)
         {
-            string query = "EXEC [Event].[spInsertMatch] @EventId = " + match.EventId.ToString() +
-                                ", @MatchTypeId = " + match.MatchTypeId.ToString() +
-                                ", @MatchDisplayId = " + match.MatchDisplayId.ToString() + 
-                                ", @DivisionId = " + match.DivisionId.ToString() +
-                                ", @SubDivisionId = " + match.SubDivisionId.ToString() + ";";
+            string sproc_name = "[Event].[spInsertMatch]";
 
-            ExecuteDDL(query);
+            SqlParameter[] parameters = new SqlParameter[5];
+
+            parameters[0] = new SqlParameter("@EventId", match.EventId);
+            parameters[1] = new SqlParameter("@MatchTypeId", match.MatchTypeId);
+            parameters[2] = new SqlParameter("@MatchDisplayId", match.MatchDisplayId);
+            parameters[3] = new SqlParameter("@DivisionId", match.DivisionId);
+            parameters[4] = new SqlParameter("@SubDivisionId", match.SubDivisionId);
+
+            return ExecuteDDLAsStoredProcedure(sproc_name, parameters);
         }
 
         public static void InsertEvent(Event Event)
@@ -1467,6 +1478,26 @@ namespace DKK_App
                     cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
 
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static int ExecuteDDLAsStoredProcedure(string query, SqlParameter[] parameters)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddRange(parameters);
+                    cmd.Parameters.Add("@return_value", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+
+                    cmd.ExecuteNonQuery();
+
+                    return (int)cmd.Parameters["@return_value"].Value;
                 }
             }
         }
