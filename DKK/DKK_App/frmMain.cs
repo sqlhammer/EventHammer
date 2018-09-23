@@ -273,6 +273,12 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_WeighIns", report_url));
         }
 
+        private void btnCompetitorsBySchoolReport_Click(object sender, EventArgs e)
+        {
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_CompetitorsByDojo", report_url));
+        }
+
         private void btnRegForm_Click(object sender, EventArgs e)
         {
             string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
@@ -526,6 +532,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             this.btnDivisionRingNumbers.Enabled = true;
             this.btnAllEvents.Enabled = true;
             this.btnSchoolsOwners.Enabled = true;
+            this.btnCompetitorsBySchoolReport.Enabled = true;
 
             //I wanted to use SQL Hammer colors but did not get around to it.
             /*
