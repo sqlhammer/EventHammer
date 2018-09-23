@@ -708,7 +708,7 @@
             <KeepTogether>true</KeepTogether>
             <DataSetName>MaxEventDate</DataSetName>
             <Top>0.06944in</Top>
-            <Left>0.01042in</Left>
+            <Left>0.01388in</Left>
             <Height>1.25in</Height>
             <Width>7.78612in</Width>
             <Style>
@@ -945,7 +945,7 @@
             <KeepTogether>true</KeepTogether>
             <DataSetName>MaxEventDate</DataSetName>
             <Top>3.43576in</Top>
-            <Left>0.0243in</Left>
+            <Left>0.02776in</Left>
             <Height>0.75in</Height>
             <Width>7.77224in</Width>
             <ZIndex>1</ZIndex>
@@ -960,7 +960,7 @@
             <Value>kyu</Value>
             <Sizing>FitProportional</Sizing>
             <Top>1.38937in</Top>
-            <Left>2.22344in</Left>
+            <Left>2.2269in</Left>
             <Height>2in</Height>
             <Width>3.4in</Width>
             <ZIndex>2</ZIndex>
@@ -986,7 +986,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox30</rd:DefaultName>
             <Top>7.28346in</Top>
-            <Left>0.12257in</Left>
+            <Left>0.12603in</Left>
             <Height>0.25in</Height>
             <Width>7.53646in</Width>
             <ZIndex>3</ZIndex>
@@ -1287,8 +1287,11 @@
             </TablixRowHierarchy>
             <KeepTogether>true</KeepTogether>
             <DataSetName>MaxEventDate</DataSetName>
+            <PageBreak>
+              <BreakLocation>End</BreakLocation>
+            </PageBreak>
             <Top>7.71402in</Top>
-            <Left>0.02951in</Left>
+            <Left>0.03297in</Left>
             <Height>0.5in</Height>
             <Width>7.77224in</Width>
             <ZIndex>4</ZIndex>
@@ -1314,7 +1317,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox49</rd:DefaultName>
             <Top>6.00395in</Top>
-            <Left>0.11736in</Left>
+            <Left>0.12082in</Left>
             <Height>0.25in</Height>
             <Width>7.53646in</Width>
             <ZIndex>5</ZIndex>
@@ -1331,7 +1334,7 @@
           <Rectangle Name="special_considerations_rectangle">
             <KeepTogether>true</KeepTogether>
             <Top>6.4484in</Top>
-            <Left>0.0243in</Left>
+            <Left>0.02776in</Left>
             <Height>0.67709in</Height>
             <Width>7.77224in</Width>
             <ZIndex>6</ZIndex>
@@ -1622,7 +1625,7 @@
             <KeepTogether>true</KeepTogether>
             <DataSetName>MaxEventDate</DataSetName>
             <Top>4.84833in</Top>
-            <Left>2.02517in</Left>
+            <Left>2.02863in</Left>
             <Height>1in</Height>
             <Width>3.78091in</Width>
             <ZIndex>7</ZIndex>
@@ -1648,7 +1651,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox49</rd:DefaultName>
             <Top>4.38479in</Top>
-            <Left>0.11736in</Left>
+            <Left>0.12082in</Left>
             <Height>0.25in</Height>
             <Width>7.53646in</Width>
             <ZIndex>8</ZIndex>
@@ -1662,15 +1665,223 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="txtTitle2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Terms and Conditions</Value>
+                    <Style>
+                      <FontSize>22pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>8.28346in</Top>
+            <Height>0.48959in</Height>
+            <Width>7.8in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox27">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Registration Accuracy</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
+I hereby certify that the above statements are true and correct to the best of my knowledge. I understand that a false statement may disqualify competitor from one or all events with no refund.</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">
+</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>Release of Liability</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
+I hereby willingly submit my application to participate as a competitor (or my child as a competitor) in the Kanreikai Open Championship karate tournament (as indicated in the present registration form) and I hereby commit myself (or my child) to abide by the rules in force during this event. I also take full responsibility for any damage, injury, or other offences that I (or my child) may sustain or inflict during the Kanreikai Open Championship. Finally I renounce to intent any legal action or claim against the organizers, Instructors, promoters or staff of either the World Kanreikai Karate Organization or Danbury Kanreikai Karate LLC. I accept that any photo or video taken of myself (or my child) in the context of the Kanreikai Open Championship could be used for publicity or promotion by the organizers and, if the occasion should arise, I waive any claim of a monetary compensation.</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">
+</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>Event Refund/Cancellation Policy</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
+Event Cancellation by Sponsor: Danbury Kanreikai Karate LLC reserves the right to cancel an event due to low enrollment or other circumstances which would make the event non-viable. If DKK cancels an event, registrants will be offered a full refund. Should circumstances arise that result in the postponement of an event, DKK has the right to transfer registration to the same event at the new, future date. </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
+Registration Cancellation by Participant: All event registration sales are final. Registration fees are non-refundable except in the case of cancellation of the event. Sale or transfer of a competitor registration or credits is not permitted.
+
+ * By signing below, I understand and accept these terms and conditions. </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox27</rd:DefaultName>
+            <Top>8.82861in</Top>
+            <Height>4.50625in</Height>
+            <Width>7.8in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox28">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Print:</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> ______________________________________</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox28</rd:DefaultName>
+            <Top>13.73764in</Top>
+            <Height>0.25in</Height>
+            <Width>3.91215in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox29">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Sign:</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> ______________________________________</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox28</rd:DefaultName>
+            <Top>13.73764in</Top>
+            <Left>5.00521in</Left>
+            <Height>0.25in</Height>
+            <Width>2.80346in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>8.23486in</Height>
+        <Height>14.20986in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>7.84688in</Width>
+      <Width>7.85034in</Width>
       <Page>
         <PageHeader>
           <Height>0.61459in</Height>
@@ -1696,7 +1907,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.125in</Top>
-              <Left>0.00521in</Left>
+              <Left>0.00867in</Left>
               <Height>0.48959in</Height>
               <Width>7.8in</Width>
               <Style>
@@ -1725,7 +1936,7 @@
               <Value>dkk_logo_medium_horizontal</Value>
               <Sizing>FitProportional</Sizing>
               <Top>0.67757in</Top>
-              <Left>3.1518in</Left>
+              <Left>3.15526in</Left>
               <Height>0.83854in</Height>
               <Width>1.68924in</Width>
               <Style>
@@ -1754,7 +1965,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.20486in</Top>
-              <Left>0.01042in</Left>
+              <Left>0.01388in</Left>
               <Height>0.415in</Height>
               <Width>7.8in</Width>
               <ZIndex>1</ZIndex>
