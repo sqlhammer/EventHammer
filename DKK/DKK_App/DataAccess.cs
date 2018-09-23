@@ -1326,7 +1326,7 @@ namespace DKK_App
                               ",@Age = " + comp.Age.ToString() +
                               //",@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
                               ",@DojoId = " + dojoId +
-                              ",@OtherDojoName = " + comp.OtherDojoName +
+                              ",@OtherDojoName = '" + comp.OtherDojoName + "'" + 
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +
                               ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
