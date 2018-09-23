@@ -1,4 +1,6 @@
 ﻿
+using DKK_App.Entities;
+
 namespace DKK_App.Models
 {
     public class CompetitorModel
@@ -15,5 +17,6 @@ namespace DKK_App.Models
         public string Gender { get; set; }
         public string Description { get; set; }
         public bool IsSpecialConsideration { get; set; }
+        public Competitor Competitor { get; set; }
     }
 }

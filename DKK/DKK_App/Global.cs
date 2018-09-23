@@ -557,7 +557,8 @@ namespace DKK_App
             mm.Weight = obj.Weight;
             mm.Height = obj.Height;
             mm.Description = obj.Description;
-            
+            mm.Competitor = obj;
+
             return mm;
         }
 
@@ -583,6 +584,7 @@ namespace DKK_App
                 mm.Height = obj.Height;
                 mm.Description = obj.Description;
                 mm.IsSpecialConsideration = obj.IsSpecialConsideration;
+                mm.Competitor = obj;
 
                 model.Add(mm);
             }

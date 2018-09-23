@@ -1321,7 +1321,7 @@ namespace DKK_App
 
             string query = "EXEC [Person].[spUpdateCompetitor] " +
                                "@CompetitorId = " + comp.CompetitorId.ToString() +
-                              ",@ParentId = " + comp.Parent.PersonId.ToString() +
+                              ",@ParentId = " + ((comp.Parent != null) ? comp.Parent.PersonId.ToString() : "NULL") +
                               ",@PersonId = " + comp.Person.PersonId.ToString() +
                               ",@Age = " + comp.Age.ToString() +
                               //",@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
@@ -1347,10 +1347,14 @@ namespace DKK_App
                               ",@StateProvince = '" + comp.Person.StateProvince + "'" +
                               ",@StreetAddress1 = '" + comp.Person.StreetAddress1 + "'" +
                               ",@StreetAddress2 = '" + comp.Person.StreetAddress2 + "'" +
+                              ",@IsKata = " + ((comp.IsKata) ? '1' : '0') +
+                              ",@IsWeaponKata = " + ((comp.IsWeaponKata) ? '1' : '0') +
+                              ",@IsSemiKnockdown = " + ((comp.IsSemiKnockdown) ? '1' : '0') +
+                              ",@IsKnockdown = " + ((comp.IsKnockdown) ? '1' : '0') +
                               //",@TitleId = " + ((comp.Person.Title.TitleId == 0) ? "NULL" : comp.Person.Title.TitleId.ToString()) +
-                              ",@ParentFirstName = " + ((comp.Parent != null) ? "'" + comp.Parent.FirstName + "'" : "") +
-                              ",@ParentLastName = " + ((comp.Parent != null) ? "'" + comp.Parent.LastName + "'" : "") +
-                              ",@ParentEmailAddress = " + ((comp.Parent != null) ? "'" + comp.Parent.EmailAddress + "'" : "");
+                              ",@ParentFirstName = " + ((comp.Parent != null) ? "'" + comp.Parent.FirstName + "'" : "NULL") +
+                              ",@ParentLastName = " + ((comp.Parent != null) ? "'" + comp.Parent.LastName + "'" : "NULL") +
+                              ",@ParentEmailAddress = " + ((comp.Parent != null) ? "'" + comp.Parent.EmailAddress + "'" : "NULL");
 
             ExecuteDDL(query);
         }

@@ -1371,6 +1371,18 @@ If you do not like the placements, you will have to move the competitors to diff
             this.cbCompBelt.SelectedIndex = this.cbCompBelt.FindStringExact(rank.RankName);
         }
 
+        private void btnCompRegEvents_Click(object sender, EventArgs e)
+        {
+            CompetitorModel comp = this.tlvComp.SelectedObject as CompetitorModel;
+
+            if (comp == null)
+                return;
+
+            frmCompRegEvents frm = new frmCompRegEvents();
+            frm.CompetitorModel = ((CompetitorModel)this.tlvComp.SelectedObject);
+            frm.Show();
+        }
+
         private void LoadCompetitorSchool(Competitor comp)
         {
             if (comp.Dojo != null && comp.Dojo.DojoId != 0)

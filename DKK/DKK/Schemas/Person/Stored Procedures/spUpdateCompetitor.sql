@@ -24,6 +24,10 @@
 	@Gender CHAR = NULL,
 	@IsInstructor BIT = NULL,
 	@LastName NVARCHAR(60) = NULL,
+	@IsKata BIT = NULL,
+	@IsWeaponKata BIT = NULL,
+	@IsSemiKnockdown BIT = NULL,
+	@IsKnockdown BIT = NULL,
 
 	--Person
 	@PhoneNumber NVARCHAR(15) = NULL,
@@ -89,6 +93,10 @@ BEGIN
 				,c.ConsiderationDescription = @ConsiderationDescription
 				,c.RankId = @RankId
 				,c.Weight = @Weight
+				,c.IsKata = @IsKata
+				,c.IsWeaponKata = @IsWeaponKata
+				,c.IsSemiKnockdown = @IsSemiKnockdown
+				,c.IsKnockdown = @IsKnockdown
 			FROM Person.Competitor c
 			WHERE c.CompetitorId = @CompetitorId
 

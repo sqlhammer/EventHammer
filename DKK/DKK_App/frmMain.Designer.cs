@@ -33,6 +33,7 @@
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
             this.gbAdmin = new System.Windows.Forms.GroupBox();
+            this.btnCompetitorsBySchoolReport = new System.Windows.Forms.Button();
             this.btnRegForm = new System.Windows.Forms.Button();
             this.btnSchoolsOwners = new System.Windows.Forms.Button();
             this.btnAllEvents = new System.Windows.Forms.Button();
@@ -137,6 +138,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.txtCompPhone = new System.Windows.Forms.TextBox();
             this.gbCompDemographics = new System.Windows.Forms.GroupBox();
+            this.btnCompRegEvents = new System.Windows.Forms.Button();
             this.lblCompSchoolOther = new System.Windows.Forms.Label();
             this.lblCompInstructor = new System.Windows.Forms.Label();
             this.txtCompInstructor = new System.Windows.Forms.TextBox();
@@ -228,7 +230,6 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
             this.tmrRegistrations = new System.Windows.Forms.Timer(this.components);
-            this.btnCompetitorsBySchoolReport = new System.Windows.Forms.Button();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -305,6 +306,18 @@
             this.gbAdmin.TabIndex = 5;
             this.gbAdmin.TabStop = false;
             this.gbAdmin.Text = "Administrative Reports";
+            // 
+            // btnCompetitorsBySchoolReport
+            // 
+            this.btnCompetitorsBySchoolReport.Enabled = false;
+            this.btnCompetitorsBySchoolReport.Location = new System.Drawing.Point(459, 195);
+            this.btnCompetitorsBySchoolReport.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCompetitorsBySchoolReport.Name = "btnCompetitorsBySchoolReport";
+            this.btnCompetitorsBySchoolReport.Size = new System.Drawing.Size(206, 131);
+            this.btnCompetitorsBySchoolReport.TabIndex = 13;
+            this.btnCompetitorsBySchoolReport.Text = "Competitors By School";
+            this.btnCompetitorsBySchoolReport.UseVisualStyleBackColor = true;
+            this.btnCompetitorsBySchoolReport.Click += new System.EventHandler(this.btnCompetitorsBySchoolReport_Click);
             // 
             // btnRegForm
             // 
@@ -1476,6 +1489,7 @@
             // 
             // gbCompDemographics
             // 
+            this.gbCompDemographics.Controls.Add(this.btnCompRegEvents);
             this.gbCompDemographics.Controls.Add(this.lblCompSchoolOther);
             this.gbCompDemographics.Controls.Add(this.lblCompInstructor);
             this.gbCompDemographics.Controls.Add(this.txtCompInstructor);
@@ -1509,10 +1523,22 @@
             this.gbCompDemographics.TabStop = false;
             this.gbCompDemographics.Text = "Demographics";
             // 
+            // btnCompRegEvents
+            // 
+            this.btnCompRegEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCompRegEvents.Location = new System.Drawing.Point(554, 171);
+            this.btnCompRegEvents.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCompRegEvents.Name = "btnCompRegEvents";
+            this.btnCompRegEvents.Size = new System.Drawing.Size(178, 38);
+            this.btnCompRegEvents.TabIndex = 31;
+            this.btnCompRegEvents.Text = "Registered Events";
+            this.btnCompRegEvents.UseVisualStyleBackColor = true;
+            this.btnCompRegEvents.Click += new System.EventHandler(this.btnCompRegEvents_Click);
+            // 
             // lblCompSchoolOther
             // 
             this.lblCompSchoolOther.AutoSize = true;
-            this.lblCompSchoolOther.Location = new System.Drawing.Point(480, 110);
+            this.lblCompSchoolOther.Location = new System.Drawing.Point(480, 93);
             this.lblCompSchoolOther.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCompSchoolOther.Name = "lblCompSchoolOther";
             this.lblCompSchoolOther.Size = new System.Drawing.Size(69, 24);
@@ -1522,7 +1548,7 @@
             // lblCompInstructor
             // 
             this.lblCompInstructor.AutoSize = true;
-            this.lblCompInstructor.Location = new System.Drawing.Point(461, 175);
+            this.lblCompInstructor.Location = new System.Drawing.Point(463, 132);
             this.lblCompInstructor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCompInstructor.Name = "lblCompInstructor";
             this.lblCompInstructor.Size = new System.Drawing.Size(86, 24);
@@ -1533,7 +1559,7 @@
             // 
             this.txtCompInstructor.Enabled = false;
             this.txtCompInstructor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompInstructor.Location = new System.Drawing.Point(550, 174);
+            this.txtCompInstructor.Location = new System.Drawing.Point(552, 131);
             this.txtCompInstructor.Margin = new System.Windows.Forms.Padding(2);
             this.txtCompInstructor.Name = "txtCompInstructor";
             this.txtCompInstructor.Size = new System.Drawing.Size(183, 24);
@@ -1633,7 +1659,7 @@
             // 
             this.txtCompSchoolOther.Enabled = false;
             this.txtCompSchoolOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompSchoolOther.Location = new System.Drawing.Point(550, 110);
+            this.txtCompSchoolOther.Location = new System.Drawing.Point(550, 93);
             this.txtCompSchoolOther.Margin = new System.Windows.Forms.Padding(2);
             this.txtCompSchoolOther.Name = "txtCompSchoolOther";
             this.txtCompSchoolOther.Size = new System.Drawing.Size(183, 24);
@@ -1643,7 +1669,7 @@
             // 
             this.cbCompSchool.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCompSchool.FormattingEnabled = true;
-            this.cbCompSchool.Location = new System.Drawing.Point(550, 80);
+            this.cbCompSchool.Location = new System.Drawing.Point(550, 63);
             this.cbCompSchool.Margin = new System.Windows.Forms.Padding(2);
             this.cbCompSchool.Name = "cbCompSchool";
             this.cbCompSchool.Size = new System.Drawing.Size(183, 26);
@@ -1653,7 +1679,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(480, 82);
+            this.label20.Location = new System.Drawing.Point(480, 65);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(69, 24);
@@ -2380,18 +2406,6 @@
             // 
             this.tmrRegistrations.Interval = 1000;
             // 
-            // btnCompetitorsBySchoolReport
-            // 
-            this.btnCompetitorsBySchoolReport.Enabled = false;
-            this.btnCompetitorsBySchoolReport.Location = new System.Drawing.Point(459, 195);
-            this.btnCompetitorsBySchoolReport.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCompetitorsBySchoolReport.Name = "btnCompetitorsBySchoolReport";
-            this.btnCompetitorsBySchoolReport.Size = new System.Drawing.Size(206, 131);
-            this.btnCompetitorsBySchoolReport.TabIndex = 13;
-            this.btnCompetitorsBySchoolReport.Text = "Competitors By School";
-            this.btnCompetitorsBySchoolReport.UseVisualStyleBackColor = true;
-            this.btnCompetitorsBySchoolReport.Click += new System.EventHandler(this.btnCompetitorsBySchoolReport_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -2663,5 +2677,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmiChangeSelectedDivisionNumber;
         private System.Windows.Forms.ToolStripMenuItem cmiDownloadLatestVersion;
         private System.Windows.Forms.Button btnCompetitorsBySchoolReport;
+        private System.Windows.Forms.Button btnCompRegEvents;
     }
 }
