@@ -76,6 +76,10 @@
       <FullPath>Master_KnockdownScoreCard.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Master_SchoolAndCompetitorList.rdl</Name>
+      <FullPath>Master_SchoolAndCompetitorList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Master_WeighIns.rdl</Name>
       <FullPath>Master_WeighIns.rdl</FullPath>
     </ProjectItem>

@@ -1,6 +1,6 @@
 ﻿CREATE VIEW [Event].[vwReportSchoolList]
 AS
-SELECT ISNULL(f.Name, 'Unknown') DojoName
+SELECT COALESCE(f.Name, NULLIF(c.OtherDojoName,''), 'Unknown') DojoName
 	,ISNULL(mat.Name, 'Unknown') MartialArtTypeName
 	,ISNULL(op.DisplayName,'Unknown') OwnerName
 	,cp.DisplayName CompetitorName
