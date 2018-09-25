@@ -202,8 +202,8 @@ BEGIN
 			INSERT INTO [Person].[Competitor]
 			(PersonId, Age, [Weight], Height, RankId, DojoId, OtherDojoName, ParentId, IsMinor
 				, IsSpecialConsideration, ConsiderationDescription, EventId, IsKata, IsWeaponKata, IsSemiKnockdown, IsKnockdown)
-			SELECT p.PersonId
-				, r.age
+			SELECT p.PersonId				
+				,COALESCE(TRY_CAST(r.age AS TINYINT),0)
 				, r.weight_pounds
 				, r.height_inches
 				, (SELECT TOP 1 RankId FROM [Event].[Rank] WHERE Kyu = r.rank_kyu)
