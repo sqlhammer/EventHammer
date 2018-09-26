@@ -55,6 +55,7 @@ namespace DKK_App
         {
             try
             {
+                Global.CheckForUpdates();
                 SetEventSearchDateRange();
                 RefreshEventSelect();
                 RefreshEvents();

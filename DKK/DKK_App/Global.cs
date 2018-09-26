@@ -806,5 +806,17 @@ namespace DKK_App
             return dialogResult;
         }
         #endregion
+
+        public static void CheckForUpdates()
+        {
+            var AvailableVersion = WebAccess.GetLatestEventHammerVersion();
+            var CurrentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+
+            if (AvailableVersion > CurrentVersion)
+            {
+                string msg = "There is a newer version of Event Hammer available. Download and install it now by going to \"Help > Download latest version\".";
+                MessageBox.Show(msg, "Update is available", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
