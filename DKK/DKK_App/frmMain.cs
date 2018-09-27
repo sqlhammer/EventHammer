@@ -271,7 +271,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
         private void btnAllEvents_Click(object sender, EventArgs e)
         {
             string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
-            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_WeighIns", report_url));
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_CheckInRoster", report_url));
         }
 
         private void btnCompetitorsBySchoolReport_Click(object sender, EventArgs e)
