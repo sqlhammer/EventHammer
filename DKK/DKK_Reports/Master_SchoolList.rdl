@@ -319,7 +319,7 @@ GROUP BY DojoName
                 <Top>0.01389in</Top>
                 <Left>0.00521in</Left>
                 <Height>0.78819in</Height>
-                <Width>7.78437in</Width>
+                <Width>7.78436in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -360,7 +360,7 @@ GROUP BY DojoName
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>School and Competitor List</Value>
+                      <Value>School and Owner List</Value>
                       <Style>
                         <FontSize>22pt</FontSize>
                       </Style>
