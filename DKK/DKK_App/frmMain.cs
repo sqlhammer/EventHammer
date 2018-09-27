@@ -1457,23 +1457,8 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void LoadCompetitorDetails(CompetitorModel compModel)
         {
-            Competitor comp = new Competitor
-            {
-                Dojo = new Dojo
-                {
-                    Facility = new Facility()
-                },
-                Event = new Event(),
-                Parent = new Person(),
-                Person = new Person(),
-                Rank = new Rank()
-            };
-
-            if (compModel.CompetitorId != 0)
-            {
-                comp = DataAccess.GetCompetitor(compModel.CompetitorId);
-            }
-
+            Competitor comp = compModel.Competitor;
+            
             this.txtCompFirstName.Text = comp.Person.FirstName;
             this.txtCompLastName.Text = comp.Person.LastName;
             this.txtCompApptCode.Text = comp.Person.AppartmentCode;
@@ -1762,21 +1747,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void UpdateCompetitorModel(Competitor updatedCompetitor)
         {
-            CompetitorModel cm = new CompetitorModel
-            {
-                Age = updatedCompetitor.Age,
-                CompetitorId = updatedCompetitor.CompetitorId,
-                Description = updatedCompetitor.Description,
-                DisplayName = updatedCompetitor.Person.DisplayName,
-                DojoName = (updatedCompetitor.Dojo != null) ? updatedCompetitor.Dojo.Facility.FacilityName : null,
-                OtherDojoName = updatedCompetitor.OtherDojoName,
-                Gender = updatedCompetitor.Person.Gender,
-                Height = updatedCompetitor.Height,
-                IsSpecialConsideration = updatedCompetitor.IsSpecialConsideration,
-                Level = updatedCompetitor.Rank.Level,
-                RankName = updatedCompetitor.Rank.RankName,
-                Weight = updatedCompetitor.Weight
-            };
+            CompetitorModel cm = new CompetitorModel(updatedCompetitor);
 
             //It will throw an exception if this is a new competitor to be inserted.
             //In that case, we will just skip the removal step of this process.

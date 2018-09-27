@@ -545,19 +545,7 @@ namespace DKK_App
 
         public static CompetitorModel GetCompetitorModel(Competitor obj)
         {
-            CompetitorModel mm = new CompetitorModel();
-
-            mm.CompetitorId = obj.CompetitorId;
-            mm.Age = obj.Age;
-            mm.DisplayName = obj.Person.DisplayName;
-            mm.DojoName = obj.Dojo.Facility.FacilityName;
-            mm.Gender = obj.Person.Gender;
-            mm.RankName = obj.Rank.RankName;
-            mm.Level = obj.Rank.Level;
-            mm.Weight = obj.Weight;
-            mm.Height = obj.Height;
-            mm.Description = obj.Description;
-            mm.Competitor = obj;
+            CompetitorModel mm = new CompetitorModel(obj);
 
             return mm;
         }
@@ -571,20 +559,7 @@ namespace DKK_App
                 if (model.Any(m => m.CompetitorId == obj.CompetitorId))
                     continue;
 
-                CompetitorModel mm = new CompetitorModel();
-                
-                mm.CompetitorId = obj.CompetitorId;
-                mm.Age = obj.Age;
-                mm.DisplayName = obj.Person.DisplayName;
-                mm.DojoName = obj.Dojo.Facility.FacilityName;
-                mm.Gender = obj.Person.Gender;
-                mm.RankName = obj.Rank.RankName;
-                mm.Level = obj.Rank.Level;
-                mm.Weight = obj.Weight;
-                mm.Height = obj.Height;
-                mm.Description = obj.Description;
-                mm.IsSpecialConsideration = obj.IsSpecialConsideration;
-                mm.Competitor = obj;
+                CompetitorModel mm = new CompetitorModel(obj);
 
                 model.Add(mm);
             }
