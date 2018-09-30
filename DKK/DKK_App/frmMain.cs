@@ -1025,20 +1025,16 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             MatchModelLoadComplete = false;
             CompetitorModelLoadComplete = false;
-            List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
-            MatchModels = SortMatchModels(Global.GetMatchModel(mcs));
 
-            List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
-            CompetitorModels = SortCompetitorModels(Global.GetCompetitorModel(cs));
-            MatchModelLoadComplete = true;
-            CompetitorModelLoadComplete = true;
+            Task.Run(() => RefreshCompetitors());
+            Task.Run(() => RefreshMatches());
         }
 
         private async void RefreshMatches()
         {
             MatchModelLoadComplete = false;
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
-            MatchModels = Global.GetMatchModel(mcs);
+            MatchModels = SortMatchModels(Global.GetMatchModel(mcs));
             MatchModelLoadComplete = true;
             this.tlvMatches.ExpandAll();
         }
@@ -1047,7 +1043,7 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             CompetitorModelLoadComplete = false;
             List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
-            CompetitorModels = Global.GetCompetitorModel(cs);
+            CompetitorModels = SortCompetitorModels(Global.GetCompetitorModel(cs));
             CompetitorModelLoadComplete = true;
         }
 
