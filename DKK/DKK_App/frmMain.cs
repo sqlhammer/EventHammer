@@ -1023,6 +1023,8 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private async void RefreshMatchesAndCompetitors()
         {
+            //For some reason, when I remove these two lines
+            //I get an error from this.tlvMatches.ExpandAll() in RefreshMatches().
             MatchModelLoadComplete = false;
             CompetitorModelLoadComplete = false;
 
