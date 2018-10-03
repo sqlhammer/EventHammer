@@ -8,7 +8,7 @@ SELECT f.Name DojoName
 	,mt.IsSpecialConsideration
 	,m.MatchDisplayId
 	,m.SubDivisionId
-	,m.EventId
+	,c.EventId
 	,d.DojoId
 FROM Facility.Dojo d
 INNER JOIN Facility.Facility f ON f.FacilityId = d.FacilityId
@@ -16,7 +16,7 @@ INNER JOIN Facility.MartialArtType mat ON mat.MartialArtTypeId = d.MartialArtTyp
 INNER JOIN Person.Competitor c ON c.DojoId = d.DojoId
 INNER JOIN Person.Person cp ON cp.PersonId = c.PersonId
 INNER JOIN Person.Person op ON op.PersonId = f.OwnerId
-INNER JOIN Event.MatchCompetitor mc ON mc.CompetitorId = c.CompetitorId
+LEFT JOIN Event.MatchCompetitor mc ON mc.CompetitorId = c.CompetitorId
 										AND mc.EventId = c.EventId
-INNER JOIN Event.Match m ON m.MatchId = mc.MatchId
-INNER JOIN Event.MatchType mt ON mt.MatchTypeId = m.MatchTypeId
+LEFT JOIN Event.Match m ON m.MatchId = mc.MatchId
+LEFT JOIN Event.MatchType mt ON mt.MatchTypeId = m.MatchTypeId
