@@ -8,6 +8,7 @@ using DKK_App.Enums;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Configuration;
+using DKK_App.Objects;
 
 namespace DKK_App
 {
@@ -16,13 +17,14 @@ namespace DKK_App
         public Event CurrentEvent = new Event();
         public List<Event> AllEvents = new List<Event>();
         public List<Event> FilteredEvents = new List<Event>();
-        public List<Models.MatchModel> MatchModels = new List<MatchModel>();
-        public List<Models.CompetitorModel> CompetitorModels = new List<CompetitorModel>();
+        public List<MatchModel> MatchModels = new List<MatchModel>();
+        public MatchContext MatchContext = new MatchContext();
+        public List<CompetitorModel> CompetitorModels = new List<CompetitorModel>();
         public List<Division> Divisions = new List<Division>();
         private List<Rank> Ranks = new List<Rank>();
         private List<Dojo> Dojos = new List<Dojo>();
         private List<Title> Titles = new List<Title>();
-        public List<Models.EventModel> EventModels = new List<EventModel>();
+        public List<EventModel> EventModels = new List<EventModel>();
         private Color Green_SQLHammer = Color.FromArgb(40, 190, 155);
 
         private bool MatchModelLoadComplete = false;
@@ -632,6 +634,55 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             ChangeDivisionNumber();
         }
 
+        private void SetMatchContext()
+        {
+            MatchModel selected = new MatchModel();
+            List<MatchModel> expanded = new List<MatchModel>();
+            List<MatchModel> collapsed = new List<MatchModel>();
+
+            // Set currently selected match
+            if (tlvMatches.SelectedObject != null)
+            {
+                selected = (MatchModel)tlvMatches.SelectedObject;
+            }
+
+            //Build list of expanded and collapsed matches
+            List<MatchModel> e = new List<MatchModel>();
+            foreach (var obj in tlvMatches.ExpandedObjects)
+            {
+                e.Add((MatchModel)obj);
+            }
+            e = e.Where(match => match.MatchId != null).ToList();
+
+            foreach (var model in MatchModels)
+            {
+                if (e.Exists(m => m.MatchId == model.MatchId))
+                {
+                    expanded.Add(model);
+                }
+                else
+                {
+                    collapsed.Add(model);
+                }
+            }
+
+            // Set context
+            MatchContext = new MatchContext(selected, collapsed, expanded);
+        }
+
+        private void ReestablishMatchContext()
+        {
+            // Expand/Collapse matches
+            tlvMatches.ExpandAll();
+            foreach(var m in MatchContext.CollapsedModels)
+            {
+                tlvMatches.Collapse(m);
+            }
+
+            // Set selected
+            tlvMatches.SelectedObject = MatchContext.SelectedModel;
+        }
+
         private void ChangeDivisionNumber()
         {
             /*
@@ -845,7 +896,7 @@ m.Division.MaxRank.RankName);
         {
             if (MatchId == null || CompetitorId == null)
                 return;
-
+            
             List<MatchModel> models = MatchModels;
             MatchModel match = models.Where(m => m.MatchId == MatchId).FirstOrDefault();
             MatchModel newMatch = match;
@@ -1005,10 +1056,11 @@ If you do not like the placements, you will have to move the competitors to diff
 
         public void RefreshMatches(List<MatchModel> model)
         {
+            SetMatchContext();
             MatchModelLoadComplete = false;
             tlvMatches.Roots = model;
-            tlvMatches.ExpandAll();
             MatchModelLoadComplete = true;
+            ReestablishMatchContext();
         }
 
         private void RefreshCompetitors(List<CompetitorModel> model)
@@ -1253,11 +1305,13 @@ If you do not like the placements, you will have to move the competitors to diff
         private void cmiMatchesExpandAll_Click(object sender, EventArgs e)
         {
             this.tlvMatches.ExpandAll();
+            SetMatchContext();
         }
 
         private void cmiMatchesCollapseAll_Click(object sender, EventArgs e)
         {
             this.tlvMatches.CollapseAll();
+            SetMatchContext();
         }
 
         private void btnClearCompetitorFilter_Click(object sender, EventArgs e)
