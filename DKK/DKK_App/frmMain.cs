@@ -83,6 +83,7 @@ namespace DKK_App
 
         private void cmiDownloadLatestVersion_Click(object sender, EventArgs e)
         {
+            LaunchWebsite("https://www.sqlhammer.com/go/ehupgradetutorial");
             LaunchWebsite("https://www.sqlhammer.com/go/ehsetup");
         }
 
