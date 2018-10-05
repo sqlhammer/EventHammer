@@ -21,29 +21,37 @@
         </Field>
       </Fields>
     </DataSet>
-    <DataSet Name="dsVwReportSchoolList">
+    <DataSet Name="dsAllMatchCompetitors">
       <Query>
         <DataSourceName>DKK</DataSourceName>
-        <CommandText>SELECT DojoName
-	  ,MartialArtTypeName
-	  ,OwnerName
-FROM [Event].[vwReportSchoolList]
-GROUP BY DojoName
-	  ,MartialArtTypeName
-	  ,OwnerName</CommandText>
+        <CommandText>SELECT 
+	COALESCE(m.DojoName,m.OtherDojoName) DojoName
+	,m.DisplayName
+	,m.MatchTypeName
+	,m.MatchDisplayId
+	,m.SubDivisionId
+FROM Event.vwMatchCompetitorDetail m</CommandText>
       </Query>
       <Fields>
         <Field Name="DojoName">
           <DataField>DojoName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="MartialArtTypeName">
-          <DataField>MartialArtTypeName</DataField>
+        <Field Name="DisplayName">
+          <DataField>DisplayName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="OwnerName">
-          <DataField>OwnerName</DataField>
+        <Field Name="MatchTypeName">
+          <DataField>MatchTypeName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MatchDisplayId">
+          <DataField>MatchDisplayId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SubDivisionId">
+          <DataField>SubDivisionId</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -58,16 +66,62 @@ GROUP BY DojoName
                 <TablixBody>
                   <TablixColumns>
                     <TablixColumn>
-                      <Width>2.23546in</Width>
+                      <Width>1.58785in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>2.89818in</Width>
+                      <Width>1.75181in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>1.41279in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>1.04373in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.98368in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>1.02014in</Width>
                     </TablixColumn>
                   </TablixColumns>
                   <TablixRows>
                     <TablixRow>
                       <Height>0.53819in</Height>
                       <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>School</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox1</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>Brown</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
                         <TablixCell>
                           <CellContents>
                             <Textbox Name="txtName">
@@ -77,7 +131,7 @@ GROUP BY DojoName
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Martial Art Type</Value>
+                                      <Value>Competitor</Value>
                                       <Style>
                                         <FontWeight>Bold</FontWeight>
                                         <Color>White</Color>
@@ -103,6 +157,40 @@ GROUP BY DojoName
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
+                            <Textbox Name="Textbox3">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Match Type</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox3</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>Brown</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
                             <Textbox Name="txtWeightDayOf">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
@@ -110,7 +198,73 @@ GROUP BY DojoName
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>School Owner</Value>
+                                      <Value>Division</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>Brown</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtWeightReg">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Sub-Division</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>Brown</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtDivision">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Checked In</Value>
                                       <Style>
                                         <FontWeight>Bold</FontWeight>
                                         <Color>White</Color>
@@ -141,29 +295,25 @@ GROUP BY DojoName
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="MartialArtTypeName">
+                            <Textbox Name="DojoName">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!MartialArtTypeName.Value</Value>
-                                      <Style>
-                                        <FontWeight>Normal</FontWeight>
-                                      </Style>
+                                      <Value>=Fields!DojoName.Value</Value>
+                                      <Style />
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>MartialArtTypeName</rd:DefaultName>
+                              <rd:DefaultName>DojoName</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
                                 </Border>
-                                <BackgroundColor>White</BackgroundColor>
-                                <VerticalAlign>Middle</VerticalAlign>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -174,29 +324,139 @@ GROUP BY DojoName
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="OwnerName">
+                            <Textbox Name="txtDisplayName">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!OwnerName.Value</Value>
-                                      <Style>
-                                        <FontWeight>Normal</FontWeight>
-                                      </Style>
+                                      <Value>=Fields!DisplayName.Value</Value>
+                                      <Style />
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <rd:DefaultName>OwnerName</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="MatchTypeName">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!MatchTypeName.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>MatchTypeName</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtWeightBlank">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!MatchDisplayId.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtWeight">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!SubDivisionId.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="IsSpecialConsideration">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value />
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>IsSpecialConsideration</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>White</BackgroundColor>
-                                <VerticalAlign>Middle</VerticalAlign>
                                 <PaddingLeft>2pt</PaddingLeft>
                                 <PaddingRight>2pt</PaddingRight>
                                 <PaddingTop>2pt</PaddingTop>
@@ -213,113 +473,43 @@ GROUP BY DojoName
                   <TablixMembers>
                     <TablixMember />
                     <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
                   </TablixMembers>
                 </TablixColumnHierarchy>
                 <TablixRowHierarchy>
                   <TablixMembers>
+                    <TablixMember />
                     <TablixMember>
-                      <TablixHeader>
-                        <Size>2.65072in</Size>
-                        <CellContents>
-                          <Textbox Name="Textbox2">
-                            <CanGrow>true</CanGrow>
-                            <KeepTogether>true</KeepTogether>
-                            <Paragraphs>
-                              <Paragraph>
-                                <TextRuns>
-                                  <TextRun>
-                                    <Value>School Name</Value>
-                                    <Style>
-                                      <FontWeight>Bold</FontWeight>
-                                      <Color>White</Color>
-                                    </Style>
-                                  </TextRun>
-                                </TextRuns>
-                                <Style />
-                              </Paragraph>
-                            </Paragraphs>
-                            <rd:DefaultName>Textbox2</rd:DefaultName>
-                            <Style>
-                              <Border>
-                                <Style>Solid</Style>
-                              </Border>
-                              <BackgroundColor>Brown</BackgroundColor>
-                              <VerticalAlign>Middle</VerticalAlign>
-                              <PaddingLeft>2pt</PaddingLeft>
-                              <PaddingRight>2pt</PaddingRight>
-                              <PaddingTop>2pt</PaddingTop>
-                              <PaddingBottom>2pt</PaddingBottom>
-                            </Style>
-                          </Textbox>
-                        </CellContents>
-                      </TablixHeader>
+                      <Group Name="Details" />
                       <TablixMembers>
                         <TablixMember />
-                      </TablixMembers>
-                    </TablixMember>
-                    <TablixMember>
-                      <Group Name="DojoName">
-                        <GroupExpressions>
-                          <GroupExpression>=Fields!DojoName.Value</GroupExpression>
-                        </GroupExpressions>
-                      </Group>
-                      <SortExpressions>
-                        <SortExpression>
-                          <Value>=Fields!DojoName.Value</Value>
-                        </SortExpression>
-                      </SortExpressions>
-                      <TablixMembers>
-                        <TablixMember>
-                          <TablixHeader>
-                            <Size>2.65072in</Size>
-                            <CellContents>
-                              <Textbox Name="DojoName">
-                                <CanGrow>true</CanGrow>
-                                <KeepTogether>true</KeepTogether>
-                                <Paragraphs>
-                                  <Paragraph>
-                                    <TextRuns>
-                                      <TextRun>
-                                        <Value>=Fields!DojoName.Value</Value>
-                                        <Style>
-                                          <FontWeight>Normal</FontWeight>
-                                        </Style>
-                                      </TextRun>
-                                    </TextRuns>
-                                    <Style />
-                                  </Paragraph>
-                                </Paragraphs>
-                                <rd:DefaultName>DojoName</rd:DefaultName>
-                                <Style>
-                                  <Border>
-                                    <Style>Solid</Style>
-                                  </Border>
-                                  <BackgroundColor>White</BackgroundColor>
-                                  <VerticalAlign>Middle</VerticalAlign>
-                                  <PaddingLeft>2pt</PaddingLeft>
-                                  <PaddingRight>2pt</PaddingRight>
-                                  <PaddingTop>2pt</PaddingTop>
-                                  <PaddingBottom>2pt</PaddingBottom>
-                                </Style>
-                              </Textbox>
-                            </CellContents>
-                          </TablixHeader>
-                        </TablixMember>
                       </TablixMembers>
                     </TablixMember>
                   </TablixMembers>
                 </TablixRowHierarchy>
                 <KeepTogether>true</KeepTogether>
-                <DataSetName>dsVwReportSchoolList</DataSetName>
+                <DataSetName>dsAllMatchCompetitors</DataSetName>
                 <SortExpressions>
                   <SortExpression>
                     <Value>=Fields!DojoName.Value</Value>
+                  </SortExpression>
+                  <SortExpression>
+                    <Value>=Fields!DisplayName.Value</Value>
+                  </SortExpression>
+                  <SortExpression>
+                    <Value>=Fields!MatchDisplayId.Value</Value>
+                  </SortExpression>
+                  <SortExpression>
+                    <Value>=Fields!SubDivisionId.Value</Value>
                   </SortExpression>
                 </SortExpressions>
                 <Top>0.01389in</Top>
                 <Left>0.00521in</Left>
                 <Height>0.78819in</Height>
-                <Width>7.78436in</Width>
+                <Width>7.8in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -331,7 +521,7 @@ GROUP BY DojoName
             <Top>0.04167in</Top>
             <Left>0.01042in</Left>
             <Height>1.05208in</Height>
-            <Width>7.78958in</Width>
+            <Width>7.80521in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -346,7 +536,7 @@ GROUP BY DojoName
           </Border>
         </Style>
       </Body>
-      <Width>7.825in</Width>
+      <Width>7.81563in</Width>
       <Page>
         <PageHeader>
           <Height>0.61459in</Height>
@@ -360,7 +550,7 @@ GROUP BY DojoName
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>School and Owner List</Value>
+                      <Value>Check In Roster</Value>
                       <Style>
                         <FontSize>22pt</FontSize>
                       </Style>

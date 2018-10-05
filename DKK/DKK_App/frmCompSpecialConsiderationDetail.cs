@@ -20,7 +20,7 @@ namespace DKK_App
 
         private void btnSave_Click(object sender, System.EventArgs e)
         {
-            CompetitorModel.Description = txtDesc.Text;
+            CompetitorModel.Competitor.Description = txtDesc.Text;
             DataAccess.UpdateCompetitor(Global.GetCompetitorFromCompetitorModel(CompetitorModel));
             this.Close();
         }

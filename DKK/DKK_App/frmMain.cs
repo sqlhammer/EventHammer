@@ -55,6 +55,7 @@ namespace DKK_App
         {
             try
             {
+                Global.CheckForUpdates();
                 SetEventSearchDateRange();
                 RefreshEventSelect();
                 RefreshEvents();
@@ -271,7 +272,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
         private void btnAllEvents_Click(object sender, EventArgs e)
         {
             string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
-            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_WeighIns", report_url));
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_CheckInRoster", report_url));
         }
 
         private void btnCompetitorsBySchoolReport_Click(object sender, EventArgs e)
@@ -1023,22 +1024,20 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private async void RefreshMatchesAndCompetitors()
         {
+            //For some reason, when I remove these two lines
+            //I get an error from this.tlvMatches.ExpandAll() in RefreshMatches().
             MatchModelLoadComplete = false;
             CompetitorModelLoadComplete = false;
-            List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
-            MatchModels = SortMatchModels(Global.GetMatchModel(mcs));
 
-            List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
-            CompetitorModels = SortCompetitorModels(Global.GetCompetitorModel(cs));
-            MatchModelLoadComplete = true;
-            CompetitorModelLoadComplete = true;
+            Task.Run(() => RefreshCompetitors());
+            Task.Run(() => RefreshMatches());
         }
 
         private async void RefreshMatches()
         {
             MatchModelLoadComplete = false;
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
-            MatchModels = Global.GetMatchModel(mcs);
+            MatchModels = SortMatchModels(Global.GetMatchModel(mcs));
             MatchModelLoadComplete = true;
             this.tlvMatches.ExpandAll();
         }
@@ -1047,7 +1046,7 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             CompetitorModelLoadComplete = false;
             List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
-            CompetitorModels = Global.GetCompetitorModel(cs);
+            CompetitorModels = SortCompetitorModels(Global.GetCompetitorModel(cs));
             CompetitorModelLoadComplete = true;
         }
 
@@ -1457,23 +1456,8 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void LoadCompetitorDetails(CompetitorModel compModel)
         {
-            Competitor comp = new Competitor
-            {
-                Dojo = new Dojo
-                {
-                    Facility = new Facility()
-                },
-                Event = new Event(),
-                Parent = new Person(),
-                Person = new Person(),
-                Rank = new Rank()
-            };
-
-            if (compModel.CompetitorId != 0)
-            {
-                comp = DataAccess.GetCompetitor(compModel.CompetitorId);
-            }
-
+            Competitor comp = compModel.Competitor;
+            
             this.txtCompFirstName.Text = comp.Person.FirstName;
             this.txtCompLastName.Text = comp.Person.LastName;
             this.txtCompApptCode.Text = comp.Person.AppartmentCode;
@@ -1762,21 +1746,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void UpdateCompetitorModel(Competitor updatedCompetitor)
         {
-            CompetitorModel cm = new CompetitorModel
-            {
-                Age = updatedCompetitor.Age,
-                CompetitorId = updatedCompetitor.CompetitorId,
-                Description = updatedCompetitor.Description,
-                DisplayName = updatedCompetitor.Person.DisplayName,
-                DojoName = (updatedCompetitor.Dojo != null) ? updatedCompetitor.Dojo.Facility.FacilityName : null,
-                OtherDojoName = updatedCompetitor.OtherDojoName,
-                Gender = updatedCompetitor.Person.Gender,
-                Height = updatedCompetitor.Height,
-                IsSpecialConsideration = updatedCompetitor.IsSpecialConsideration,
-                Level = updatedCompetitor.Rank.Level,
-                RankName = updatedCompetitor.Rank.RankName,
-                Weight = updatedCompetitor.Weight
-            };
+            CompetitorModel cm = new CompetitorModel(updatedCompetitor);
 
             //It will throw an exception if this is a new competitor to be inserted.
             //In that case, we will just skip the removal step of this process.

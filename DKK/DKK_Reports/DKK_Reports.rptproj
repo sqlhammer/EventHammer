@@ -80,6 +80,10 @@
       <FullPath>Master_SchoolAndCompetitorList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>Master_SchoolList.rdl</Name>
+      <FullPath>Master_SchoolList.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Master_WeighIns.rdl</Name>
       <FullPath>Master_WeighIns.rdl</FullPath>
     </ProjectItem>
@@ -104,8 +108,8 @@
       <FullPath>SubReport_DojoHeader.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Master_SchoolList.rdl</Name>
-      <FullPath>Master_SchoolList.rdl</FullPath>
+      <Name>Master_CheckInRoster.rdl</Name>
+      <FullPath>Master_CheckInRoster.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
