@@ -1658,7 +1658,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
             if (comp != null)
             {
-                frm.CompetitorModel = ((CompetitorModel)this.tlvComp.SelectedObject);
+                frm.CompetitorModel = (comp);
             }
             else
             {
@@ -1786,7 +1786,6 @@ If you do not like the placements, you will have to move the competitors to diff
             }
 
             UpdateCompetitorModel(comp);
-            ClearCompetitorSelection();
         }
 
         private void editSelectedCompetitorToolStripMenuItem_Click(object sender, EventArgs e)
