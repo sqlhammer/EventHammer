@@ -862,7 +862,7 @@ m.Division.MaxRank.RankName);
             return models;
         }
 
-        private List<MatchModel> SortMatchModels(List<MatchModel> models)
+        public List<MatchModel> SortMatchModels(List<MatchModel> models)
         {
             //We need to resort for display purposes
             models.Sort(delegate (MatchModel x, MatchModel y)

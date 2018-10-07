@@ -40,7 +40,7 @@
             this.tlvDivisions = new BrightIdeasSoftware.TreeListView();
             this.colId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colGender = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.colIsKata = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.colMatchTypeName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colMinBelt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colMaxBelt = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.colMinAge = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -49,6 +49,7 @@
             this.colMaxWeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.nudDivision = new System.Windows.Forms.NumericUpDown();
             this.nudSubDivision = new System.Windows.Forms.NumericUpDown();
+            this.cbIsSpecialConsideration = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.tlvDivisions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudDivision)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSubDivision)).BeginInit();
@@ -93,7 +94,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(429, 31);
+            this.label2.Location = new System.Drawing.Point(429, 67);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 18);
@@ -111,6 +112,7 @@
             this.label1.Size = new System.Drawing.Size(85, 18);
             this.label1.TabIndex = 9;
             this.label1.Text = "Match Type";
+            this.label1.Visible = false;
             // 
             // cbMatchType
             // 
@@ -121,6 +123,7 @@
             this.cbMatchType.Name = "cbMatchType";
             this.cbMatchType.Size = new System.Drawing.Size(240, 25);
             this.cbMatchType.TabIndex = 18;
+            this.cbMatchType.Visible = false;
             // 
             // label4
             // 
@@ -137,7 +140,7 @@
             // 
             this.tlvDivisions.AllColumns.Add(this.colId);
             this.tlvDivisions.AllColumns.Add(this.colGender);
-            this.tlvDivisions.AllColumns.Add(this.colIsKata);
+            this.tlvDivisions.AllColumns.Add(this.colMatchTypeName);
             this.tlvDivisions.AllColumns.Add(this.colMinBelt);
             this.tlvDivisions.AllColumns.Add(this.colMaxBelt);
             this.tlvDivisions.AllColumns.Add(this.colMinAge);
@@ -148,7 +151,7 @@
             this.tlvDivisions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colId,
             this.colGender,
-            this.colIsKata,
+            this.colMatchTypeName,
             this.colMinBelt,
             this.colMaxBelt,
             this.colMinAge,
@@ -179,10 +182,10 @@
             this.colGender.Text = "Gender";
             this.colGender.Width = 67;
             // 
-            // colIsKata
+            // colMatchTypeName
             // 
-            this.colIsKata.AspectName = "IsKata";
-            this.colIsKata.Text = "Kata";
+            this.colMatchTypeName.AspectName = "MatchTypeName";
+            this.colMatchTypeName.Text = "Type";
             // 
             // colMinBelt
             // 
@@ -223,7 +226,7 @@
             // nudDivision
             // 
             this.nudDivision.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudDivision.Location = new System.Drawing.Point(536, 30);
+            this.nudDivision.Location = new System.Drawing.Point(536, 66);
             this.nudDivision.Margin = new System.Windows.Forms.Padding(2);
             this.nudDivision.Minimum = new decimal(new int[] {
             1,
@@ -264,12 +267,25 @@
             0,
             0});
             // 
+            // cbIsSpecialConsideration
+            // 
+            this.cbIsSpecialConsideration.AutoSize = true;
+            this.cbIsSpecialConsideration.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F);
+            this.cbIsSpecialConsideration.Location = new System.Drawing.Point(432, 30);
+            this.cbIsSpecialConsideration.Name = "cbIsSpecialConsideration";
+            this.cbIsSpecialConsideration.Size = new System.Drawing.Size(186, 22);
+            this.cbIsSpecialConsideration.TabIndex = 25;
+            this.cbIsSpecialConsideration.Text = "Is Special Consideration";
+            this.cbIsSpecialConsideration.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.cbIsSpecialConsideration.UseVisualStyleBackColor = true;
+            // 
             // frmNewMatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(832, 504);
+            this.Controls.Add(this.cbIsSpecialConsideration);
             this.Controls.Add(this.nudSubDivision);
             this.Controls.Add(this.nudDivision);
             this.Controls.Add(this.tlvDivisions);
@@ -308,7 +324,7 @@
         private BrightIdeasSoftware.TreeListView tlvDivisions;
         private BrightIdeasSoftware.OLVColumn colId;
         private BrightIdeasSoftware.OLVColumn colGender;
-        private BrightIdeasSoftware.OLVColumn colIsKata;
+        private BrightIdeasSoftware.OLVColumn colMatchTypeName;
         private BrightIdeasSoftware.OLVColumn colMinBelt;
         private BrightIdeasSoftware.OLVColumn colMaxBelt;
         private BrightIdeasSoftware.OLVColumn colMinAge;
@@ -317,5 +333,6 @@
         private BrightIdeasSoftware.OLVColumn colMaxWeight;
         private System.Windows.Forms.NumericUpDown nudDivision;
         private System.Windows.Forms.NumericUpDown nudSubDivision;
+        private System.Windows.Forms.CheckBox cbIsSpecialConsideration;
     }
 }

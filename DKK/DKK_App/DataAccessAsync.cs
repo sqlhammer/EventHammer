@@ -218,6 +218,9 @@ namespace DKK_App
 	                              ,d.MinimumAge
 	                              ,d.MaximumAge
 	                              ,d.IsKata 
+	                              ,d.IsWeaponKata
+	                              ,d.IsSemiKnockdown
+	                              ,d.IsKnockdown
                             FROM Event.Division d";
 
             return await QueryDivisionInformation(query);
@@ -246,6 +249,9 @@ namespace DKK_App
                                     DivisionId = Convert.ToInt32(reader["DivisionId"].ToString()),
                                     Gender = reader["Gender"].ToString(),
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
+                                    IsWeaponKata = Convert.ToBoolean(reader["IsWeaponKata"].ToString()),
+                                    IsSemiKnockdown = Convert.ToBoolean(reader["IsSemiKnockdown"].ToString()),
+                                    IsKnockdown = Convert.ToBoolean(reader["IsKnockdown"].ToString()),
                                     MaxAge = Convert.ToInt32(reader["MaximumAge"].ToString()),
                                     MaxRank = await GetRank(Convert.ToInt32(reader["MaximumLevelId"].ToString())),
                                     MaxWeight_lb = Convert.ToDecimal(reader["MaximumWeight_lb"].ToString()),

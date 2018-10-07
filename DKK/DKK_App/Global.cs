@@ -515,7 +515,7 @@ namespace DKK_App
 
         public static List<DivisionModel> GetDivisionModel(List<Division> divisions)
         {
-            List<Models.DivisionModel> model = new List<Models.DivisionModel>();
+            List<DivisionModel> model = new List<Models.DivisionModel>();
 
             foreach (Division obj in divisions)
             {
@@ -527,6 +527,9 @@ namespace DKK_App
                     DivisionId = obj.DivisionId,
                     Gender = obj.Gender,
                     IsKata = obj.IsKata,
+                    IsWeaponKata = obj.IsWeaponKata,
+                    IsSemiKnockdown = obj.IsSemiKnockdown,
+                    IsKnockdown = obj.IsKnockdown,
                     MaxAge = obj.MaxAge,
                     MaxBelt = obj.MaxRank.RankName,
                     MaxWeight_lb = obj.MaxWeight_lb,

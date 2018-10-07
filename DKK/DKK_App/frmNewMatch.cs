@@ -39,24 +39,18 @@ namespace DKK_App
              * 7. A display division number cannot already exist
              */
 
-            if (Global.IsDuplicateMatchDisplayId(MatchModels,(int)this.nudDivision.Value, (int)this.nudSubDivision.Value))
+            int divisionId = ((DivisionModel)this.tlvDivisions.SelectedObject).DivisionId;
+
+            if (Global.IsDuplicateMatchDisplayId(MatchModels, divisionId, (int)this.nudSubDivision.Value))
                 return NewMatchErrorType.DuplicateMatchDisplayId;
-
-            if (this.cbMatchType.SelectedItem == null)
-                return NewMatchErrorType.MatchTypeNotSelected;
-
+            
             if (this.tlvDivisions.SelectedObject == null)
                 return NewMatchErrorType.DivisionNotSelected;
 
             if (this.tlvDivisions.SelectedObject == null)
                 return NewMatchErrorType.DivisionNotSelected;
 
-            var result = IsAppropriateKataType();
-            if (result != NewMatchErrorType.KataDivisionWithNonKataSelection ||
-                result != NewMatchErrorType.NonKataDivisionWithKataSelection)
-                return result;
-
-            string MatchDisplayName = Global.GetMatchDisplayName(this.nudDivision.Value, this.nudSubDivision.Value);
+            string MatchDisplayName = Global.GetMatchDisplayName(divisionId, this.nudSubDivision.Value);
             if (MatchModels.Any(m => m.MatchDisplayName.CompareTo(MatchDisplayName) == 0))
                 return NewMatchErrorType.MatchDisplayNameExists;
 
@@ -137,55 +131,34 @@ namespace DKK_App
             //write to the database
             MatchModel match = new MatchModel();
 
-            switch (this.cbMatchType.SelectedItem.ToString())
+            bool isSpecial = this.cbIsSpecialConsideration.Checked;
+            string matchTypeName = ((DivisionModel)this.tlvDivisions.SelectedObject).MatchTypeName;
+
+            switch (matchTypeName)
             {
                 case "Kata":
                     match.MatchTypeId = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Kata") == 0 && 
-                        mtw.IsSpecialConsideration == false).First()).MatchTypeId;
+                        mtw.IsSpecialConsideration == isSpecial).First()).MatchTypeId;
                     match.MatchTypeName = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Kata") == 0 &&
-                        mtw.IsSpecialConsideration == false).First()).MatchTypeName;
+                        mtw.IsSpecialConsideration == isSpecial).First()).MatchTypeName;
                     break;
                 case "Weapon Kata":
                     match.MatchTypeId = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Weapon Kata") == 0 &&
-                        mtw.IsSpecialConsideration == false).First()).MatchTypeId;
+                        mtw.IsSpecialConsideration == isSpecial).First()).MatchTypeId;
                     match.MatchTypeName = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Weapon Kata") == 0 &&
-                        mtw.IsSpecialConsideration == false).First()).MatchTypeName;
+                        mtw.IsSpecialConsideration == isSpecial).First()).MatchTypeName;
                     break;
                 case "Semi-Knockdown":
                     match.MatchTypeId = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Semi-Knockdown") == 0 &&
-                        mtw.IsSpecialConsideration == false).First()).MatchTypeId;
+                        mtw.IsSpecialConsideration == isSpecial).First()).MatchTypeId;
                     match.MatchTypeName = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Semi-Knockdown") == 0 &&
-                        mtw.IsSpecialConsideration == false).First()).MatchTypeName;
+                        mtw.IsSpecialConsideration == isSpecial).First()).MatchTypeName;
                     break;
                 case "Knockdown":
                     match.MatchTypeId = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Knockdown") == 0 &&
-                        mtw.IsSpecialConsideration == false).First()).MatchTypeId;
+                        mtw.IsSpecialConsideration == isSpecial).First()).MatchTypeId;
                     match.MatchTypeName = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Knockdown") == 0 &&
-                        mtw.IsSpecialConsideration == false).First()).MatchTypeName;
-                    break;
-                case "Kata (Special Consideration)":
-                    match.MatchTypeId = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Kata") == 0 &&
-                        mtw.IsSpecialConsideration == true).First()).MatchTypeId;
-                    match.MatchTypeName = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Kata") == 0 &&
-                        mtw.IsSpecialConsideration == true).First()).MatchTypeName;
-                    break;
-                case "Weapon Kata (Special Consideration)":
-                    match.MatchTypeId = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Weapon Kata") == 0 &&
-                        mtw.IsSpecialConsideration == true).First()).MatchTypeId;
-                    match.MatchTypeName = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Weapon Kata") == 0 &&
-                        mtw.IsSpecialConsideration == true).First()).MatchTypeName;
-                    break;
-                case "Semi-Knockdown (Special Consideration)":
-                    match.MatchTypeId = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Semi-Knockdown") == 0 &&
-                        mtw.IsSpecialConsideration == true).First()).MatchTypeId;
-                    match.MatchTypeName = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Semi-Knockdown") == 0 &&
-                        mtw.IsSpecialConsideration == true).First()).MatchTypeName;
-                    break;
-                case "Knockdown (Special Consideration)":
-                    match.MatchTypeId = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Knockdown") == 0 &&
-                        mtw.IsSpecialConsideration == true).First()).MatchTypeId;
-                    match.MatchTypeName = (MatchTypes.Where(mtw => mtw.MatchTypeName.CompareTo("Knockdown") == 0 &&
-                        mtw.IsSpecialConsideration == true).First()).MatchTypeName;
+                        mtw.IsSpecialConsideration == isSpecial).First()).MatchTypeName;
                     break;
             }
 
@@ -198,7 +171,7 @@ namespace DKK_App
 
             //update the matchmodels
             MatchModels.Add(match);
-            ParentFormMain.MatchModels = MatchModels;
+            ParentFormMain.MatchModels = ParentFormMain.SortMatchModels(MatchModels);
 
             //refresh the main form to avoid a full refresh
             ParentFormMain.RefreshMatches(MatchModels);

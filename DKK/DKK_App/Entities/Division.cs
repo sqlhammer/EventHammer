@@ -10,6 +10,9 @@
         public int MinAge { get; set; }
         public int MaxAge { get; set; }
         public bool IsKata { get; set; }
+        public bool IsWeaponKata { get; set; }
+        public bool IsSemiKnockdown { get; set; }
+        public bool IsKnockdown { get; set; }
         public Rank MinRank { get; set; }
         public Rank MaxRank { get; set; }
     }
