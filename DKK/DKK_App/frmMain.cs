@@ -274,6 +274,12 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
         private void btnAllEvents_Click(object sender, EventArgs e)
         {
             string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
+            LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_AllEvents", report_url));
+        }
+
+        private void btnCheckInRoster_Click(object sender, EventArgs e)
+        {
+            string report_url = ConfigurationManager.AppSettings["ReportURL"].ToString();
             LaunchWebsite(String.Format("{0}ReportServer?%2fDKK_Reports%2fMaster_CheckInRoster", report_url));
         }
 
@@ -537,6 +543,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             this.btnAllEvents.Enabled = true;
             this.btnSchoolsOwners.Enabled = true;
             this.btnCompetitorsBySchoolReport.Enabled = true;
+            this.btnCheckInRoster.Enabled = true;
 
             //I wanted to use SQL Hammer colors but did not get around to it.
             /*
@@ -569,6 +576,8 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             this.btnDivisionRingNumbers.Enabled = false;
             this.btnAllEvents.Enabled = false;
             this.btnSchoolsOwners.Enabled = false;
+            this.btnCompetitorsBySchoolReport.Enabled = false;
+            this.btnCheckInRoster.Enabled = false;
 
             //I wanted to use SQL Hammer colors but did not get around to it.
             /*

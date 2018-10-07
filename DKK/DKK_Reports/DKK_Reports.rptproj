@@ -56,6 +56,10 @@
       <MimeType>image/x-png</MimeType>
     </ResourceProjectItem>
     <ProjectItem>
+      <Name>Master_CheckInRoster.rdl</Name>
+      <FullPath>Master_CheckInRoster.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Master_CompetitorRegistrationForm.rdl</Name>
       <FullPath>Master_CompetitorRegistrationForm.rdl</FullPath>
     </ProjectItem>
@@ -108,8 +112,8 @@
       <FullPath>SubReport_DojoHeader.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Master_CheckInRoster.rdl</Name>
-      <FullPath>Master_CheckInRoster.rdl</FullPath>
+      <Name>Master_AllEvents.rdl</Name>
+      <FullPath>Master_AllEvents.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
