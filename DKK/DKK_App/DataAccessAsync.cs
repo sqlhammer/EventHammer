@@ -1306,7 +1306,7 @@ namespace DKK_App
         {
             string query = @"EXEC [Event].[spUpdateMatchDisplayId] @MatchId = 
                 " + match.MatchId.ToString() + @", @MatchDisplayId = " +
-                match.MatchDisplayId.ToString() + @", @SubDivisionId = " +
+                match.DivisionId.ToString() + @", @SubDivisionId = " +
                 match.SubDivisionId.ToString() + @";";
 
             ExecuteDDL(query);

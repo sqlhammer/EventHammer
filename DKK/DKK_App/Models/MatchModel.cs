@@ -6,33 +6,25 @@ namespace DKK_App.Models
     public class MatchModel
     {
         private string _MatchDisplayName;
-        private int? _MatchDisplayId;
-        
+        private int? _SubDivisionId;
+
         public int? EventId { get; set; }
-        public int? SubDivisionId { get; set; }
+        public int? SubDivisionId
+        {
+            get { return _SubDivisionId; }
+            set { _SubDivisionId = value; _MatchDisplayName = null; }
+        }
         public int? MatchId { get; set; }
         public int? DivisionId { get; set; }
-        public int? MatchDisplayId
-        {
-            get
-            {
-                return _MatchDisplayId;
-            }
-            set
-            {
-                _MatchDisplayId = value;
-                _MatchDisplayName = null;
-            }
-        } 
         public string MatchDisplayName
         {
             get
             {
                 if (String.IsNullOrEmpty(_MatchDisplayName))
                 {
-                    if (MatchDisplayId != null)
+                    if (DivisionId != null)
                     {
-                        _MatchDisplayName = Global.GetMatchDisplayName((int)MatchDisplayId, (int)SubDivisionId);
+                        _MatchDisplayName = Global.GetMatchDisplayName((int)DivisionId, (int)SubDivisionId);
                     }
                 }
 

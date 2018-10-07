@@ -148,6 +148,7 @@
     <None Include="Schemas\Stage\Data\CalderaFormEntry.sql" />
     <None Include="Publish\eventhammer.publish.xml" />
     <None Include="SQLAgentJobs\SQLAgentJob-Load-Registration-Data.sql" />
+    <None Include="Publish\localhost.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Publish\Script.PostDeployment.sql" />

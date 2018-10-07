@@ -58,7 +58,7 @@
             // 
             this.btnCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreate.Location = new System.Drawing.Point(290, 420);
-            this.btnCreate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCreate.Margin = new System.Windows.Forms.Padding(2);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(104, 43);
             this.btnCreate.TabIndex = 17;
@@ -70,7 +70,7 @@
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(418, 420);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(104, 43);
             this.btnCancel.TabIndex = 16;
@@ -99,6 +99,7 @@
             this.label2.Size = new System.Drawing.Size(93, 18);
             this.label2.TabIndex = 10;
             this.label2.Text = "Display Div #";
+            this.label2.Visible = false;
             // 
             // label1
             // 
@@ -116,7 +117,7 @@
             this.cbMatchType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbMatchType.FormattingEnabled = true;
             this.cbMatchType.Location = new System.Drawing.Point(118, 30);
-            this.cbMatchType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbMatchType.Margin = new System.Windows.Forms.Padding(2);
             this.cbMatchType.Name = "cbMatchType";
             this.cbMatchType.Size = new System.Drawing.Size(240, 25);
             this.cbMatchType.TabIndex = 18;
@@ -157,7 +158,7 @@
             this.tlvDivisions.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvDivisions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlvDivisions.Location = new System.Drawing.Point(30, 98);
-            this.tlvDivisions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tlvDivisions.Margin = new System.Windows.Forms.Padding(2);
             this.tlvDivisions.Name = "tlvDivisions";
             this.tlvDivisions.ShowGroups = false;
             this.tlvDivisions.Size = new System.Drawing.Size(765, 301);
@@ -223,7 +224,7 @@
             // 
             this.nudDivision.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudDivision.Location = new System.Drawing.Point(536, 30);
-            this.nudDivision.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudDivision.Margin = new System.Windows.Forms.Padding(2);
             this.nudDivision.Minimum = new decimal(new int[] {
             1,
             0,
@@ -237,12 +238,13 @@
             0,
             0,
             0});
+            this.nudDivision.Visible = false;
             // 
             // nudSubDivision
             // 
             this.nudSubDivision.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudSubDivision.Location = new System.Drawing.Point(716, 30);
-            this.nudSubDivision.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudSubDivision.Margin = new System.Windows.Forms.Padding(2);
             this.nudSubDivision.Maximum = new decimal(new int[] {
             20,
             0,
@@ -280,7 +282,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(848, 539);
             this.Name = "frmNewMatch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

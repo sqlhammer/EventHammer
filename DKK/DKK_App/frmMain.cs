@@ -626,12 +626,12 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
         #region Match Tab
         private void cmiChangeDivisionNumber_Click(object sender, EventArgs e)
         {
-            ChangeDivisionNumber();
+            ChangeSubDivisionNumber();
         }
 
         private void cmiChangeSelectedDivisionNumber_Click(object sender, EventArgs e)
         {
-            ChangeDivisionNumber();
+            ChangeSubDivisionNumber();
         }
 
         private void SetMatchContext()
@@ -683,7 +683,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             tlvMatches.SelectedObject = MatchContext.SelectedModel;
         }
 
-        private void ChangeDivisionNumber()
+        private void ChangeSubDivisionNumber()
         {
             /*
              * pop up to ask for new division and sub-division numbers
@@ -702,29 +702,28 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
                 return;
 
             string newDisplayId = "";
-            var result = Global.InputBox("Select new division and sub-division number"
-                , "Type in a new division and sub-division number. Follow the pattern #-#. Example: 12-2"
+            var result = Global.InputBox("Select new sub-division number"
+                , "Type in a new sub-division number."
                 , ref newDisplayId);
                         
             if (result == DialogResult.Cancel)
                 return;
 
-            if (!Global.IsValidMatchDisplayIsString(newDisplayId))
+            if (!Global.IsValidInteger(newDisplayId))
             {
-                MessageBox.Show("You must follow the pattern #-#. Example: 12-2. No changes were made.",
+                MessageBox.Show("You must input a single number only.",
                     "Invalid text pattern",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
             }
+            
+            int divisionId = Convert.ToInt32(mt.DivisionId);
+            int subDivisionId = Convert.ToInt32(newDisplayId);
 
-            string[] split = newDisplayId.Split('-');
-            int matchDisplayId = Convert.ToInt32(split[0]);
-            int subDivisionId = Convert.ToInt32(split[1]);
-
-            if (Global.IsDuplicateMatchDisplayId(MatchModels, matchDisplayId, subDivisionId))
+            if (Global.IsDuplicateMatchDisplayId(MatchModels, divisionId, subDivisionId))
             {
-                MessageBox.Show("Division Id: {0} combined with Sub-Division Id: {1} already exists. Please chose a different number.", 
+                MessageBox.Show(String.Format("Division Id: {0} combined with Sub-Division Id: {1} already exists. Please chose a different number.", divisionId, subDivisionId), 
                     "Duplicate Division / Sub-division combination.", 
                     MessageBoxButtons.OK, 
                     MessageBoxIcon.Error);
@@ -735,7 +734,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
 
             // Begin database update
 
-            mt.MatchDisplayId = matchDisplayId;
+            mt.DivisionId = divisionId;
             mt.SubDivisionId = subDivisionId;
 
             DataAccessAsync.UpdateMatchDisplayId(mt);
@@ -869,16 +868,16 @@ m.Division.MaxRank.RankName);
             models.Sort(delegate (MatchModel x, MatchModel y)
             {
                 //Handle NULLs even though I do not expect them
-                if (x.MatchDisplayId == null && y.MatchDisplayId == null) return 0;
-                if (x.MatchDisplayId == null) return -1;
-                if (y.MatchDisplayId == null) return 1;
+                if (x.DivisionId == null && y.DivisionId == null) return 0;
+                if (x.DivisionId == null) return -1;
+                if (y.DivisionId == null) return 1;
 
                 //Sort by division
-                if (x.MatchDisplayId < y.MatchDisplayId) return -1;
-                if (x.MatchDisplayId > y.MatchDisplayId) return 1;
+                if (x.DivisionId < y.DivisionId) return -1;
+                if (x.DivisionId > y.DivisionId) return 1;
 
                 //Sort by sub-division if divisions match
-                if (x.MatchDisplayId == y.MatchDisplayId)
+                if (x.DivisionId == y.DivisionId)
                 {
                     if (x.SubDivisionId == y.SubDivisionId) return 0;
                     if (x.SubDivisionId < y.SubDivisionId) return -1;
@@ -1091,7 +1090,7 @@ If you do not like the placements, you will have to move the competitors to diff
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
             MatchModels = SortMatchModels(Global.GetMatchModel(mcs));
             MatchModelLoadComplete = true;
-            this.tlvMatches.ExpandAll();
+            //this.tlvMatches.ExpandAll();
         }
 
         private async void RefreshCompetitors()

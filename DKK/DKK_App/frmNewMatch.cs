@@ -191,7 +191,6 @@ namespace DKK_App
 
             match.EventId = CurrentEvent.EventId;
             match.DivisionId = ((DivisionModel)this.tlvDivisions.SelectedObject).DivisionId;
-            match.MatchDisplayId = (int)this.nudDivision.Value;
             match.SubDivisionId = (int)this.nudSubDivision.Value;
             match.Children = new List<MatchModel>();
 

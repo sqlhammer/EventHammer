@@ -1435,7 +1435,7 @@ namespace DKK_App
 
             parameters[0] = new SqlParameter("@EventId", match.EventId);
             parameters[1] = new SqlParameter("@MatchTypeId", match.MatchTypeId);
-            parameters[2] = new SqlParameter("@MatchDisplayId", match.MatchDisplayId);
+            parameters[2] = new SqlParameter("@MatchDisplayId", match.DivisionId);
             parameters[3] = new SqlParameter("@DivisionId", match.DivisionId);
             parameters[4] = new SqlParameter("@SubDivisionId", match.SubDivisionId);
 

@@ -426,7 +426,6 @@ namespace DKK_App
                 mm.DivisionId = obj.Match.Division.DivisionId;
                 mm.MatchTypeId = obj.Match.MatchType.MatchTypeId;
                 mm.MatchId = obj.Match.MatchId;
-                mm.MatchDisplayId = obj.Match.MatchDisplayId;
                 mm.SubDivisionId = obj.Match.SubDivisionId;
                 mm.MatchTypeName = GetMatchTypeDisplayName(obj.Match.MatchType,LengthType.Long);
                 mm.Children = new List<MatchModel>();
@@ -629,19 +628,19 @@ namespace DKK_App
             return IsDuplicate;
         }
 
-        public static bool IsValidMatchDisplayIsString(string displayid)
+        public static bool IsValidInteger(string num)
         {
-            Regex regex = new Regex(@"^\d*\-\d*$");
-            System.Text.RegularExpressions.Match match = regex.Match(displayid);
+            Regex regex = new Regex(@"^\d*$");
+            System.Text.RegularExpressions.Match match = regex.Match(num);
 
             return match.Success;
         }
 
-        public static bool IsDuplicateMatchDisplayId(List<MatchModel> models, int matchDisplayId, int subDivisionId)
+        public static bool IsDuplicateMatchDisplayId(List<MatchModel> models, int divisionId, int subDivisionId)
         {
             bool IsDuplicate = true;
 
-            MatchModel model = models.Where(m => m.MatchDisplayId == matchDisplayId && m.SubDivisionId == subDivisionId).FirstOrDefault();
+            MatchModel model = models.Where(m => m.DivisionId == divisionId && m.SubDivisionId == subDivisionId).FirstOrDefault();
 
             if (model == null)
             {
