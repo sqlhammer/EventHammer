@@ -4,7 +4,7 @@ SELECT DISTINCT c.CompetitorId
 	,p.DisplayName
 	,c.Weight
 	,mt.Name MatchTypeName
-	,m.MatchDisplayId
+	,d.DivisionId MatchDisplayId
 	,m.SubDivisionId
 	,d.MinimumWeight_lb
 	,d.MaximumWeight_lb
@@ -15,3 +15,4 @@ INNER JOIN [Event].[Division] d ON m.DivisionId = d.DivisionId
 INNER JOIN [Event].[MatchCompetitor] mc ON mc.MatchId = m.MatchId
 INNER JOIN [Person].[Competitor] c ON c.CompetitorId = mc.CompetitorId
 INNER JOIN [Person].[Person] p ON p.PersonId = c.PersonId
+WHERE d.IsSemiKnockdown = 1 OR d.IsKnockdown = 1
