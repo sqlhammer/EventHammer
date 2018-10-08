@@ -20,8 +20,7 @@
 	, MinimumWeight_lb
 	, MaximumWeight_lb
 FROM [Event].[vwWeighIn] w
-WHERE w.MatchTypeName IN ('Semi-Knockdown','Knockdown')
-	AND w.Eventid = @EventId</CommandText>
+WHERE w.Eventid = @EventId</CommandText>
     </Query>
     <Fields>
       <Field Name="CompetitorId">

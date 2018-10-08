@@ -23,9 +23,20 @@ BEGIN
 			FROM Person.Competitor c
 			WHERE c.CompetitorId = @CompetitorId
 
-			DELETE FROM p
-			FROM Person.Person p
-			WHERE p.PersonId = @PersonId
+			/*
+			IF NOT EXISTS 
+			(
+				SELECT *
+				FROM Person.Competitor AS c
+				INNER JOIN Person.Person AS p ON p.PersonId = c.PersonId
+				WHERE p.PersonId = @PersonId
+			)
+			BEGIN
+				DELETE FROM p
+				FROM Person.Person p
+				WHERE p.PersonId = @PersonId
+			END
+			*/
 
 	END TRY
 	BEGIN CATCH
