@@ -133,7 +133,7 @@ namespace DKK_App
 	                           MartialArtTypeId,
 	                           MartialArtTypeName
                         FROM [Person].[vwCompetitorDetail]
-                        WHERE EventId = " + id.ToString();
+                        WHERE CompetitorId = " + id.ToString();
 
             Competitor c = QueryCompetitorInformation(query).FirstOrDefault();
 
