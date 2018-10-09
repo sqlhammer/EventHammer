@@ -53,6 +53,17 @@ SELECT mc.MatchCompetitorId
 	  ,r.Kyu
 	  ,f.Name DojoName
 	  ,f.OwnerId
+	  ,f.FacilityId
+	  ,f.Name FacilityName
+	  ,f.PhoneNumber FacilityPhoneNumber
+	  ,f.Email FacilityEmail
+	  ,f.StreetAddress1 FacilityStreetAddress1
+	  ,f.StreetAddress2 FacilityStreetAddress2
+	  ,f.AppartmentCode FacilityAppartmentCode
+	  ,f.City FacilityCity
+	  ,f.StateProvidence FacilityStateProvidence
+	  ,f.PostalCode FacilityPostalCode
+	  ,f.Country FacilityCountry
 	  ,ft.FacilityTypeId
 	  ,ft.Name FacilityTypeName
 	  ,ownr.FirstName OwnerFirstName
@@ -77,6 +88,8 @@ SELECT mc.MatchCompetitorId
 	  ,d_min_r.Name DivisionMinBelt
 	  ,d_min_r.Level DivisionMinLevel
 	  ,d_min_r.Kyu DivisionMinKyu
+	  ,mat.MartialArtTypeId
+	  ,mat.Name MartialArtTypeName
 FROM Event.Match m
 LEFT JOIN Event.MatchCompetitor mc ON m.MatchId = mc.MatchId
 LEFT JOIN Event.MatchType mt ON mt.MatchTypeId = m.MatchTypeId
@@ -86,8 +99,10 @@ LEFT JOIN Person.Competitor c ON c.CompetitorId = mc.CompetitorId
 LEFT JOIN Person.Person per ON per.PersonId = c.PersonId
 LEFT JOIN Person.Person par ON par.PersonId = c.ParentId
 LEFT JOIN Event.Rank r ON r.RankId = c.RankId
-LEFT JOIN Facility.Facility f ON c.DojoId = f.FacilityId
+LEFT JOIN Facility.Dojo dojo ON dojo.DojoId = c.DojoId
+LEFT JOIN Facility.Facility f ON dojo.DojoId = f.FacilityId
 LEFT JOIN Facility.FacilityType ft ON ft.FacilityTypeId = f.FacilityTypeId
+LEFT JOIN Facility.MartialArtType mat ON dojo.MartialArtTypeId = mat.MartialArtTypeId
 LEFT JOIN Person.Person ownr ON ownr.PersonId = f.OwnerId
 LEFT JOIN Person.Title t ON t.TitleId = per.TitleId
 LEFT JOIN Person.Title t_owner ON t_owner.TitleId = ownr.TitleId

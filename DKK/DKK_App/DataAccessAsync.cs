@@ -100,37 +100,76 @@ namespace DKK_App
 
         public static async Task<List<Competitor>> GetCompetitors(Event Event)
         {
-            string query = @"SELECT CompetitorId
-	                          ,PersonId
-	                          --,DateOfBirth
-	                          ,Age
-	                          ,Weight
-                              ,Height
-	                          ,RankId
-	                          ,DojoId
-                              ,OtherDojoName
-	                          ,ParentId
-	                          ,IsMinor
-	                          ,IsSpecialConsideration
-	                          ,EventId
-	                          ,IsKata
-	                          ,IsWeaponKata
-	                          ,IsSemiKnockdown
-	                          ,IsKnockdown
-                              ,ConsiderationDescription
-                        FROM Person.Competitor
+            string query = @"SELECT CompetitorId,
+                               DateOfBirth,
+                               Age,
+                               Weight,
+                               Height,
+                               DojoId,
+                               OtherDojoName,
+                               ParentId,
+                               IsMinor,
+                               IsSpecialConsideration,
+                               ConsiderationDescription,
+                               IsKata,
+                               IsWeaponKata,
+                               IsSemiKnockdown,
+                               IsKnockdown,
+                               PersonId,
+                               FirstName,
+                               LastName,
+                               DisplayName,
+                               TitleId,
+                               TitleName,
+                               IsInstructor,
+                               Gender,
+                               PhoneNumber,
+                               EmailAddress,
+                               StreetAddress1,
+                               StreetAddress2,
+                               AppartmentCode,
+                               City,
+                               StateProvince,
+                               PostalCode,
+                               Country,
+                               ParentPersonId,
+                               ParentFirstName,
+                               ParentLastName,
+                               ParentDisplayName,
+                               ParentEmailAddress,
+                               RankId,
+                               Belt,
+                               Level,
+                               Kyu,
+                               EventId,
+                               EventName,
+                               EventTypeId,
+                               EventDate,
+                               DojoName,
+                               OwnerId,
+                               FacilityId,
+                               FacilityName,
+                               FacilityPhoneNumber,
+                               FacilityEmail,
+                               FacilityStreetAddress1,
+                               FacilityStreetAddress2,
+                               FacilityAppartmentCode,
+                               FacilityCity,
+                               FacilityStateProvidence,
+                               FacilityPostalCode,
+                               FacilityCountry,
+                               FacilityTypeId,
+                               FacilityTypeName,
+                               OwnerFirstName,
+                               OwnerLastName,
+                               OwnerDisplayName,
+	                           MartialArtTypeId,
+	                           MartialArtTypeName
+                        FROM [Person].[vwCompetitorDetail]
                         WHERE EventId = " + Event.EventId.ToString();
 
             List<Competitor> cs = await QueryCompetitorInformation(query);
-
-            foreach (Competitor c in cs)
-            {
-                c.Person = await GetPerson(c.Person.PersonId);
-                c.Parent = await GetPerson(c.Parent.PersonId);
-                c.Rank = await GetRank(c.Rank.RankId);
-                c.Event = await GetEventInformationById(c.Event.EventId);
-            }
-
+            
             return cs;
         }
 
@@ -161,17 +200,102 @@ namespace DKK_App
                                     MartialArtType = new MartialArtType(),
                                     Facility = new Facility()
                                 };
+                                
+                                //Competitor title
+                                Title ct = new Title();
+                                if (!String.IsNullOrEmpty(reader["TitleId"].ToString()))
+                                {
+                                    ct.TitleId = Convert.ToInt32(reader["TitleId"].ToString());
+                                    ct.TitleName = reader["TitleName"].ToString();
+                                }
 
-                                rank.RankId = Convert.ToInt32(reader["RankId"].ToString());
-                                person.PersonId = Convert.ToInt32(reader["PersonId"].ToString());
-                                Event.EventId = Convert.ToInt32(reader["EventId"].ToString());
+                                //Rank
+                                if (!String.IsNullOrEmpty(reader["RankId"].ToString()))
+                                {
+                                    rank.Kyu = reader["Kyu"].ToString();
+                                    rank.Level = Convert.ToInt32(reader["Level"].ToString());
+                                    rank.RankId = Convert.ToInt32(reader["RankId"].ToString());
+                                    rank.RankName = reader["Belt"].ToString();
+                                }
+
+                                //Parent
                                 if (!String.IsNullOrEmpty(reader["ParentId"].ToString()))
                                 {
+                                    parent.DisplayName = reader["ParentDisplayName"].ToString();
+                                    parent.EmailAddress = reader["ParentEmailAddress"].ToString();
+                                    parent.FirstName = reader["ParentFirstName"].ToString();
+                                    parent.LastName = (reader["ParentLastName"] != null) ? reader["ParentLastName"].ToString() : null;
                                     parent.PersonId = Convert.ToInt32(reader["ParentId"].ToString());
                                 }
-                                if (!String.IsNullOrEmpty(reader["DojoId"].ToString()))
+
+                                //Person
+                                if (!String.IsNullOrEmpty(reader["PersonId"].ToString()))
                                 {
-                                    dojo = await GetDojo(Convert.ToInt32(reader["DojoId"].ToString()));
+                                    person.AppartmentCode = reader["AppartmentCode"].ToString();
+                                    person.City = reader["City"].ToString();
+                                    person.Country = reader["Country"].ToString();
+                                    person.DisplayName = reader["DisplayName"].ToString();
+                                    person.EmailAddress = reader["EmailAddress"].ToString();
+                                    person.FirstName = reader["FirstName"].ToString();
+                                    person.Gender = reader["Gender"].ToString();
+                                    person.IsInstructor = Convert.ToBoolean(reader["IsInstructor"].ToString());
+                                    person.LastName = reader["LastName"].ToString();
+                                    person.PersonId = Convert.ToInt32(reader["PersonId"].ToString());
+                                    person.PhoneNumber = reader["PhoneNumber"].ToString();
+                                    person.PostalCode = reader["PostalCode"].ToString();
+                                    person.StateProvince = reader["StateProvince"].ToString();
+                                    person.StreetAddress1 = (reader["StreetAddress1"] != null) ? reader["StreetAddress1"].ToString() : null;
+                                    person.StreetAddress2 = (reader["StreetAddress2"] != null) ? reader["StreetAddress2"].ToString() : null;
+                                    person.Title = ct;
+                                }
+
+                                //Dojo
+                                int dojoid = (!String.IsNullOrEmpty(reader["DojoId"].ToString())) ? Convert.ToInt32(reader["DojoId"].ToString()) : 0;
+                                int ownerid = (!String.IsNullOrEmpty(reader["OwnerId"].ToString())) ? Convert.ToInt32(reader["OwnerId"].ToString()) : 0;
+                                
+                                if (dojoid > 0)
+                                {
+                                    Person owner = new Person();
+                                    if (ownerid > 0)
+                                    {
+                                        owner = new Person
+                                        {
+                                            PersonId = ownerid,
+                                            FirstName = reader["OwnerFirstName"].ToString(),
+                                            LastName = reader["OwnerLastName"].ToString(),
+                                            DisplayName = reader["OwnerDisplayName"].ToString(),
+                                        };
+                                    }
+
+                                    dojo = new Dojo
+                                    {
+                                        DojoId = dojoid,
+                                        Facility = new Facility
+                                        {
+                                            FacilityId = Convert.ToInt32(reader["FacilityId"].ToString()),
+                                            FacilityName = reader["FacilityName"].ToString(),
+                                            StreetAddress1 = (reader["FacilityStreetAddress1"] != null) ? reader["FacilityStreetAddress1"].ToString() : null,
+                                            StreetAddress2 = (reader["FacilityStreetAddress2"] != null) ? reader["FacilityStreetAddress2"].ToString() : null,
+                                            AppartmentCode = (reader["FacilityAppartmentCode"] != null) ? reader["FacilityAppartmentCode"].ToString() : null,
+                                            City = (reader["FacilityCity"] != null) ? reader["FacilityCity"].ToString() : null,
+                                            Country = (reader["FacilityCountry"] != null) ? reader["FacilityCountry"].ToString() : null,
+                                            Email = (reader["FacilityEmail"] != null) ? reader["FacilityEmail"].ToString() : null,
+                                            PhoneNumber = (reader["FacilityPhoneNumber"] != null) ? reader["FacilityPhoneNumber"].ToString() : null,
+                                            PostalCode = (reader["FacilityPostalCode"] != null) ? reader["FacilityPostalCode"].ToString() : null,
+                                            StateProvidence = (reader["FacilityStateProvidence"] != null) ? reader["FacilityStateProvidence"].ToString() : null,
+                                            FacilityType = new FacilityType
+                                            {
+                                                FacilityTypeId = Convert.ToInt32(reader["FacilityTypeId"].ToString()),
+                                                FacilityTypeName = (reader["FacilityTypeName"] != null) ? reader["FacilityTypeName"].ToString() : null,
+                                            },
+                                            Owner = owner
+                                        },
+                                        MartialArtType = new MartialArtType
+                                        {
+                                            MartialArtTypeId = Convert.ToInt32(reader["MartialArtTypeId"].ToString()),
+                                            MartialArtTypeName = reader["MartialArtTypeName"].ToString()
+                                        }
+                                    };
                                 }
 
                                 objs.Add(new Competitor
@@ -909,6 +1033,20 @@ namespace DKK_App
 	                              ,mcd.DivisionMinBelt
 	                              ,mcd.DivisionMinLevel
 	                              ,mcd.DivisionMinKyu
+	                              ,mcd.OwnerId
+	                              ,mcd.FacilityId
+	                              ,mcd.FacilityName
+	                              ,mcd.FacilityPhoneNumber
+	                              ,mcd.FacilityEmail
+	                              ,mcd.FacilityStreetAddress1
+	                              ,mcd.FacilityStreetAddress2
+	                              ,mcd.FacilityAppartmentCode
+	                              ,mcd.FacilityCity
+	                              ,mcd.FacilityStateProvidence
+	                              ,mcd.FacilityPostalCode
+	                              ,mcd.FacilityCountry
+                                  ,mcd.MartialArtTypeId
+                                  ,mcd.MartialArtTypeName
                             FROM Event.vwMatchCompetitorDetail mcd
                             WHERE mcd.EventId = " + Event.EventId.ToString();
             
@@ -1055,15 +1193,56 @@ namespace DKK_App
 
                                 //Dojo
                                 int dojoid = (!String.IsNullOrEmpty(reader["DojoId"].ToString())) ? Convert.ToInt32(reader["DojoId"].ToString()) : 0;
+                                int ownerid = (!String.IsNullOrEmpty(reader["OwnerId"].ToString())) ? Convert.ToInt32(reader["OwnerId"].ToString()) : 0;
 
                                 Dojo dojo = new Dojo
                                 {
                                     MartialArtType = new MartialArtType(),
                                     Facility = new Facility()
                                 };
-                                if(dojoid > 0)
+                                if (dojoid > 0)
                                 {
-                                    dojo = await GetDojo(dojoid);
+                                    Person owner = new Person();
+                                    if (ownerid > 0)
+                                    {
+                                        owner = new Person
+                                        {
+                                            PersonId = ownerid,
+                                            FirstName = reader["OwnerFirstName"].ToString(),
+                                            LastName = reader["OwnerLastName"].ToString(),
+                                            DisplayName = reader["OwnerDisplayName"].ToString(),
+                                        };
+                                    }
+
+                                    dojo = new Dojo
+                                    {
+                                        DojoId = dojoid,
+                                        Facility = new Facility
+                                        {
+                                            FacilityId = Convert.ToInt32(reader["FacilityId"].ToString()),
+                                            FacilityName = reader["FacilityName"].ToString(),
+                                            StreetAddress1 = (reader["FacilityStreetAddress1"] != null) ? reader["FacilityStreetAddress1"].ToString() : null,
+                                            StreetAddress2 = (reader["FacilityStreetAddress2"] != null) ? reader["FacilityStreetAddress2"].ToString() : null,
+                                            AppartmentCode = (reader["FacilityAppartmentCode"] != null) ? reader["FacilityAppartmentCode"].ToString() : null,
+                                            City = (reader["FacilityCity"] != null) ? reader["FacilityCity"].ToString() : null,
+                                            Country = (reader["FacilityCountry"] != null) ? reader["FacilityCountry"].ToString() : null,
+                                            Email = (reader["FacilityEmail"] != null) ? reader["FacilityEmail"].ToString() : null,
+                                            PhoneNumber = (reader["FacilityPhoneNumber"] != null) ? reader["FacilityPhoneNumber"].ToString() : null,
+                                            PostalCode = (reader["FacilityPostalCode"] != null) ? reader["FacilityPostalCode"].ToString() : null,
+                                            StateProvidence = (reader["FacilityStateProvidence"] != null) ? reader["FacilityStateProvidence"].ToString() : null,
+                                            FacilityType = new FacilityType
+                                            {
+                                                FacilityTypeId = Convert.ToInt32(reader["FacilityTypeId"].ToString()),
+                                                FacilityTypeName = (reader["FacilityTypeName"] != null) ? reader["FacilityTypeName"].ToString() : null,
+                                            },
+                                            Owner = owner
+                                        },
+                                        MartialArtType = new MartialArtType
+                                        {
+                                            MartialArtTypeId = Convert.ToInt32(reader["MartialArtTypeId"].ToString()),
+                                            MartialArtTypeName = reader["MartialArtTypeName"].ToString()
+                                        }
+                                    };
                                 }
 
                                 //Competitor
