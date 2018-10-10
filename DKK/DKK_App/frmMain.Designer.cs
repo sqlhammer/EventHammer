@@ -1581,7 +1581,6 @@
             // 
             // btnSpecialConsiderationDetails
             // 
-            this.btnSpecialConsiderationDetails.Enabled = false;
             this.btnSpecialConsiderationDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSpecialConsiderationDetails.Location = new System.Drawing.Point(217, 137);
             this.btnSpecialConsiderationDetails.Margin = new System.Windows.Forms.Padding(2);

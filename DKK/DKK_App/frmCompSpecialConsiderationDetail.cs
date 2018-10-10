@@ -1,4 +1,5 @@
 ﻿using DKK_App.Models;
+using System;
 using System.Windows.Forms;
 
 namespace DKK_App
@@ -20,8 +21,10 @@ namespace DKK_App
 
         private void btnSave_Click(object sender, System.EventArgs e)
         {
+            CompetitorModel.Competitor = Global.GetCompetitorFromCompetitorModel(CompetitorModel);
             CompetitorModel.Competitor.Description = txtDesc.Text;
-            DataAccess.UpdateCompetitor(Global.GetCompetitorFromCompetitorModel(CompetitorModel));
+            CompetitorModel.Competitor.IsSpecialConsideration = !String.IsNullOrWhiteSpace(txtDesc.Text);
+            DataAccess.UpdateCompetitor(CompetitorModel.Competitor);
             this.Close();
         }
     }

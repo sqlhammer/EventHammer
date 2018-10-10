@@ -1539,7 +1539,6 @@ If you do not like the placements, you will have to move the competitors to diff
             this.txtCompZipCode.Text = comp.Person.PostalCode;
 
             //this.chbCompIsInstructor.Checked = comp.Person.IsInstructor;
-            this.btnSpecialConsiderationDetails.Enabled = comp.IsSpecialConsideration;
 
             this.nudCompWeight.Value = comp.Weight;
             this.nudCompHeight.Value = comp.Height;
