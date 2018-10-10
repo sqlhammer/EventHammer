@@ -25,12 +25,13 @@
       <Query>
         <DataSourceName>DKK</DataSourceName>
         <CommandText>SELECT 
-	COALESCE(m.DojoName,m.OtherDojoName) DojoName
-	,m.DisplayName
+	COALESCE(vcd.DojoName,vcd.OtherDojoName) DojoName
+	,vcd.DisplayName
 	,m.MatchTypeName
 	,m.MatchDisplayId
 	,m.SubDivisionId
-FROM Event.vwMatchCompetitorDetail m</CommandText>
+FROM Person.vwCompetitorDetail vcd
+LEFT JOIN Event.vwMatchCompetitorDetail m ON m.CompetitorId = vcd.CompetitorId</CommandText>
       </Query>
       <Fields>
         <Field Name="DojoName">
