@@ -67,33 +67,76 @@ namespace DKK_App
         #region Competitor Gets
         public static async Task<Competitor> GetCompetitor(int id)
         {
-            string query = @"SELECT CompetitorId
-	                          ,PersonId
-	                          --,DateOfBirth
-	                          ,Age
-	                          ,Weight
-	                          ,RankId
-	                          ,DojoId
-                              ,OtherDojoName
-	                          ,ParentId
-	                          ,IsMinor
-	                          ,IsSpecialConsideration
-	                          ,EventId
-	                          ,IsKata
-	                          ,IsWeaponKata
-	                          ,IsSemiKnockdown
-	                          ,IsKnockdown
-                              ,ConsiderationDescription
-                        FROM Person.Competitor
+            string query = @"SELECT CompetitorId,
+                               DateOfBirth,
+                               Age,
+                               Weight,
+                               Height,
+                               DojoId,
+                               OtherDojoName,
+                               ParentId,
+                               IsMinor,
+                               IsSpecialConsideration,
+                               ConsiderationDescription,
+                               IsKata,
+                               IsWeaponKata,
+                               IsSemiKnockdown,
+                               IsKnockdown,
+                               PersonId,
+                               FirstName,
+                               LastName,
+                               DisplayName,
+                               TitleId,
+                               TitleName,
+                               IsInstructor,
+                               Gender,
+                               PhoneNumber,
+                               EmailAddress,
+                               StreetAddress1,
+                               StreetAddress2,
+                               AppartmentCode,
+                               City,
+                               StateProvince,
+                               PostalCode,
+                               Country,
+                               ParentPersonId,
+                               ParentFirstName,
+                               ParentLastName,
+                               ParentDisplayName,
+                               ParentEmailAddress,
+                               RankId,
+                               Belt,
+                               Level,
+                               Kyu,
+                               EventId,
+                               EventName,
+                               EventTypeId,
+                               EventDate,
+                               DojoName,
+                               OwnerId,
+                               FacilityId,
+                               FacilityName,
+                               FacilityPhoneNumber,
+                               FacilityEmail,
+                               FacilityStreetAddress1,
+                               FacilityStreetAddress2,
+                               FacilityAppartmentCode,
+                               FacilityCity,
+                               FacilityStateProvidence,
+                               FacilityPostalCode,
+                               FacilityCountry,
+                               FacilityTypeId,
+                               FacilityTypeName,
+                               OwnerFirstName,
+                               OwnerLastName,
+                               OwnerDisplayName,
+	                           MartialArtTypeId,
+	                           MartialArtTypeName
+                        FROM [Person].[vwCompetitorDetail]
                         WHERE CompetitorId = " + id.ToString();
 
             List<Competitor> cs = await QueryCompetitorInformation(query);
             Competitor c = cs.FirstOrDefault();
-
-            c.Person = await GetPerson(c.Person.PersonId);
-            c.Parent = await GetPerson(c.Parent.PersonId);
-            c.Rank = await GetRank(c.Rank.RankId);
-            c.Event = await GetEventInformationById(c.Event.EventId);
 
             return c;
         }
