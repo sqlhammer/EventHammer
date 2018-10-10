@@ -1481,9 +1481,7 @@ If you do not like the placements, you will have to move the competitors to diff
             else
             {
                 this.txtCompSchoolOther.Enabled = true;
-
-                this.cbCompSchool.Enabled = false;
-                this.cbCompSchool.SelectedIndex = -1;
+                this.cbCompSchool.SelectedIndex = 0; //"Other"
             }
         }
 
