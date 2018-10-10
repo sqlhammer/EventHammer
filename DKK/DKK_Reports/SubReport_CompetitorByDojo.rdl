@@ -259,9 +259,6 @@
             <DataSetName>dsCompetitorsByDojo</DataSetName>
             <SortExpressions>
               <SortExpression>
-                <Value>=Fields!CompetitorName.Value</Value>
-              </SortExpression>
-              <SortExpression>
                 <Value>=Fields!MatchDisplayId.Value</Value>
               </SortExpression>
               <SortExpression>
