@@ -1535,9 +1535,7 @@ If you do not like the placements, you will have to move the competitors to diff
             this.txtCompStreet1.Text = comp.Person.StreetAddress1;
             this.txtCompStreet2.Text = comp.Person.StreetAddress2;
             this.txtCompZipCode.Text = comp.Person.PostalCode;
-
-            //this.chbCompIsInstructor.Checked = comp.Person.IsInstructor;
-
+            
             this.nudCompWeight.Value = comp.Weight;
             this.nudCompHeight.Value = comp.Height;
 
@@ -1647,6 +1645,12 @@ If you do not like the placements, you will have to move the competitors to diff
             {
                 this.txtCompSchoolOther.Text = "";
                 this.txtCompSchoolOther.Enabled = false;
+
+                string selectedSchool = "";
+                if (this.cbCompSchool.SelectedItem != null)
+                    selectedSchool = this.cbCompSchool.SelectedItem.ToString();
+                Dojo dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(selectedSchool) == 0)).FirstOrDefault();
+                this.txtCompInstructor.Text = dojo.Facility.Owner.DisplayName;
             }
         }
 
@@ -1775,10 +1779,7 @@ If you do not like the placements, you will have to move the competitors to diff
             comp.Person.DisplayName = this.txtCompLastName.Text + ", " + this.txtCompFirstName.Text;
             comp.Height = this.nudCompHeight.Value;
             comp.Person.Gender = (this.rbCompFemale.Checked) ? "F" : "M";
-            //comp.DateOfBirth = new DateTime(Convert.ToInt32(this.cbCompYear.SelectedItem.ToString()), Convert.ToInt32(this.cbCompMonth.SelectedItem.ToString()),1);
             comp.Age = (int)this.nudCompAge.Value;
-            //comp.Person.IsInstructor = this.chbCompIsInstructor.Checked;
-            //comp.IsSpecialConsideration = this.chbCompSpecialConsideration.Checked;
             comp.Parent.FirstName = this.txtCompParentFirstName.Text;
             comp.Parent.LastName = this.txtCompParentLastName.Text;
             comp.Parent.EmailAddress = this.txtCompParentEmail.Text;
