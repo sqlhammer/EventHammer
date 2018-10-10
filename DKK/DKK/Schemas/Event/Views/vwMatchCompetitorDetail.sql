@@ -90,6 +90,7 @@ SELECT mc.MatchCompetitorId
 	  ,d_min_r.Kyu DivisionMinKyu
 	  ,mat.MartialArtTypeId
 	  ,mat.Name MartialArtTypeName
+	  ,c.OtherInstructorName
 FROM Event.Match m
 LEFT JOIN Event.MatchCompetitor mc ON m.MatchId = mc.MatchId
 LEFT JOIN Event.MatchType mt ON mt.MatchTypeId = m.MatchTypeId

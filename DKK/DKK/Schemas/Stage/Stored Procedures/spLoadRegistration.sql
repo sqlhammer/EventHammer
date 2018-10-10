@@ -200,7 +200,7 @@ BEGIN
 
 			--Competitor inserts
 			INSERT INTO [Person].[Competitor]
-			(PersonId, Age, [Weight], Height, RankId, DojoId, OtherDojoName, ParentId, IsMinor
+			(PersonId, Age, [Weight], Height, RankId, DojoId, OtherDojoName, OtherInstructorName, ParentId, IsMinor
 				, IsSpecialConsideration, ConsiderationDescription, EventId, IsKata, IsWeaponKata, IsSemiKnockdown, IsKnockdown)
 			SELECT p.PersonId				
 				,COALESCE(TRY_CAST(r.age AS TINYINT),0)
@@ -215,6 +215,7 @@ BEGIN
 					WHERE f.[Name] = r.school_name
 				)
 				, r.other_school 
+				, r.other_instructor 
 				, (
 					SELECT TOP 1 p.PersonId
 					FROM Person.Person p

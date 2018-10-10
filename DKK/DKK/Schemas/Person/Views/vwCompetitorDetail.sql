@@ -65,6 +65,7 @@ SELECT c.CompetitorId,
 	  ,ownr.DisplayName OwnerDisplayName
 	  ,mat.MartialArtTypeId
 	  ,mat.Name MartialArtTypeName
+	  ,c.OtherInstructorName
 FROM Person.Competitor AS c
 INNER JOIN Person.Person AS p ON p.PersonId = c.PersonId
 LEFT JOIN Person.Person AS parent ON parent.PersonId = c.ParentId

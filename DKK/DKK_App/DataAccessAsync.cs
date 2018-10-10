@@ -131,7 +131,8 @@ namespace DKK_App
                                OwnerLastName,
                                OwnerDisplayName,
 	                           MartialArtTypeId,
-	                           MartialArtTypeName
+	                           MartialArtTypeName,
+                               OtherInstructorName
                         FROM [Person].[vwCompetitorDetail]
                         WHERE CompetitorId = " + id.ToString();
 
@@ -207,7 +208,8 @@ namespace DKK_App
                                OwnerLastName,
                                OwnerDisplayName,
 	                           MartialArtTypeId,
-	                           MartialArtTypeName
+	                           MartialArtTypeName,
+                               OtherInstructorName
                         FROM [Person].[vwCompetitorDetail]
                         WHERE EventId = " + Event.EventId.ToString();
 
@@ -345,7 +347,7 @@ namespace DKK_App
                                 {
                                     Age = Convert.ToInt32(reader["Age"].ToString()),
                                     CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
-                                    //DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
+                                    OtherInstructorName = (reader["OtherInstructorName"] != null) ? reader["OtherInstructorName"].ToString() : null,
                                     Dojo = dojo,
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
                                     IsKnockdown = Convert.ToBoolean(reader["IsKnockdown"].ToString()),

@@ -131,7 +131,8 @@ namespace DKK_App
                                OwnerLastName,
                                OwnerDisplayName,
 	                           MartialArtTypeId,
-	                           MartialArtTypeName
+	                           MartialArtTypeName,
+                               OtherInstructorName
                         FROM [Person].[vwCompetitorDetail]
                         WHERE CompetitorId = " + id.ToString();
 
@@ -268,7 +269,7 @@ namespace DKK_App
                                 {
                                     Age = Convert.ToInt32(reader["Age"].ToString()),
                                     CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
-                                    //DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"].ToString()),
+                                    OtherInstructorName = (reader["OtherInstructorName"] != null) ? reader["OtherInstructorName"].ToString() : null,
                                     Dojo = dojo,
                                     IsKata = Convert.ToBoolean(reader["IsKata"].ToString()),
                                     IsKnockdown = Convert.ToBoolean(reader["IsKnockdown"].ToString()),
@@ -1519,9 +1520,9 @@ namespace DKK_App
                               ",@ParentId = " + ((comp.Parent != null) ? comp.Parent.PersonId.ToString() : "NULL") +
                               ",@PersonId = " + comp.Person.PersonId.ToString() +
                               ",@Age = " + comp.Age.ToString() +
-                              //",@DateOfBirth = '" + comp.DateOfBirth.ToString("yyyyMMdd") + "'" +
+                              ",@OtherInstructorName = '" + comp.OtherInstructorName.Replace("'","''") + "'" +  
                               ",@DojoId = " + dojoId +
-                              ",@OtherDojoName = '" + comp.OtherDojoName + "'" + 
+                              ",@OtherDojoName = '" + comp.OtherDojoName.Replace("'", "''") + "'" + 
                               ",@EventId = " + comp.Event.EventId.ToString() +
                               ",@Height = " + comp.Height.ToString() +
                               ",@IsSpecialConsideration = " + ((comp.IsSpecialConsideration) ? "1" : "0") +
@@ -1575,10 +1576,11 @@ namespace DKK_App
 
             string sproc_name = "[Person].[spInsertCompetitor]";
 
-            SqlParameter[] parameters = new SqlParameter[25];
+            SqlParameter[] parameters = new SqlParameter[26];
 
             parameters[0] = new SqlParameter("@DojoId", dojoId);
-            parameters[0] = new SqlParameter("@OtherDojoName", comp.OtherDojoName);
+            parameters[0] = new SqlParameter("@OtherDojoName", comp.OtherDojoName.Replace("'", "''"));
+            parameters[0] = new SqlParameter("@OtherInstructorName", comp.OtherInstructorName.Replace("'", "''"));
             parameters[1] = new SqlParameter("@Age", comp.Age);
             parameters[2] = new SqlParameter("@EventId", comp.Event.EventId);
             parameters[3] = new SqlParameter("@Height", comp.Height);

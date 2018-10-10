@@ -1465,7 +1465,7 @@ If you do not like the placements, you will have to move the competitors to diff
             {
                 SetCompetitorSchoolControls(false);
                 this.txtCompSchoolOther.Text = comp.OtherDojoName;
-                this.txtCompInstructor.Text = "";
+                this.txtCompInstructor.Text = comp.OtherInstructorName;
             }
         }
 
@@ -1481,7 +1481,8 @@ If you do not like the placements, you will have to move the competitors to diff
             else
             {
                 this.txtCompSchoolOther.Enabled = true;
-                this.cbCompSchool.SelectedIndex = 0; //"Other"
+                if (this.cbCompSchool.Items.Count > 0)
+                    this.cbCompSchool.SelectedIndex = 0; //"Other"
             }
         }
 
@@ -1639,12 +1640,19 @@ If you do not like the placements, you will have to move the competitors to diff
             if (this.cbCompSchool.SelectedItem != null &&
                 this.cbCompSchool.SelectedItem.ToString().CompareTo("Other") == 0)
             {
+                this.txtCompSchoolOther.Text = "";
                 this.txtCompSchoolOther.Enabled = true;
+
+                this.txtCompInstructor.Text = "";
+                this.txtCompInstructor.Enabled = true;
             }
             else
             {
                 this.txtCompSchoolOther.Text = "";
                 this.txtCompSchoolOther.Enabled = false;
+
+                this.txtCompInstructor.Text = "";
+                this.txtCompInstructor.Enabled = false;
 
                 string selectedSchool = "";
                 if (this.cbCompSchool.SelectedItem != null)
@@ -1800,6 +1808,10 @@ If you do not like the placements, you will have to move the competitors to diff
             if (this.cbCompSchool.SelectedItem != null)
                 selectedSchool = this.cbCompSchool.SelectedItem.ToString();
             comp.Dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(selectedSchool) == 0)).FirstOrDefault();
+
+            comp.OtherInstructorName = "";
+            if (comp.Dojo == null)
+                comp.OtherInstructorName = this.txtCompInstructor.Text;
 
             SaveCompetitor(comp, IsNew);
         }

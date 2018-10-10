@@ -17,5 +17,6 @@
 	,[IsKata] BIT NOT NULL CONSTRAINT DF_Person_Competitor_IsKata DEFAULT(0)
 	,[IsWeaponKata] BIT NOT NULL CONSTRAINT DF_Person_Competitor_IsWeaponKata DEFAULT(0)
 	,[IsSemiKnockdown] BIT NOT NULL CONSTRAINT DF_Person_Competitor_IsSemiKnockdown DEFAULT(0)
-	,[IsKnockdown] BIT NOT NULL CONSTRAINT DF_Person_Competitor_IsKnockdown DEFAULT(0)
+	,[IsKnockdown] BIT NOT NULL CONSTRAINT DF_Person_Competitor_IsKnockdown DEFAULT(0), 
+    [OtherInstructorName] VARCHAR(120) NULL
 )

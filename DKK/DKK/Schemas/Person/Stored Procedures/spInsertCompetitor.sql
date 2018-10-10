@@ -19,6 +19,7 @@
 	@Gender CHAR = NULL,
 	@IsInstructor BIT = NULL,
 	@LastName NVARCHAR(60) = NULL,
+	@OtherInstructorName VARCHAR(120) = NULL,
 
 	--Person
 	@PhoneNumber NVARCHAR(15) = NULL,
@@ -151,6 +152,7 @@ BEGIN
 				,IsSpecialConsideration
 				,ConsiderationDescription
 				,EventId
+				,OtherInstructorName
 			)
 			OUTPUT inserted.CompetitorId INTO @returnTable
 			VALUES
@@ -170,7 +172,8 @@ BEGIN
 				END,
 				@IsSpecialConsideration,
 				@ConsiderationDescription,
-				@EventId
+				@EventId,
+				@OtherInstructorName
 			) 
 
 			SELECT TOP 1 @competitorid = competitorid FROM @returnTable;

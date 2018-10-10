@@ -28,6 +28,7 @@
 	@IsWeaponKata BIT = NULL,
 	@IsSemiKnockdown BIT = NULL,
 	@IsKnockdown BIT = NULL,
+	@OtherInstructorName VARCHAR(120) = NULL,
 
 	--Person
 	@PhoneNumber NVARCHAR(15) = NULL,
@@ -97,6 +98,7 @@ BEGIN
 				,c.IsWeaponKata = @IsWeaponKata
 				,c.IsSemiKnockdown = @IsSemiKnockdown
 				,c.IsKnockdown = @IsKnockdown
+				,c.OtherInstructorName = @OtherInstructorName
 			FROM Person.Competitor c
 			WHERE c.CompetitorId = @CompetitorId
 
