@@ -1576,11 +1576,9 @@ namespace DKK_App
 
             string sproc_name = "[Person].[spInsertCompetitor]";
 
-            SqlParameter[] parameters = new SqlParameter[26];
+            SqlParameter[] parameters = new SqlParameter[27];
 
             parameters[0] = new SqlParameter("@DojoId", dojoId);
-            parameters[0] = new SqlParameter("@OtherDojoName", comp.OtherDojoName.Replace("'", "''"));
-            parameters[0] = new SqlParameter("@OtherInstructorName", comp.OtherInstructorName.Replace("'", "''"));
             parameters[1] = new SqlParameter("@Age", comp.Age);
             parameters[2] = new SqlParameter("@EventId", comp.Event.EventId);
             parameters[3] = new SqlParameter("@Height", comp.Height);
@@ -1605,6 +1603,8 @@ namespace DKK_App
             parameters[22] = new SqlParameter("@ParentFirstName", ((comp.Parent != null) ? comp.Parent.FirstName : null));
             parameters[23] = new SqlParameter("@ParentLastName", ((comp.Parent != null) ? comp.Parent.LastName : null));
             parameters[24] = new SqlParameter("@ParentEmailAddress", ((comp.Parent != null) ? comp.Parent.EmailAddress : null));
+            parameters[25] = new SqlParameter("@OtherDojoName", comp.OtherDojoName.Replace("'", "''"));
+            parameters[26] = new SqlParameter("@OtherInstructorName", comp.OtherInstructorName.Replace("'", "''"));
 
             return ExecuteDDLAsStoredProcedure(sproc_name, parameters);
         }
