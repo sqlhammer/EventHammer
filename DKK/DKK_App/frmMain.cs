@@ -29,6 +29,7 @@ namespace DKK_App
 
         private bool MatchModelLoadComplete = false;
         private bool CompetitorModelLoadComplete = false;
+        private bool _resizing = false;
 
         #region Form / Multi-tab
 
@@ -39,6 +40,8 @@ namespace DKK_App
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            this.MinimumSize = new System.Drawing.Size(1155, 620);
+
             //Setup TreeListViews
             tlvMatches.CanExpandGetter = delegate (object x) { return true; };
             tlvMatches.ChildrenGetter = delegate (object x) { return ((Models.MatchModel)x).Children; };
@@ -50,7 +53,7 @@ namespace DKK_App
             //Populate controls
             SetFilterDropdowns();
             SetEventDateTimePicker();
-            DisableNonEventTabs();
+            DisableNonEventTabs();            
         }
 
         private void InitializeFormWithDataAccess()
@@ -221,6 +224,8 @@ namespace DKK_App
             {
                 this.eventToolStripMenuItem.Enabled = false;
             }
+
+            AutoResizeForm();
         }
 
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2093,5 +2098,115 @@ If you do not like the placements, you will have to move the competitors to diff
             DeleteEvent();
         }
         #endregion
+
+        #region Form Sizing
+        private void frmMain_SizeChanged(object sender, EventArgs e)
+        {
+            AutoResizeForm();
+        }
+
+        private void AutoResizeForm()
+        {
+            if (_resizing) return;
+            _resizing = true;
+
+            AutoResizeMainControls();
+            AutoResizeHomeControls();
+            AutoResizeEventControls();
+            AutoResizeMatchControls();
+            AutoResizeCompetitorControls();
+
+            _resizing = false;
+        }
+
+        private void AutoResizeMainControls()
+        {
+            //Tab panel
+            tab1.Width = this.Width - tab1.Left - 20;
+            tab1.Height = this.Height - tab1.Top - 100;
+
+            //Logos
+            int tab1_bottom_edge_buffer = tab1.Top + tab1.Height + 10;
+            pbCompany.Top = tab1_bottom_edge_buffer;
+            pbPoweredBy.Top = tab1_bottom_edge_buffer;
+            pbPoweredBy.Left = this.Width - pbPoweredBy.Width - 20;
+
+            //Buttons
+            //  Static relation to each other, centered
+            btnRetryConnection.Left = (this.Width / 2) - (btnRetryConnection.Width / 2);
+            btnRefreshMatchTab.Left = (this.Width / 2) - (btnRefreshMatchTab.Width / 2);
+
+            btnClearCompetitorFilter.Left = btnRefreshMatchTab.Left - btnClearCompetitorFilter.Width - 40;
+            btnClearMatchFilter.Left = btnRefreshMatchTab.Left + btnRefreshMatchTab.Width + 40;
+
+            btnRetryConnection.Top = tab1_bottom_edge_buffer;
+            btnRefreshMatchTab.Top = tab1_bottom_edge_buffer;
+            btnClearCompetitorFilter.Top = tab1_bottom_edge_buffer;
+            btnClearMatchFilter.Top = tab1_bottom_edge_buffer;
+
+        }
+
+        private void AutoResizeHomeControls()
+        {
+
+        }
+
+        private void AutoResizeEventControls()
+        {
+            //Groups
+            gbEvents.Width = (int)((tabEvents.Width * 0.40) - 10);
+            gbEventDetails.Width = (int)((tabEvents.Width * 0.60) - 15);
+            gbEventDetails.Left = (int)((tabEvents.Width * 0.40) + 10);
+            gbEvents.Height = tabEvents.Height - 15;
+            gbEventDetails.Height = tabEvents.Height - 15;
+
+            //Events group
+            tlvEvents.Height = gbEvents.Height - 35;
+            tlvEvents.Width = gbEvents.Width - 10;
+
+            //Details group
+            //  Center controls
+            int static_label_width = 175;
+            int minimum_label_space_padding = 5;
+            int line_control_width = static_label_width + minimum_label_space_padding + txtEventName.Width;
+            lblEventName.Left = (gbEventDetails.Width / 2) - (line_control_width / 2);
+            txtEventName.Left = lblEventName.Left + static_label_width + minimum_label_space_padding;
+            lblEventType.Left = (gbEventDetails.Width / 2) - (line_control_width / 2);
+            cbEventType.Left = lblEventName.Left + static_label_width + minimum_label_space_padding;
+            lblEventDate.Left = (gbEventDetails.Width / 2) - (line_control_width / 2);
+            dtpEventDate.Left = lblEventName.Left + static_label_width + minimum_label_space_padding;
+
+            int control_height_buffer = 30;
+            int top_center_adjusted_for_height = (gbEventDetails.Height / 2) - (lblEventType.Height / 2);
+            lblEventType.Top = top_center_adjusted_for_height;
+            cbEventType.Top = top_center_adjusted_for_height;
+            lblEventDate.Top = top_center_adjusted_for_height + lblEventType.Height + control_height_buffer;
+            dtpEventDate.Top = top_center_adjusted_for_height + lblEventType.Height + control_height_buffer;
+            lblEventName.Top = top_center_adjusted_for_height - lblEventType.Height - control_height_buffer;
+            txtEventName.Top = top_center_adjusted_for_height - lblEventType.Height - control_height_buffer;
+
+            //  Bottom buttons
+            int gbEventDetails_bottom_buffer = gbEventDetails.Top + gbEventDetails.Height - 15;
+            btnSaveEvent.Top = gbEventDetails_bottom_buffer - btnSaveEvent.Height;
+            btnNewEvent.Top = gbEventDetails_bottom_buffer - btnNewEvent.Height;
+            btnDeleteEvent.Top = gbEventDetails_bottom_buffer - btnDeleteEvent.Height;
+            btnClearEventSelection.Top = gbEventDetails_bottom_buffer - btnClearEventSelection.Height;
+
+            btnNewEvent.Left = (gbEventDetails.Width / 2) - btnNewEvent.Width - 5;
+            btnSaveEvent.Left = btnNewEvent.Left - btnSaveEvent.Width - 10;
+            btnDeleteEvent.Left = btnNewEvent.Left + btnNewEvent.Width + 10;
+            btnClearEventSelection.Left = btnDeleteEvent.Left + btnDeleteEvent.Width + 10;
+        }
+
+        private void AutoResizeCompetitorControls()
+        {
+
+        }
+
+        private void AutoResizeMatchControls()
+        {
+
+        }
+        #endregion        
     }
 }
