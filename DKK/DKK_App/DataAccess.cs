@@ -1406,7 +1406,7 @@ namespace DKK_App
 	                              ,e.EventTypeId
 	                              ,e.EventTypeName
                             FROM [Event].vwEvent e
-                            WHERE e.EventName = '" + name + "'";
+                            WHERE e.EventName = '" + Global.GetEscapedSQLText(name) + "'";
 
             return QueryEventInformation(query);
         }
@@ -1642,7 +1642,7 @@ namespace DKK_App
         public static void InsertEvent(Event Event)
         {
             string query = @"EXEC [Event].[spInsertEvent] @EventName = '" +
-                Event.EventName + @"', @EventTypeId = " +
+                Global.GetEscapedSQLText(Event.EventName) + @"', @EventTypeId = " +
                 Event.EventType.EventTypeId.ToString() + @", @Date = '" +
                 Event.Date.ToString("yyyyMMdd") + @"';";
 

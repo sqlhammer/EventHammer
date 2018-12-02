@@ -602,6 +602,11 @@ namespace DKK_App
         #endregion
 
         #region Validators and Conversions
+        public static string GetEscapedSQLText(string query)
+        {
+            return query.Replace("'", "''");
+        }
+
         public static Competitor GetCompetitorFromCompetitorModel(CompetitorModel cm)
         {
             return DataAccess.GetCompetitor(cm.CompetitorId);

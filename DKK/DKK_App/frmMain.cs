@@ -53,7 +53,9 @@ namespace DKK_App
             //Populate controls
             SetFilterDropdowns();
             SetEventDateTimePicker();
-            DisableNonEventTabs();            
+            DisableNonEventTabs();
+
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void InitializeFormWithDataAccess()
@@ -1904,6 +1906,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
             ClearEventSelection();
             RefreshEvents(EventModels);
+            RefreshEventSelect();
         }
 
         private void RefreshEvents(List<EventModel> em)
@@ -2148,7 +2151,18 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void AutoResizeHomeControls()
         {
+            //Centering the groups
+            int top_center = (tab1.Height / 2);
+            int left_center = (tab1.Width / 2);
 
+            gbEvent.Left = left_center - gbEvent.Width - 15;
+            gbAdmin.Left = left_center - gbEvent.Width - 15;
+
+            gbEvent.Top = top_center - (gbScorecards.Height / 2) - 15;
+            gbAdmin.Top = gbEvent.Top + gbEvent.Height + 8;
+
+            gbScorecards.Left = left_center + 5;
+            gbScorecards.Top = gbEvent.Top;
         }
 
         private void AutoResizeEventControls()
