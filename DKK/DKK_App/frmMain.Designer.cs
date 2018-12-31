@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
+            this.lblReportCreds = new System.Windows.Forms.Label();
             this.gbAdmin = new System.Windows.Forms.GroupBox();
             this.btnCheckInRoster = new System.Windows.Forms.Button();
             this.btnCompetitorsBySchoolReport = new System.Windows.Forms.Button();
@@ -41,16 +42,15 @@
             this.btnDivisionRingNumbers = new System.Windows.Forms.Button();
             this.btnWeighInList = new System.Windows.Forms.Button();
             this.gbEvent = new System.Windows.Forms.GroupBox();
+            this.rtbEventInfo = new System.Windows.Forms.RichTextBox();
             this.btnEventLoadReg = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblEventTo = new System.Windows.Forms.Label();
             this.dtpEventTo = new System.Windows.Forms.DateTimePicker();
             this.dtpEventFrom = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtEventInfo = new System.Windows.Forms.TextBox();
+            this.lblEventFrom = new System.Windows.Forms.Label();
             this.lblEventSelect = new System.Windows.Forms.Label();
             this.cbEventSelect = new System.Windows.Forms.ComboBox();
             this.gbScorecards = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnKnockdownSpecial = new System.Windows.Forms.Button();
             this.btnSemiKnockdownSpecial = new System.Windows.Forms.Button();
             this.btnWeaponKataSpecial = new System.Windows.Forms.Button();
@@ -278,6 +278,7 @@
             // 
             // tabHome
             // 
+            this.tabHome.Controls.Add(this.lblReportCreds);
             this.tabHome.Controls.Add(this.gbAdmin);
             this.tabHome.Controls.Add(this.gbEvent);
             this.tabHome.Controls.Add(this.gbScorecards);
@@ -289,6 +290,17 @@
             this.tabHome.TabIndex = 0;
             this.tabHome.Text = "Home";
             this.tabHome.UseVisualStyleBackColor = true;
+            // 
+            // lblReportCreds
+            // 
+            this.lblReportCreds.AutoSize = true;
+            this.lblReportCreds.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReportCreds.Location = new System.Drawing.Point(726, 3);
+            this.lblReportCreds.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblReportCreds.Name = "lblReportCreds";
+            this.lblReportCreds.Size = new System.Drawing.Size(217, 15);
+            this.lblReportCreds.TabIndex = 4;
+            this.lblReportCreds.Text = "Username: reports - Password: reports";
             // 
             // gbAdmin
             // 
@@ -394,12 +406,12 @@
             // 
             // gbEvent
             // 
+            this.gbEvent.Controls.Add(this.rtbEventInfo);
             this.gbEvent.Controls.Add(this.btnEventLoadReg);
-            this.gbEvent.Controls.Add(this.label2);
+            this.gbEvent.Controls.Add(this.lblEventTo);
             this.gbEvent.Controls.Add(this.dtpEventTo);
             this.gbEvent.Controls.Add(this.dtpEventFrom);
-            this.gbEvent.Controls.Add(this.label1);
-            this.gbEvent.Controls.Add(this.txtEventInfo);
+            this.gbEvent.Controls.Add(this.lblEventFrom);
             this.gbEvent.Controls.Add(this.lblEventSelect);
             this.gbEvent.Controls.Add(this.cbEventSelect);
             this.gbEvent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -411,6 +423,14 @@
             this.gbEvent.TabIndex = 0;
             this.gbEvent.TabStop = false;
             this.gbEvent.Text = "Select Event";
+            // 
+            // rtbEventInfo
+            // 
+            this.rtbEventInfo.Location = new System.Drawing.Point(6, 74);
+            this.rtbEventInfo.Name = "rtbEventInfo";
+            this.rtbEventInfo.Size = new System.Drawing.Size(378, 96);
+            this.rtbEventInfo.TabIndex = 8;
+            this.rtbEventInfo.Text = "";
             // 
             // btnEventLoadReg
             // 
@@ -424,16 +444,16 @@
             this.btnEventLoadReg.UseVisualStyleBackColor = true;
             this.btnEventLoadReg.Click += new System.EventHandler(this.btnEventLoadReg_Click);
             // 
-            // label2
+            // lblEventTo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(152, 22);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "To:";
+            this.lblEventTo.AutoSize = true;
+            this.lblEventTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEventTo.Location = new System.Drawing.Point(152, 22);
+            this.lblEventTo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEventTo.Name = "lblEventTo";
+            this.lblEventTo.Size = new System.Drawing.Size(24, 15);
+            this.lblEventTo.TabIndex = 6;
+            this.lblEventTo.Text = "To:";
             // 
             // dtpEventTo
             // 
@@ -457,26 +477,16 @@
             this.dtpEventFrom.TabIndex = 4;
             this.dtpEventFrom.ValueChanged += new System.EventHandler(this.dtpEventFrom_ValueChanged);
             // 
-            // label1
+            // lblEventFrom
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 24);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "From:";
-            // 
-            // txtEventInfo
-            // 
-            this.txtEventInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEventInfo.Location = new System.Drawing.Point(6, 74);
-            this.txtEventInfo.Margin = new System.Windows.Forms.Padding(2);
-            this.txtEventInfo.Multiline = true;
-            this.txtEventInfo.Name = "txtEventInfo";
-            this.txtEventInfo.Size = new System.Drawing.Size(372, 100);
-            this.txtEventInfo.TabIndex = 2;
+            this.lblEventFrom.AutoSize = true;
+            this.lblEventFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEventFrom.Location = new System.Drawing.Point(3, 24);
+            this.lblEventFrom.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEventFrom.Name = "lblEventFrom";
+            this.lblEventFrom.Size = new System.Drawing.Size(39, 15);
+            this.lblEventFrom.TabIndex = 3;
+            this.lblEventFrom.Text = "From:";
             // 
             // lblEventSelect
             // 
@@ -502,7 +512,6 @@
             // 
             // gbScorecards
             // 
-            this.gbScorecards.Controls.Add(this.label3);
             this.gbScorecards.Controls.Add(this.btnKnockdownSpecial);
             this.gbScorecards.Controls.Add(this.btnSemiKnockdownSpecial);
             this.gbScorecards.Controls.Add(this.btnWeaponKataSpecial);
@@ -512,25 +521,14 @@
             this.gbScorecards.Controls.Add(this.btnWeaponKata);
             this.gbScorecards.Controls.Add(this.btnKata);
             this.gbScorecards.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F);
-            this.gbScorecards.Location = new System.Drawing.Point(564, 4);
+            this.gbScorecards.Location = new System.Drawing.Point(564, 51);
             this.gbScorecards.Margin = new System.Windows.Forms.Padding(2);
             this.gbScorecards.Name = "gbScorecards";
             this.gbScorecards.Padding = new System.Windows.Forms.Padding(2);
-            this.gbScorecards.Size = new System.Drawing.Size(550, 462);
+            this.gbScorecards.Size = new System.Drawing.Size(550, 415);
             this.gbScorecards.TabIndex = 0;
             this.gbScorecards.TabStop = false;
             this.gbScorecards.Text = "Scorecards";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(196, 18);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(217, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Username: reports - Password: reports";
             // 
             // btnKnockdownSpecial
             // 
@@ -2444,11 +2442,11 @@
             this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
             this.tab1.ResumeLayout(false);
             this.tabHome.ResumeLayout(false);
+            this.tabHome.PerformLayout();
             this.gbAdmin.ResumeLayout(false);
             this.gbEvent.ResumeLayout(false);
             this.gbEvent.PerformLayout();
             this.gbScorecards.ResumeLayout(false);
-            this.gbScorecards.PerformLayout();
             this.tabEvents.ResumeLayout(false);
             this.gbEventDetails.ResumeLayout(false);
             this.gbEventDetails.PerformLayout();
@@ -2498,11 +2496,10 @@
         private System.Windows.Forms.GroupBox gbEvent;
         private System.Windows.Forms.Label lblEventSelect;
         private System.Windows.Forms.ComboBox cbEventSelect;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblEventTo;
         private System.Windows.Forms.DateTimePicker dtpEventTo;
         private System.Windows.Forms.DateTimePicker dtpEventFrom;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtEventInfo;
+        private System.Windows.Forms.Label lblEventFrom;
         private System.Windows.Forms.MenuStrip msMenu;
         private System.Windows.Forms.ToolStripMenuItem miFile;
         private System.Windows.Forms.GroupBox gbScorecards;
@@ -2510,7 +2507,7 @@
         private System.Windows.Forms.Button btnSemiKnockdown;
         private System.Windows.Forms.Button btnWeaponKata;
         private System.Windows.Forms.Button btnKata;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblReportCreds;
         private System.Windows.Forms.Button btnRetryConnection;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -2691,5 +2688,6 @@
         private System.Windows.Forms.Button btnCompetitorsBySchoolReport;
         private System.Windows.Forms.Button btnCompRegEvents;
         private System.Windows.Forms.Button btnCheckInRoster;
+        private System.Windows.Forms.RichTextBox rtbEventInfo;
     }
 }

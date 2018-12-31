@@ -753,7 +753,7 @@ namespace DKK_App
             double font_multiplier = 1;
             double size_multiplier = 1;
 
-            //string a = control.GetType().ToString();
+            //string debug = control.GetType().ToString();
 
             switch (control.GetType().ToString())
             {
@@ -762,31 +762,43 @@ namespace DKK_App
                     size_multiplier = control.Width;
                     break;
                 case "System.Windows.Forms.TextBox":
-                    font_multiplier = 0.042;
+                    font_multiplier = 0.033;
+                    size_multiplier = control.Width;
+                    break;
+                case "System.Windows.Forms.RichTextBox":
+                    font_multiplier = 0.033;
                     size_multiplier = control.Width;
                     break;
                 case "System.Windows.Forms.ComboBox":
-                    font_multiplier = 0.042;
+                    font_multiplier = 0.033;
                     size_multiplier = control.Width;
                     break;
                 case "System.Windows.Forms.DateTimePicker":
-                    font_multiplier = 0.042;
+                    font_multiplier = 0.033;
                     size_multiplier = control.Width;
                     break;
-                case "System.Windows.Forms.Label":
-                    font_multiplier = 0.042;
-                    size_multiplier = control.Width;
-                    break;
+                //  Not very applicable since the font determins the label's height and width
+                //case "System.Windows.Forms.Label":
+                //    font_multiplier = 0.042;
+                //    size_multiplier = control.Width;
+                //    break;
                 case "System.Windows.Forms.Button":
                     font_multiplier = 0.087;
                     size_multiplier = control.Width;
                     break;
+                //default:
+                //    debug = debug;
+                //    break;
             }
+
+            float size = (float)(size_multiplier * font_multiplier);
+
+            if (size < 8) size = 8;
 
             return new Font
                 (
                     "Microsoft Sans Serif",
-                    (float)(size_multiplier * font_multiplier),
+                    size,
                     FontStyle.Regular,
                     System.Drawing.GraphicsUnit.Point
                 );

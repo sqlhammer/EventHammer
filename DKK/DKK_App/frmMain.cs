@@ -516,10 +516,10 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
 
         private void DisplayEventInformation()
         {
-            this.txtEventInfo.Text = "Event Id:\t\t" + CurrentEvent.EventId.ToString();
-            this.txtEventInfo.Text = this.txtEventInfo.Text + System.Environment.NewLine + "Event Name:\t" + CurrentEvent.EventName;
-            this.txtEventInfo.Text = this.txtEventInfo.Text + System.Environment.NewLine + "Event Type:\t" + CurrentEvent.EventType.EventTypeName;
-            this.txtEventInfo.Text = this.txtEventInfo.Text + System.Environment.NewLine + "Event Date:\t" + CurrentEvent.Date.ToString("MM/dd/yyyy");
+            this.rtbEventInfo.Text = "Event Id:\t\t" + CurrentEvent.EventId.ToString();
+            this.rtbEventInfo.Text = this.rtbEventInfo.Text + System.Environment.NewLine + "Event Name:\t" + CurrentEvent.EventName;
+            this.rtbEventInfo.Text = this.rtbEventInfo.Text + System.Environment.NewLine + "Event Type:\t" + CurrentEvent.EventType.EventTypeName;
+            this.rtbEventInfo.Text = this.rtbEventInfo.Text + System.Environment.NewLine + "Event Date:\t" + CurrentEvent.Date.ToString("MM/dd/yyyy");
         }
 
         private void EnableAllMenus()
@@ -734,7 +734,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
                 return;
             }
             
-            int divisionId = Convert.ToInt32(mt.DivisionId);
+            int divisionId = (int)(mt.DivisionId);
             int subDivisionId = Convert.ToInt32(newDisplayId);
 
             if (Global.IsDuplicateMatchDisplayId(MatchModels, divisionId, subDivisionId))
@@ -2151,18 +2151,145 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void AutoResizeHomeControls()
         {
-            //Centering the groups
+            int width_padding = 20;
+            int half_widths = (tab1.Width / 2) - width_padding;
+            int height_padding = 40;
+            int max_height = tab1.Height - height_padding;
+
+            gbScorecards.Width = half_widths;
+            gbEvent.Width = half_widths;
+            gbAdmin.Width = half_widths;
+            gbEvent.Height = (int)(max_height * 0.5);
+            gbAdmin.Height = (int)(max_height * 0.5) - 15;
+
+            AutoResizeHomeEventGroupControls();
+
+            gbScorecards.Height = max_height - lblReportCreds.Height - 10;
+            
+            AutoResizeHomeAdminGroupControls();
+            AutoResizeHomeScorecardGroupControls();
+
             int top_center = (tab1.Height / 2);
-            int left_center = (tab1.Width / 2);
+            int left_center = (tab1.Width / 2) - 5;
 
-            gbEvent.Left = left_center - gbEvent.Width - 15;
-            gbAdmin.Left = left_center - gbEvent.Width - 15;
-
+            gbEvent.Left = left_center - gbEvent.Width - 5;
+            gbAdmin.Left = left_center - gbEvent.Width - 5;
             gbEvent.Top = top_center - (gbScorecards.Height / 2) - 15;
             gbAdmin.Top = gbEvent.Top + gbEvent.Height + 8;
-
             gbScorecards.Left = left_center + 5;
-            gbScorecards.Top = gbEvent.Top;
+
+            lblReportCreds.Top = 10;
+            lblReportCreds.Font = Global.AutoResizeFont(cbEventSelect);
+            lblReportCreds.Left = gbScorecards.Left + (gbScorecards.Width / 2) - (lblReportCreds.Width / 2);
+
+            gbScorecards.Top = gbEvent.Top + lblReportCreds.Height;
+        }
+
+        private void AutoResizeHomeEventGroupControls()
+        {
+            // Selection controls
+            int left_control_total_width = (int)(gbEvent.Width * 0.66);
+            int date_fitler_label_width = (int)(left_control_total_width / 8);
+            int padding = 5;
+
+            //      Date filter
+            dtpEventFrom.Width = date_fitler_label_width * 3;
+            dtpEventTo.Width = date_fitler_label_width * 3;
+
+            Font selection_font = Global.AutoResizeFont(dtpEventFrom);
+            dtpEventFrom.Font = selection_font;
+            dtpEventTo.Font = selection_font;
+            lblEventFrom.Font = selection_font;
+            lblEventTo.Font = selection_font;
+
+            lblEventFrom.Left = padding;
+            dtpEventFrom.Left = lblEventFrom.Left + lblEventFrom.Width + padding;
+            lblEventTo.Left = dtpEventFrom.Left + dtpEventFrom.Width + padding;
+            dtpEventTo.Left = lblEventTo.Left + lblEventTo.Width + padding;
+
+            //      Event select
+            cbEventSelect.Width = (int)(left_control_total_width * 0.66);
+            cbEventSelect.Font = Global.AutoResizeFont(cbEventSelect);
+            lblEventSelect.Font = cbEventSelect.Font;
+            cbEventSelect.Left = lblEventSelect.Left + lblEventSelect.Width + padding;
+
+            // Registration button
+            btnEventLoadReg.Width = gbEvent.Width - left_control_total_width - (padding * 2);
+            btnEventLoadReg.Left = gbEvent.Width - btnEventLoadReg.Width - padding;
+            btnEventLoadReg.Height = gbEvent.Height - (padding * 5);
+            btnEventLoadReg.Top = (padding * 3);
+
+            // EventInfo
+            rtbEventInfo.Width = left_control_total_width - padding;
+            rtbEventInfo.Top = cbEventSelect.Top + cbEventSelect.Height + padding;
+            rtbEventInfo.Height = gbEvent.Height - rtbEventInfo.Top - (padding * 2);
+            rtbEventInfo.Font = Global.AutoResizeFont(rtbEventInfo);
+        }
+
+        private void AutoResizeHomeAdminGroupControls()
+        {
+            List<Control> controls = new List<Control>
+            {
+                btnAllEvents,
+                btnRegForm,
+                btnCheckInRoster,
+                btnSchoolsOwners,
+                btnWeighInList,
+                btnDivisionRingNumbers,
+                btnCompetitorsBySchoolReport
+            };
+
+            AutoResizeControlsInGrid(gbAdmin, controls, 4);
+        }
+
+        private void AutoResizeControlsInGrid(Control groupBox, List<Control> controls, int column_count)
+        {
+            int padding = 5;
+            int column_counter = 0;
+            Control last_control = null;
+            int current_top = padding * 5;
+            int col1_left = padding * 3;
+            int button_width = (int)((groupBox.Width - (padding * 10)) / column_count);
+            int row_count = (int)Math.Ceiling((decimal)controls.Count / (decimal)column_count);
+            int button_height = (int)((groupBox.Height - (padding * (row_count + 5))) / row_count);
+
+            foreach (Control control in controls)
+            {
+                int current_left = col1_left + ((button_width + padding) * column_counter);
+                
+                //If we just moved to the next row
+                if (column_counter == 0 && last_control != null)
+                    current_top = last_control.Top + button_height + padding;
+
+                control.Top = current_top;
+                control.Height = button_height;
+                control.Width = button_width;
+                control.Left = current_left;
+
+                column_counter++;
+                if (column_counter == column_count)
+                    column_counter = 0;
+
+                last_control = control;
+            }
+
+        }
+
+        private void AutoResizeHomeScorecardGroupControls()
+        {
+            List<Control> controls = new List<Control>
+            {
+                btnKata,
+                btnWeaponKata,
+                btnKataSpecial,
+                btnSemiKnockdown,
+                btnKnockdown,
+                btnWeaponKataSpecial,
+                btnSemiKnockdownSpecial,
+                btnKnockdownSpecial
+            };
+
+            AutoResizeControlsInGrid(gbScorecards, controls, 3);
         }
 
         private void AutoResizeEventControls()
@@ -2179,45 +2306,53 @@ If you do not like the placements, you will have to move the competitors to diff
             tlvEvents.Width = gbEvents.Width - 10;
 
             //Details group
-            int label_width = Convert.ToInt32(gbEvents.Width * 0.28);
+            int desired_label_width = (int)(gbEvents.Width * 0.28);
             int minimum_label_space_padding = 5;
 
             //  Size controls
-            txtEventName.Width = Convert.ToInt32((gbEvents.Width - (label_width + minimum_label_space_padding)) * 0.90);
-            cbEventType.Width = txtEventName.Width;
-            dtpEventDate.Width = txtEventName.Width;
+            int size = (int)((gbEvents.Width - (desired_label_width + minimum_label_space_padding)) * 0.90);
+            txtEventName.Width = size;
+            cbEventType.Width = size;
+            dtpEventDate.Width = size;
 
-            btnNewEvent.Width = Convert.ToInt32(gbEvents.Width / 3);
-            btnSaveEvent.Width = btnNewEvent.Width;
-            btnDeleteEvent.Width = btnNewEvent.Width;
-            btnClearEventSelection.Width = btnNewEvent.Width;
+            size = (int)(gbEvents.Width / 3);
+            btnNewEvent.Width = size;
+            btnSaveEvent.Width = size;
+            btnDeleteEvent.Width = size;
+            btnClearEventSelection.Width = size;
 
-            btnNewEvent.Height = Convert.ToInt32(btnNewEvent.Width * 0.28);
-            btnSaveEvent.Height = btnNewEvent.Height;
-            btnDeleteEvent.Height = btnNewEvent.Height;
-            btnClearEventSelection.Height = btnNewEvent.Height;
+            size = (int)(btnNewEvent.Width * 0.28);
+            btnNewEvent.Height = size;
+            btnSaveEvent.Height = size;
+            btnDeleteEvent.Height = size;
+            btnClearEventSelection.Height = size;
 
             //  Font scaling
             tlvEvents.Font = Global.AutoResizeFont(tlvEvents);
-            txtEventName.Font = Global.AutoResizeFont(txtEventName);
-            cbEventType.Font = txtEventName.Font;
-            dtpEventDate.Font = txtEventName.Font;
-            lblEventName.Font = txtEventName.Font;
-            lblEventType.Font = txtEventName.Font;
-            lblEventDate.Font = txtEventName.Font;
-            btnNewEvent.Font = Global.AutoResizeFont(btnNewEvent);
-            btnSaveEvent.Font = btnNewEvent.Font;
-            btnDeleteEvent.Font = btnNewEvent.Font;
-            btnClearEventSelection.Font = btnNewEvent.Font;
+            tlvEvents.AutoResizeColumns();
+
+            Font font = Global.AutoResizeFont(txtEventName);
+            txtEventName.Font = font;
+            cbEventType.Font = font;
+            dtpEventDate.Font = font;
+            lblEventName.Font = font;
+            lblEventType.Font = font;
+            lblEventDate.Font = font;
+
+            font = Global.AutoResizeFont(btnNewEvent);
+            btnNewEvent.Font = font;
+            btnSaveEvent.Font = font;
+            btnDeleteEvent.Font = font;
+            btnClearEventSelection.Font = font;
 
             //  Center controls
-            int line_control_width = label_width + minimum_label_space_padding + txtEventName.Width;
+            int line_control_width = desired_label_width + minimum_label_space_padding + txtEventName.Width;
             lblEventName.Left = (gbEventDetails.Width / 2) - (line_control_width / 2);
-            txtEventName.Left = lblEventName.Left + label_width + minimum_label_space_padding;
+            txtEventName.Left = lblEventName.Left + desired_label_width + minimum_label_space_padding;
             lblEventType.Left = (gbEventDetails.Width / 2) - (line_control_width / 2);
-            cbEventType.Left = lblEventName.Left + label_width + minimum_label_space_padding;
+            cbEventType.Left = lblEventName.Left + desired_label_width + minimum_label_space_padding;
             lblEventDate.Left = (gbEventDetails.Width / 2) - (line_control_width / 2);
-            dtpEventDate.Left = lblEventName.Left + label_width + minimum_label_space_padding;
+            dtpEventDate.Left = lblEventName.Left + desired_label_width + minimum_label_space_padding;
 
             int control_height_buffer = 30;
             int top_center_adjusted_for_height = (gbEventDetails.Height / 2) - (lblEventType.Height / 2);
