@@ -2218,6 +2218,7 @@ If you do not like the placements, you will have to move the competitors to diff
             btnEventLoadReg.Left = gbEvent.Width - btnEventLoadReg.Width - padding;
             btnEventLoadReg.Height = gbEvent.Height - (padding * 5);
             btnEventLoadReg.Top = (padding * 3);
+            btnEventLoadReg.Font = Global.AutoResizeFont(btnEventLoadReg);
 
             // EventInfo
             rtbEventInfo.Width = left_control_total_width - padding;
@@ -2265,6 +2266,7 @@ If you do not like the placements, you will have to move the competitors to diff
                 control.Height = button_height;
                 control.Width = button_width;
                 control.Left = current_left;
+                control.Font = Global.AutoResizeFont(control);
 
                 column_counter++;
                 if (column_counter == column_count)

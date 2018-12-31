@@ -783,7 +783,7 @@ namespace DKK_App
                 //    size_multiplier = control.Width;
                 //    break;
                 case "System.Windows.Forms.Button":
-                    font_multiplier = 0.087;
+                    font_multiplier = 0.080;
                     size_multiplier = control.Width;
                     break;
                 //default:
