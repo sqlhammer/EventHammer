@@ -746,6 +746,52 @@ namespace DKK_App
         #endregion
 
         #region Helper functions
+        public static Font AutoResizeFont(Control control)
+        {
+            // min font size / min control width
+            // treelistview example: 7.875 / 458
+            double font_multiplier = 1;
+            double size_multiplier = 1;
+
+            //string a = control.GetType().ToString();
+
+            switch (control.GetType().ToString())
+            {
+                case "BrightIdeasSoftware.TreeListView":
+                    font_multiplier = 0.017;
+                    size_multiplier = control.Width;
+                    break;
+                case "System.Windows.Forms.TextBox":
+                    font_multiplier = 0.042;
+                    size_multiplier = control.Width;
+                    break;
+                case "System.Windows.Forms.ComboBox":
+                    font_multiplier = 0.042;
+                    size_multiplier = control.Width;
+                    break;
+                case "System.Windows.Forms.DateTimePicker":
+                    font_multiplier = 0.042;
+                    size_multiplier = control.Width;
+                    break;
+                case "System.Windows.Forms.Label":
+                    font_multiplier = 0.042;
+                    size_multiplier = control.Width;
+                    break;
+                case "System.Windows.Forms.Button":
+                    font_multiplier = 0.087;
+                    size_multiplier = control.Width;
+                    break;
+            }
+
+            return new Font
+                (
+                    "Microsoft Sans Serif",
+                    (float)(size_multiplier * font_multiplier),
+                    FontStyle.Regular,
+                    System.Drawing.GraphicsUnit.Point
+                );
+        }
+
         public static DialogResult InputBox(string title, string promptText, ref string value)
         {
             Form form = new Form();

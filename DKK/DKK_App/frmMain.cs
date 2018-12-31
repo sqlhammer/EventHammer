@@ -2179,16 +2179,45 @@ If you do not like the placements, you will have to move the competitors to diff
             tlvEvents.Width = gbEvents.Width - 10;
 
             //Details group
-            //  Center controls
-            int static_label_width = 175;
+            int label_width = Convert.ToInt32(gbEvents.Width * 0.28);
             int minimum_label_space_padding = 5;
-            int line_control_width = static_label_width + minimum_label_space_padding + txtEventName.Width;
+
+            //  Size controls
+            txtEventName.Width = Convert.ToInt32((gbEvents.Width - (label_width + minimum_label_space_padding)) * 0.90);
+            cbEventType.Width = txtEventName.Width;
+            dtpEventDate.Width = txtEventName.Width;
+
+            btnNewEvent.Width = Convert.ToInt32(gbEvents.Width / 3);
+            btnSaveEvent.Width = btnNewEvent.Width;
+            btnDeleteEvent.Width = btnNewEvent.Width;
+            btnClearEventSelection.Width = btnNewEvent.Width;
+
+            btnNewEvent.Height = Convert.ToInt32(btnNewEvent.Width * 0.28);
+            btnSaveEvent.Height = btnNewEvent.Height;
+            btnDeleteEvent.Height = btnNewEvent.Height;
+            btnClearEventSelection.Height = btnNewEvent.Height;
+
+            //  Font scaling
+            tlvEvents.Font = Global.AutoResizeFont(tlvEvents);
+            txtEventName.Font = Global.AutoResizeFont(txtEventName);
+            cbEventType.Font = txtEventName.Font;
+            dtpEventDate.Font = txtEventName.Font;
+            lblEventName.Font = txtEventName.Font;
+            lblEventType.Font = txtEventName.Font;
+            lblEventDate.Font = txtEventName.Font;
+            btnNewEvent.Font = Global.AutoResizeFont(btnNewEvent);
+            btnSaveEvent.Font = btnNewEvent.Font;
+            btnDeleteEvent.Font = btnNewEvent.Font;
+            btnClearEventSelection.Font = btnNewEvent.Font;
+
+            //  Center controls
+            int line_control_width = label_width + minimum_label_space_padding + txtEventName.Width;
             lblEventName.Left = (gbEventDetails.Width / 2) - (line_control_width / 2);
-            txtEventName.Left = lblEventName.Left + static_label_width + minimum_label_space_padding;
+            txtEventName.Left = lblEventName.Left + label_width + minimum_label_space_padding;
             lblEventType.Left = (gbEventDetails.Width / 2) - (line_control_width / 2);
-            cbEventType.Left = lblEventName.Left + static_label_width + minimum_label_space_padding;
+            cbEventType.Left = lblEventName.Left + label_width + minimum_label_space_padding;
             lblEventDate.Left = (gbEventDetails.Width / 2) - (line_control_width / 2);
-            dtpEventDate.Left = lblEventName.Left + static_label_width + minimum_label_space_padding;
+            dtpEventDate.Left = lblEventName.Left + label_width + minimum_label_space_padding;
 
             int control_height_buffer = 30;
             int top_center_adjusted_for_height = (gbEventDetails.Height / 2) - (lblEventType.Height / 2);
