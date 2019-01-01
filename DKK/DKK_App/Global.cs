@@ -777,11 +777,6 @@ namespace DKK_App
                     font_multiplier = 0.033;
                     size_multiplier = control.Width;
                     break;
-                //  Not very applicable since the font determins the label's height and width
-                //case "System.Windows.Forms.Label":
-                //    font_multiplier = 0.042;
-                //    size_multiplier = control.Width;
-                //    break;
                 case "System.Windows.Forms.Button":
                     font_multiplier = 0.080;
                     size_multiplier = control.Width;

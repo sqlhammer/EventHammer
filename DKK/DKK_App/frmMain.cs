@@ -2243,6 +2243,23 @@ If you do not like the placements, you will have to move the competitors to diff
             AutoResizeControlsInGrid(gbAdmin, controls, 4);
         }
 
+        private void AutoResizeHomeScorecardGroupControls()
+        {
+            List<Control> controls = new List<Control>
+            {
+                btnKata,
+                btnWeaponKata,
+                btnKataSpecial,
+                btnSemiKnockdown,
+                btnKnockdown,
+                btnWeaponKataSpecial,
+                btnSemiKnockdownSpecial,
+                btnKnockdownSpecial
+            };
+
+            AutoResizeControlsInGrid(gbScorecards, controls, 3);
+        }
+
         private void AutoResizeControlsInGrid(Control groupBox, List<Control> controls, int column_count)
         {
             int padding = 5;
@@ -2276,24 +2293,7 @@ If you do not like the placements, you will have to move the competitors to diff
             }
 
         }
-
-        private void AutoResizeHomeScorecardGroupControls()
-        {
-            List<Control> controls = new List<Control>
-            {
-                btnKata,
-                btnWeaponKata,
-                btnKataSpecial,
-                btnSemiKnockdown,
-                btnKnockdown,
-                btnWeaponKataSpecial,
-                btnSemiKnockdownSpecial,
-                btnKnockdownSpecial
-            };
-
-            AutoResizeControlsInGrid(gbScorecards, controls, 3);
-        }
-
+        
         private void AutoResizeEventControls()
         {
             //Groups
