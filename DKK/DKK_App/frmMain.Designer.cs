@@ -81,7 +81,7 @@
             this.imgList = new System.Windows.Forms.ImageList(this.components);
             this.tabMatch = new System.Windows.Forms.TabPage();
             this.lblLoading = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gbMatches = new System.Windows.Forms.GroupBox();
             this.btnMatchApply = new System.Windows.Forms.Button();
             this.tlvMatches = new BrightIdeasSoftware.TreeListView();
             this.olvColDivDisplay = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -94,11 +94,11 @@
             this.olvColHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.cbMatchFilterBy = new System.Windows.Forms.ComboBox();
             this.rbApplicableMatches = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblMatchFilterBy = new System.Windows.Forms.Label();
             this.txtMatchFilter = new System.Windows.Forms.TextBox();
             this.rbAll = new System.Windows.Forms.RadioButton();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblMatchFilter = new System.Windows.Forms.Label();
+            this.gbMatchCompetitors = new System.Windows.Forms.GroupBox();
             this.btnCompetitorApply = new System.Windows.Forms.Button();
             this.tlvCompetitors = new BrightIdeasSoftware.TreeListView();
             this.olvColCompDisplayName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -107,10 +107,10 @@
             this.olvColCompWeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvMatchCompHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.cbCompetitorFilterBy = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblCompetitorFilterBy = new System.Windows.Forms.Label();
             this.txtCompetitorFilter = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblCompetitorFilter = new System.Windows.Forms.Label();
+            this.lblDragAndDrop = new System.Windows.Forms.Label();
             this.tabCompetitor = new System.Windows.Forms.TabPage();
             this.lblConnection = new System.Windows.Forms.Label();
             this.lblCompLoading = new System.Windows.Forms.Label();
@@ -241,9 +241,9 @@
             this.gbEvents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvEvents)).BeginInit();
             this.tabMatch.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbMatches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvMatches)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gbMatchCompetitors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).BeginInit();
             this.tabCompetitor.SuspendLayout();
             this.gbCompetitorDetails.SuspendLayout();
@@ -848,9 +848,9 @@
             // tabMatch
             // 
             this.tabMatch.Controls.Add(this.lblLoading);
-            this.tabMatch.Controls.Add(this.groupBox2);
-            this.tabMatch.Controls.Add(this.groupBox1);
-            this.tabMatch.Controls.Add(this.label4);
+            this.tabMatch.Controls.Add(this.gbMatches);
+            this.tabMatch.Controls.Add(this.gbMatchCompetitors);
+            this.tabMatch.Controls.Add(this.lblDragAndDrop);
             this.tabMatch.Location = new System.Drawing.Point(4, 22);
             this.tabMatch.Margin = new System.Windows.Forms.Padding(2);
             this.tabMatch.Name = "tabMatch";
@@ -872,25 +872,25 @@
             this.lblLoading.Text = "Loading...";
             this.lblLoading.Visible = false;
             // 
-            // groupBox2
+            // gbMatches
             // 
-            this.groupBox2.Controls.Add(this.btnMatchApply);
-            this.groupBox2.Controls.Add(this.tlvMatches);
-            this.groupBox2.Controls.Add(this.cbMatchFilterBy);
-            this.groupBox2.Controls.Add(this.rbApplicableMatches);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.txtMatchFilter);
-            this.groupBox2.Controls.Add(this.rbAll);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(554, 2);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(564, 458);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Matches";
+            this.gbMatches.Controls.Add(this.btnMatchApply);
+            this.gbMatches.Controls.Add(this.tlvMatches);
+            this.gbMatches.Controls.Add(this.cbMatchFilterBy);
+            this.gbMatches.Controls.Add(this.rbApplicableMatches);
+            this.gbMatches.Controls.Add(this.lblMatchFilterBy);
+            this.gbMatches.Controls.Add(this.txtMatchFilter);
+            this.gbMatches.Controls.Add(this.rbAll);
+            this.gbMatches.Controls.Add(this.lblMatchFilter);
+            this.gbMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbMatches.Location = new System.Drawing.Point(554, 2);
+            this.gbMatches.Margin = new System.Windows.Forms.Padding(2);
+            this.gbMatches.Name = "gbMatches";
+            this.gbMatches.Padding = new System.Windows.Forms.Padding(2);
+            this.gbMatches.Size = new System.Drawing.Size(564, 458);
+            this.gbMatches.TabIndex = 4;
+            this.gbMatches.TabStop = false;
+            this.gbMatches.Text = "Matches";
             // 
             // btnMatchApply
             // 
@@ -1014,15 +1014,15 @@
             this.rbApplicableMatches.UseVisualStyleBackColor = true;
             this.rbApplicableMatches.CheckedChanged += new System.EventHandler(this.rbApplicableMatches_CheckedChanged);
             // 
-            // label7
+            // lblMatchFilterBy
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(277, 28);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 18);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Filter by:";
+            this.lblMatchFilterBy.AutoSize = true;
+            this.lblMatchFilterBy.Location = new System.Drawing.Point(277, 28);
+            this.lblMatchFilterBy.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMatchFilterBy.Name = "lblMatchFilterBy";
+            this.lblMatchFilterBy.Size = new System.Drawing.Size(63, 18);
+            this.lblMatchFilterBy.TabIndex = 7;
+            this.lblMatchFilterBy.Text = "Filter by:";
             // 
             // txtMatchFilter
             // 
@@ -1049,33 +1049,33 @@
             this.rbAll.UseVisualStyleBackColor = true;
             this.rbAll.CheckedChanged += new System.EventHandler(this.rbAll_CheckedChanged);
             // 
-            // label8
+            // lblMatchFilter
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(106, 28);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(44, 18);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Filter:";
+            this.lblMatchFilter.AutoSize = true;
+            this.lblMatchFilter.Location = new System.Drawing.Point(106, 28);
+            this.lblMatchFilter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMatchFilter.Name = "lblMatchFilter";
+            this.lblMatchFilter.Size = new System.Drawing.Size(44, 18);
+            this.lblMatchFilter.TabIndex = 5;
+            this.lblMatchFilter.Text = "Filter:";
             // 
-            // groupBox1
+            // gbMatchCompetitors
             // 
-            this.groupBox1.Controls.Add(this.btnCompetitorApply);
-            this.groupBox1.Controls.Add(this.tlvCompetitors);
-            this.groupBox1.Controls.Add(this.cbCompetitorFilterBy);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.txtCompetitorFilter);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 3);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(467, 458);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Competitors";
+            this.gbMatchCompetitors.Controls.Add(this.btnCompetitorApply);
+            this.gbMatchCompetitors.Controls.Add(this.tlvCompetitors);
+            this.gbMatchCompetitors.Controls.Add(this.cbCompetitorFilterBy);
+            this.gbMatchCompetitors.Controls.Add(this.lblCompetitorFilterBy);
+            this.gbMatchCompetitors.Controls.Add(this.txtCompetitorFilter);
+            this.gbMatchCompetitors.Controls.Add(this.lblCompetitorFilter);
+            this.gbMatchCompetitors.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbMatchCompetitors.Location = new System.Drawing.Point(12, 3);
+            this.gbMatchCompetitors.Margin = new System.Windows.Forms.Padding(2);
+            this.gbMatchCompetitors.Name = "gbMatchCompetitors";
+            this.gbMatchCompetitors.Padding = new System.Windows.Forms.Padding(2);
+            this.gbMatchCompetitors.Size = new System.Drawing.Size(467, 458);
+            this.gbMatchCompetitors.TabIndex = 3;
+            this.gbMatchCompetitors.TabStop = false;
+            this.gbMatchCompetitors.Text = "Competitors";
             // 
             // btnCompetitorApply
             // 
@@ -1158,15 +1158,15 @@
             this.cbCompetitorFilterBy.Size = new System.Drawing.Size(177, 25);
             this.cbCompetitorFilterBy.TabIndex = 4;
             // 
-            // label6
+            // lblCompetitorFilterBy
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(204, 28);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 18);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Filter by:";
+            this.lblCompetitorFilterBy.AutoSize = true;
+            this.lblCompetitorFilterBy.Location = new System.Drawing.Point(204, 28);
+            this.lblCompetitorFilterBy.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCompetitorFilterBy.Name = "lblCompetitorFilterBy";
+            this.lblCompetitorFilterBy.Size = new System.Drawing.Size(63, 18);
+            this.lblCompetitorFilterBy.TabIndex = 3;
+            this.lblCompetitorFilterBy.Text = "Filter by:";
             // 
             // txtCompetitorFilter
             // 
@@ -1177,27 +1177,27 @@
             this.txtCompetitorFilter.TabIndex = 2;
             this.txtCompetitorFilter.TextChanged += new System.EventHandler(this.txtCompetitorFilter_TextChanged);
             // 
-            // label5
+            // lblCompetitorFilter
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 28);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(44, 18);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Filter:";
+            this.lblCompetitorFilter.AutoSize = true;
+            this.lblCompetitorFilter.Location = new System.Drawing.Point(9, 28);
+            this.lblCompetitorFilter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCompetitorFilter.Name = "lblCompetitorFilter";
+            this.lblCompetitorFilter.Size = new System.Drawing.Size(44, 18);
+            this.lblCompetitorFilter.TabIndex = 1;
+            this.lblCompetitorFilter.Text = "Filter:";
             // 
-            // label4
+            // lblDragAndDrop
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(492, 163);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 216);
-            this.label4.TabIndex = 2;
-            this.label4.Text = ">\r\n\r\nDrag\r\n\r\nand\r\n\r\nDrop\r\n\r\n>";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblDragAndDrop.AutoSize = true;
+            this.lblDragAndDrop.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDragAndDrop.Location = new System.Drawing.Point(492, 163);
+            this.lblDragAndDrop.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDragAndDrop.Name = "lblDragAndDrop";
+            this.lblDragAndDrop.Size = new System.Drawing.Size(51, 216);
+            this.lblDragAndDrop.TabIndex = 2;
+            this.lblDragAndDrop.Text = ">\r\n\r\nDrag\r\n\r\nand\r\n\r\nDrop\r\n\r\n>";
+            this.lblDragAndDrop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabCompetitor
             // 
@@ -2454,11 +2454,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.tlvEvents)).EndInit();
             this.tabMatch.ResumeLayout(false);
             this.tabMatch.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gbMatches.ResumeLayout(false);
+            this.gbMatches.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvMatches)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbMatchCompetitors.ResumeLayout(false);
+            this.gbMatchCompetitors.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).EndInit();
             this.tabCompetitor.ResumeLayout(false);
             this.tabCompetitor.PerformLayout();
@@ -2509,19 +2509,19 @@
         private System.Windows.Forms.Button btnKata;
         private System.Windows.Forms.Label lblReportCreds;
         private System.Windows.Forms.Button btnRetryConnection;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblDragAndDrop;
+        private System.Windows.Forms.GroupBox gbMatches;
+        private System.Windows.Forms.GroupBox gbMatchCompetitors;
         private System.Windows.Forms.RadioButton rbApplicableMatches;
         private System.Windows.Forms.RadioButton rbAll;
         private System.Windows.Forms.TextBox txtCompetitorFilter;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblCompetitorFilter;
         private System.Windows.Forms.ComboBox cbMatchFilterBy;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblMatchFilterBy;
         private System.Windows.Forms.TextBox txtMatchFilter;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblMatchFilter;
         private System.Windows.Forms.ComboBox cbCompetitorFilterBy;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblCompetitorFilterBy;
         private BrightIdeasSoftware.BarRenderer barRenderer1;
         private BrightIdeasSoftware.TreeListView tlvMatches;
         private System.Windows.Forms.ImageList imgList;

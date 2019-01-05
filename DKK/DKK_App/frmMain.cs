@@ -2378,12 +2378,141 @@ If you do not like the placements, you will have to move the competitors to diff
             btnClearEventSelection.Left = btnDeleteEvent.Left + btnDeleteEvent.Width + 10;
         }
 
-        private void AutoResizeCompetitorControls()
+        private void AutoResizeMatchControls()
         {
+            const double comp_width_multiplier = 0.4;
+            const double dragdrop_width_multiplier = 0.05;
+            const double matches_width_multiplier = 0.55;
+            const double padding = 10;
 
+            // group placement
+
+            gbMatchCompetitors.Width = Convert.ToInt32((tab1.Width * comp_width_multiplier) - (padding * 2));
+            gbMatches.Width = Convert.ToInt32((tab1.Width * matches_width_multiplier) - (padding * 2));
+            gbMatchCompetitors.Height = tab1.Height - (int)(padding * 3);
+            gbMatches.Height = tab1.Height - (int)(padding * 3);
+
+            gbMatchCompetitors.Left = Convert.ToInt32(padding);
+            gbMatches.Left = Convert.ToInt32(gbMatchCompetitors.Width + (padding * 2) + (tab1.Width * dragdrop_width_multiplier));
+
+            // auto size groups
+
+            AutoResizeMatchCompetitorGroupControls();
+            AutoResizeMatchMatchGroupControls();
+
+            // place drag and drop label
+
+            lblDragAndDrop.Top = (tab1.Height / 2) - (lblDragAndDrop.Height / 2);
+            lblDragAndDrop.Left = gbMatches.Left - 
+                (lblDragAndDrop.Width / 2) - 
+                (int)((tab1.Width * dragdrop_width_multiplier) / 2) -
+                (int)(padding / 2);
         }
 
-        private void AutoResizeMatchControls()
+        private void AutoResizeMatchCompetitorGroupControls()
+        {
+            const double padding = 10;
+
+            // control sizing (except TLV heights)
+
+            tlvCompetitors.Width = Convert.ToInt32(gbMatchCompetitors.Width - padding);
+
+            const double comp_filter_width_multiplier = 0.4;
+            const double comp_filterby_width_multiplier = 0.45;
+            const double comp_apply_width_multiplier = 0.15;
+
+            txtCompetitorFilter.Width = Convert.ToInt32((gbMatchCompetitors.Width * comp_filter_width_multiplier) - padding);
+            cbCompetitorFilterBy.Width = Convert.ToInt32((gbMatchCompetitors.Width * comp_filterby_width_multiplier) - padding);
+            btnCompetitorApply.Width = Convert.ToInt32((gbMatchCompetitors.Width * comp_apply_width_multiplier) - padding);
+
+            txtCompetitorFilter.Height = cbCompetitorFilterBy.Height;
+            btnCompetitorApply.Height = (txtCompetitorFilter.Height * 2) + (int)(padding * 1.5);
+
+            // fonts
+
+            Font current_font = Global.AutoResizeFont(txtCompetitorFilter);
+            txtCompetitorFilter.Font = current_font;
+            cbCompetitorFilterBy.Font = current_font;
+            lblCompetitorFilter.Font = current_font;
+            lblCompetitorFilterBy.Font = current_font;
+            tlvCompetitors.Font = Global.AutoResizeFont(tlvCompetitors);
+            tlvCompetitors.AutoResizeColumns();
+
+            // control placement
+
+            tlvCompetitors.Top = Convert.ToInt32(padding + (cbCompetitorFilterBy.Top + cbCompetitorFilterBy.Height));
+
+            txtCompetitorFilter.Left = tlvCompetitors.Left;
+            cbCompetitorFilterBy.Left = txtCompetitorFilter.Left + Convert.ToInt32(padding) + txtCompetitorFilter.Width;
+            btnCompetitorApply.Left = cbCompetitorFilterBy.Left + Convert.ToInt32(padding) + cbCompetitorFilterBy.Width;
+
+            lblCompetitorFilter.Top = (int)(padding * 2.5);
+            lblCompetitorFilterBy.Top = (int)(padding * 2.5);
+            lblCompetitorFilter.Left = txtCompetitorFilter.Left;
+            lblCompetitorFilterBy.Left = cbCompetitorFilterBy.Left;
+
+            txtCompetitorFilter.Top = lblCompetitorFilter.Top + (int)(padding * 0.5) + lblCompetitorFilter.Height;
+            cbCompetitorFilterBy.Top = lblCompetitorFilterBy.Top + (int)(padding * 0.5) + lblCompetitorFilterBy.Height;
+            btnCompetitorApply.Top = lblCompetitorFilter.Top - (int)padding;
+
+            // tree list view heights
+            tlvCompetitors.Height = gbMatchCompetitors.Height - tlvCompetitors.Top - (int)padding;
+        }
+
+        private void AutoResizeMatchMatchGroupControls()
+        {
+            const int padding = 10;
+
+            // control sizing (except TLV heights)
+
+            tlvMatches.Width = gbMatches.Width - padding;
+
+            const double match_filter_width_multiplier = 0.35;
+            const double match_filterby_width_multiplier = 0.4;
+            const double match_apply_width_multiplier = 0.10;
+
+            txtMatchFilter.Width = (int)(gbMatches.Width * match_filter_width_multiplier) - padding;
+            cbMatchFilterBy.Width = (int)(gbMatches.Width * match_filterby_width_multiplier) - padding;
+            btnMatchApply.Width = (int)(gbMatches.Width * match_apply_width_multiplier) - padding;
+
+            txtMatchFilter.Height = cbMatchFilterBy.Height;
+            btnMatchApply.Height = (txtMatchFilter.Height * 2) + (int)(padding * 1.5);
+
+            // fonts
+
+            Font current_font = Global.AutoResizeFont(txtMatchFilter);
+            txtMatchFilter.Font = current_font;
+            rbAll.Font = current_font;
+            rbApplicableMatches.Font = current_font;
+            cbMatchFilterBy.Font = current_font;
+            btnMatchApply.Font = current_font;
+            tlvMatches.Font = tlvCompetitors.Font;
+            tlvMatches.AutoResizeColumns();
+
+            // control placement
+
+            tlvMatches.Top = padding + (rbApplicableMatches.Top + rbApplicableMatches.Height);
+
+            txtMatchFilter.Left = rbApplicableMatches.Left + rbApplicableMatches.Width + padding;
+            cbMatchFilterBy.Left = txtMatchFilter.Left + (int)padding + txtMatchFilter.Width;
+            btnMatchApply.Left = cbMatchFilterBy.Left + (int)padding + cbMatchFilterBy.Width;
+
+            lblMatchFilter.Top = (int)(padding * 2.5);
+            lblMatchFilterBy.Top = lblMatchFilter.Top;
+            rbAll.Top = lblMatchFilter.Top;
+            rbApplicableMatches.Top = rbAll.Top + rbAll.Height + (int)(padding / 2);
+            lblMatchFilter.Left = txtMatchFilter.Left;
+            lblMatchFilterBy.Left = cbMatchFilterBy.Left;
+
+            txtMatchFilter.Top = lblMatchFilter.Top + (int)(padding * 0.5) + lblMatchFilter.Height;
+            cbMatchFilterBy.Top = lblMatchFilterBy.Top + (int)(padding * 0.5) + lblMatchFilterBy.Height;
+            btnMatchApply.Top = lblMatchFilter.Top - (int)padding;
+
+            // tree list view heights
+            tlvMatches.Height = (gbMatches.Height - tlvMatches.Top) - padding;
+        }
+
+        private void AutoResizeCompetitorControls()
         {
 
         }

@@ -781,9 +781,9 @@ namespace DKK_App
                     font_multiplier = 0.080;
                     size_multiplier = control.Width;
                     break;
-                //default:
-                //    debug = debug;
-                //    break;
+                    //default:
+                    //    debug = debug;
+                    //    break;
             }
 
             float size = (float)(size_multiplier * font_multiplier);
