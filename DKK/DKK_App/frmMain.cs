@@ -434,7 +434,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
 
         private void cbEventSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CurrentEvent = AllEvents[this.cbEventSelect.SelectedIndex];
+            CurrentEvent = FilteredEvents[this.cbEventSelect.SelectedIndex];
             EnableEventButtons();
             EnableAllTabs();
             RefreshFormTitle();
