@@ -76,9 +76,6 @@
                 <TablixBody>
                   <TablixColumns>
                     <TablixColumn>
-                      <Width>1.09306in</Width>
-                    </TablixColumn>
-                    <TablixColumn>
                       <Width>1.57993in</Width>
                     </TablixColumn>
                     <TablixColumn>
@@ -104,38 +101,6 @@
                     <TablixRow>
                       <Height>0.25in</Height>
                       <TablixCells>
-                        <TablixCell>
-                          <CellContents>
-                            <Textbox Name="txtCompId">
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Competitor Id</Value>
-                                      <Style>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Color>White</Color>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <Style>
-                                <Border>
-                                  <Style>Solid</Style>
-                                </Border>
-                                <BackgroundColor>Brown</BackgroundColor>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
                         <TablixCell>
                           <CellContents>
                             <Textbox Name="txtName">
@@ -367,34 +332,6 @@
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="txtId">
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!CompetitorId.Value</Value>
-                                      <Style />
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <Style>
-                                <Border>
-                                  <Style>Solid</Style>
-                                </Border>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
                             <Textbox Name="txtDisplayName">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
@@ -602,7 +539,6 @@
                     <TablixMember />
                     <TablixMember />
                     <TablixMember />
-                    <TablixMember />
                   </TablixMembers>
                 </TablixColumnHierarchy>
                 <TablixRowHierarchy>
@@ -631,7 +567,7 @@
                 <Top>0.01389in</Top>
                 <Left>0.00521in</Left>
                 <Height>0.5in</Height>
-                <Width>7.8in</Width>
+                <Width>6.70696in</Width>
                 <Style>
                   <Border>
                     <Style>None</Style>
@@ -643,7 +579,7 @@
             <Top>0.04167in</Top>
             <Left>0.01042in</Left>
             <Height>0.55208in</Height>
-            <Width>7.80521in</Width>
+            <Width>7.80523in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
