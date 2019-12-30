@@ -93,8 +93,8 @@ namespace DKK_App
 
         private void cmiDownloadLatestVersion_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("https://www.sqlhammer.com/go/ehupgradetutorial");
-            LaunchWebsite("https://www.sqlhammer.com/go/ehsetup");
+            LaunchWebsite("https://www.eventhammeronline.com/go/ehupgradetutorial");
+            LaunchWebsite("https://www.eventhammeronline.com/go/ehsetup");
         }
 
         private async Task ApplyCompetitorFilter(ComboBox cb, TextBox txtbox)
@@ -236,7 +236,7 @@ namespace DKK_App
 
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            LaunchWebsite("https://www.sqlhammer.com/go/ehhelp");
+            LaunchWebsite("https://www.eventhammeronline.com/go/ehhelp");
         }
 
         #endregion
