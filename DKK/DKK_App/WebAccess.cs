@@ -8,7 +8,7 @@ namespace DKK_App
     {
         public static Version GetLatestEventHammerVersion()
         {
-            string json_response = GetWebClientResponse("https://www.sqlhammer.com/wp-json/wp/v2/pages/4214");
+            string json_response = GetWebClientResponse("https://eventhammeronline.com/go/ehversion/");
 
             JObject json = JObject.Parse(json_response);
 
