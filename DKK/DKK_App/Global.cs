@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using DKK_App.Objects;
 
 namespace DKK_App
 {
@@ -759,6 +760,10 @@ namespace DKK_App
             {
                 case "BrightIdeasSoftware.TreeListView":
                     font_multiplier = 0.017;
+                    size_multiplier = control.Width;
+                    break;
+                case "System.Windows.Forms.DataGridView":
+                    font_multiplier = 0.01;
                     size_multiplier = control.Width;
                     break;
                 case "System.Windows.Forms.TextBox":

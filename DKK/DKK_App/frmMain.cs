@@ -26,6 +26,7 @@ namespace DKK_App
         private List<Title> Titles = new List<Title>();
         public List<EventModel> EventModels = new List<EventModel>();
         private Color Green_SQLHammer = Color.FromArgb(40, 190, 155);
+        private CompetitorDetailsGridMap map = new CompetitorDetailsGridMap();
 
         private bool MatchModelLoadComplete = false;
         private bool CompetitorModelLoadComplete = false;
@@ -72,6 +73,7 @@ namespace DKK_App
                 RefreshRanks();
                 RefreshDojos();
                 RefreshTitles();
+                BuildCompetitorDetailsGridView();
 
                 this.lblConnection.Visible = false;
                 this.btnRetryConnection.Visible = false;
@@ -101,7 +103,7 @@ namespace DKK_App
                 return;
 
             FilterType type = TranslateToFilterType(cb.SelectedItem.ToString());
-            
+
             if (type == FilterType.Minor || type == FilterType.IsSpecialConsideration)
             {
                 await ApplyCompetitorFilter(type);
@@ -116,7 +118,7 @@ namespace DKK_App
         {
             if (String.IsNullOrEmpty(pattern))
                 return;
-            
+
             var model = await Global.FilterCompetitorModelAsync(CompetitorModels, type, pattern);
 
             RefreshCompetitors(model);
@@ -141,6 +143,8 @@ namespace DKK_App
             this.tmrNewMatch.Enabled = true;
 
             Task.Run(() => { RefreshMatchesAndCompetitors(); });
+
+            ClearCompetitorSelection();
         }
 
         private void HideTabPageButtons()
@@ -263,7 +267,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
                 RefreshMatches(Global.FilterMatchModelAsync_ApplicableMatches(MatchModels, competitor, Divisions));
             }
         }
-        
+
         private void btnRetryConnection_Click(object sender, EventArgs e)
         {
             RetryConnection();
@@ -481,7 +485,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
 
         private void RefreshFilteredEvents(DateTime from, DateTime to)
         {
-            FilteredEvents = DataAccess.GetEventInformationByDateRange(from, to);            
+            FilteredEvents = DataAccess.GetEventInformationByDateRange(from, to);
         }
 
         private Event SetCurrentEvent(List<Event> events)
@@ -496,7 +500,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
 
         private void RefreshEventSelect()
         {
-            RefreshFilteredEvents(this.dtpEventFrom.Value,this.dtpEventTo.Value);
+            RefreshFilteredEvents(this.dtpEventFrom.Value, this.dtpEventTo.Value);
 
             this.cbEventSelect.Items.Clear();
             foreach (Event Event in FilteredEvents)
@@ -690,7 +694,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
         {
             // Expand/Collapse matches
             tlvMatches.ExpandAll();
-            foreach(var m in MatchContext.CollapsedModels)
+            foreach (var m in MatchContext.CollapsedModels)
             {
                 tlvMatches.Collapse(m);
             }
@@ -721,7 +725,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             var result = Global.InputBox("Select new sub-division number"
                 , "Type in a new sub-division number."
                 , ref newDisplayId);
-                        
+
             if (result == DialogResult.Cancel)
                 return;
 
@@ -733,15 +737,15 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
                     MessageBoxIcon.Error);
                 return;
             }
-            
+
             int divisionId = (int)(mt.DivisionId);
             int subDivisionId = Convert.ToInt32(newDisplayId);
 
             if (Global.IsDuplicateMatchDisplayId(MatchModels, divisionId, subDivisionId))
             {
-                MessageBox.Show(String.Format("Division Id: {0} combined with Sub-Division Id: {1} already exists. Please chose a different number.", divisionId, subDivisionId), 
-                    "Duplicate Division / Sub-division combination.", 
-                    MessageBoxButtons.OK, 
+                MessageBox.Show(String.Format("Division Id: {0} combined with Sub-Division Id: {1} already exists. Please chose a different number.", divisionId, subDivisionId),
+                    "Duplicate Division / Sub-division combination.",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
             }
@@ -870,7 +874,7 @@ m.Division.MaxRank.RankName);
                 //Sort by Event Date
                 if (x.Date < y.Date) return -1;
                 if (x.Date > y.Date) return 1;
-                
+
                 //It should never get here but I needed to guarantee all code paths return a value.
                 return 0;
             });
@@ -911,7 +915,7 @@ m.Division.MaxRank.RankName);
         {
             if (MatchId == null || CompetitorId == null)
                 return;
-            
+
             List<MatchModel> models = MatchModels;
             MatchModel match = models.Where(m => m.MatchId == MatchId).FirstOrDefault();
             MatchModel newMatch = match;
@@ -937,7 +941,7 @@ m.Division.MaxRank.RankName);
         {
             LoadRemoveMatchCompetitorForm();
         }
-        
+
         private void LoadRemoveMatchCompetitorForm()
         {
             if (tlvMatches.SelectedObject == null)
@@ -956,9 +960,9 @@ m.Division.MaxRank.RankName);
             string msg = @"Would you like the application to automatically place all competitors into matches which might suit them?
 
 If you do not like the placements, you will have to move the competitors to different matches or remove them from unsatisfactory matches, manually.";
-            DialogResult r = MessageBox.Show(msg,"Match Selection Assistant",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            DialogResult r = MessageBox.Show(msg, "Match Selection Assistant", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if(r == DialogResult.Yes)
+            if (r == DialogResult.Yes)
             {
                 try
                 {
@@ -1047,8 +1051,8 @@ If you do not like the placements, you will have to move the competitors to diff
                 return;
 
             FilterType type = TranslateToFilterType(this.cbMatchFilterBy.SelectedItem.ToString());
-            
-            if ((this.cbMatchFilterBy.SelectedIndex != -1 && 
+
+            if ((this.cbMatchFilterBy.SelectedIndex != -1 &&
                 !String.IsNullOrEmpty(this.txtMatchFilter.Text)) ||
                 type == FilterType.MatchesWithTooFewCompetitors)
             {
@@ -1203,7 +1207,7 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             //this method was implemented because I was unable to refresh the treelistviews after
             //the async calls to refresh the match and competitor models was complete
-            
+
             if (MatchModelLoadComplete && CompetitorModelLoadComplete)
             {
                 this.lblLoading.Visible = false;
@@ -1400,7 +1404,7 @@ If you do not like the placements, you will have to move the competitors to diff
         #endregion
 
         #region Competitor Tab
-        
+
         private void RefreshRanks()
         {
             this.tmrCompTab.Enabled = true;
@@ -1437,7 +1441,8 @@ If you do not like the placements, you will have to move the competitors to diff
             if (rank == null)
                 return;
 
-            this.cbCompBelt.SelectedIndex = this.cbCompBelt.FindStringExact(rank.RankName);
+            CompetitorDetailsGridMap map = new CompetitorDetailsGridMap();
+            dgvCompetitorDetails[map.Belt.Value.ColumnIndex, map.Belt.Value.RowIndex].Value = rank.RankName;
         }
 
         private void btnCompRegEvents_Click(object sender, EventArgs e)
@@ -1458,21 +1463,22 @@ If you do not like the placements, you will have to move the competitors to diff
             {
                 SetCompetitorSchoolControls(true);
 
-                this.cbCompSchool.SelectedIndex = this.cbCompSchool.FindStringExact(comp.Dojo.Facility.FacilityName);
+                dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value = comp.Dojo.Facility.FacilityName;
 
                 if (comp.Dojo.Facility.Owner == null)
                 {
-                    this.txtCompInstructor.Text = "";
+                    dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value = "";
                     return;
                 }
 
-                this.txtCompInstructor.Text = comp.Dojo.Facility.Owner.DisplayName;
+                dgvCompetitorDetails[map.Instructor.Value.ColumnIndex,
+                    map.Instructor.Value.RowIndex].Value = comp.Dojo.Facility.Owner.DisplayName;
             }
             else
             {
                 SetCompetitorSchoolControls(false);
-                this.txtCompSchoolOther.Text = comp.OtherDojoName;
-                this.txtCompInstructor.Text = comp.OtherInstructorName;
+                dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value = comp.OtherDojoName;
+                dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value = comp.OtherInstructorName;
             }
         }
 
@@ -1480,16 +1486,15 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             if (HasDojoId)
             {
-                this.txtCompSchoolOther.Enabled = false;
-                this.txtCompSchoolOther.Text = "";
+                dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].ReadOnly = true;
+                dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value = "";
 
-                this.cbCompSchool.Enabled = true;
+                dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].ReadOnly = false;
             }
             else
             {
-                this.txtCompSchoolOther.Enabled = true;
-                if (this.cbCompSchool.Items.Count > 0)
-                    this.cbCompSchool.SelectedIndex = 0; //"Other"
+                dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].ReadOnly = false;
+                dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value = "Other";
             }
         }
 
@@ -1498,56 +1503,47 @@ If you do not like the placements, you will have to move the competitors to diff
             if (title == null)
                 return;
 
-            this.cbCompTitle.SelectedIndex = this.cbCompTitle.FindStringExact(title.TitleName);
+            dgvCompetitorDetails[map.Title.Value.ColumnIndex, map.Title.Value.RowIndex].Value = title.TitleName;
         }
 
         private void LoadCompetitorGender(string gender)
         {
             if (String.IsNullOrEmpty(gender))
-            {
-                this.rbCompFemale.Checked = false;
-                this.rbCompMale.Checked = false;
-                return;
-            }
+                gender = "";
+            else if (gender.ToLower().CompareTo("f") == 0)
+                gender = "Female";
+            else if (gender.ToLower().CompareTo("m") == 0)
+                gender = "Male";
 
-            if (gender.ToLower().CompareTo("f") == 0)
-            {
-                this.rbCompFemale.Checked = true;
-                this.rbCompMale.Checked = false;
-            }
-            else
-            {
-                this.rbCompFemale.Checked = false;
-                this.rbCompMale.Checked = true;
-            }
+            dgvCompetitorDetails[map.Gender.Value.ColumnIndex, map.Gender.Value.RowIndex].Value = gender;
         }
 
         private void LoadCompetitorDetails(CompetitorModel compModel)
         {
             Competitor comp = compModel.Competitor;
-            
-            this.txtCompFirstName.Text = comp.Person.FirstName;
-            this.txtCompLastName.Text = comp.Person.LastName;
-            this.txtCompApptCode.Text = comp.Person.AppartmentCode;
-            this.txtCompCity.Text = comp.Person.City;
-            this.txtCompCountry.Text = comp.Person.Country;
-            this.txtCompEmail.Text = comp.Person.EmailAddress;
+
+            dgvCompetitorDetails[map.FirstName.Value.ColumnIndex, map.FirstName.Value.RowIndex].Value = comp.Person.FirstName;
+            dgvCompetitorDetails[map.LastName.Value.ColumnIndex, map.LastName.Value.RowIndex].Value = comp.Person.LastName;
+            dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex, map.AppartmentNumber.Value.RowIndex].Value = comp.Person.AppartmentCode;
+            dgvCompetitorDetails[map.City.Value.ColumnIndex, map.City.Value.RowIndex].Value = comp.Person.City;
+            dgvCompetitorDetails[map.Country.Value.ColumnIndex, map.Country.Value.RowIndex].Value = comp.Person.Country;
+            dgvCompetitorDetails[map.Email.Value.ColumnIndex, map.Email.Value.RowIndex].Value = comp.Person.EmailAddress;
             if (comp.Parent != null)
             {
-                this.txtCompParentEmail.Text = comp.Parent.EmailAddress;
-                this.txtCompParentFirstName.Text = comp.Parent.FirstName;
-                this.txtCompParentLastName.Text = comp.Parent.LastName;
+                dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value = comp.Parent.EmailAddress;
+                dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex, map.ParentFirstName.Value.RowIndex].Value = comp.Parent.FirstName;
+                dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex].Value = comp.Parent.LastName;
             }
-            this.txtCompPhone.Text = comp.Person.PhoneNumber;
-            this.txtCompState.Text = comp.Person.StateProvince;
-            this.txtCompStreet1.Text = comp.Person.StreetAddress1;
-            this.txtCompStreet2.Text = comp.Person.StreetAddress2;
-            this.txtCompZipCode.Text = comp.Person.PostalCode;
-            
-            this.nudCompWeight.Value = comp.Weight;
-            this.nudCompHeight.Value = comp.Height;
+            dgvCompetitorDetails[map.PhoneNumber.Value.ColumnIndex, map.PhoneNumber.Value.RowIndex].Value = comp.Person.PhoneNumber;
+            dgvCompetitorDetails[map.State.Value.ColumnIndex, map.State.Value.RowIndex].Value = comp.Person.StateProvince;
+            dgvCompetitorDetails[map.Street1.Value.ColumnIndex, map.Street1.Value.RowIndex].Value = comp.Person.StreetAddress1;
+            dgvCompetitorDetails[map.Street2.Value.ColumnIndex, map.Street2.Value.RowIndex].Value = comp.Person.StreetAddress2;
+            dgvCompetitorDetails[map.PostalCode.Value.ColumnIndex, map.PostalCode.Value.RowIndex].Value = comp.Person.PostalCode;
 
-            this.nudCompAge.Value = comp.Age;
+            dgvCompetitorDetails[map.Weight.Value.ColumnIndex, map.Weight.Value.RowIndex].Value = comp.Weight;
+            dgvCompetitorDetails[map.Height.Value.ColumnIndex, map.Height.Value.RowIndex].Value = comp.Height;
+
+            dgvCompetitorDetails[map.Age.Value.ColumnIndex, map.Age.Value.RowIndex].Value = comp.Age;
 
             LoadCompetitorBelt(comp.Rank);
             LoadCompetitorSchool(comp);
@@ -1569,53 +1565,15 @@ If you do not like the placements, you will have to move the competitors to diff
             }
         }
 
-        private void SetCompetitorBeltDropdown()
-        {
-            if (Ranks.Count == 0)
-                return;
-
-            this.cbCompBelt.Items.Clear();
-            foreach (var rank in Ranks)
-            {
-                this.cbCompBelt.Items.Add(rank.RankName);
-            }
-        }
-
-        private void SetCompetitorDojoDropdown()
-        {
-            if (Dojos.Count == 0)
-                return;
-
-            this.cbCompSchool.Items.Clear();
-            this.cbCompSchool.Items.Add("Other");
-
-            foreach (var dojo in Dojos)
-            {
-                this.cbCompSchool.Items.Add(dojo.Facility.FacilityName);
-            }
-        }
-
-        private void SetCompetitorTitleDropdown()
-        {
-            if (Titles.Count == 0)
-                return;
-
-            this.cbCompTitle.Items.Clear();
-            foreach (var title in Titles)
-            {
-                this.cbCompTitle.Items.Add(title.TitleName);
-            }
-        }
-
         private void tmrCompTab_Tick(object sender, EventArgs e)
         {
             bool TurnMeOff = true;
-
             if (Ranks.Count == 0)
             {
                 TurnMeOff = false;
             }
-            else if (this.cbCompBelt.Items.Count == 0)
+            else if (((DataGridViewComboBoxCell)dgvCompetitorDetails[map.Belt.Value.ColumnIndex,
+                map.Belt.Value.RowIndex]).Items.Count == 0)
             {
                 SetCompetitorBeltDropdown();
             }
@@ -1624,7 +1582,8 @@ If you do not like the placements, you will have to move the competitors to diff
             {
                 TurnMeOff = false;
             }
-            else if (this.cbCompSchool.Items.Count == 0)
+            else if (((DataGridViewComboBoxCell)dgvCompetitorDetails[map.School.Value.ColumnIndex,
+                map.School.Value.RowIndex]).Items.Count == 1)
             {
                 SetCompetitorDojoDropdown();
             }
@@ -1633,7 +1592,8 @@ If you do not like the placements, you will have to move the competitors to diff
             {
                 TurnMeOff = false;
             }
-            else if (this.cbCompTitle.Items.Count == 0)
+            else if (((DataGridViewComboBoxCell)dgvCompetitorDetails[map.Title.Value.ColumnIndex,
+                map.Title.Value.RowIndex]).Items.Count == 0)
             {
                 SetCompetitorTitleDropdown();
             }
@@ -1644,28 +1604,28 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void cbCompSchool_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.cbCompSchool.SelectedItem != null &&
-                this.cbCompSchool.SelectedItem.ToString().CompareTo("Other") == 0)
+            if (dgvCompetitorDetails[map.School.Value.ColumnIndex,
+                    map.School.Value.RowIndex].ToString().CompareTo("Other") == 0)
             {
-                this.txtCompSchoolOther.Text = "";
-                this.txtCompSchoolOther.Enabled = true;
+                dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value = "";
+                dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].ReadOnly = false;
 
-                this.txtCompInstructor.Text = "";
-                this.txtCompInstructor.Enabled = true;
+                dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value = "";
+                dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].ReadOnly = false;
             }
             else
             {
-                this.txtCompSchoolOther.Text = "";
-                this.txtCompSchoolOther.Enabled = false;
+                dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value = "";
+                dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].ReadOnly = true;
 
-                this.txtCompInstructor.Text = "";
-                this.txtCompInstructor.Enabled = false;
+                dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value = "";
+                dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].ReadOnly = true;
 
                 string selectedSchool = "";
-                if (this.cbCompSchool.SelectedItem != null)
-                    selectedSchool = this.cbCompSchool.SelectedItem.ToString();
+                if (dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value != null)
+                    selectedSchool = dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value.ToString();
                 Dojo dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(selectedSchool) == 0)).FirstOrDefault();
-                this.txtCompInstructor.Text = dojo.Facility.Owner.DisplayName;
+                dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value = dojo.Facility.Owner.DisplayName;
             }
         }
 
@@ -1742,7 +1702,7 @@ If you do not like the placements, you will have to move the competitors to diff
             {
                 frm.CompetitorModel = (new CompetitorModel());
             }
-            
+
             frm.Show();
         }
 
@@ -1769,7 +1729,7 @@ If you do not like the placements, you will have to move the competitors to diff
                     Title = new Title()
                 }
             };
-            
+
             if (cm != null && IsNew == false)
             {
                 comp = DataAccess.GetCompetitor(cm.CompetitorId);
@@ -1779,46 +1739,56 @@ If you do not like the placements, you will have to move the competitors to diff
                 //No competitor is selected to save.
                 return;
             }
-            
-            comp.Person.FirstName = this.txtCompFirstName.Text;
-            comp.Person.EmailAddress = this.txtCompEmail.Text;
-            comp.Person.LastName = this.txtCompLastName.Text;
-            
+
+            comp.Person.FirstName = dgvCompetitorDetails[map.FirstName.Value.ColumnIndex, map.FirstName.Value.RowIndex].Value.ToString();
+            comp.Person.EmailAddress = dgvCompetitorDetails[map.Email.Value.ColumnIndex, map.Email.Value.RowIndex].Value.ToString();
+            comp.Person.LastName = dgvCompetitorDetails[map.LastName.Value.ColumnIndex, map.LastName.Value.RowIndex].Value.ToString();
+
             if (IsNew && Global.IsDuplicatePerson(comp.Person))
             {
                 MessageBox.Show("The same combination of FirstName, LastName, and EmailAddress already exists.", "Duplicate person", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
-            comp.Weight = this.nudCompWeight.Value;
-            comp.Person.DisplayName = this.txtCompLastName.Text + ", " + this.txtCompFirstName.Text;
-            comp.Height = this.nudCompHeight.Value;
-            comp.Person.Gender = (this.rbCompFemale.Checked) ? "F" : "M";
-            comp.Age = (int)this.nudCompAge.Value;
-            comp.Parent.FirstName = this.txtCompParentFirstName.Text;
-            comp.Parent.LastName = this.txtCompParentLastName.Text;
-            comp.Parent.EmailAddress = this.txtCompParentEmail.Text;
-            comp.Person.PhoneNumber = this.txtCompPhone.Text;
-            comp.Person.Country = this.txtCompCountry.Text;
-            comp.Person.StreetAddress1 = this.txtCompStreet1.Text;
-            comp.Person.StreetAddress2 = this.txtCompStreet2.Text;
-            comp.Person.AppartmentCode = this.txtCompApptCode.Text;
-            comp.Person.City = this.txtCompCity.Text;
-            comp.Person.StateProvince = this.txtCompState.Text;
-            comp.Person.PostalCode = this.txtCompZipCode.Text;
+            comp.Weight = (decimal)dgvCompetitorDetails[map.Weight.Value.ColumnIndex, map.Weight.Value.RowIndex].Value;
+            comp.Person.DisplayName = dgvCompetitorDetails[map.LastName.Value.ColumnIndex, map.LastName.Value.RowIndex].Value.ToString() +
+                ", " +
+                dgvCompetitorDetails[map.FirstName.Value.ColumnIndex, map.FirstName.Value.RowIndex].Value.ToString();
+            comp.Height = (decimal)dgvCompetitorDetails[map.Height.Value.ColumnIndex, map.Height.Value.RowIndex].Value;
+            comp.Person.Gender = (dgvCompetitorDetails[map.Gender.Value.ColumnIndex,
+                                    map.Gender.Value.RowIndex].Value.ToString().CompareTo("Female") == 0) ? "F" : "M";
+            comp.Age = (int)dgvCompetitorDetails[map.Age.Value.ColumnIndex, map.Age.Value.RowIndex].Value;
+            comp.Parent.FirstName = dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex, map.ParentFirstName.Value.RowIndex].Value.ToString();
+            comp.Parent.LastName = dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex].Value.ToString();
+            comp.Parent.EmailAddress = dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value.ToString();
+            comp.Person.PhoneNumber = dgvCompetitorDetails[map.PhoneNumber.Value.ColumnIndex, map.PhoneNumber.Value.RowIndex].Value.ToString();
+            comp.Person.Country = dgvCompetitorDetails[map.Country.Value.ColumnIndex, map.Country.Value.RowIndex].Value.ToString();
+            comp.Person.StreetAddress1 = dgvCompetitorDetails[map.Street1.Value.ColumnIndex, map.Street1.Value.RowIndex].Value.ToString();
+            comp.Person.StreetAddress2 = dgvCompetitorDetails[map.Street2.Value.ColumnIndex, map.Street2.Value.RowIndex].Value.ToString();
+            comp.Person.AppartmentCode = dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex, map.AppartmentNumber.Value.RowIndex].Value.ToString();
+            comp.Person.City = dgvCompetitorDetails[map.City.Value.ColumnIndex, map.City.Value.RowIndex].Value.ToString();
+            comp.Person.StateProvince = dgvCompetitorDetails[map.State.Value.ColumnIndex, map.State.Value.RowIndex].Value.ToString();
+            comp.Person.PostalCode = dgvCompetitorDetails[map.PostalCode.Value.ColumnIndex, map.PostalCode.Value.RowIndex].Value.ToString();
 
-            comp.Rank = (Ranks.Where(r => r.RankName.CompareTo(this.cbCompBelt.SelectedItem.ToString()) == 0)).First();
-            comp.Person.Title = (this.cbCompTitle.SelectedItem == null) ? new Title() : (Titles.Where(t => t.TitleName.CompareTo(this.cbCompTitle.SelectedItem.ToString()) == 0)).First();
-            comp.OtherDojoName = this.txtCompSchoolOther.Text;
+            comp.Rank = (Ranks.Where(r => r.RankName.CompareTo(
+                                                                dgvCompetitorDetails[map.Belt.Value.ColumnIndex,
+                                                                    map.Belt.Value.RowIndex].Value.ToString()
+                                                                ) == 0)).First();
+            comp.Person.Title = (dgvCompetitorDetails[map.Title.Value.ColumnIndex,
+                                    map.Title.Value.RowIndex].Value.ToString() == null) ?
+                                        new Title() :
+                                        (Titles.Where(t => t.TitleName.CompareTo(dgvCompetitorDetails[map.Title.Value.ColumnIndex,
+                                                                                    map.Title.Value.RowIndex].Value.ToString()) == 0)).First();
+            comp.OtherDojoName = dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value.ToString();
 
             string selectedSchool = "";
-            if (this.cbCompSchool.SelectedItem != null)
-                selectedSchool = this.cbCompSchool.SelectedItem.ToString();
+            if (dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value != null)
+                selectedSchool = dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value.ToString();
             comp.Dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(selectedSchool) == 0)).FirstOrDefault();
 
             comp.OtherInstructorName = "";
             if (comp.Dojo == null)
-                comp.OtherInstructorName = this.txtCompInstructor.Text;
+                comp.OtherInstructorName = dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value.ToString();
 
             SaveCompetitor(comp, IsNew);
         }
@@ -1896,7 +1866,462 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             await ApplyCompetitorFilter(this.cbCompFilterBy, this.txtCompFilter);
         }
-        #endregion
+
+        #region BuildCompetitorDetailsGridView
+        private void BuildCompetitorDetailsGridView()
+        {
+            // Grid Settings
+            dgvCompetitorDetails.ReadOnly = false;
+            dgvCompetitorDetails.AllowUserToDeleteRows = false;
+            dgvCompetitorDetails.ColumnCount = map.ColumnCount;
+            dgvCompetitorDetails.AllowUserToAddRows = false;
+            dgvCompetitorDetails.AllowUserToDeleteRows = false;
+            dgvCompetitorDetails.AllowUserToOrderColumns = false;
+            dgvCompetitorDetails.AllowUserToResizeColumns = true;
+            dgvCompetitorDetails.AllowUserToResizeRows = true;
+
+            dgvCompetitorDetails.Rows.Add(map.RowCount);
+
+            for (int c = 0; c < dgvCompetitorDetails.Columns.Count; c++)
+            {
+                dgvCompetitorDetails.Columns[c].MinimumWidth = map.MinimumColumnWidth;
+            }
+
+            // Hidden id column
+            dgvCompetitorDetails.Columns[0].Visible = false;
+            dgvCompetitorDetails.Columns[0].ValueType = typeof(int);
+            for (int i = 0; i < dgvCompetitorDetails.Rows.Count; i++)
+            {
+                dgvCompetitorDetails[0, i].Value = i;
+            }
+
+            // Build cells
+            SetCompetitorDetailsGridLabelFields();
+            SetCompetitorDetailsGridDataFields();
+
+            //Refresh
+            dgvCompetitorDetails.Refresh();
+            dgvCompetitorDetails.AutoResizeColumns();
+        }
+
+        private void SetCompetitorDetailsGridDataFields()
+        {
+            CompetitorDetailsGridMap map = new CompetitorDetailsGridMap();
+
+            #region Text Boxes
+            // First Name text box
+            dgvCompetitorDetails[map.FirstName.Value.ColumnIndex,
+                map.FirstName.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.FirstName.Value.ColumnIndex,
+                map.FirstName.Value.RowIndex].ReadOnly = false;
+            // Last Name text box
+            dgvCompetitorDetails[map.LastName.Value.ColumnIndex,
+                map.LastName.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.LastName.Value.ColumnIndex,
+                map.LastName.Value.RowIndex].ReadOnly = false;
+            // Other school text box
+            dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex,
+                map.OtherSchool.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex,
+                map.OtherSchool.Value.RowIndex].ReadOnly = false;
+            // Instructor text box
+            dgvCompetitorDetails[map.Instructor.Value.ColumnIndex,
+                map.Instructor.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Instructor.Value.ColumnIndex,
+                map.Instructor.Value.RowIndex].ReadOnly = false;
+            // Parent First Name text box
+            dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex,
+                map.ParentFirstName.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex,
+                map.ParentFirstName.Value.RowIndex].ReadOnly = false;
+            // Parent last Name text box
+            dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex,
+                map.ParentLastName.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex,
+                map.ParentLastName.Value.RowIndex].ReadOnly = false;
+            // Email text box
+            dgvCompetitorDetails[map.Email.Value.ColumnIndex,
+                map.Email.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Email.Value.ColumnIndex,
+                map.Email.Value.RowIndex].ReadOnly = false;
+            // Parent Email text box
+            dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex,
+                map.ParentEmail.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex,
+                map.ParentEmail.Value.RowIndex].ReadOnly = false;
+            // Phone number text box
+            dgvCompetitorDetails[map.PhoneNumber.Value.ColumnIndex,
+                map.PhoneNumber.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.PhoneNumber.Value.ColumnIndex,
+                map.PhoneNumber.Value.RowIndex].ReadOnly = false;
+            // Street 1 text box
+            dgvCompetitorDetails[map.Street1.Value.ColumnIndex,
+                map.Street1.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Street1.Value.ColumnIndex,
+                map.Street1.Value.RowIndex].ReadOnly = false;
+            // Street 2 text box
+            dgvCompetitorDetails[map.Street2.Value.ColumnIndex,
+                map.Street2.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Street2.Value.ColumnIndex,
+                map.Street2.Value.RowIndex].ReadOnly = false;
+            // City text box
+            dgvCompetitorDetails[map.City.Value.ColumnIndex,
+                map.City.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.City.Value.ColumnIndex,
+                map.City.Value.RowIndex].ReadOnly = false;
+            // State text box
+            dgvCompetitorDetails[map.State.Value.ColumnIndex,
+                map.State.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.State.Value.ColumnIndex,
+                map.State.Value.RowIndex].ReadOnly = false;
+            // Postal code text box
+            dgvCompetitorDetails[map.PostalCode.Value.ColumnIndex,
+                map.PostalCode.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.PostalCode.Value.ColumnIndex,
+                map.PostalCode.Value.RowIndex].ReadOnly = false;
+            // Country text box
+            dgvCompetitorDetails[map.Country.Value.ColumnIndex,
+                map.Country.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Country.Value.ColumnIndex,
+                map.Country.Value.RowIndex].ReadOnly = false;
+            // Appt. # text box
+            dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex,
+                map.AppartmentNumber.Value.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex,
+                map.AppartmentNumber.Value.RowIndex].ReadOnly = false;
+            #endregion Text Boxes
+
+            #region Numerics
+            // weight
+            dgvCompetitorDetails[map.Weight.Value.ColumnIndex,
+                map.Weight.Value.RowIndex].ValueType = typeof(double);
+            dgvCompetitorDetails[map.Weight.Value.ColumnIndex,
+                map.Weight.Value.RowIndex].ReadOnly = false;
+            // height
+            dgvCompetitorDetails[map.Height.Value.ColumnIndex,
+                map.Height.Value.RowIndex].ValueType = typeof(double);
+            dgvCompetitorDetails[map.Height.Value.ColumnIndex,
+                map.Height.Value.RowIndex].ReadOnly = false;
+            #endregion Numerics
+
+            #region Combo boxes
+
+            // age
+            int[] ages = new int[121];
+            for (int i = 0; i < 121; i++)
+            {
+                ages[i] = i;
+            }
+            DataGridViewComboBoxCell cbCell = new DataGridViewComboBoxCell
+            {
+                ValueType = typeof(int),
+                ReadOnly = false,
+                DataSource = ages
+            };
+            dgvCompetitorDetails[map.Age.Value.ColumnIndex,
+                map.Age.Value.RowIndex] = cbCell;
+
+            // gender
+            string[] genders = new string[] { "Female", "Male" };
+            cbCell = new DataGridViewComboBoxCell
+            {
+                ValueType = typeof(string),
+                ReadOnly = false,
+                DataSource = genders
+            };
+            dgvCompetitorDetails[map.Gender.Value.ColumnIndex,
+                map.Gender.Value.RowIndex] = cbCell;
+
+            SetCompetitorTitleDropdown();
+            SetCompetitorDojoDropdown();
+            SetCompetitorBeltDropdown();
+
+            #endregion Combo boxes
+
+            #region Buttons
+
+            dgvCompetitorDetails[map.Special.Value.ColumnIndex,
+                map.Special.Value.RowIndex] = new DataGridViewButtonCell
+                {
+                    Value = "Special Considerations"
+                };
+
+            dgvCompetitorDetails[map.RegisteredEvents.Value.ColumnIndex,
+                map.RegisteredEvents.Value.RowIndex] = new DataGridViewButtonCell
+                {
+                    Value = "Registered Events"
+                };
+
+            #endregion Buttons
+        }
+
+        private void SetCompetitorDetailsGridLabelFields()
+        {
+            CompetitorDetailsGridMap map = new CompetitorDetailsGridMap();
+
+            dgvCompetitorDetails[map.FirstName.Base.ColumnIndex,
+                map.FirstName.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.FirstName.Base.ColumnIndex,
+                map.FirstName.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.FirstName.Base.ColumnIndex,
+                map.FirstName.Base.RowIndex].Value = "First Name";
+            dgvCompetitorDetails[map.LastName.Base.ColumnIndex,
+                map.LastName.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.LastName.Base.ColumnIndex,
+                map.LastName.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.LastName.Base.ColumnIndex,
+                map.LastName.Base.RowIndex].Value = "Last Name";
+            dgvCompetitorDetails[map.Weight.Base.ColumnIndex,
+                map.Weight.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Weight.Base.ColumnIndex,
+                map.Weight.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Weight.Base.ColumnIndex,
+                map.Weight.Base.RowIndex].Value = "Weight (lb)";
+            dgvCompetitorDetails[map.Height.Base.ColumnIndex,
+                map.Height.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Height.Base.ColumnIndex,
+                map.Height.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Height.Base.ColumnIndex,
+                map.Height.Base.RowIndex].Value = "Height (in)";
+            dgvCompetitorDetails[map.Gender.Base.ColumnIndex,
+                map.Gender.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Gender.Base.ColumnIndex,
+                map.Gender.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Gender.Base.ColumnIndex,
+                map.Gender.Base.RowIndex].Value = "Gender";
+            dgvCompetitorDetails[map.Age.Base.ColumnIndex,
+                map.Age.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Age.Base.ColumnIndex,
+                map.Age.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Age.Base.ColumnIndex,
+                map.Age.Base.RowIndex].Value = "Age";
+            dgvCompetitorDetails[map.Belt.Base.ColumnIndex,
+                map.Belt.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Belt.Base.ColumnIndex,
+                map.Belt.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Belt.Base.ColumnIndex,
+                map.Belt.Base.RowIndex].Value = "Belt";
+            dgvCompetitorDetails[map.Title.Base.ColumnIndex,
+                map.Title.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Title.Base.ColumnIndex,
+                map.Title.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Title.Base.ColumnIndex,
+                map.Title.Base.RowIndex].Value = "Title";
+            dgvCompetitorDetails[map.School.Base.ColumnIndex,
+                map.School.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.School.Base.ColumnIndex,
+                map.School.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.School.Base.ColumnIndex,
+                map.School.Base.RowIndex].Value = "School";
+            dgvCompetitorDetails[map.OtherSchool.Base.ColumnIndex,
+                map.OtherSchool.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.OtherSchool.Base.ColumnIndex,
+                map.OtherSchool.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.OtherSchool.Base.ColumnIndex,
+                map.OtherSchool.Base.RowIndex].Value = "Other School";
+            dgvCompetitorDetails[map.Instructor.Base.ColumnIndex,
+                map.Instructor.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Instructor.Base.ColumnIndex,
+                map.Instructor.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Instructor.Base.ColumnIndex,
+                map.Instructor.Base.RowIndex].Value = "Instructor";
+            dgvCompetitorDetails[map.ParentFirstName.Base.ColumnIndex,
+                map.ParentFirstName.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.ParentFirstName.Base.ColumnIndex,
+                map.ParentFirstName.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.ParentFirstName.Base.ColumnIndex,
+                map.ParentFirstName.Base.RowIndex].Value = "Parent First Name";
+            dgvCompetitorDetails[map.ParentLastName.Base.ColumnIndex,
+                map.ParentLastName.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.ParentLastName.Base.ColumnIndex,
+                map.ParentLastName.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.ParentLastName.Base.ColumnIndex,
+                map.ParentLastName.Base.RowIndex].Value = "Parent Last Name";
+            dgvCompetitorDetails[map.ParentEmail.Base.ColumnIndex,
+                map.ParentEmail.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.ParentEmail.Base.ColumnIndex,
+                map.ParentEmail.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.ParentEmail.Base.ColumnIndex,
+                map.ParentEmail.Base.RowIndex].Value = "Parent Email";
+            dgvCompetitorDetails[map.PhoneNumber.Base.ColumnIndex,
+                map.PhoneNumber.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.PhoneNumber.Base.ColumnIndex,
+                map.PhoneNumber.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.PhoneNumber.Base.ColumnIndex,
+                map.PhoneNumber.Base.RowIndex].Value = "Phone Number";
+            dgvCompetitorDetails[map.Street1.Base.ColumnIndex,
+                map.Street1.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Street1.Base.ColumnIndex,
+                map.Street1.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Street1.Base.ColumnIndex,
+                map.Street1.Base.RowIndex].Value = "Street 1";
+            dgvCompetitorDetails[map.City.Base.ColumnIndex,
+                map.City.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.City.Base.ColumnIndex,
+                map.City.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.City.Base.ColumnIndex,
+                map.City.Base.RowIndex].Value = "City";
+            dgvCompetitorDetails[map.Email.Base.ColumnIndex,
+                map.Email.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Email.Base.ColumnIndex,
+                map.Email.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Email.Base.ColumnIndex,
+                map.Email.Base.RowIndex].Value = "Email";
+            dgvCompetitorDetails[map.Street2.Base.ColumnIndex,
+                map.Street2.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Street2.Base.ColumnIndex,
+                map.Street2.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Street2.Base.ColumnIndex,
+                map.Street2.Base.RowIndex].Value = "Street 2";
+            dgvCompetitorDetails[map.State.Base.ColumnIndex,
+                map.State.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.State.Base.ColumnIndex,
+                map.State.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.State.Base.ColumnIndex,
+                map.State.Base.RowIndex].Value = "State";
+            dgvCompetitorDetails[map.Country.Base.ColumnIndex,
+                map.Country.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.Country.Base.ColumnIndex,
+                map.Country.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.Country.Base.ColumnIndex,
+                map.Country.Base.RowIndex].Value = "Country";
+            dgvCompetitorDetails[map.AppartmentNumber.Base.ColumnIndex,
+                map.AppartmentNumber.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.AppartmentNumber.Base.ColumnIndex,
+                map.AppartmentNumber.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.AppartmentNumber.Base.ColumnIndex,
+                map.AppartmentNumber.Base.RowIndex].Value = "Appt. #";
+            dgvCompetitorDetails[map.PostalCode.Base.ColumnIndex,
+                map.PostalCode.Base.RowIndex].ValueType = typeof(string);
+            dgvCompetitorDetails[map.PostalCode.Base.ColumnIndex,
+                map.PostalCode.Base.RowIndex].ReadOnly = true;
+            dgvCompetitorDetails[map.PostalCode.Base.ColumnIndex,
+                map.PostalCode.Base.RowIndex].Value = "Postal Code";
+        }
+
+        private void SetCompetitorTitleDropdown()
+        {
+            string[] titles = GetCompetitorTitleDropdown();
+            DataGridViewComboBoxCell cbCell = new DataGridViewComboBoxCell
+            {
+                ValueType = typeof(string),
+                ReadOnly = false,
+                DataSource = titles
+            };
+            dgvCompetitorDetails[map.Title.Value.ColumnIndex,
+                map.Title.Value.RowIndex] = cbCell;
+
+            dgvCompetitorDetails.Refresh();
+        }
+
+        private string[] GetCompetitorTitleDropdown()
+        {
+            string[] titles = new string[0];
+
+            foreach (var title in Titles)
+            {
+                Array.Resize(ref titles, (titles.GetUpperBound(0) + 2));
+                titles[titles.GetUpperBound(0)] = title.TitleName;
+            }
+
+            return titles;
+        }
+
+        private void SetCompetitorDojoDropdown()
+        {
+            string[] schools = GetCompetitorDojoDropdown();
+            DataGridViewComboBoxCell cbCell = new DataGridViewComboBoxCell
+            {
+                ValueType = typeof(string),
+                ReadOnly = false,
+                DataSource = schools
+            };
+            dgvCompetitorDetails[map.School.Value.ColumnIndex,
+                map.School.Value.RowIndex] = cbCell;
+
+            dgvCompetitorDetails.Refresh();
+        }
+
+        private string[] GetCompetitorDojoDropdown()
+        {
+            string[] schools = new string[1] { "Other" };
+
+            foreach (var dojo in Dojos)
+            {
+                Array.Resize(ref schools, (schools.GetUpperBound(0) + 2));
+                schools[schools.GetUpperBound(0)] = dojo.Facility.FacilityName;
+            }
+
+            return schools;
+        }
+
+        private void SetCompetitorBeltDropdown()
+        {
+            string[] belts = GetCompetitorBeltDropdown();
+            DataGridViewComboBoxCell cbCell = new DataGridViewComboBoxCell
+            {
+                ValueType = typeof(string),
+                ReadOnly = false,
+                DataSource = belts
+            };
+            dgvCompetitorDetails[map.Belt.Value.ColumnIndex,
+                map.Belt.Value.RowIndex] = cbCell;
+
+            dgvCompetitorDetails.Refresh();
+        }
+
+        private string[] GetCompetitorBeltDropdown()
+        {
+            string[] belts = new string[0];
+
+            foreach (var rank in Ranks)
+            {
+                Array.Resize(ref belts, (belts.GetUpperBound(0) + 2));
+                belts[belts.GetUpperBound(0)] = rank.RankName;
+            }
+
+            return belts;
+        }
+
+        private void dgvCompetitorDetails_SpecialConsiderations_ButtonClick(DataGridViewButtonCell cell)
+        {
+            //TODO: open special considerations form
+
+            /*
+            if (String.Compare(cell.Value.ToString(), "Not Special") == 0)
+                cell.Value = "Is Special";
+            else
+                cell.Value = "Not Special";
+                */
+        }
+
+        private void dgvCompetitorDetails_RegisteredEvents_ButtonClick(DataGridViewButtonCell cell)
+        {
+            //TODO: open reg events form
+        }
+
+        private void dgvCompetitorDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+            CompetitorDetailsGridMap map = new CompetitorDetailsGridMap();
+
+            if (senderGrid[e.ColumnIndex, e.RowIndex] is DataGridViewButtonCell &&
+                e.RowIndex >= 0)
+            {
+                // Is Special Considerations
+                if (e.ColumnIndex == map.Special.Base.ColumnIndex && 
+                    e.RowIndex == map.Special.Base.RowIndex)
+                    dgvCompetitorDetails_SpecialConsiderations_ButtonClick((DataGridViewButtonCell)senderGrid[e.ColumnIndex, e.RowIndex]);
+
+                // Registered Events
+                if (e.ColumnIndex == map.RegisteredEvents.Base.ColumnIndex &&
+                    e.RowIndex == map.RegisteredEvents.Base.RowIndex)
+                    dgvCompetitorDetails_RegisteredEvents_ButtonClick((DataGridViewButtonCell)senderGrid[e.ColumnIndex, e.RowIndex]);
+            }
+        }
+        #endregion BuildCompetitorDetailsGridView
+
+        #endregion Competitor Tab
 
         #region Event Tab
         private void RefreshEvents()
@@ -2512,10 +2937,89 @@ If you do not like the placements, you will have to move the competitors to diff
             tlvMatches.Height = (gbMatches.Height - tlvMatches.Top) - padding;
         }
 
+        private void AutoResizeCompetitorListControls()
+        {
+            
+        }
+
+        private void AutoResizeCompetitorDetailsControls()
+        {
+            int padding = 10;
+            dgvCompetitorDetails.Width = gbCompetitorDetails.Width - (padding * 3);
+            AutoResizeCompetitorDetailsColumnWidths();
+
+            // Size
+            int size = (gbCompetitorDetails.Width / 6);
+            btnSaveComp.Width = size;
+            btnNewComp.Width = size;
+            btnCompDelete.Width = size;
+            btnCompClear.Width = size;
+
+            size = (int)(btnNewComp.Width * 0.35);
+            btnSaveComp.Height = size;
+            btnNewComp.Height = size;
+            btnCompDelete.Height = size;
+            btnCompClear.Height = size;
+
+            // Font
+            Font font = Global.AutoResizeFont(btnNewComp);
+            btnSaveComp.Font = font;
+            btnNewComp.Font = font;
+            btnCompDelete.Font = font;
+            btnCompClear.Font = font;
+            dgvCompetitorDetails.DefaultCellStyle.Font = Global.AutoResizeFont(dgvCompetitorDetails);
+            dgvCompetitorDetails.AutoResizeRows();
+
+            // Place
+            btnSaveComp.Top = gbCompetitorDetails.Height - btnSaveComp.Height - (padding * 2);
+            btnNewComp.Top = btnSaveComp.Top;
+            btnCompDelete.Top = btnSaveComp.Top;
+            btnCompClear.Top = btnSaveComp.Top;
+
+            btnNewComp.Left = (gbCompetitorDetails.Width / 2) - btnNewComp.Width - (padding / 2);
+            btnSaveComp.Left = btnNewComp.Left - btnSaveComp.Width - padding;
+            btnCompDelete.Left = (gbCompetitorDetails.Width / 2) + (padding / 2);
+            btnCompClear.Left = btnCompDelete.Left + btnCompDelete.Width + padding;
+
+            // Finalize grid view
+            dgvCompetitorDetails.Height = gbCompetitorDetails.Height -
+                                            (padding * 5) -
+                                            (gbCompetitorDetails.Height - btnNewComp.Top);
+            dgvCompetitorDetails.Refresh();
+        }
+
+        private void AutoResizeCompetitorDetailsColumnWidths()
+        {
+            int column_width = (dgvCompetitorDetails.Width / (dgvCompetitorDetails.Columns.Count - 1)) - 12;
+
+            //Skip hidden id column (0)
+            for (int i = 1; i < dgvCompetitorDetails.Columns.Count; i++)
+            {
+                dgvCompetitorDetails.Columns[i].Width = (column_width < dgvCompetitorDetails.Columns[i].MinimumWidth) ?
+                                                            dgvCompetitorDetails.Columns[i].MinimumWidth :
+                                                            column_width;
+            }
+        }
+
         private void AutoResizeCompetitorControls()
         {
+            // Size groups
+            int padding = 10;
+            gbComp.Width = (int)(tab1.Width * 0.40) - (padding * 2);
+            gbCompetitorDetails.Width = (int)(tab1.Width * 0.60) - (padding * 2);
+            gbComp.Height = tab1.Height - (padding * 4);
+            gbCompetitorDetails.Height = tab1.Height - (padding * 4);
 
+            // Place groups
+            gbComp.Left = padding;
+            gbCompetitorDetails.Left = gbComp.Left + padding + gbComp.Width;
+            gbComp.Top = padding;
+            gbCompetitorDetails.Top = padding;
+
+            // Controls
+            AutoResizeCompetitorListControls();
+            AutoResizeCompetitorDetailsControls();
         }
-        #endregion        
+        #endregion
     }
 }

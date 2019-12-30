@@ -115,61 +115,11 @@
             this.lblConnection = new System.Windows.Forms.Label();
             this.lblCompLoading = new System.Windows.Forms.Label();
             this.gbCompetitorDetails = new System.Windows.Forms.GroupBox();
+            this.dgvCompetitorDetails = new System.Windows.Forms.DataGridView();
             this.btnCompDelete = new System.Windows.Forms.Button();
             this.btnCompClear = new System.Windows.Forms.Button();
             this.btnNewComp = new System.Windows.Forms.Button();
             this.btnSaveComp = new System.Windows.Forms.Button();
-            this.gbCompAddress = new System.Windows.Forms.GroupBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.txtCompZipCode = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.txtCompState = new System.Windows.Forms.TextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.txtCompCity = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.txtCompApptCode = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.txtCompStreet2 = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.txtCompStreet1 = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.txtCompCountry = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.txtCompEmail = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.txtCompPhone = new System.Windows.Forms.TextBox();
-            this.gbCompDemographics = new System.Windows.Forms.GroupBox();
-            this.btnCompRegEvents = new System.Windows.Forms.Button();
-            this.lblCompSchoolOther = new System.Windows.Forms.Label();
-            this.lblCompInstructor = new System.Windows.Forms.Label();
-            this.txtCompInstructor = new System.Windows.Forms.TextBox();
-            this.btnSpecialConsiderationDetails = new System.Windows.Forms.Button();
-            this.nudCompAge = new System.Windows.Forms.NumericUpDown();
-            this.lblAge = new System.Windows.Forms.Label();
-            this.nudCompHeight = new System.Windows.Forms.NumericUpDown();
-            this.label31 = new System.Windows.Forms.Label();
-            this.cbCompBelt = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txtCompSchoolOther = new System.Windows.Forms.TextBox();
-            this.cbCompSchool = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.gbCompParent = new System.Windows.Forms.GroupBox();
-            this.txtCompParentEmail = new System.Windows.Forms.TextBox();
-            this.txtCompParentLastName = new System.Windows.Forms.TextBox();
-            this.txtCompParentFirstName = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.nudCompWeight = new System.Windows.Forms.NumericUpDown();
-            this.label19 = new System.Windows.Forms.Label();
-            this.rbCompMale = new System.Windows.Forms.RadioButton();
-            this.rbCompFemale = new System.Windows.Forms.RadioButton();
-            this.cbCompTitle = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtCompLastName = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtCompFirstName = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.gbComp = new System.Windows.Forms.GroupBox();
             this.btnCompFilterApply = new System.Windows.Forms.Button();
             this.tlvComp = new BrightIdeasSoftware.TreeListView();
@@ -247,12 +197,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tlvCompetitors)).BeginInit();
             this.tabCompetitor.SuspendLayout();
             this.gbCompetitorDetails.SuspendLayout();
-            this.gbCompAddress.SuspendLayout();
-            this.gbCompDemographics.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCompAge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCompHeight)).BeginInit();
-            this.gbCompParent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCompWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCompetitorDetails)).BeginInit();
             this.gbComp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvComp)).BeginInit();
             this.msMenu.SuspendLayout();
@@ -1239,12 +1184,11 @@
             // 
             // gbCompetitorDetails
             // 
+            this.gbCompetitorDetails.Controls.Add(this.dgvCompetitorDetails);
             this.gbCompetitorDetails.Controls.Add(this.btnCompDelete);
             this.gbCompetitorDetails.Controls.Add(this.btnCompClear);
             this.gbCompetitorDetails.Controls.Add(this.btnNewComp);
             this.gbCompetitorDetails.Controls.Add(this.btnSaveComp);
-            this.gbCompetitorDetails.Controls.Add(this.gbCompAddress);
-            this.gbCompetitorDetails.Controls.Add(this.gbCompDemographics);
             this.gbCompetitorDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbCompetitorDetails.Location = new System.Drawing.Point(496, 4);
             this.gbCompetitorDetails.Margin = new System.Windows.Forms.Padding(2);
@@ -1254,6 +1198,17 @@
             this.gbCompetitorDetails.TabIndex = 5;
             this.gbCompetitorDetails.TabStop = false;
             this.gbCompetitorDetails.Text = "Competitor Details";
+            // 
+            // dgvCompetitorDetails
+            // 
+            this.dgvCompetitorDetails.AllowUserToAddRows = false;
+            this.dgvCompetitorDetails.AllowUserToDeleteRows = false;
+            this.dgvCompetitorDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCompetitorDetails.Location = new System.Drawing.Point(14, 28);
+            this.dgvCompetitorDetails.Name = "dgvCompetitorDetails";
+            this.dgvCompetitorDetails.Size = new System.Drawing.Size(584, 353);
+            this.dgvCompetitorDetails.TabIndex = 6;
+            this.dgvCompetitorDetails.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCompetitorDetails_CellContentClick);
             // 
             // btnCompDelete
             // 
@@ -1298,590 +1253,6 @@
             this.btnSaveComp.Text = "Save Changes";
             this.btnSaveComp.UseVisualStyleBackColor = true;
             this.btnSaveComp.Click += new System.EventHandler(this.btnSaveComp_Click);
-            // 
-            // gbCompAddress
-            // 
-            this.gbCompAddress.Controls.Add(this.label28);
-            this.gbCompAddress.Controls.Add(this.txtCompZipCode);
-            this.gbCompAddress.Controls.Add(this.label29);
-            this.gbCompAddress.Controls.Add(this.txtCompState);
-            this.gbCompAddress.Controls.Add(this.label30);
-            this.gbCompAddress.Controls.Add(this.txtCompCity);
-            this.gbCompAddress.Controls.Add(this.label25);
-            this.gbCompAddress.Controls.Add(this.txtCompApptCode);
-            this.gbCompAddress.Controls.Add(this.label26);
-            this.gbCompAddress.Controls.Add(this.txtCompStreet2);
-            this.gbCompAddress.Controls.Add(this.label27);
-            this.gbCompAddress.Controls.Add(this.txtCompStreet1);
-            this.gbCompAddress.Controls.Add(this.label24);
-            this.gbCompAddress.Controls.Add(this.txtCompCountry);
-            this.gbCompAddress.Controls.Add(this.label23);
-            this.gbCompAddress.Controls.Add(this.txtCompEmail);
-            this.gbCompAddress.Controls.Add(this.label22);
-            this.gbCompAddress.Controls.Add(this.txtCompPhone);
-            this.gbCompAddress.Location = new System.Drawing.Point(4, 266);
-            this.gbCompAddress.Margin = new System.Windows.Forms.Padding(2);
-            this.gbCompAddress.Name = "gbCompAddress";
-            this.gbCompAddress.Padding = new System.Windows.Forms.Padding(2);
-            this.gbCompAddress.Size = new System.Drawing.Size(596, 111);
-            this.gbCompAddress.TabIndex = 1;
-            this.gbCompAddress.TabStop = false;
-            this.gbCompAddress.Text = "Contact Information";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(440, 80);
-            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(28, 18);
-            this.label28.TabIndex = 25;
-            this.label28.Text = "Zip";
-            // 
-            // txtCompZipCode
-            // 
-            this.txtCompZipCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompZipCode.Location = new System.Drawing.Point(500, 78);
-            this.txtCompZipCode.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompZipCode.Name = "txtCompZipCode";
-            this.txtCompZipCode.Size = new System.Drawing.Size(96, 21);
-            this.txtCompZipCode.TabIndex = 26;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(440, 52);
-            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(42, 18);
-            this.label29.TabIndex = 23;
-            this.label29.Text = "State";
-            // 
-            // txtCompState
-            // 
-            this.txtCompState.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompState.Location = new System.Drawing.Point(500, 50);
-            this.txtCompState.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompState.Name = "txtCompState";
-            this.txtCompState.Size = new System.Drawing.Size(96, 21);
-            this.txtCompState.TabIndex = 24;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(440, 24);
-            this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(33, 18);
-            this.label30.TabIndex = 21;
-            this.label30.Text = "City";
-            // 
-            // txtCompCity
-            // 
-            this.txtCompCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompCity.Location = new System.Drawing.Point(500, 22);
-            this.txtCompCity.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompCity.Name = "txtCompCity";
-            this.txtCompCity.Size = new System.Drawing.Size(96, 21);
-            this.txtCompCity.TabIndex = 22;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(238, 80);
-            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(53, 18);
-            this.label25.TabIndex = 19;
-            this.label25.Text = "Appt. #";
-            // 
-            // txtCompApptCode
-            // 
-            this.txtCompApptCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompApptCode.Location = new System.Drawing.Point(308, 78);
-            this.txtCompApptCode.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompApptCode.Name = "txtCompApptCode";
-            this.txtCompApptCode.Size = new System.Drawing.Size(116, 21);
-            this.txtCompApptCode.TabIndex = 20;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(238, 52);
-            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(59, 18);
-            this.label26.TabIndex = 17;
-            this.label26.Text = "Street 2";
-            // 
-            // txtCompStreet2
-            // 
-            this.txtCompStreet2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompStreet2.Location = new System.Drawing.Point(308, 50);
-            this.txtCompStreet2.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompStreet2.Name = "txtCompStreet2";
-            this.txtCompStreet2.Size = new System.Drawing.Size(116, 21);
-            this.txtCompStreet2.TabIndex = 18;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(238, 24);
-            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(59, 18);
-            this.label27.TabIndex = 15;
-            this.label27.Text = "Street 1";
-            // 
-            // txtCompStreet1
-            // 
-            this.txtCompStreet1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompStreet1.Location = new System.Drawing.Point(308, 22);
-            this.txtCompStreet1.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompStreet1.Name = "txtCompStreet1";
-            this.txtCompStreet1.Size = new System.Drawing.Size(116, 21);
-            this.txtCompStreet1.TabIndex = 16;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(3, 80);
-            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(60, 18);
-            this.label24.TabIndex = 13;
-            this.label24.Text = "Country";
-            // 
-            // txtCompCountry
-            // 
-            this.txtCompCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompCountry.Location = new System.Drawing.Point(111, 78);
-            this.txtCompCountry.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompCountry.Name = "txtCompCountry";
-            this.txtCompCountry.Size = new System.Drawing.Size(116, 21);
-            this.txtCompCountry.TabIndex = 14;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(3, 52);
-            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(45, 18);
-            this.label23.TabIndex = 11;
-            this.label23.Text = "Email";
-            // 
-            // txtCompEmail
-            // 
-            this.txtCompEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompEmail.Location = new System.Drawing.Point(111, 50);
-            this.txtCompEmail.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompEmail.Name = "txtCompEmail";
-            this.txtCompEmail.Size = new System.Drawing.Size(116, 21);
-            this.txtCompEmail.TabIndex = 12;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(3, 24);
-            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(108, 18);
-            this.label22.TabIndex = 9;
-            this.label22.Text = "Phone Number";
-            // 
-            // txtCompPhone
-            // 
-            this.txtCompPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompPhone.Location = new System.Drawing.Point(111, 22);
-            this.txtCompPhone.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompPhone.Name = "txtCompPhone";
-            this.txtCompPhone.Size = new System.Drawing.Size(116, 21);
-            this.txtCompPhone.TabIndex = 10;
-            // 
-            // gbCompDemographics
-            // 
-            this.gbCompDemographics.Controls.Add(this.btnCompRegEvents);
-            this.gbCompDemographics.Controls.Add(this.lblCompSchoolOther);
-            this.gbCompDemographics.Controls.Add(this.lblCompInstructor);
-            this.gbCompDemographics.Controls.Add(this.txtCompInstructor);
-            this.gbCompDemographics.Controls.Add(this.btnSpecialConsiderationDetails);
-            this.gbCompDemographics.Controls.Add(this.nudCompAge);
-            this.gbCompDemographics.Controls.Add(this.lblAge);
-            this.gbCompDemographics.Controls.Add(this.nudCompHeight);
-            this.gbCompDemographics.Controls.Add(this.label31);
-            this.gbCompDemographics.Controls.Add(this.cbCompBelt);
-            this.gbCompDemographics.Controls.Add(this.label21);
-            this.gbCompDemographics.Controls.Add(this.txtCompSchoolOther);
-            this.gbCompDemographics.Controls.Add(this.cbCompSchool);
-            this.gbCompDemographics.Controls.Add(this.label20);
-            this.gbCompDemographics.Controls.Add(this.gbCompParent);
-            this.gbCompDemographics.Controls.Add(this.nudCompWeight);
-            this.gbCompDemographics.Controls.Add(this.label19);
-            this.gbCompDemographics.Controls.Add(this.rbCompMale);
-            this.gbCompDemographics.Controls.Add(this.rbCompFemale);
-            this.gbCompDemographics.Controls.Add(this.cbCompTitle);
-            this.gbCompDemographics.Controls.Add(this.label16);
-            this.gbCompDemographics.Controls.Add(this.txtCompLastName);
-            this.gbCompDemographics.Controls.Add(this.label15);
-            this.gbCompDemographics.Controls.Add(this.txtCompFirstName);
-            this.gbCompDemographics.Controls.Add(this.label14);
-            this.gbCompDemographics.Location = new System.Drawing.Point(4, 28);
-            this.gbCompDemographics.Margin = new System.Windows.Forms.Padding(2);
-            this.gbCompDemographics.Name = "gbCompDemographics";
-            this.gbCompDemographics.Padding = new System.Windows.Forms.Padding(2);
-            this.gbCompDemographics.Size = new System.Drawing.Size(596, 234);
-            this.gbCompDemographics.TabIndex = 0;
-            this.gbCompDemographics.TabStop = false;
-            this.gbCompDemographics.Text = "Demographics";
-            // 
-            // btnCompRegEvents
-            // 
-            this.btnCompRegEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCompRegEvents.Location = new System.Drawing.Point(443, 137);
-            this.btnCompRegEvents.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCompRegEvents.Name = "btnCompRegEvents";
-            this.btnCompRegEvents.Size = new System.Drawing.Size(142, 30);
-            this.btnCompRegEvents.TabIndex = 31;
-            this.btnCompRegEvents.Text = "Registered Events";
-            this.btnCompRegEvents.UseVisualStyleBackColor = true;
-            this.btnCompRegEvents.Click += new System.EventHandler(this.btnCompRegEvents_Click);
-            // 
-            // lblCompSchoolOther
-            // 
-            this.lblCompSchoolOther.AutoSize = true;
-            this.lblCompSchoolOther.Location = new System.Drawing.Point(384, 74);
-            this.lblCompSchoolOther.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblCompSchoolOther.Name = "lblCompSchoolOther";
-            this.lblCompSchoolOther.Size = new System.Drawing.Size(55, 18);
-            this.lblCompSchoolOther.TabIndex = 30;
-            this.lblCompSchoolOther.Text = "(Other)";
-            // 
-            // lblCompInstructor
-            // 
-            this.lblCompInstructor.AutoSize = true;
-            this.lblCompInstructor.Location = new System.Drawing.Point(370, 106);
-            this.lblCompInstructor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblCompInstructor.Name = "lblCompInstructor";
-            this.lblCompInstructor.Size = new System.Drawing.Size(70, 18);
-            this.lblCompInstructor.TabIndex = 29;
-            this.lblCompInstructor.Text = "Instructor";
-            // 
-            // txtCompInstructor
-            // 
-            this.txtCompInstructor.Enabled = false;
-            this.txtCompInstructor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompInstructor.Location = new System.Drawing.Point(442, 105);
-            this.txtCompInstructor.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompInstructor.Name = "txtCompInstructor";
-            this.txtCompInstructor.Size = new System.Drawing.Size(147, 21);
-            this.txtCompInstructor.TabIndex = 28;
-            // 
-            // btnSpecialConsiderationDetails
-            // 
-            this.btnSpecialConsiderationDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSpecialConsiderationDetails.Location = new System.Drawing.Point(217, 137);
-            this.btnSpecialConsiderationDetails.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSpecialConsiderationDetails.Name = "btnSpecialConsiderationDetails";
-            this.btnSpecialConsiderationDetails.Size = new System.Drawing.Size(142, 30);
-            this.btnSpecialConsiderationDetails.TabIndex = 6;
-            this.btnSpecialConsiderationDetails.Text = "Special Considerations";
-            this.btnSpecialConsiderationDetails.UseVisualStyleBackColor = true;
-            this.btnSpecialConsiderationDetails.Click += new System.EventHandler(this.btnSpecialConsiderationDetails_Click);
-            // 
-            // nudCompAge
-            // 
-            this.nudCompAge.Location = new System.Drawing.Point(296, 67);
-            this.nudCompAge.Margin = new System.Windows.Forms.Padding(2);
-            this.nudCompAge.Maximum = new decimal(new int[] {
-            120,
-            0,
-            0,
-            0});
-            this.nudCompAge.Name = "nudCompAge";
-            this.nudCompAge.Size = new System.Drawing.Size(61, 24);
-            this.nudCompAge.TabIndex = 27;
-            this.nudCompAge.Value = new decimal(new int[] {
-            120,
-            0,
-            0,
-            0});
-            // 
-            // lblAge
-            // 
-            this.lblAge.AutoSize = true;
-            this.lblAge.Location = new System.Drawing.Point(214, 68);
-            this.lblAge.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(33, 18);
-            this.lblAge.TabIndex = 26;
-            this.lblAge.Text = "Age";
-            // 
-            // nudCompHeight
-            // 
-            this.nudCompHeight.DecimalPlaces = 2;
-            this.nudCompHeight.Location = new System.Drawing.Point(86, 142);
-            this.nudCompHeight.Margin = new System.Windows.Forms.Padding(2);
-            this.nudCompHeight.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nudCompHeight.Name = "nudCompHeight";
-            this.nudCompHeight.Size = new System.Drawing.Size(114, 24);
-            this.nudCompHeight.TabIndex = 25;
-            this.nudCompHeight.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(3, 142);
-            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(75, 18);
-            this.label31.TabIndex = 24;
-            this.label31.Text = "Height (in)";
-            // 
-            // cbCompBelt
-            // 
-            this.cbCompBelt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCompBelt.FormattingEnabled = true;
-            this.cbCompBelt.Location = new System.Drawing.Point(251, 104);
-            this.cbCompBelt.Margin = new System.Windows.Forms.Padding(2);
-            this.cbCompBelt.Name = "cbCompBelt";
-            this.cbCompBelt.Size = new System.Drawing.Size(108, 23);
-            this.cbCompBelt.TabIndex = 23;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(212, 104);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(33, 18);
-            this.label21.TabIndex = 22;
-            this.label21.Text = "Belt";
-            // 
-            // txtCompSchoolOther
-            // 
-            this.txtCompSchoolOther.Enabled = false;
-            this.txtCompSchoolOther.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompSchoolOther.Location = new System.Drawing.Point(440, 74);
-            this.txtCompSchoolOther.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompSchoolOther.Name = "txtCompSchoolOther";
-            this.txtCompSchoolOther.Size = new System.Drawing.Size(147, 21);
-            this.txtCompSchoolOther.TabIndex = 21;
-            // 
-            // cbCompSchool
-            // 
-            this.cbCompSchool.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCompSchool.FormattingEnabled = true;
-            this.cbCompSchool.Location = new System.Drawing.Point(440, 50);
-            this.cbCompSchool.Margin = new System.Windows.Forms.Padding(2);
-            this.cbCompSchool.Name = "cbCompSchool";
-            this.cbCompSchool.Size = new System.Drawing.Size(147, 23);
-            this.cbCompSchool.TabIndex = 20;
-            this.cbCompSchool.SelectedIndexChanged += new System.EventHandler(this.cbCompSchool_SelectedIndexChanged);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(384, 52);
-            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(55, 18);
-            this.label20.TabIndex = 19;
-            this.label20.Text = "School";
-            // 
-            // gbCompParent
-            // 
-            this.gbCompParent.Controls.Add(this.txtCompParentEmail);
-            this.gbCompParent.Controls.Add(this.txtCompParentLastName);
-            this.gbCompParent.Controls.Add(this.txtCompParentFirstName);
-            this.gbCompParent.Controls.Add(this.label13);
-            this.gbCompParent.Controls.Add(this.label12);
-            this.gbCompParent.Controls.Add(this.label11);
-            this.gbCompParent.Location = new System.Drawing.Point(6, 168);
-            this.gbCompParent.Margin = new System.Windows.Forms.Padding(2);
-            this.gbCompParent.Name = "gbCompParent";
-            this.gbCompParent.Padding = new System.Windows.Forms.Padding(2);
-            this.gbCompParent.Size = new System.Drawing.Size(580, 61);
-            this.gbCompParent.TabIndex = 1;
-            this.gbCompParent.TabStop = false;
-            this.gbCompParent.Text = "Parent (if minor)";
-            // 
-            // txtCompParentEmail
-            // 
-            this.txtCompParentEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompParentEmail.Location = new System.Drawing.Point(460, 28);
-            this.txtCompParentEmail.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompParentEmail.Name = "txtCompParentEmail";
-            this.txtCompParentEmail.Size = new System.Drawing.Size(116, 21);
-            this.txtCompParentEmail.TabIndex = 5;
-            // 
-            // txtCompParentLastName
-            // 
-            this.txtCompParentLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompParentLastName.Location = new System.Drawing.Point(288, 28);
-            this.txtCompParentLastName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompParentLastName.Name = "txtCompParentLastName";
-            this.txtCompParentLastName.Size = new System.Drawing.Size(116, 21);
-            this.txtCompParentLastName.TabIndex = 4;
-            // 
-            // txtCompParentFirstName
-            // 
-            this.txtCompParentFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompParentFirstName.Location = new System.Drawing.Point(84, 28);
-            this.txtCompParentFirstName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompParentFirstName.Name = "txtCompParentFirstName";
-            this.txtCompParentFirstName.Size = new System.Drawing.Size(116, 21);
-            this.txtCompParentFirstName.TabIndex = 3;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(412, 29);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(45, 18);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Email";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(208, 29);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(80, 18);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Last Name";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 29);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 18);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "First Name";
-            // 
-            // nudCompWeight
-            // 
-            this.nudCompWeight.DecimalPlaces = 2;
-            this.nudCompWeight.Location = new System.Drawing.Point(86, 104);
-            this.nudCompWeight.Margin = new System.Windows.Forms.Padding(2);
-            this.nudCompWeight.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.nudCompWeight.Name = "nudCompWeight";
-            this.nudCompWeight.Size = new System.Drawing.Size(114, 24);
-            this.nudCompWeight.TabIndex = 18;
-            this.nudCompWeight.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(3, 104);
-            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(79, 18);
-            this.label19.TabIndex = 17;
-            this.label19.Text = "Weight (lb)";
-            // 
-            // rbCompMale
-            // 
-            this.rbCompMale.AutoSize = true;
-            this.rbCompMale.Location = new System.Drawing.Point(304, 27);
-            this.rbCompMale.Margin = new System.Windows.Forms.Padding(2);
-            this.rbCompMale.Name = "rbCompMale";
-            this.rbCompMale.Size = new System.Drawing.Size(58, 22);
-            this.rbCompMale.TabIndex = 15;
-            this.rbCompMale.TabStop = true;
-            this.rbCompMale.Text = "Male";
-            this.rbCompMale.UseVisualStyleBackColor = true;
-            // 
-            // rbCompFemale
-            // 
-            this.rbCompFemale.AutoSize = true;
-            this.rbCompFemale.Location = new System.Drawing.Point(216, 26);
-            this.rbCompFemale.Margin = new System.Windows.Forms.Padding(2);
-            this.rbCompFemale.Name = "rbCompFemale";
-            this.rbCompFemale.Size = new System.Drawing.Size(75, 22);
-            this.rbCompFemale.TabIndex = 14;
-            this.rbCompFemale.TabStop = true;
-            this.rbCompFemale.Text = "Female";
-            this.rbCompFemale.UseVisualStyleBackColor = true;
-            // 
-            // cbCompTitle
-            // 
-            this.cbCompTitle.Enabled = false;
-            this.cbCompTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCompTitle.FormattingEnabled = true;
-            this.cbCompTitle.Location = new System.Drawing.Point(441, 24);
-            this.cbCompTitle.Margin = new System.Windows.Forms.Padding(2);
-            this.cbCompTitle.Name = "cbCompTitle";
-            this.cbCompTitle.Size = new System.Drawing.Size(147, 23);
-            this.cbCompTitle.TabIndex = 13;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(388, 26);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(35, 18);
-            this.label16.TabIndex = 12;
-            this.label16.Text = "Title";
-            // 
-            // txtCompLastName
-            // 
-            this.txtCompLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompLastName.Location = new System.Drawing.Point(86, 66);
-            this.txtCompLastName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompLastName.Name = "txtCompLastName";
-            this.txtCompLastName.Size = new System.Drawing.Size(116, 21);
-            this.txtCompLastName.TabIndex = 9;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(3, 29);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(81, 18);
-            this.label15.TabIndex = 6;
-            this.label15.Text = "First Name";
-            // 
-            // txtCompFirstName
-            // 
-            this.txtCompFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCompFirstName.Location = new System.Drawing.Point(86, 28);
-            this.txtCompFirstName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCompFirstName.Name = "txtCompFirstName";
-            this.txtCompFirstName.Size = new System.Drawing.Size(116, 21);
-            this.txtCompFirstName.TabIndex = 8;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 68);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(80, 18);
-            this.label14.TabIndex = 7;
-            this.label14.Text = "Last Name";
             // 
             // gbComp
             // 
@@ -2463,15 +1834,7 @@
             this.tabCompetitor.ResumeLayout(false);
             this.tabCompetitor.PerformLayout();
             this.gbCompetitorDetails.ResumeLayout(false);
-            this.gbCompAddress.ResumeLayout(false);
-            this.gbCompAddress.PerformLayout();
-            this.gbCompDemographics.ResumeLayout(false);
-            this.gbCompDemographics.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCompAge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCompHeight)).EndInit();
-            this.gbCompParent.ResumeLayout(false);
-            this.gbCompParent.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCompWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCompetitorDetails)).EndInit();
             this.gbComp.ResumeLayout(false);
             this.gbComp.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvComp)).EndInit();
@@ -2575,48 +1938,6 @@
         private System.Windows.Forms.TextBox txtCompFilter;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox gbCompetitorDetails;
-        private System.Windows.Forms.GroupBox gbCompParent;
-        private System.Windows.Forms.GroupBox gbCompAddress;
-        private System.Windows.Forms.GroupBox gbCompDemographics;
-        private System.Windows.Forms.TextBox txtCompParentEmail;
-        private System.Windows.Forms.TextBox txtCompParentLastName;
-        private System.Windows.Forms.TextBox txtCompParentFirstName;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txtCompLastName;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox txtCompFirstName;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.RadioButton rbCompMale;
-        private System.Windows.Forms.RadioButton rbCompFemale;
-        private System.Windows.Forms.ComboBox cbCompTitle;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.NumericUpDown nudCompWeight;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox txtCompSchoolOther;
-        private System.Windows.Forms.ComboBox cbCompSchool;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.ComboBox cbCompBelt;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox txtCompCountry;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox txtCompEmail;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox txtCompPhone;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TextBox txtCompZipCode;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.TextBox txtCompState;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.TextBox txtCompCity;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox txtCompApptCode;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox txtCompStreet2;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox txtCompStreet1;
         private System.Windows.Forms.Button btnCompClear;
         private System.Windows.Forms.Button btnNewComp;
         private System.Windows.Forms.Button btnSaveComp;
@@ -2630,8 +1951,6 @@
         private BrightIdeasSoftware.OLVColumn olvColHeight;
         private BrightIdeasSoftware.OLVColumn olvMatchCompHeight;
         private BrightIdeasSoftware.OLVColumn olvColCompHeight;
-        private System.Windows.Forms.NumericUpDown nudCompHeight;
-        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.GroupBox gbEventDetails;
         private System.Windows.Forms.Button btnDeleteEvent;
         private System.Windows.Forms.Button btnClearEventSelection;
@@ -2665,29 +1984,23 @@
         private System.Windows.Forms.Button btnDivisionRingNumbers;
         private System.Windows.Forms.Button btnSchoolsOwners;
         private System.Windows.Forms.Button btnAllEvents;
-        private System.Windows.Forms.NumericUpDown nudCompAge;
-        private System.Windows.Forms.Label lblAge;
         private System.Windows.Forms.Label lblConnection;
         private System.Windows.Forms.ToolStripMenuItem miHelp;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Button btnSpecialConsiderationDetails;
         private System.Windows.Forms.ToolStripMenuItem matchSelectionAssistantToolStripMenuItem;
         private System.Windows.Forms.Button btnEventLoadReg;
         private System.Windows.Forms.Timer tmrRegistrations;
         private System.Windows.Forms.ToolStripMenuItem cmiRemoveCompetitors;
         private System.Windows.Forms.ToolStripMenuItem cmiViewMatchDetails;
-        private System.Windows.Forms.Label lblCompInstructor;
-        private System.Windows.Forms.TextBox txtCompInstructor;
-        private System.Windows.Forms.Label lblCompSchoolOther;
         private System.Windows.Forms.Button btnRegForm;
         private System.Windows.Forms.ToolStripMenuItem cmiViewSelectedMatchDetails;
         private System.Windows.Forms.ToolStripMenuItem cmiChangeDivisionNumber;
         private System.Windows.Forms.ToolStripMenuItem cmiChangeSelectedDivisionNumber;
         private System.Windows.Forms.ToolStripMenuItem cmiDownloadLatestVersion;
         private System.Windows.Forms.Button btnCompetitorsBySchoolReport;
-        private System.Windows.Forms.Button btnCompRegEvents;
         private System.Windows.Forms.Button btnCheckInRoster;
         private System.Windows.Forms.RichTextBox rtbEventInfo;
+        private System.Windows.Forms.DataGridView dgvCompetitorDetails;
     }
 }

@@ -114,6 +114,9 @@
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\DivisionModel.cs" />
     <Compile Include="Models\MatchModel.cs" />
+    <Compile Include="Objects\GridPair.cs" />
+    <Compile Include="Objects\CompetitorDetailsGridPair.cs" />
+    <Compile Include="Objects\CompetitorDetailsGridMap.cs" />
     <Compile Include="Objects\MatchContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
