@@ -883,7 +883,6 @@
             this.tlvMatches.UseCompatibleStateImageBehavior = false;
             this.tlvMatches.View = System.Windows.Forms.View.Details;
             this.tlvMatches.VirtualMode = true;
-            this.tlvMatches.CanDrop += new System.EventHandler<BrightIdeasSoftware.OlvDropEventArgs>(this.tlvMatches_CanDrop);
             this.tlvMatches.ModelCanDrop += new System.EventHandler<BrightIdeasSoftware.ModelDropEventArgs>(this.tlvMatches_ModelCanDrop);
             this.tlvMatches.ModelDropped += new System.EventHandler<BrightIdeasSoftware.ModelDropEventArgs>(this.tlvMatches_ModelDropped);
             // 

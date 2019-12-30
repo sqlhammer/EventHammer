@@ -1232,6 +1232,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
                 RefreshMatches(MatchModels);
                 RefreshCompetitors(CompetitorModels);
+                AutoResizeForm();
             }
         }
 
@@ -1329,12 +1330,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
             e.RefreshObjects();
         }
-
-        private void tlvMatches_CanDrop(object sender, BrightIdeasSoftware.OlvDropEventArgs e)
-        {
-            //string s = "used as break point to test event";
-        }
-
+        
         private void cmiMatchesExpandAll_Click(object sender, EventArgs e)
         {
             this.tlvMatches.ExpandAll();
