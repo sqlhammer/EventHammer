@@ -28,7 +28,7 @@
 	COALESCE(vcd.DojoName,vcd.OtherDojoName) DojoName
 	,vcd.DisplayName
 	,m.MatchTypeName
-	,m.MatchDisplayId
+	,m.DivisionId
 	,m.SubDivisionId
 FROM Person.vwCompetitorDetail vcd
 LEFT JOIN Event.vwMatchCompetitorDetail m ON m.CompetitorId = vcd.CompetitorId</CommandText>
@@ -46,8 +46,8 @@ LEFT JOIN Event.vwMatchCompetitorDetail m ON m.CompetitorId = vcd.CompetitorId</
           <DataField>MatchTypeName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="MatchDisplayId">
-          <DataField>MatchDisplayId</DataField>
+        <Field Name="DivisionId">
+          <DataField>DivisionId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="SubDivisionId">
@@ -389,7 +389,7 @@ LEFT JOIN Event.vwMatchCompetitorDetail m ON m.CompetitorId = vcd.CompetitorId</
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!MatchDisplayId.Value</Value>
+                                      <Value>=Fields!DivisionId.Value</Value>
                                       <Style />
                                     </TextRun>
                                   </TextRuns>
@@ -501,7 +501,7 @@ LEFT JOIN Event.vwMatchCompetitorDetail m ON m.CompetitorId = vcd.CompetitorId</
                     <Value>=Fields!DisplayName.Value</Value>
                   </SortExpression>
                   <SortExpression>
-                    <Value>=Fields!MatchDisplayId.Value</Value>
+                    <Value>=Fields!DivisionId.Value</Value>
                   </SortExpression>
                   <SortExpression>
                     <Value>=Fields!SubDivisionId.Value</Value>

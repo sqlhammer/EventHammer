@@ -31,8 +31,8 @@
           <DataField>MatchTypeName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="MatchDisplayId">
-          <DataField>MatchDisplayId</DataField>
+        <Field Name="DivisionId">
+          <DataField>DivisionId</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="SubDivisionId">
@@ -139,14 +139,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="MatchDisplayId">
+                        <Textbox Name="DivisionId">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!MatchDisplayId.Value</Value>
+                                  <Value>=Fields!DivisionId.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -155,7 +155,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>MatchDisplayId</rd:DefaultName>
+                          <rd:DefaultName>DivisionId</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -259,7 +259,7 @@
             <DataSetName>dsCompetitorsByDojo</DataSetName>
             <SortExpressions>
               <SortExpression>
-                <Value>=Fields!MatchDisplayId.Value</Value>
+                <Value>=Fields!DivisionId.Value</Value>
               </SortExpression>
               <SortExpression>
                 <Value>=Fields!SubDivisionId.Value</Value>

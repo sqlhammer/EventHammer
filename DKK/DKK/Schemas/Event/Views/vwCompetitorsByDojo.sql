@@ -6,7 +6,7 @@ SELECT f.Name DojoName
 	,cp.DisplayName CompetitorName
 	,mt.Name MatchTypeName
 	,mt.IsSpecialConsideration
-	,m.MatchDisplayId
+	,m.DivisionId
 	,m.SubDivisionId
 	,c.EventId
 	,d.DojoId

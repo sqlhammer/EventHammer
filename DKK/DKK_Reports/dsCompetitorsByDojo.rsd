@@ -20,7 +20,7 @@
       <CommandText>SELECT DISTINCT
 	  cd.CompetitorName
 	  ,cd.MatchTypeName
-	  ,cd.MatchDisplayId
+	  ,cd.DivisionId
 	  ,cd.SubDivisionId
 	  ,cd.IsSpecialConsideration
 FROM [Event].[vwCompetitorsByDojo] cd
@@ -36,8 +36,8 @@ WHERE cd.EventId = @EventId
         <DataField>MatchTypeName</DataField>
         <rd:TypeName>System.String</rd:TypeName>
       </Field>
-      <Field Name="MatchDisplayId">
-        <DataField>MatchDisplayId</DataField>
+      <Field Name="DivisionId">
+        <DataField>DivisionId</DataField>
         <rd:TypeName>System.Int32</rd:TypeName>
       </Field>
       <Field Name="SubDivisionId">
