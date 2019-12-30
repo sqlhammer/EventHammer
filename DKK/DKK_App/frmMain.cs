@@ -88,7 +88,13 @@ namespace DKK_App
 
         private void btnClearMatchFilter_Click(object sender, EventArgs e)
         {
+            ClearMatchFilter();
+        }
+
+        private void ClearMatchFilter()
+        {
             RefreshMatches(MatchModels);
+            txtMatchFilter.Text = "";
         }
 
         private void cmiDownloadLatestVersion_Click(object sender, EventArgs e)
@@ -1345,7 +1351,14 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void btnClearCompetitorFilter_Click(object sender, EventArgs e)
         {
+            ClearCompetitorFilters();
+        }
+
+        private void ClearCompetitorFilters()
+        {
             RefreshCompetitors(CompetitorModels);
+            txtCompetitorFilter.Text = "";
+            txtCompFilter.Text = "";
         }
 
         private void txtCompetitorFilter_TextChanged(object sender, EventArgs e)
