@@ -2939,7 +2939,52 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void AutoResizeCompetitorListControls()
         {
-            
+            const double padding = 10;
+
+            // control sizing (except TLV heights)
+
+            tlvComp.Width = Convert.ToInt32(gbComp.Width - padding);
+
+            const double comp_filter_width_multiplier = 0.4;
+            const double comp_filterby_width_multiplier = 0.45;
+            const double comp_apply_width_multiplier = 0.15;
+
+            txtCompFilter.Width = Convert.ToInt32((gbComp.Width * comp_filter_width_multiplier) - padding);
+            cbCompFilterBy.Width = Convert.ToInt32((gbComp.Width * comp_filterby_width_multiplier) - padding);
+            btnCompFilterApply.Width = Convert.ToInt32((gbComp.Width * comp_apply_width_multiplier) - padding);
+
+            txtCompFilter.Height = cbCompFilterBy.Height;
+            btnCompFilterApply.Height = (txtCompFilter.Height * 2) + (int)(padding * 1.5);
+
+            // fonts
+
+            Font current_font = Global.AutoResizeFont(txtCompFilter);
+            txtCompFilter.Font = current_font;
+            cbCompFilterBy.Font = current_font;
+            lblCompFilter.Font = current_font;
+            lblCompFilterBy.Font = current_font;
+            tlvComp.Font = Global.AutoResizeFont(tlvComp);
+            tlvComp.AutoResizeColumns();
+
+            // control placement
+
+            tlvComp.Top = Convert.ToInt32(padding + (cbCompFilterBy.Top + cbCompFilterBy.Height));
+
+            txtCompFilter.Left = tlvComp.Left;
+            cbCompFilterBy.Left = txtCompFilter.Left + Convert.ToInt32(padding) + txtCompFilter.Width;
+            btnCompFilterApply.Left = cbCompFilterBy.Left + Convert.ToInt32(padding) + cbCompFilterBy.Width;
+
+            lblCompFilter.Top = (int)(padding * 2.5);
+            lblCompFilterBy.Top = (int)(padding * 2.5);
+            lblCompFilter.Left = txtCompFilter.Left;
+            lblCompFilterBy.Left = cbCompFilterBy.Left;
+
+            txtCompFilter.Top = lblCompFilter.Top + (int)(padding * 0.5) + lblCompFilter.Height;
+            cbCompFilterBy.Top = lblCompFilterBy.Top + (int)(padding * 0.5) + lblCompFilterBy.Height;
+            btnCompFilterApply.Top = lblCompFilter.Top - (int)padding;
+
+            // tree list view heights
+            tlvComp.Height = gbComp.Height - tlvComp.Top - (int)padding;
         }
 
         private void AutoResizeCompetitorDetailsControls()

@@ -129,9 +129,9 @@
             this.olvColumn4 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColCompHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.cbCompFilterBy = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblCompFilterBy = new System.Windows.Forms.Label();
             this.txtCompFilter = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblCompFilter = new System.Windows.Forms.Label();
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.retryConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -243,9 +243,9 @@
             this.lblReportCreds.Location = new System.Drawing.Point(726, 3);
             this.lblReportCreds.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReportCreds.Name = "lblReportCreds";
-            this.lblReportCreds.Size = new System.Drawing.Size(217, 15);
+            this.lblReportCreds.Size = new System.Drawing.Size(229, 15);
             this.lblReportCreds.TabIndex = 4;
-            this.lblReportCreds.Text = "Username: reports - Password: reports";
+            this.lblReportCreds.Text = "Username: reports - Password: Reports1";
             // 
             // gbAdmin
             // 
@@ -1259,9 +1259,9 @@
             this.gbComp.Controls.Add(this.btnCompFilterApply);
             this.gbComp.Controls.Add(this.tlvComp);
             this.gbComp.Controls.Add(this.cbCompFilterBy);
-            this.gbComp.Controls.Add(this.label9);
+            this.gbComp.Controls.Add(this.lblCompFilterBy);
             this.gbComp.Controls.Add(this.txtCompFilter);
-            this.gbComp.Controls.Add(this.label10);
+            this.gbComp.Controls.Add(this.lblCompFilter);
             this.gbComp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbComp.Location = new System.Drawing.Point(10, 4);
             this.gbComp.Margin = new System.Windows.Forms.Padding(2);
@@ -1352,15 +1352,15 @@
             this.cbCompFilterBy.Size = new System.Drawing.Size(177, 25);
             this.cbCompFilterBy.TabIndex = 4;
             // 
-            // label9
+            // lblCompFilterBy
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(204, 28);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(63, 18);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Filter by:";
+            this.lblCompFilterBy.AutoSize = true;
+            this.lblCompFilterBy.Location = new System.Drawing.Point(204, 28);
+            this.lblCompFilterBy.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCompFilterBy.Name = "lblCompFilterBy";
+            this.lblCompFilterBy.Size = new System.Drawing.Size(63, 18);
+            this.lblCompFilterBy.TabIndex = 3;
+            this.lblCompFilterBy.Text = "Filter by:";
             // 
             // txtCompFilter
             // 
@@ -1371,15 +1371,15 @@
             this.txtCompFilter.TabIndex = 2;
             this.txtCompFilter.TextChanged += new System.EventHandler(this.txtCompFilter_TextChanged);
             // 
-            // label10
+            // lblCompFilter
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(9, 28);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(44, 18);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Filter:";
+            this.lblCompFilter.AutoSize = true;
+            this.lblCompFilter.Location = new System.Drawing.Point(9, 28);
+            this.lblCompFilter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCompFilter.Name = "lblCompFilter";
+            this.lblCompFilter.Size = new System.Drawing.Size(44, 18);
+            this.lblCompFilter.TabIndex = 1;
+            this.lblCompFilter.Text = "Filter:";
             // 
             // msMenu
             // 
@@ -1934,9 +1934,9 @@
         private BrightIdeasSoftware.OLVColumn olvColumn3;
         private BrightIdeasSoftware.OLVColumn olvColumn4;
         private System.Windows.Forms.ComboBox cbCompFilterBy;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblCompFilterBy;
         private System.Windows.Forms.TextBox txtCompFilter;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblCompFilter;
         private System.Windows.Forms.GroupBox gbCompetitorDetails;
         private System.Windows.Forms.Button btnCompClear;
         private System.Windows.Forms.Button btnNewComp;
