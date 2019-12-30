@@ -1085,12 +1085,20 @@ If you do not like the placements, you will have to move the competitors to diff
         private void RefreshCompetitors(List<CompetitorModel> model)
         {
             CompetitorModelLoadComplete = false;
+            CountCompetitors();
+
             tlvCompetitors.Roots = model;
             tlvCompetitors.CollapseAll();
 
             tlvComp.Roots = model;
             tlvComp.CollapseAll();
             CompetitorModelLoadComplete = true;
+        }
+
+        private void CountCompetitors()
+        {
+            string title = "Competitors ( Count: " + CompetitorModels.Count + " )";
+            gbComp.Text = title;
         }
 
         private async void RefreshMatchesAndCompetitors()
