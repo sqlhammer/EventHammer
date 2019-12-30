@@ -1138,7 +1138,6 @@ If you do not like the placements, you will have to move the competitors to diff
         private void SetCompetitorFilterDropdowns()
         {
             //Handles both Matches and Competitors tabs
-
             this.cbCompetitorFilterBy.Items.Clear();
             this.cbCompFilterBy.Items.Clear();
 
@@ -1165,6 +1164,10 @@ If you do not like the placements, you will have to move the competitors to diff
 
             this.cbCompetitorFilterBy.Items.Add("Is Special Consideration");
             this.cbCompFilterBy.Items.Add("Is Special Consideration");
+
+            //Set name as default selection
+            this.cbCompetitorFilterBy.SelectedIndex = this.cbCompetitorFilterBy.FindStringExact("Name");
+            this.cbCompFilterBy.SelectedIndex = this.cbCompetitorFilterBy.FindStringExact("Name");
         }
 
         private void SetMatchFilterDropdowns()
@@ -1193,6 +1196,9 @@ If you do not like the placements, you will have to move the competitors to diff
 
             //Add non-columnar filters
             this.cbMatchFilterBy.Items.Add("Matches w/ <= 1 competitor");
+
+            //Set name as default selection
+            this.cbMatchFilterBy.SelectedIndex = this.cbMatchFilterBy.FindStringExact("Name");
         }
 
         private void retryConnectionToolStripMenuItem_Click(object sender, EventArgs e)
