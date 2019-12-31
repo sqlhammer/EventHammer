@@ -131,7 +131,7 @@ WHERE mcd.EventId = @EventId</CommandText>
                 <TablixBody>
                   <TablixColumns>
                     <TablixColumn>
-                      <Width>0.8066in</Width>
+                      <Width>0.52535in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>1.26223in</Width>
@@ -140,7 +140,7 @@ WHERE mcd.EventId = @EventId</CommandText>
                       <Width>1.47396in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.74818in</Width>
+                      <Width>1.56907in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>0.45243in</Width>
@@ -150,6 +150,9 @@ WHERE mcd.EventId = @EventId</CommandText>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>0.59375in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.46036in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>0.89583in</Width>
@@ -379,6 +382,40 @@ WHERE mcd.EventId = @EventId</CommandText>
                                 </Paragraph>
                               </Paragraphs>
                               <rd:DefaultName>Textbox2</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>Brown</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="Textbox4">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Kyu</Value>
+                                      <Style>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Textbox4</rd:DefaultName>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -640,6 +677,36 @@ WHERE mcd.EventId = @EventId</CommandText>
                         </TablixCell>
                         <TablixCell>
                           <CellContents>
+                            <Textbox Name="Kyu">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Kyu.Value</Value>
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <rd:DefaultName>Kyu</rd:DefaultName>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>=IIF(Fields!HighlightIndicator.Value = 1, "LightGrey", "White")</BackgroundColor>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
                             <Textbox Name="Belt">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
@@ -674,6 +741,7 @@ WHERE mcd.EventId = @EventId</CommandText>
                 </TablixBody>
                 <TablixColumnHierarchy>
                   <TablixMembers>
+                    <TablixMember />
                     <TablixMember />
                     <TablixMember />
                     <TablixMember />
@@ -723,7 +791,7 @@ WHERE mcd.EventId = @EventId</CommandText>
             <Top>0.04167in</Top>
             <Left>0.01042in</Left>
             <Height>1.05208in</Height>
-            <Width>7.80521in</Width>
+            <Width>7.78958in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -738,7 +806,7 @@ WHERE mcd.EventId = @EventId</CommandText>
           </Border>
         </Style>
       </Body>
-      <Width>7.81563in</Width>
+      <Width>7.82922in</Width>
       <Page>
         <PageHeader>
           <Height>0.61459in</Height>
