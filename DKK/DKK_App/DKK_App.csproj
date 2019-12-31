@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="DataAccessAsync.cs" />
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Entities\Score.cs" />
     <Compile Include="Entities\MatchCompetitor.cs" />
     <Compile Include="Entities\FacilityType.cs" />
     <Compile Include="Entities\Facility.cs" />
@@ -194,6 +195,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\DKK_App.Entities.Score.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

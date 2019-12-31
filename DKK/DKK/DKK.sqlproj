@@ -141,6 +141,8 @@
     <Build Include="Schemas\Event\Views\vwReportSchoolList.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spUpdateMatchDisplayId.sql" />
     <Build Include="Schemas\Person\Views\vwCompetitorDetail.sql" />
+    <Build Include="Schemas\Event\Tables\Score.sql" />
+    <Build Include="Schemas\Event\Views\vwScore.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\dev-eventhammer.publish.xml" />

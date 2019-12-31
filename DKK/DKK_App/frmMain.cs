@@ -20,6 +20,7 @@ namespace DKK_App
         public List<MatchModel> MatchModels = new List<MatchModel>();
         public MatchContext MatchContext = new MatchContext();
         public List<CompetitorModel> CompetitorModels = new List<CompetitorModel>();
+        public List<Score> Scores = new List<Score>();
         public List<Division> Divisions = new List<Division>();
         private List<Rank> Ranks = new List<Rank>();
         private List<Dojo> Dojos = new List<Dojo>();
@@ -30,6 +31,7 @@ namespace DKK_App
 
         private bool MatchModelLoadComplete = false;
         private bool CompetitorModelLoadComplete = false;
+        private bool ScoresLoadComplete = false;
         private bool _resizing = false;
 
         #region Form / Multi-tab
@@ -49,6 +51,7 @@ namespace DKK_App
             tlvMatches.ContextMenuStrip = this.cmsMatches;
             tlvComp.ContextMenuStrip = this.cmsCompetitor;
 
+            //First point of database access
             InitializeFormWithDataAccess();
 
             //Populate controls
@@ -63,7 +66,7 @@ namespace DKK_App
         {
             try
             {
-                Global.CheckForUpdates();
+                //Global.CheckForUpdates(); //Disabled in favor of ClickOnce auto-upgrades
                 SetEventSearchDateRange();
                 RefreshEventSelect();
                 RefreshEvents();
@@ -148,7 +151,7 @@ namespace DKK_App
             this.tmrMatchCompetitorRefresh.Enabled = true;
             this.tmrNewMatch.Enabled = true;
 
-            Task.Run(() => { RefreshMatchesAndCompetitors(); });
+            Task.Run(() => { RefreshMatchesAndCompetitorsAndScores(); });
 
             ClearCompetitorSelection();
         }
@@ -1112,15 +1115,18 @@ If you do not like the placements, you will have to move the competitors to diff
             gbComp.Text = title;
         }
 
-        private async void RefreshMatchesAndCompetitors()
+        private async void RefreshMatchesAndCompetitorsAndScores()
         {
-            //For some reason, when I remove these two lines
+            //For some reason, when I remove these 3 lines
             //I get an error from this.tlvMatches.ExpandAll() in RefreshMatches().
+            //In theory, these shouldn't be needed because they are in the child methods.
             MatchModelLoadComplete = false;
             CompetitorModelLoadComplete = false;
+            ScoresLoadComplete = false;
 
             Task.Run(() => RefreshCompetitors());
             Task.Run(() => RefreshMatches());
+            Task.Run(() => RefreshScores());
         }
 
         private async void RefreshMatches()
@@ -1129,7 +1135,6 @@ If you do not like the placements, you will have to move the competitors to diff
             List<MatchCompetitor> mcs = await DataAccessAsync.GetMatchCompetitors(CurrentEvent);
             MatchModels = SortMatchModels(Global.GetMatchModel(mcs));
             MatchModelLoadComplete = true;
-            //this.tlvMatches.ExpandAll();
         }
 
         private async void RefreshCompetitors()
@@ -1138,6 +1143,21 @@ If you do not like the placements, you will have to move the competitors to diff
             List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
             CompetitorModels = SortCompetitorModels(Global.GetCompetitorModel(cs));
             CompetitorModelLoadComplete = true;
+        }
+
+        private async void RefreshScores()
+        {
+            ScoresLoadComplete = false;
+            List<Score> scores = await DataAccessAsync.GetScoresByEvent(CurrentEvent);
+            Scores = SortScores(scores);
+            ScoresLoadComplete = true;
+        }
+
+        private void RefreshScoresGrid()
+        {
+            dgvScore.DataSource = Scores;
+            dgvScore.Refresh();
+            dgvScore.AutoResizeColumns();
         }
 
         private void SetFilterDropdowns()
@@ -1228,12 +1248,12 @@ If you do not like the placements, you will have to move the competitors to diff
             RefreshMatchCompetitorViews();
         }
 
-        private void tmrMatchCompetitorRefresh_Tick(object sender, EventArgs e)
+        private void tmrMatchCompetitorScoreRefresh_Tick(object sender, EventArgs e)
         {
             //this method was implemented because I was unable to refresh the treelistviews after
             //the async calls to refresh the match and competitor models was complete
 
-            if (MatchModelLoadComplete && CompetitorModelLoadComplete)
+            if (MatchModelLoadComplete && CompetitorModelLoadComplete && ScoresLoadComplete)
             {
                 this.lblLoading.Visible = false;
                 this.lblCompLoading.Visible = false;
@@ -1243,6 +1263,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
                 RefreshMatches(MatchModels);
                 RefreshCompetitors(CompetitorModels);
+                RefreshScoresGrid();
                 AutoResizeForm();
             }
         }
@@ -2554,6 +2575,59 @@ If you do not like the placements, you will have to move the competitors to diff
             DeleteEvent();
         }
         #endregion
+
+        #region Score Tab
+
+        private List<Score> SortScores(List<Score> models)
+        {
+            //We need to resort for display purposes
+            models.Sort(delegate (Score x, Score y)
+            {
+                //Handle NULLs even though I do not expect them
+                if (x.DivSubDiv == null && y.DivSubDiv == null) return 0;
+                if (x.DivSubDiv == null) return -1;
+                if (y.DivSubDiv == null) return 1;
+
+                //Sort by division then sub-division
+                return x.DivSubDiv.CompareTo(y.DivSubDiv);
+            });
+
+            return models;
+        }
+
+        private void dgvScore_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            ComputeScoreTotal(e.RowIndex);
+        }
+
+        private void dgvScore_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            ComputeScoreTotal(e.RowIndex);
+        }
+
+        private void ComputeScoreTotal(int RowIndex)
+        {
+            if (RowIndex > -1)
+            {
+                DataGridViewRow row = dgvScore.Rows[RowIndex];
+                string score1 = row.Cells[scoreJudge1DataGridViewTextBoxColumn.Index].Value.ToString();
+                string score2 = row.Cells[scoreJudge2DataGridViewTextBoxColumn.Index].Value.ToString();
+                string score3 = row.Cells[scoreJudge3DataGridViewTextBoxColumn.Index].Value.ToString();
+                string score4 = row.Cells[scoreJudge4DataGridViewTextBoxColumn.Index].Value.ToString();
+                string score5 = row.Cells[scoreJudge5DataGridViewTextBoxColumn.Index].Value.ToString();
+                decimal result;
+                if (Decimal.TryParse(score1, out result)
+                    && Decimal.TryParse(score2, out result)
+                    && Decimal.TryParse(score3, out result)
+                    && Decimal.TryParse(score4, out result)
+                    && Decimal.TryParse(score5, out result))
+                {
+                    row.Cells[totalDataGridViewTextBoxColumn.Index].Value = Decimal.Parse(score1) + Decimal.Parse(score2) +
+                        Decimal.Parse(score3) + Decimal.Parse(score4) + Decimal.Parse(score5);
+                }
+            }
+        }
+        #endregion Score Tab
 
         #region Form Sizing
         private void frmMain_SizeChanged(object sender, EventArgs e)

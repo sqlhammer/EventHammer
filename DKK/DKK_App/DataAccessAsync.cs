@@ -1490,6 +1490,80 @@ namespace DKK_App
         }
         #endregion
 
+        #region Score Gets
+        public static async Task<List<Score>> GetScoresByEvent(Event Event)
+        {
+            string query = @"SELECT
+                                [ScoreId]
+                                ,[EventId]
+                                ,[MatchId]
+                                ,[DivisionId]
+                                ,[SubDivisionId]
+                                ,[MatchTypeId]
+                                ,[MatchTypeName]
+                                ,[CompetitorId]
+                                ,[DisplayName]
+                                ,[ScoreJudge1]
+                                ,[ScoreJudge2]
+                                ,[ScoreJudge3]
+                                ,[ScoreJudge4]
+                                ,[ScoreJudge5]
+                                ,[Database_Total]
+                                ,[Ranked]
+                                ,[IsDisqualified]
+                            FROM [Event].[vwScore]
+                            WHERE EventId = " + Event.EventId;
+
+            return await QueryScores(query);
+        }
+
+        private static async Task<List<Score>> QueryScores(string query)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            {
+                List<Score> scores = new List<Score>();
+
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader != null)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                scores.Add(new Score
+                                {
+                                    CompetitorId = Convert.ToInt32(reader["CompetitorId"].ToString()),
+                                    EventId = Convert.ToInt32(reader["EventId"].ToString()),
+                                    DivisionId = Convert.ToInt32(reader["DivisionId"].ToString()),
+                                    MatchId = Convert.ToInt32(reader["MatchId"].ToString()),
+                                    MatchTypeId = Convert.ToInt32(reader["MatchTypeId"].ToString()),
+                                    ScoreId = Convert.ToInt32(reader["ScoreId"].ToString()),
+                                    IsDisqualified = Convert.ToBoolean(reader["IsDisqualified"].ToString()),
+                                    SubDivisionId = Convert.ToInt32(reader["SubDivisionId"].ToString()),
+                                    Database_Total = Convert.ToDecimal(reader["Database_Total"].ToString()),
+                                    Ranked = Convert.ToInt32(reader["Ranked"].ToString()),
+                                    DisplayName = reader["DisplayName"].ToString(),
+                                    ScoreJudge1 = Convert.ToDecimal(reader["ScoreJudge1"].ToString()),
+                                    ScoreJudge2 = Convert.ToDecimal(reader["ScoreJudge2"].ToString()),
+                                    ScoreJudge3 = Convert.ToDecimal(reader["ScoreJudge3"].ToString()),
+                                    ScoreJudge4 = Convert.ToDecimal(reader["ScoreJudge4"].ToString()),
+                                    ScoreJudge5 = Convert.ToDecimal(reader["ScoreJudge5"].ToString()),
+                                });
+                            }
+                        }
+                    }
+                }
+
+                return scores;
+            }
+        }
+        #endregion Score Gets
+
         #region Deletes
         public static void DeleteEventAsync(int id)
         {
