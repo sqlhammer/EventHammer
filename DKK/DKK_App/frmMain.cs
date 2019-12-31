@@ -245,6 +245,11 @@ namespace DKK_App
             LaunchWebsite("https://www.eventhammeronline.com/go/ehhelp");
         }
 
+        private void autoUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Global.InstallUpdateSyncWithInfo();
+        }
+
         #endregion
 
         #region Home Tab

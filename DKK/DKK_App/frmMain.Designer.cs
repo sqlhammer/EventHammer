@@ -158,6 +158,7 @@
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiDownloadLatestVersion = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRetryConnection = new System.Windows.Forms.Button();
             this.barRenderer1 = new BrightIdeasSoftware.BarRenderer();
             this.btnRefreshMatchTab = new System.Windows.Forms.Button();
@@ -243,9 +244,9 @@
             this.lblReportCreds.Location = new System.Drawing.Point(726, 3);
             this.lblReportCreds.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReportCreds.Name = "lblReportCreds";
-            this.lblReportCreds.Size = new System.Drawing.Size(229, 15);
+            this.lblReportCreds.Size = new System.Drawing.Size(222, 15);
             this.lblReportCreds.TabIndex = 4;
-            this.lblReportCreds.Text = "Username: reports - Password: Reports1";
+            this.lblReportCreds.Text = "Username: reports - Password: Reports";
             // 
             // gbAdmin
             // 
@@ -1566,6 +1567,7 @@
             // 
             this.miHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem1,
+            this.autoUpdateToolStripMenuItem,
             this.cmiDownloadLatestVersion,
             this.aboutToolStripMenuItem});
             this.miHelp.Name = "miHelp";
@@ -1576,23 +1578,30 @@
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
             this.helpToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(200, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(205, 22);
             this.helpToolStripMenuItem1.Text = "Knowledge Base";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // cmiDownloadLatestVersion
             // 
             this.cmiDownloadLatestVersion.Name = "cmiDownloadLatestVersion";
-            this.cmiDownloadLatestVersion.Size = new System.Drawing.Size(200, 22);
-            this.cmiDownloadLatestVersion.Text = "Download latest version";
+            this.cmiDownloadLatestVersion.Size = new System.Drawing.Size(205, 22);
+            this.cmiDownloadLatestVersion.Text = "Download installer (web)";
             this.cmiDownloadLatestVersion.Click += new System.EventHandler(this.cmiDownloadLatestVersion_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // autoUpdateToolStripMenuItem
+            // 
+            this.autoUpdateToolStripMenuItem.Name = "autoUpdateToolStripMenuItem";
+            this.autoUpdateToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.autoUpdateToolStripMenuItem.Text = "Check For Updates";
+            this.autoUpdateToolStripMenuItem.Click += new System.EventHandler(this.autoUpdateToolStripMenuItem_Click);
             // 
             // btnRetryConnection
             // 
@@ -2001,5 +2010,6 @@
         private System.Windows.Forms.Button btnCheckInRoster;
         private System.Windows.Forms.RichTextBox rtbEventInfo;
         private System.Windows.Forms.DataGridView dgvCompetitorDetails;
+        private System.Windows.Forms.ToolStripMenuItem autoUpdateToolStripMenuItem;
     }
 }
