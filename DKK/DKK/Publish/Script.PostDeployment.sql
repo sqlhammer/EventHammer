@@ -37,8 +37,8 @@ PRINT 'Loading Facility.Facility...'
 PRINT 'Loading Facility.Dojo...'
 :r .\..\Schemas\Facility\Data\Dojo.sql
 
-PRINT 'Loading Event.Event...'
-:r .\..\Schemas\Event\Data\Event.sql
+--PRINT 'Loading Event.Event...'
+--:r .\..\Schemas\Event\Data\Event.sql
 
 --PRINT 'Executing SQLAgentJob-Load-Registration-Data.sql...'
 --:r .\..\SQLAgentJobs\SQLAgentJob-Load-Registration-Data.sql

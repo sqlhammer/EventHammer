@@ -5,7 +5,7 @@ MERGE INTO [Event].[Event] AS [target]
 USING
 (VALUES
 (1, 'World Kanreikai Open', 1, '20181013'),
-(2, 'New York City Invitational', 1, '20190509')
+(2, 'New York City Invitational', 1, '20200509')
 )
 AS [source] ([EventId] ,[Name] ,[EventTypeId] ,[Date])
 ON [target].[EventId] = [source].[EventId]
