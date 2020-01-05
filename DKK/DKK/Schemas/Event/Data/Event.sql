@@ -4,7 +4,8 @@ SET IDENTITY_INSERT [Event].[Event] ON
 MERGE INTO [Event].[Event] AS [target]
 USING
 (VALUES
-(1, 'World Kanreikai Open', 1, '20181013')
+(1, 'World Kanreikai Open', 1, '20181013'),
+(2, 'New York City Invitational', 1, '20190509')
 )
 AS [source] ([EventId] ,[Name] ,[EventTypeId] ,[Date])
 ON [target].[EventId] = [source].[EventId]
@@ -19,7 +20,8 @@ WHEN NOT MATCHED BY TARGET THEN
 	INSERT ([EventId] ,[Name] ,[EventTypeId] ,[Date])
 	VALUES ([EventId] ,[Name] ,[EventTypeId] ,[Date])
 
-WHEN NOT MATCHED BY SOURCE THEN
-	DELETE;
+--WHEN NOT MATCHED BY SOURCE THEN
+--	DELETE;
+;
 
 SET IDENTITY_INSERT [Event].[Event] OFF

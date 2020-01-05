@@ -108,7 +108,7 @@
     <None Include="Schemas\Facility\Data\Facility.sql" />
     <None Include="Schemas\Facility\Data\FacilityType.sql" />
     <None Include="Schemas\Facility\Data\Dojo.sql" />
-    <Build Include="Schemas\Stage\Stored Procedures\spLoadRegistration.sql" />
+    <Build Include="Schemas\Stage\Stored Procedures\spLoadRegistration_v1.sql" />
     <None Include="Schemas\Event\Data\Event.sql" />
     <Build Include="Schemas\Event\Stored Procedures\spAutoSetMatches.sql" />
     <Build Include="Schemas\Event\Tables\MatchCompetitor.sql" />
@@ -143,6 +143,8 @@
     <Build Include="Schemas\Person\Views\vwCompetitorDetail.sql" />
     <Build Include="Schemas\Event\Tables\Score.sql" />
     <Build Include="Schemas\Event\Views\vwScore.sql" />
+    <Build Include="Schemas\Stage\Tables\ElementorFormEntry.sql" />
+    <Build Include="Schemas\Stage\Stored Procedures\spLoadRegistration.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\dev-eventhammer.publish.xml" />

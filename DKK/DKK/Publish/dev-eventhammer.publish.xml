@@ -2,7 +2,7 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
-    <TargetDatabaseName>dkk</TargetDatabaseName>
+    <TargetDatabaseName>dkk_dev</TargetDatabaseName>
     <DeployScriptFileName>DKK.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=app.eventhammeronline.com,49001;Initial Catalog=dkk_dev;Persist Security Info=True;User ID=SQLHammer;Password=111monkeyAPPLEjumping@@@;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=false;TrustServerCertificate=False</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>

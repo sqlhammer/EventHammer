@@ -1,0 +1,609 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/24/2018 10:11:02 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HAMMER-SURFACE"
+  DTS:CreatorName="HAMMER-SURFACE\derik"
+  DTS:DTSID="{AC41624F-90BD-4717-9277-289FB4B9B6BC}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.0900.40"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Load-Competitors-v1"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{15E2C4A5-DD66-4210-8F2B-AEEC8514E7C6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[dkk]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{978BC3CC-FFDF-46AC-AF8B-1C12C60553BE}"
+      DTS:ObjectName="dkk">
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[User::dkk_password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[User::dkk_username]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=app.eventhammeronline.com,49001;User ID=sqlhammer;Initial Catalog=dkk;Provider=SQLNCLI11.1;Persist Security Info=True;Connect Timeout=10;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[kanreikaikarate.db.10015251.hostedresource.com.kanreikaikarate.kanreikaikarate]"
+      DTS:CreationName="ADO.NET:MySql.Data.MySqlClient.MySqlConnection, MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d"
+      DTS:DTSID="{71D7CD33-AFF3-4343-85A4-599D09CBDA39}"
+      DTS:ObjectName="kanreikaikarate.db.10015251.hostedresource.com.kanreikaikarate.kanreikaikarate">
+      <DTS:PropertyExpression
+        DTS:Name="Password">@[User::mysql_kk_password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="UserName">@[User::mysql_kk_username]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=kanreikaikarate.db.10015251.hostedresource.com;user id=kanreikaikarate;connectiontimeout=10;database=kanreikaikarate;defaultcommandtimeout=300;port=3306;compress=True;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1C28D2B2-A061-412F-976A-D257CD0605C0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dkk_password">
+      <DTS:VariableValue
+        DTS:DataType="8">111monkeyAPPLEjumping@@@</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{029093DB-DF2C-455F-8496-C49B4A0284BD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="dkk_username">
+      <DTS:VariableValue
+        DTS:DataType="8">sqlhammer</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4F36E3D1-E4F2-4287-AD80-7FB9875B4FFC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="mysql_kk_password">
+      <DTS:VariableValue
+        DTS:DataType="8">Michael88@</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6C237091-E7AF-43F2-986D-C7BF1376E503}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="mysql_kk_username">
+      <DTS:VariableValue
+        DTS:DataType="8">kanreikaikarate</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3C485214-09F5-4EDA-A767-CF6B56AA6833}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:ISOLevel="4096"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="MySQL kanreikaikarate &gt; MSSQL dkk"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="MSSQL - dkk"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Stage].[CalderaFormEntry]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[dkk]"
+                  connectionManagerRefId="Package.ConnectionManagers[dkk]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].Columns[form_id]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="form_id"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[form_id]"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[form_id]" />
+                    <inputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].Columns[entry_id]"
+                      cachedDataType="i4"
+                      cachedName="entry_id"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[entry_id]"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[entry_id]" />
+                    <inputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].Columns[field_id]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="field_id"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[field_id]"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[field_id]" />
+                    <inputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].Columns[slug]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="slug"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[slug]"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[slug]" />
+                    <inputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].Columns[value]"
+                      cachedDataType="nText"
+                      cachedName="value"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[value]"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[value]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[form_id]"
+                      dataType="wstr"
+                      length="18"
+                      name="form_id" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[entry_id]"
+                      dataType="i4"
+                      name="entry_id" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[field_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="field_id" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[slug]"
+                      dataType="wstr"
+                      length="255"
+                      name="slug" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[value]"
+                      dataType="nText"
+                      name="value" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input].ExternalColumns[dtcreated]"
+                      dataType="dbTimeStamp2"
+                      name="dtcreated"
+                      scale="3" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="MySQL - kanreikaikarate"
+              usesDispositions="true"
+              validateExternalMetadata="False"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select f.form_id
+  ,v.entry_id
+  ,v.field_id
+  ,v.slug
+  ,v.value
+from wp_cf_forms f
+inner join wp_cf_form_entries e on e.form_id = f.form_id
+inner join wp_cf_form_entry_values v on e.id = v.entry_id 
+where f.form_id = 'CF5aad1517b9cc9' /*WKK Tournament 2018*/
+  and f.type = 'primary' /*The current version of the form*/
+  and e.status = 'active' /*Only entries which have not been soft deleted*/
+  ;</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[kanreikaikarate.db.10015251.hostedresource.com.kanreikaikarate.kanreikaikarate]"
+                  connectionManagerRefId="Package.ConnectionManagers[kanreikaikarate.db.10015251.hostedresource.com.kanreikaikarate.kanreikaikarate]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[form_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[form_id]"
+                      length="18"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[form_id]"
+                      name="form_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[entry_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[entry_id]"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[entry_id]"
+                      name="entry_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[field_id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[field_id]"
+                      length="20"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[field_id]"
+                      name="field_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[slug]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[slug]"
+                      length="255"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[slug]"
+                      name="slug"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[value]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[value]"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].Columns[value]"
+                      name="value"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[form_id]"
+                      dataType="wstr"
+                      length="18"
+                      name="form_id" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[entry_id]"
+                      dataType="i4"
+                      name="entry_id" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[field_id]"
+                      dataType="wstr"
+                      length="20"
+                      name="field_id" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[slug]"
+                      dataType="wstr"
+                      length="255"
+                      name="slug" />
+                    <externalMetadataColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output].ExternalColumns[value]"
+                      dataType="nText"
+                      name="value" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[form_id]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[form_id]"
+                      name="form_id" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[entry_id]"
+                      dataType="i4"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[entry_id]"
+                      name="entry_id" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[field_id]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[field_id]"
+                      name="field_id" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[slug]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[slug]"
+                      name="slug" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[value]"
+                      dataType="nText"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[value]"
+                      name="value" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\MySQL kanreikaikarate &gt; MSSQL dkk.Paths[ADO NET Source Output]"
+              endId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk.Inputs[OLE DB Destination Input]"
+              name="ADO NET Source Output"
+              startId="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate.Outputs[ADO NET Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Stage_CalderaFormEntry"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3422B416-E683-4172-8DFB-75D9419C7CDA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Stage_CalderaFormEntry"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{978BC3CC-FFDF-46AC-AF8B-1C12C60553BE}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE Stage.CalderaFormEntry;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{186B4B06-8453-400D-BB5A-2AA591691E2F}"
+      DTS:From="Package\Truncate Stage_CalderaFormEntry"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\MySQL kanreikaikarate &gt; MSSQL dkk" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="256,42"
+          Id="Package\MySQL kanreikaikarate &gt; MSSQL dkk"
+          TopLeft="75.5,114.562499430962" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Truncate Stage_CalderaFormEntry"
+          TopLeft="89.25,34.1249998304993" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="206.875,76.1249998304993">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.4374996004626"
+              Start="0,0"
+              End="0,30.9374996004626">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.9374996004626" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\MySQL kanreikaikarate &gt; MSSQL dkk">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="194,42"
+          Id="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate"
+          TopLeft="53,24.3749998789281" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk"
+          TopLeft="75.25,110.49999945114" />
+        <EdgeLayout
+          Id="Package\MySQL kanreikaikarate &gt; MSSQL dkk.Paths[ADO NET Source Output]"
+          TopLeft="148,66.3749998789281">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.1249995722123"
+              Start="0,0"
+              End="0,36.6249995722123">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.6249995722123" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MSSQL - dkk">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\MySQL kanreikaikarate &gt; MSSQL dkk\MySQL - kanreikaikarate">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
