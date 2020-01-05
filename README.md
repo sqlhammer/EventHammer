@@ -1,6 +1,9 @@
 # Event Hammer
 Tournament management system for martial arts.
 
+# Website
+https://eventhammeronline.com/go/ehhelp
+
 # Prerequisites
 - MySQL ODBC Driver
 - SQL Server Data Tools
