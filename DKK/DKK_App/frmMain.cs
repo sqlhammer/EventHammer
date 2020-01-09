@@ -140,7 +140,7 @@ namespace DKK_App
             RefreshCompetitors(model);
         }
 
-        public void RefreshMatchCompetitorViews()
+        public void RefreshMatchCompetitorScoreViews()
         {
             MatchModels = new List<MatchModel>();
             CompetitorModels = new List<CompetitorModel>();
@@ -193,7 +193,7 @@ namespace DKK_App
                     )
                )
             {
-                RefreshMatchCompetitorViews();
+                RefreshMatchCompetitorScoreViews();
             }
 
             //Toggle Competitor button visibility
@@ -219,6 +219,21 @@ namespace DKK_App
                 this.btnClearMatchFilter.Visible = true;
                 this.btnClearCompetitorFilter.Visible = true;
                 this.msMatches.Enabled = true;
+            }
+            else
+            {
+                this.msMatches.Enabled = false;
+            }
+
+            //Toggle Score button visibility
+            if (this.tabScore.Enabled &&
+                this.tab1.SelectedTab == this.tabScore &&
+                this.btnRetryConnection.Visible == false)
+            {
+                this.btnRefreshMatchTab.Visible = true;
+                this.btnClearMatchFilter.Visible = false;
+                this.btnClearCompetitorFilter.Visible = false;
+                this.msMatches.Enabled = false;
             }
             else
             {
@@ -981,7 +996,7 @@ If you do not like the placements, you will have to move the competitors to diff
                 try
                 {
                     DataAccess.AutoSetMatches(CurrentEvent);
-                    RefreshMatchCompetitorViews();
+                    RefreshMatchCompetitorScoreViews();
                 }
                 catch (Exception ex)
                 {
@@ -992,7 +1007,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void btnRefreshMatchTab_Click(object sender, EventArgs e)
         {
-            RefreshMatchCompetitorViews();
+            RefreshMatchCompetitorScoreViews();
         }
 
         private async void RefreshDivisionsAsync()
@@ -1119,7 +1134,7 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             //For some reason, when I remove these 3 lines
             //I get an error from this.tlvMatches.ExpandAll() in RefreshMatches().
-            //In theory, these shouldn't be needed because they are in the child methods.
+            //In theory, these shouldn't be needed because they are in the child methods but that is on a different thread.
             MatchModelLoadComplete = false;
             CompetitorModelLoadComplete = false;
             ScoresLoadComplete = false;
@@ -1245,7 +1260,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void refreshMatchAndCompetitorListsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RefreshMatchCompetitorViews();
+            RefreshMatchCompetitorScoreViews();
         }
 
         private void tmrMatchCompetitorScoreRefresh_Tick(object sender, EventArgs e)
