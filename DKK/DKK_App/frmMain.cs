@@ -2744,6 +2744,10 @@ If you do not like the placements, you will have to move the competitors to diff
                     row.Cells[dgvScoresTotal.Index].Value = Decimal.Parse(score1) + Decimal.Parse(score2) +
                         Decimal.Parse(score3) + Decimal.Parse(score4) + Decimal.Parse(score5);
                 }
+                else
+                {
+                    row.Cells[dgvScoresTotal.Index].Value = "N/A";
+                }
             }
         }
         #endregion Score Tab

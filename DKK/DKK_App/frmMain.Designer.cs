@@ -135,18 +135,6 @@
             this.lblCompFilter = new System.Windows.Forms.Label();
             this.tabScore = new System.Windows.Forms.TabPage();
             this.dgvScore = new System.Windows.Forms.DataGridView();
-            this.dgvScoresDivSubDiv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoresMatchTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoresDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoreJudge1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoreJudge2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoreJudge3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoreJudge4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoreJudge5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoresTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoresRanked = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoresIsDisqualified = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.scoreBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.retryConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -202,6 +190,20 @@
             this.cmsScores = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmiScoreAddRow = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiScoreDeleteRows = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.scoreBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvScoresDivSubDiv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresMatchTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresRanked = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresIsDisqualified = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -223,13 +225,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.tlvComp)).BeginInit();
             this.tabScore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvScore)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scoreBindingSource)).BeginInit();
             this.msMenu.SuspendLayout();
             this.cmsMatches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).BeginInit();
             this.cmsCompetitor.SuspendLayout();
             this.cmsScores.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scoreBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tab1
@@ -1408,6 +1410,8 @@
             // 
             // tabScore
             // 
+            this.tabScore.Controls.Add(this.label2);
+            this.tabScore.Controls.Add(this.label1);
             this.tabScore.Controls.Add(this.dgvScore);
             this.tabScore.Location = new System.Drawing.Point(4, 22);
             this.tabScore.Name = "tabScore";
@@ -1446,82 +1450,6 @@
             this.dgvScore.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScore_RowValidated);
             this.dgvScore.Sorted += new System.EventHandler(this.dgvScore_Sorted);
             this.dgvScore.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvScore_KeyDown);
-            // 
-            // dgvScoresDivSubDiv
-            // 
-            this.dgvScoresDivSubDiv.DataPropertyName = "DivSubDiv";
-            this.dgvScoresDivSubDiv.HeaderText = "Div-SubDiv";
-            this.dgvScoresDivSubDiv.Name = "dgvScoresDivSubDiv";
-            this.dgvScoresDivSubDiv.ReadOnly = true;
-            // 
-            // dgvScoresMatchTypeName
-            // 
-            this.dgvScoresMatchTypeName.DataPropertyName = "MatchTypeName";
-            this.dgvScoresMatchTypeName.HeaderText = "Match Type";
-            this.dgvScoresMatchTypeName.Name = "dgvScoresMatchTypeName";
-            this.dgvScoresMatchTypeName.ReadOnly = true;
-            // 
-            // dgvScoresDisplayName
-            // 
-            this.dgvScoresDisplayName.DataPropertyName = "DisplayName";
-            this.dgvScoresDisplayName.HeaderText = "Competitor";
-            this.dgvScoresDisplayName.Name = "dgvScoresDisplayName";
-            this.dgvScoresDisplayName.ReadOnly = true;
-            // 
-            // dgvScoreJudge1
-            // 
-            this.dgvScoreJudge1.DataPropertyName = "ScoreJudge1";
-            this.dgvScoreJudge1.HeaderText = "Score 1";
-            this.dgvScoreJudge1.Name = "dgvScoreJudge1";
-            // 
-            // dgvScoreJudge2
-            // 
-            this.dgvScoreJudge2.DataPropertyName = "ScoreJudge2";
-            this.dgvScoreJudge2.HeaderText = "Score 2";
-            this.dgvScoreJudge2.Name = "dgvScoreJudge2";
-            // 
-            // dgvScoreJudge3
-            // 
-            this.dgvScoreJudge3.DataPropertyName = "ScoreJudge3";
-            this.dgvScoreJudge3.HeaderText = "Score 3";
-            this.dgvScoreJudge3.Name = "dgvScoreJudge3";
-            // 
-            // dgvScoreJudge4
-            // 
-            this.dgvScoreJudge4.DataPropertyName = "ScoreJudge4";
-            this.dgvScoreJudge4.HeaderText = "Score 4";
-            this.dgvScoreJudge4.Name = "dgvScoreJudge4";
-            // 
-            // dgvScoreJudge5
-            // 
-            this.dgvScoreJudge5.DataPropertyName = "ScoreJudge5";
-            this.dgvScoreJudge5.HeaderText = "Score 5";
-            this.dgvScoreJudge5.Name = "dgvScoreJudge5";
-            // 
-            // dgvScoresTotal
-            // 
-            this.dgvScoresTotal.HeaderText = "Total";
-            this.dgvScoresTotal.Name = "dgvScoresTotal";
-            this.dgvScoresTotal.ReadOnly = true;
-            // 
-            // dgvScoresRanked
-            // 
-            this.dgvScoresRanked.DataPropertyName = "Ranked";
-            this.dgvScoresRanked.HeaderText = "Ranked";
-            this.dgvScoresRanked.Name = "dgvScoresRanked";
-            // 
-            // dgvScoresIsDisqualified
-            // 
-            this.dgvScoresIsDisqualified.DataPropertyName = "IsDisqualified";
-            this.dgvScoresIsDisqualified.FalseValue = "false";
-            this.dgvScoresIsDisqualified.HeaderText = "Disqualified";
-            this.dgvScoresIsDisqualified.IndeterminateValue = "false";
-            this.dgvScoresIsDisqualified.Name = "dgvScoresIsDisqualified";
-            this.dgvScoresIsDisqualified.TrueValue = "true";
-            // 
-            // scoreBindingSource
-            // 
-            this.scoreBindingSource.DataSource = typeof(DKK_App.Entities.Score);
             // 
             // msMenu
             // 
@@ -1987,6 +1915,100 @@
             this.cmiScoreDeleteRows.Size = new System.Drawing.Size(149, 22);
             this.cmiScoreDeleteRows.Text = "Delete Row(s)";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(444, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Unsaved changes ***";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(468, 231);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "LOADING";
+            // 
+            // scoreBindingSource
+            // 
+            this.scoreBindingSource.DataSource = typeof(DKK_App.Entities.Score);
+            // 
+            // dgvScoresDivSubDiv
+            // 
+            this.dgvScoresDivSubDiv.DataPropertyName = "DivSubDiv";
+            this.dgvScoresDivSubDiv.HeaderText = "Div-SubDiv";
+            this.dgvScoresDivSubDiv.Name = "dgvScoresDivSubDiv";
+            this.dgvScoresDivSubDiv.ReadOnly = true;
+            // 
+            // dgvScoresMatchTypeName
+            // 
+            this.dgvScoresMatchTypeName.DataPropertyName = "MatchTypeName";
+            this.dgvScoresMatchTypeName.HeaderText = "Match Type";
+            this.dgvScoresMatchTypeName.Name = "dgvScoresMatchTypeName";
+            this.dgvScoresMatchTypeName.ReadOnly = true;
+            // 
+            // dgvScoresDisplayName
+            // 
+            this.dgvScoresDisplayName.DataPropertyName = "DisplayName";
+            this.dgvScoresDisplayName.HeaderText = "Competitor";
+            this.dgvScoresDisplayName.Name = "dgvScoresDisplayName";
+            this.dgvScoresDisplayName.ReadOnly = true;
+            // 
+            // dgvScoreJudge1
+            // 
+            this.dgvScoreJudge1.DataPropertyName = "DisplayScoreJudge1";
+            this.dgvScoreJudge1.HeaderText = "Score 1";
+            this.dgvScoreJudge1.Name = "dgvScoreJudge1";
+            // 
+            // dgvScoreJudge2
+            // 
+            this.dgvScoreJudge2.DataPropertyName = "DisplayScoreJudge2";
+            this.dgvScoreJudge2.HeaderText = "Score 2";
+            this.dgvScoreJudge2.Name = "dgvScoreJudge2";
+            // 
+            // dgvScoreJudge3
+            // 
+            this.dgvScoreJudge3.DataPropertyName = "DisplayScoreJudge3";
+            this.dgvScoreJudge3.HeaderText = "Score 3";
+            this.dgvScoreJudge3.Name = "dgvScoreJudge3";
+            // 
+            // dgvScoreJudge4
+            // 
+            this.dgvScoreJudge4.DataPropertyName = "DisplayScoreJudge4";
+            this.dgvScoreJudge4.HeaderText = "Score 4";
+            this.dgvScoreJudge4.Name = "dgvScoreJudge4";
+            // 
+            // dgvScoreJudge5
+            // 
+            this.dgvScoreJudge5.DataPropertyName = "DisplayScoreJudge5";
+            this.dgvScoreJudge5.HeaderText = "Score 5";
+            this.dgvScoreJudge5.Name = "dgvScoreJudge5";
+            // 
+            // dgvScoresTotal
+            // 
+            this.dgvScoresTotal.HeaderText = "Total";
+            this.dgvScoresTotal.Name = "dgvScoresTotal";
+            this.dgvScoresTotal.ReadOnly = true;
+            // 
+            // dgvScoresRanked
+            // 
+            this.dgvScoresRanked.DataPropertyName = "Ranked";
+            this.dgvScoresRanked.HeaderText = "Ranked";
+            this.dgvScoresRanked.Name = "dgvScoresRanked";
+            // 
+            // dgvScoresIsDisqualified
+            // 
+            this.dgvScoresIsDisqualified.DataPropertyName = "IsDisqualified";
+            this.dgvScoresIsDisqualified.FalseValue = "false";
+            this.dgvScoresIsDisqualified.HeaderText = "Disqualified";
+            this.dgvScoresIsDisqualified.IndeterminateValue = "false";
+            this.dgvScoresIsDisqualified.Name = "dgvScoresIsDisqualified";
+            this.dgvScoresIsDisqualified.TrueValue = "true";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -2038,8 +2060,8 @@
             this.gbComp.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvComp)).EndInit();
             this.tabScore.ResumeLayout(false);
+            this.tabScore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvScore)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.scoreBindingSource)).EndInit();
             this.msMenu.ResumeLayout(false);
             this.msMenu.PerformLayout();
             this.cmsMatches.ResumeLayout(false);
@@ -2047,6 +2069,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).EndInit();
             this.cmsCompetitor.ResumeLayout(false);
             this.cmsScores.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scoreBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2214,6 +2237,8 @@
         private System.Windows.Forms.ContextMenuStrip cmsScores;
         private System.Windows.Forms.ToolStripMenuItem cmiScoreAddRow;
         private System.Windows.Forms.ToolStripMenuItem cmiScoreDeleteRows;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresDivSubDiv;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresMatchTypeName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresDisplayName;

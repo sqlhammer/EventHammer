@@ -1530,7 +1530,7 @@ namespace DKK_App
                                     EventId = Convert.ToInt32(reader["EventId"].ToString()),
                                     DivisionId = Convert.ToInt32(reader["DivisionId"].ToString()),
                                     MatchId = Convert.ToInt32(reader["MatchId"].ToString()),
-                                    MatchTypeId = Convert.ToInt32(reader["MatchTypeId"].ToString()),
+                                    MatchType = GetMatchType(Convert.ToInt32(reader["MatchTypeId"].ToString())),
                                     ScoreId = Convert.ToInt32(reader["ScoreId"].ToString()),
                                     IsDisqualified = Convert.ToBoolean(reader["IsDisqualified"].ToString()),
                                     SubDivisionId = Convert.ToInt32(reader["SubDivisionId"].ToString()),
