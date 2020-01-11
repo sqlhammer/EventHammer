@@ -6,6 +6,8 @@ using DKK_App.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 using DKK_App.Models;
+using System.ComponentModel;
+using DKK_App.Objects;
 
 namespace DKK_App
 {
@@ -1491,7 +1493,7 @@ namespace DKK_App
         #endregion
 
         #region Score Gets
-        public static async Task<List<Score>> GetScoresByEvent(Event Event)
+        public static async Task<SortableBindingList<Score>> GetScoresByEvent(Event Event)
         {
             string query = @"SELECT
                                 [ScoreId]
@@ -1517,11 +1519,11 @@ namespace DKK_App
             return await QueryScores(query);
         }
 
-        private static async Task<List<Score>> QueryScores(string query)
+        private static async Task<SortableBindingList<Score>> QueryScores(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
             {
-                List<Score> scores = new List<Score>();
+                SortableBindingList<Score> scores = new SortableBindingList<Score>();
 
                 conn.Open();
 

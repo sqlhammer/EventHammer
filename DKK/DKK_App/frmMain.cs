@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Configuration;
 using DKK_App.Objects;
+using System.ComponentModel;
 
 namespace DKK_App
 {
@@ -20,7 +21,7 @@ namespace DKK_App
         public List<MatchModel> MatchModels = new List<MatchModel>();
         public MatchContext MatchContext = new MatchContext();
         public List<CompetitorModel> CompetitorModels = new List<CompetitorModel>();
-        public List<Score> Scores = new List<Score>();
+        public SortableBindingList<Score> Scores = new SortableBindingList<Score>();
         public List<Division> Divisions = new List<Division>();
         private List<Rank> Ranks = new List<Rank>();
         private List<Dojo> Dojos = new List<Dojo>();
@@ -59,7 +60,7 @@ namespace DKK_App
             SetEventDateTimePicker();
             DisableNonEventTabs();
 
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
         }
 
         private void InitializeFormWithDataAccess()
@@ -179,17 +180,20 @@ namespace DKK_App
             if (
                     (
                         this.tabMatch.Enabled &&
-                        this.tabCompetitor.Enabled
+                        this.tabCompetitor.Enabled &&
+                        this.tabScore.Enabled
                     )
                     &&
                     (
                         this.tab1.SelectedTab == this.tabMatch ||
-                        this.tab1.SelectedTab == this.tabCompetitor
+                        this.tab1.SelectedTab == this.tabCompetitor ||
+                        this.tab1.SelectedTab == this.tabScore
                     )
                     &&
                     (
                         MatchModelLoadComplete == false
                         && CompetitorModelLoadComplete == false
+                        && ScoresLoadComplete == false
                     )
                )
             {
@@ -234,6 +238,8 @@ namespace DKK_App
                 this.btnClearMatchFilter.Visible = false;
                 this.btnClearCompetitorFilter.Visible = false;
                 this.msMatches.Enabled = false;
+                this.btnSubmitScores.Visible = true;
+                this.btnScoresUndoChanges.Visible = true;
             }
             else
             {
@@ -1141,7 +1147,7 @@ If you do not like the placements, you will have to move the competitors to diff
 
             Task.Run(() => RefreshCompetitors());
             Task.Run(() => RefreshMatches());
-            Task.Run(() => RefreshScores());
+            Task.Run(() => RefreshScoresAsync());
         }
 
         private async void RefreshMatches()
@@ -1158,21 +1164,6 @@ If you do not like the placements, you will have to move the competitors to diff
             List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
             CompetitorModels = SortCompetitorModels(Global.GetCompetitorModel(cs));
             CompetitorModelLoadComplete = true;
-        }
-
-        private async void RefreshScores()
-        {
-            ScoresLoadComplete = false;
-            List<Score> scores = await DataAccessAsync.GetScoresByEvent(CurrentEvent);
-            Scores = SortScores(scores);
-            ScoresLoadComplete = true;
-        }
-
-        private void RefreshScoresGrid()
-        {
-            dgvScore.DataSource = Scores;
-            dgvScore.Refresh();
-            dgvScore.AutoResizeColumns();
         }
 
         private void SetFilterDropdowns()
@@ -2593,21 +2584,48 @@ If you do not like the placements, you will have to move the competitors to diff
 
         #region Score Tab
 
-        private List<Score> SortScores(List<Score> models)
+        private void btnScoresUndoChanges_Click(object sender, EventArgs e)
         {
-            //We need to resort for display purposes
-            models.Sort(delegate (Score x, Score y)
-            {
-                //Handle NULLs even though I do not expect them
-                if (x.DivSubDiv == null && y.DivSubDiv == null) return 0;
-                if (x.DivSubDiv == null) return -1;
-                if (y.DivSubDiv == null) return 1;
+            UndoScoreChanges();
+        }
 
-                //Sort by division then sub-division
-                return x.DivSubDiv.CompareTo(y.DivSubDiv);
-            });
+        private void UndoScoreChanges()
+        {
+            RefreshScores();
+        }
 
-            return models;
+        private void btnSubmitScores_Click(object sender, EventArgs e)
+        {
+            SubmitScores();
+        }
+
+        private void SubmitScores()
+        {
+            MessageBox.Show("stubbed");
+        }
+
+        private void RefreshScoresGrid()
+        {
+            dgvScore.DataSource = Scores;
+            dgvScore.Refresh();
+            dgvScore.AutoResizeColumns();
+        }
+
+        private void RefreshScores()
+        {
+            ScoresLoadComplete = false;
+            SortableBindingList<Score> scores = DataAccess.GetScoresByEvent(CurrentEvent);
+            Scores = scores;
+            RefreshScoresGrid();
+            ScoresLoadComplete = true;
+        }
+
+        private async void RefreshScoresAsync()
+        {
+            ScoresLoadComplete = false;
+            SortableBindingList<Score> scores = await DataAccessAsync.GetScoresByEvent(CurrentEvent);
+            Scores = scores;
+            ScoresLoadComplete = true;
         }
 
         private void dgvScore_CellValidated(object sender, DataGridViewCellEventArgs e)
@@ -2620,16 +2638,102 @@ If you do not like the placements, you will have to move the competitors to diff
             ComputeScoreTotal(e.RowIndex);
         }
 
+        private void dgvScore_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            DataGridView dgv = (DataGridView)sender;
+
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+                return;
+
+            e.ContextMenuStrip = cmsScores;
+        }
+
+        private void SetScoreContextMenuItemDeleteRowsText()
+        {
+            if (dgvScore.CurrentRow == null) return;
+
+            string div = (dgvScore.CurrentRow.Cells[dgvScoresDivSubDiv.Index].Value == null) ? "?" : dgvScore.CurrentRow.Cells[dgvScoresDivSubDiv.Index].Value.ToString();
+            string competitor = (dgvScore.CurrentRow.Cells[dgvScoresDisplayName.Index].Value == null) ? "?" : dgvScore.CurrentRow.Cells[dgvScoresDisplayName.Index].Value.ToString();
+
+            cmiScoreDeleteRows.Text = string.Format("Delete row: Div: {0}, Name: {1}", div, competitor);
+        }
+
+        private void dgvScore_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                SetScoreContextMenuItemDeleteRowsText();
+
+                DataGridViewCell c = (sender as DataGridView)[e.ColumnIndex, e.RowIndex];
+                if (!c.Selected)
+                {
+                    c.DataGridView.ClearSelection();
+                    c.DataGridView.CurrentCell = c;
+                    c.Selected = true;
+                }
+            }
+        }
+
+        private void dgvScore_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.F10 && e.Shift) || e.KeyCode == Keys.Apps)
+            {
+                SetScoreContextMenuItemDeleteRowsText();
+
+                DataGridViewCell currentCell = (sender as DataGridView).CurrentCell;
+                e.SuppressKeyPress = true;
+                if (currentCell != null)
+                {
+                    ContextMenuStrip cms = currentCell.ContextMenuStrip;
+                    if (cms != null)
+                    {
+                        Rectangle r = currentCell.DataGridView.GetCellDisplayRectangle(currentCell.ColumnIndex, currentCell.RowIndex, false);
+                        Point p = new Point(r.X + r.Width, r.Y + r.Height);
+                        cms.Show(currentCell.DataGridView, p);
+                    }
+                }
+
+                return;
+            }
+        }
+
+        private void cmiScoreAddRow_Click(object sender, EventArgs e)
+        {
+            AddingNewScoresRow();
+        }
+
+        private void AddingNewScoresRow()
+        {
+            if (dgvScore.Rows.Count == Scores.Count)
+            {
+                Scores.RemoveAt(Scores.Count - 1);
+            }
+            Scores.Add(new Score());
+        }
+
+        private void dgvScore_Sorted(object sender, EventArgs e)
+        {
+            ComputeScoreTotals();
+        }
+
+        private void ComputeScoreTotals()
+        {
+            foreach (DataGridViewRow row in dgvScore.Rows)
+            {
+                ComputeScoreTotal(row.Index);
+            }
+        }
+
         private void ComputeScoreTotal(int RowIndex)
         {
             if (RowIndex > -1)
             {
                 DataGridViewRow row = dgvScore.Rows[RowIndex];
-                string score1 = row.Cells[scoreJudge1DataGridViewTextBoxColumn.Index].Value.ToString();
-                string score2 = row.Cells[scoreJudge2DataGridViewTextBoxColumn.Index].Value.ToString();
-                string score3 = row.Cells[scoreJudge3DataGridViewTextBoxColumn.Index].Value.ToString();
-                string score4 = row.Cells[scoreJudge4DataGridViewTextBoxColumn.Index].Value.ToString();
-                string score5 = row.Cells[scoreJudge5DataGridViewTextBoxColumn.Index].Value.ToString();
+                string score1 = (row.Cells[dgvScoreJudge1.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge1.Index].Value.ToString();
+                string score2 = (row.Cells[dgvScoreJudge2.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge2.Index].Value.ToString();
+                string score3 = (row.Cells[dgvScoreJudge3.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge3.Index].Value.ToString();
+                string score4 = (row.Cells[dgvScoreJudge4.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge4.Index].Value.ToString();
+                string score5 = (row.Cells[dgvScoreJudge5.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge5.Index].Value.ToString();
                 decimal result;
                 if (Decimal.TryParse(score1, out result)
                     && Decimal.TryParse(score2, out result)
@@ -2637,7 +2741,7 @@ If you do not like the placements, you will have to move the competitors to diff
                     && Decimal.TryParse(score4, out result)
                     && Decimal.TryParse(score5, out result))
                 {
-                    row.Cells[totalDataGridViewTextBoxColumn.Index].Value = Decimal.Parse(score1) + Decimal.Parse(score2) +
+                    row.Cells[dgvScoresTotal.Index].Value = Decimal.Parse(score1) + Decimal.Parse(score2) +
                         Decimal.Parse(score3) + Decimal.Parse(score4) + Decimal.Parse(score5);
                 }
             }

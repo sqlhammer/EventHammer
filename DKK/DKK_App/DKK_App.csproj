@@ -160,6 +160,7 @@
     <Compile Include="Objects\CompetitorDetailsGridPair.cs" />
     <Compile Include="Objects\CompetitorDetailsGridMap.cs" />
     <Compile Include="Objects\MatchContext.cs" />
+    <Compile Include="Objects\SortableBindingList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebAccess.cs" />

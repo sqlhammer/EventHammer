@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tab1 = new System.Windows.Forms.TabControl();
             this.tabHome = new System.Windows.Forms.TabPage();
@@ -134,8 +135,17 @@
             this.lblCompFilter = new System.Windows.Forms.Label();
             this.tabScore = new System.Windows.Forms.TabPage();
             this.dgvScore = new System.Windows.Forms.DataGridView();
-            this.DivSubDiv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresDivSubDiv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresMatchTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoreJudge5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresRanked = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresIsDisqualified = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.scoreBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,15 +197,11 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrCompTab = new System.Windows.Forms.Timer(this.components);
             this.tmrRegistrations = new System.Windows.Forms.Timer(this.components);
-            this.isDisqualifiedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.rankedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.scoreJudge5DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.scoreJudge4DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.scoreJudge3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.scoreJudge2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.scoreJudge1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.displayNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.matchTypeNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnScoresUndoChanges = new System.Windows.Forms.Button();
+            this.btnSubmitScores = new System.Windows.Forms.Button();
+            this.cmsScores = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmiScoreAddRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiScoreDeleteRows = new System.Windows.Forms.ToolStripMenuItem();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -223,6 +229,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).BeginInit();
             this.cmsCompetitor.SuspendLayout();
+            this.cmsScores.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -1412,40 +1419,105 @@
             // 
             // dgvScore
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvScore.AutoGenerateColumns = false;
             this.dgvScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvScore.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DivSubDiv,
-            this.matchTypeNameDataGridViewTextBoxColumn,
-            this.displayNameDataGridViewTextBoxColumn,
-            this.scoreJudge1DataGridViewTextBoxColumn,
-            this.scoreJudge2DataGridViewTextBoxColumn,
-            this.scoreJudge3DataGridViewTextBoxColumn,
-            this.scoreJudge4DataGridViewTextBoxColumn,
-            this.scoreJudge5DataGridViewTextBoxColumn,
-            this.totalDataGridViewTextBoxColumn,
-            this.rankedDataGridViewTextBoxColumn,
-            this.isDisqualifiedDataGridViewCheckBoxColumn});
+            this.dgvScoresDivSubDiv,
+            this.dgvScoresMatchTypeName,
+            this.dgvScoresDisplayName,
+            this.dgvScoreJudge1,
+            this.dgvScoreJudge2,
+            this.dgvScoreJudge3,
+            this.dgvScoreJudge4,
+            this.dgvScoreJudge5,
+            this.dgvScoresTotal,
+            this.dgvScoresRanked,
+            this.dgvScoresIsDisqualified});
             this.dgvScore.DataSource = this.scoreBindingSource;
             this.dgvScore.Location = new System.Drawing.Point(32, 31);
             this.dgvScore.Name = "dgvScore";
             this.dgvScore.Size = new System.Drawing.Size(1046, 403);
             this.dgvScore.TabIndex = 0;
+            this.dgvScore.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgvScore_CellContextMenuStripNeeded);
+            this.dgvScore.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvScore_CellMouseDown);
             this.dgvScore.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScore_CellValidated);
             this.dgvScore.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScore_RowValidated);
+            this.dgvScore.Sorted += new System.EventHandler(this.dgvScore_Sorted);
+            this.dgvScore.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvScore_KeyDown);
             // 
-            // DivSubDiv
+            // dgvScoresDivSubDiv
             // 
-            this.DivSubDiv.DataPropertyName = "DivSubDiv";
-            this.DivSubDiv.HeaderText = "Div-SubDiv";
-            this.DivSubDiv.Name = "DivSubDiv";
-            this.DivSubDiv.ReadOnly = true;
+            this.dgvScoresDivSubDiv.DataPropertyName = "DivSubDiv";
+            this.dgvScoresDivSubDiv.HeaderText = "Div-SubDiv";
+            this.dgvScoresDivSubDiv.Name = "dgvScoresDivSubDiv";
+            this.dgvScoresDivSubDiv.ReadOnly = true;
             // 
-            // totalDataGridViewTextBoxColumn
+            // dgvScoresMatchTypeName
             // 
-            this.totalDataGridViewTextBoxColumn.HeaderText = "Total";
-            this.totalDataGridViewTextBoxColumn.Name = "totalDataGridViewTextBoxColumn";
-            this.totalDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dgvScoresMatchTypeName.DataPropertyName = "MatchTypeName";
+            this.dgvScoresMatchTypeName.HeaderText = "Match Type";
+            this.dgvScoresMatchTypeName.Name = "dgvScoresMatchTypeName";
+            this.dgvScoresMatchTypeName.ReadOnly = true;
+            // 
+            // dgvScoresDisplayName
+            // 
+            this.dgvScoresDisplayName.DataPropertyName = "DisplayName";
+            this.dgvScoresDisplayName.HeaderText = "Competitor";
+            this.dgvScoresDisplayName.Name = "dgvScoresDisplayName";
+            this.dgvScoresDisplayName.ReadOnly = true;
+            // 
+            // dgvScoreJudge1
+            // 
+            this.dgvScoreJudge1.DataPropertyName = "ScoreJudge1";
+            this.dgvScoreJudge1.HeaderText = "Score 1";
+            this.dgvScoreJudge1.Name = "dgvScoreJudge1";
+            // 
+            // dgvScoreJudge2
+            // 
+            this.dgvScoreJudge2.DataPropertyName = "ScoreJudge2";
+            this.dgvScoreJudge2.HeaderText = "Score 2";
+            this.dgvScoreJudge2.Name = "dgvScoreJudge2";
+            // 
+            // dgvScoreJudge3
+            // 
+            this.dgvScoreJudge3.DataPropertyName = "ScoreJudge3";
+            this.dgvScoreJudge3.HeaderText = "Score 3";
+            this.dgvScoreJudge3.Name = "dgvScoreJudge3";
+            // 
+            // dgvScoreJudge4
+            // 
+            this.dgvScoreJudge4.DataPropertyName = "ScoreJudge4";
+            this.dgvScoreJudge4.HeaderText = "Score 4";
+            this.dgvScoreJudge4.Name = "dgvScoreJudge4";
+            // 
+            // dgvScoreJudge5
+            // 
+            this.dgvScoreJudge5.DataPropertyName = "ScoreJudge5";
+            this.dgvScoreJudge5.HeaderText = "Score 5";
+            this.dgvScoreJudge5.Name = "dgvScoreJudge5";
+            // 
+            // dgvScoresTotal
+            // 
+            this.dgvScoresTotal.HeaderText = "Total";
+            this.dgvScoresTotal.Name = "dgvScoresTotal";
+            this.dgvScoresTotal.ReadOnly = true;
+            // 
+            // dgvScoresRanked
+            // 
+            this.dgvScoresRanked.DataPropertyName = "Ranked";
+            this.dgvScoresRanked.HeaderText = "Ranked";
+            this.dgvScoresRanked.Name = "dgvScoresRanked";
+            // 
+            // dgvScoresIsDisqualified
+            // 
+            this.dgvScoresIsDisqualified.DataPropertyName = "IsDisqualified";
+            this.dgvScoresIsDisqualified.FalseValue = "false";
+            this.dgvScoresIsDisqualified.HeaderText = "Disqualified";
+            this.dgvScoresIsDisqualified.IndeterminateValue = "false";
+            this.dgvScoresIsDisqualified.Name = "dgvScoresIsDisqualified";
+            this.dgvScoresIsDisqualified.TrueValue = "true";
             // 
             // scoreBindingSource
             // 
@@ -1868,64 +1940,52 @@
             // 
             this.tmrRegistrations.Interval = 1000;
             // 
-            // isDisqualifiedDataGridViewCheckBoxColumn
+            // btnScoresUndoChanges
             // 
-            this.isDisqualifiedDataGridViewCheckBoxColumn.DataPropertyName = "IsDisqualified";
-            this.isDisqualifiedDataGridViewCheckBoxColumn.FalseValue = "false";
-            this.isDisqualifiedDataGridViewCheckBoxColumn.HeaderText = "Disqualified";
-            this.isDisqualifiedDataGridViewCheckBoxColumn.IndeterminateValue = "false";
-            this.isDisqualifiedDataGridViewCheckBoxColumn.Name = "isDisqualifiedDataGridViewCheckBoxColumn";
-            this.isDisqualifiedDataGridViewCheckBoxColumn.TrueValue = "true";
+            this.btnScoresUndoChanges.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnScoresUndoChanges.Location = new System.Drawing.Point(752, 544);
+            this.btnScoresUndoChanges.Margin = new System.Windows.Forms.Padding(2);
+            this.btnScoresUndoChanges.Name = "btnScoresUndoChanges";
+            this.btnScoresUndoChanges.Size = new System.Drawing.Size(200, 42);
+            this.btnScoresUndoChanges.TabIndex = 10;
+            this.btnScoresUndoChanges.Text = "Undo Changes";
+            this.btnScoresUndoChanges.UseVisualStyleBackColor = true;
+            this.btnScoresUndoChanges.Visible = false;
+            this.btnScoresUndoChanges.Click += new System.EventHandler(this.btnScoresUndoChanges_Click);
             // 
-            // rankedDataGridViewTextBoxColumn
+            // btnSubmitScores
             // 
-            this.rankedDataGridViewTextBoxColumn.DataPropertyName = "Ranked";
-            this.rankedDataGridViewTextBoxColumn.HeaderText = "Ranked";
-            this.rankedDataGridViewTextBoxColumn.Name = "rankedDataGridViewTextBoxColumn";
+            this.btnSubmitScores.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmitScores.Location = new System.Drawing.Point(325, 544);
+            this.btnSubmitScores.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSubmitScores.Name = "btnSubmitScores";
+            this.btnSubmitScores.Size = new System.Drawing.Size(200, 42);
+            this.btnSubmitScores.TabIndex = 11;
+            this.btnSubmitScores.Text = "Submit Scores";
+            this.btnSubmitScores.UseVisualStyleBackColor = true;
+            this.btnSubmitScores.Visible = false;
+            this.btnSubmitScores.Click += new System.EventHandler(this.btnSubmitScores_Click);
             // 
-            // scoreJudge5DataGridViewTextBoxColumn
+            // cmsScores
             // 
-            this.scoreJudge5DataGridViewTextBoxColumn.DataPropertyName = "ScoreJudge5";
-            this.scoreJudge5DataGridViewTextBoxColumn.HeaderText = "Score 5";
-            this.scoreJudge5DataGridViewTextBoxColumn.Name = "scoreJudge5DataGridViewTextBoxColumn";
+            this.cmsScores.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmiScoreAddRow,
+            this.cmiScoreDeleteRows});
+            this.cmsScores.Name = "cmsScores";
+            this.cmsScores.Size = new System.Drawing.Size(150, 48);
             // 
-            // scoreJudge4DataGridViewTextBoxColumn
+            // cmiScoreAddRow
             // 
-            this.scoreJudge4DataGridViewTextBoxColumn.DataPropertyName = "ScoreJudge4";
-            this.scoreJudge4DataGridViewTextBoxColumn.HeaderText = "Score 4";
-            this.scoreJudge4DataGridViewTextBoxColumn.Name = "scoreJudge4DataGridViewTextBoxColumn";
+            this.cmiScoreAddRow.Name = "cmiScoreAddRow";
+            this.cmiScoreAddRow.Size = new System.Drawing.Size(149, 22);
+            this.cmiScoreAddRow.Text = "Add New Row";
+            this.cmiScoreAddRow.Click += new System.EventHandler(this.cmiScoreAddRow_Click);
             // 
-            // scoreJudge3DataGridViewTextBoxColumn
+            // cmiScoreDeleteRows
             // 
-            this.scoreJudge3DataGridViewTextBoxColumn.DataPropertyName = "ScoreJudge3";
-            this.scoreJudge3DataGridViewTextBoxColumn.HeaderText = "Score 3";
-            this.scoreJudge3DataGridViewTextBoxColumn.Name = "scoreJudge3DataGridViewTextBoxColumn";
-            // 
-            // scoreJudge2DataGridViewTextBoxColumn
-            // 
-            this.scoreJudge2DataGridViewTextBoxColumn.DataPropertyName = "ScoreJudge2";
-            this.scoreJudge2DataGridViewTextBoxColumn.HeaderText = "Score 2";
-            this.scoreJudge2DataGridViewTextBoxColumn.Name = "scoreJudge2DataGridViewTextBoxColumn";
-            // 
-            // scoreJudge1DataGridViewTextBoxColumn
-            // 
-            this.scoreJudge1DataGridViewTextBoxColumn.DataPropertyName = "ScoreJudge1";
-            this.scoreJudge1DataGridViewTextBoxColumn.HeaderText = "Score 1";
-            this.scoreJudge1DataGridViewTextBoxColumn.Name = "scoreJudge1DataGridViewTextBoxColumn";
-            // 
-            // displayNameDataGridViewTextBoxColumn
-            // 
-            this.displayNameDataGridViewTextBoxColumn.DataPropertyName = "DisplayName";
-            this.displayNameDataGridViewTextBoxColumn.HeaderText = "Competitor";
-            this.displayNameDataGridViewTextBoxColumn.Name = "displayNameDataGridViewTextBoxColumn";
-            this.displayNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // matchTypeNameDataGridViewTextBoxColumn
-            // 
-            this.matchTypeNameDataGridViewTextBoxColumn.DataPropertyName = "MatchTypeName";
-            this.matchTypeNameDataGridViewTextBoxColumn.HeaderText = "Match Type";
-            this.matchTypeNameDataGridViewTextBoxColumn.Name = "matchTypeNameDataGridViewTextBoxColumn";
-            this.matchTypeNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cmiScoreDeleteRows.Name = "cmiScoreDeleteRows";
+            this.cmiScoreDeleteRows.Size = new System.Drawing.Size(149, 22);
+            this.cmiScoreDeleteRows.Text = "Delete Row(s)";
             // 
             // frmMain
             // 
@@ -1933,6 +1993,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1158, 597);
+            this.Controls.Add(this.btnSubmitScores);
+            this.Controls.Add(this.btnScoresUndoChanges);
             this.Controls.Add(this.btnClearCompetitorFilter);
             this.Controls.Add(this.btnClearMatchFilter);
             this.Controls.Add(this.btnRefreshMatchTab);
@@ -1984,6 +2046,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCompany)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).EndInit();
             this.cmsCompetitor.ResumeLayout(false);
+            this.cmsScores.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2146,16 +2209,21 @@
         private System.Windows.Forms.TabPage tabScore;
         private System.Windows.Forms.DataGridView dgvScore;
         private System.Windows.Forms.BindingSource scoreBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DivSubDiv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn matchTypeNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn displayNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn scoreJudge1DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn scoreJudge2DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn scoreJudge3DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn scoreJudge4DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn scoreJudge5DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rankedDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isDisqualifiedDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Button btnScoresUndoChanges;
+        private System.Windows.Forms.Button btnSubmitScores;
+        private System.Windows.Forms.ContextMenuStrip cmsScores;
+        private System.Windows.Forms.ToolStripMenuItem cmiScoreAddRow;
+        private System.Windows.Forms.ToolStripMenuItem cmiScoreDeleteRows;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresDivSubDiv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresMatchTypeName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresDisplayName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoreJudge1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoreJudge2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoreJudge3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoreJudge4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoreJudge5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresRanked;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dgvScoresIsDisqualified;
     }
 }

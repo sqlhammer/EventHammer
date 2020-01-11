@@ -13,9 +13,10 @@
             {
                 return Global.GetMatchDisplayName(DivisionId, SubDivisionId);
             }
+            //TODO need setter with validator to check input
         }
         public int MatchTypeId { get; set; }
-        public string MatchTypeName { get;}
+        public string MatchTypeName { get; } //TODO need setter with validator to check input
         public int CompetitorId { get; set; }
         public string DisplayName { get; set; }
         public decimal ScoreJudge1 { get; set; }
