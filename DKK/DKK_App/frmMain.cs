@@ -2601,7 +2601,15 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void SubmitScores()
         {
-            MessageBox.Show("stubbed");
+            //try
+            //{
+                DataAccess.MergeScores(Scores, CurrentEvent);
+            //    MessageBox.Show("Scores saved successfully.", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Scores failed to save.", "Save Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void RefreshScoresGrid()

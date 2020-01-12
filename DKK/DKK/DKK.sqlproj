@@ -79,6 +79,7 @@
     <Folder Include="Schemas\Person\Stored Procedures" />
     <Folder Include="SQLAgentJobs" />
     <Folder Include="Schemas\Stage\Functions" />
+    <Folder Include="Schemas\Event\Types" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schemas\Person\Person.sql" />
@@ -145,6 +146,8 @@
     <Build Include="Schemas\Event\Views\vwScore.sql" />
     <Build Include="Schemas\Stage\Tables\ElementorFormEntry.sql" />
     <Build Include="Schemas\Stage\Stored Procedures\spLoadRegistration.sql" />
+    <Build Include="Schemas\Event\Stored Procedures\spMergeScores.sql" />
+    <Build Include="Schemas\Event\Types\ttScore.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Publish\dev-eventhammer.publish.xml" />

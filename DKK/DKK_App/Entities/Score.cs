@@ -3,11 +3,10 @@
     public class Score
     {
         private bool _isSettable;
-        private MatchType _matchType;
 
         public Score()
         {
-            _matchType = new MatchType
+            MatchType = new MatchType
             {
                 IsSpecialConsideration = false,
                 MatchTypeId = 0,
@@ -22,25 +21,15 @@
         public int SubDivisionId { get; set; }
         public string DivSubDiv
         {
-            //TODO need setter with validator to check input
+            //TODO need setter with validator to check input (consider drop down input)
             get
             {
                 return Global.GetMatchDisplayName(DivisionId, SubDivisionId);
             }
         }
-        public MatchType MatchType
-        {
-            get
-            {
-                return _matchType;
-            }
-            set
-            {
-                _matchType = value;
-            }
-        }
+        public MatchType MatchType { get; set; }
         public string MatchTypeName
-        { //TODO need setter with validator to check input
+        { //TODO need setter with validator to check input (consider dropdown input)
             get
             {
                 return (MatchType == null) ? "" : MatchType.MatchTypeName;
@@ -146,7 +135,7 @@
         private decimal SetValueWithRankOnlyCheck(string v)
         {
             //Don't change the underlying value if they cannot see what they
-            //changes due to "N/A" being displayed.
+            //changed due to "N/A" being displayed.
             _isSettable = true;
             if (MatchType.IsRankOnlyMatch)
                 _isSettable = false;

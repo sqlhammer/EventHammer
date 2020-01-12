@@ -8,6 +8,7 @@ using DKK_App.Models;
 using System.Data;
 using System.ComponentModel;
 using DKK_App.Objects;
+using Microsoft.SqlServer.Server;
 
 namespace DKK_App
 {
@@ -1553,6 +1554,61 @@ namespace DKK_App
         }
         #endregion Score Gets
 
+        #region Merges
+        public static int MergeScores(SortableBindingList<Score> scores, Event currentEvent)
+        {
+            string sproc_name = "[Event].[spMergeScores]";
+            
+            SqlParameter[] parameters = new SqlParameter[2];
+
+            parameters[0] = new SqlParameter("@EventId", currentEvent.EventId);
+            parameters[1] = new SqlParameter("@Scores", CreateScoreDataTable(scores,currentEvent))
+            {
+                SqlDbType = SqlDbType.Structured,
+                TypeName = "[Event].[ttScore]"
+            };
+
+            return ExecuteDDLAsStoredProcedureWithDataTable(sproc_name, parameters);
+        }
+
+        private static DataTable CreateScoreDataTable(IEnumerable<Score> scores, Event currentEvent)
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("ScoreId", typeof(int));
+            table.Columns.Add("EventId", typeof(int));
+            table.Columns.Add("MatchId", typeof(int));
+            table.Columns.Add("MatchTypeId", typeof(int));
+            table.Columns.Add("CompetitorId", typeof(int));
+            table.Columns.Add("ScoreJudge1", typeof(decimal));
+            table.Columns.Add("ScoreJudge2", typeof(decimal));
+            table.Columns.Add("ScoreJudge3", typeof(decimal));
+            table.Columns.Add("ScoreJudge4", typeof(decimal));
+            table.Columns.Add("ScoreJudge5", typeof(decimal));
+            table.Columns.Add("Ranked", typeof(Int16));
+            table.Columns.Add("IsDisqualified", typeof(bool));
+
+            DataRow row;
+            foreach (Score s in scores)
+            {
+                row = table.NewRow();
+                row[0] = s.ScoreId;
+                row[1] = currentEvent.EventId;
+                row[2] = s.MatchId;
+                row[3] = s.MatchType.MatchTypeId;
+                row[4] = s.CompetitorId;
+                row[5] = s.ScoreJudge1;
+                row[6] = s.ScoreJudge2;
+                row[7] = s.ScoreJudge3;
+                row[8] = s.ScoreJudge4;
+                row[9] = s.ScoreJudge5;
+                row[10] = s.Ranked;
+                row[11] = s.IsDisqualified;
+                table.Rows.Add(row);
+            }
+            return table;
+        }
+        #endregion
+
         #region Deletes
         public static void DeleteEvent(int id)
         {
@@ -1761,6 +1817,26 @@ namespace DKK_App
                     cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
 
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static int ExecuteDDLAsStoredProcedureWithDataTable(string query, SqlParameter[] parameters)
+        {
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings["SqlCommandTimeout"]);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddRange(parameters);
+                    cmd.Parameters.Add("@return_value", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+
+                    cmd.ExecuteNonQuery();
+
+                    return (int)cmd.Parameters["@return_value"].Value;
                 }
             }
         }
