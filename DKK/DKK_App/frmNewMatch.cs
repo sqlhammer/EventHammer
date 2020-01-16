@@ -1,5 +1,6 @@
 ﻿using DKK_App.Entities;
 using DKK_App.Enums;
+using DKK_App.Exceptions;
 using DKK_App.Models;
 using System.Collections.Generic;
 using System.Linq;

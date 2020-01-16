@@ -888,6 +888,18 @@ namespace DKK_App
             return result;
         }
 
+        public static async Task<List<MatchType>> GetMatchTypes()
+        {
+            string query = @"SELECT MatchTypeId
+	                              ,Name
+	                              ,IsSpecialConsideration 
+                            FROM Event.MatchType";
+
+            var results = await QueryMatchTypeInformation(query);
+
+            return results;
+        }
+
         private static async Task<List<MatchType>> QueryMatchTypeInformation(string query)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))

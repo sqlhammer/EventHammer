@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using DKK_App.Objects;
 using System.Deployment.Application;
+using DKK_App.Exceptions;
 
 namespace DKK_App
 {
@@ -430,6 +431,7 @@ namespace DKK_App
                 mm.MatchId = obj.Match.MatchId;
                 mm.SubDivisionId = obj.Match.SubDivisionId;
                 mm.MatchTypeName = GetMatchTypeDisplayName(obj.Match.MatchType,LengthType.Long);
+                mm.MatchTypeDisplayName = obj.Match.MatchType.MatchTypeDisplayName;
                 mm.Children = new List<MatchModel>();
 
                 divisions.Add(mm);
@@ -604,6 +606,22 @@ namespace DKK_App
         #endregion
 
         #region Validators and Conversions
+        public static ScoreMergeErrorType ValidateScores(SortableBindingList<Score> scores, Event currentEvent)
+        {
+            //this is going to be a pretty heavy validation, will need to be cautious about performance.
+
+            //get a refreshed list from the db to verify most up-to-date
+            SortableBindingList<Score> savedScores = DataAccess.GetScoresByEvent(currentEvent);
+
+            //get complete list of FK entities
+            //      make each object list population async.
+
+            //compare keys
+
+
+            return ScoreMergeErrorType.None;
+        }
+
         public static string GetEscapedSQLText(string query)
         {
             return query.Replace("'", "''");

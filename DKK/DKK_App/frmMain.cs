@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Configuration;
 using DKK_App.Objects;
 using System.ComponentModel;
+using DKK_App.Exceptions;
 
 namespace DKK_App
 {
@@ -21,7 +22,9 @@ namespace DKK_App
         public List<MatchModel> MatchModels = new List<MatchModel>();
         public MatchContext MatchContext = new MatchContext();
         public List<CompetitorModel> CompetitorModels = new List<CompetitorModel>();
+        public List<MatchType> MatchTypes = new List<MatchType>();
         public SortableBindingList<Score> Scores = new SortableBindingList<Score>();
+        public SortableBindingList<Score> SavedScores = new SortableBindingList<Score>();
         public List<Division> Divisions = new List<Division>();
         private List<Rank> Ranks = new List<Rank>();
         private List<Dojo> Dojos = new List<Dojo>();
@@ -77,6 +80,7 @@ namespace DKK_App
                 RefreshRanks();
                 RefreshDojos();
                 RefreshTitles();
+                RefreshMatchTypes();
                 BuildCompetitorDetailsGridView();
 
                 this.lblConnection.Visible = false;
@@ -88,6 +92,16 @@ namespace DKK_App
                 MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.btnRetryConnection.Visible = true;
             }
+        }
+
+        private void RefreshMatchTypes()
+        {
+            Task.Run(() => { RefreshMatchTypesAsync(); });
+        }
+
+        private async void RefreshMatchTypesAsync()
+        {
+            MatchTypes = await DataAccessAsync.GetMatchTypes();
         }
 
         private void btnClearMatchFilter_Click(object sender, EventArgs e)
@@ -152,6 +166,7 @@ namespace DKK_App
             this.tmrMatchCompetitorRefresh.Enabled = true;
             this.tmrNewMatch.Enabled = true;
 
+            RefreshMatchTypes();
             Task.Run(() => { RefreshMatchesAndCompetitorsAndScores(); });
 
             ClearCompetitorSelection();
@@ -237,13 +252,13 @@ namespace DKK_App
                 this.btnRefreshMatchTab.Visible = true;
                 this.btnClearMatchFilter.Visible = false;
                 this.btnClearCompetitorFilter.Visible = false;
-                this.msMatches.Enabled = false;
+                //this.msMatches.Enabled = false;
                 this.btnSubmitScores.Visible = true;
                 this.btnScoresUndoChanges.Visible = true;
             }
             else
             {
-                this.msMatches.Enabled = false;
+                //this.msMatches.Enabled = false;
             }
 
             //Toggle Event button visibility and Event menu options
@@ -2601,8 +2616,12 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void SubmitScores()
         {
+            dgvScore.EndEdit();
+            FlushUnboundScoreGridBuffers();
+
             //try
             //{
+            if (Global.ValidateScores(Scores, CurrentEvent) == ScoreMergeErrorType.None)
                 DataAccess.MergeScores(Scores, CurrentEvent);
             //    MessageBox.Show("Scores saved successfully.", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //}
@@ -2610,13 +2629,147 @@ If you do not like the placements, you will have to move the competitors to diff
             //{
             //    MessageBox.Show("Scores failed to save.", "Save Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //}
+
+            //TODO: disable editable cells once they are commited to the DB.
+            //DisableDataGridViewComboBoxCell();
         }
 
         private void RefreshScoresGrid()
         {
+            BuildScoresGrid();
             dgvScore.DataSource = Scores;
             dgvScore.Refresh();
             dgvScore.AutoResizeColumns();
+        }
+
+        private void BuildScoresGrid()
+        {
+            if (dgvScore.Columns["dgvScoresDivSubDiv"] != null)
+                return;
+
+            dgvScore.Columns.Add(BindMatchTypesColumn());
+            dgvScore.Columns.Add(BindDivisionsColumn());
+            dgvScore.Columns.Add(BindCompetitorsColumn());
+
+            SetScoreColumnDisplayOrder();
+        }
+
+        private void DisableDataGridViewComboBoxColumn(DataGridViewComboBoxColumn Column)
+        {
+            Column.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
+            Column.ReadOnly = true;
+        }
+
+        private void EnableDataGridViewComboBoxColumn(DataGridViewComboBoxColumn Column)
+        {
+            Column.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            Column.ReadOnly = false;
+        }
+
+        private void DisableDataGridViewComboBoxCell(DataGridViewComboBoxCell cell)
+        {
+            cell.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
+            cell.ReadOnly = true;
+        }
+
+        private void EnableDataGridViewComboBoxCell(DataGridViewComboBoxCell cell)
+        {
+            cell.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            cell.ReadOnly = false;
+        }
+
+        private DataGridViewComboBoxColumn BindDivisionsColumn()
+        {
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = MatchModels;
+
+            DataGridViewComboBoxColumn Column = new DataGridViewComboBoxColumn();
+            Column.DataPropertyName = "MatchDisplayName";
+            Column.DataSource = bindingSource;
+            Column.ValueMember = "MatchDisplayName";
+            Column.DisplayMember = "MatchDisplayName";
+            Column.Name = "dgvScoresDivSubDiv";
+            Column.HeaderText = "Div-SubDiv";
+
+            DisableDataGridViewComboBoxColumn(Column);
+
+            return Column;
+        }
+
+        private DataGridViewComboBoxColumn BindMatchTypesColumn()
+        {
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = MatchModels;
+
+            DataGridViewComboBoxColumn Column = new DataGridViewComboBoxColumn();
+            Column.DataPropertyName = "MatchTypeDisplayName";
+            Column.DataSource = bindingSource;
+            Column.ValueMember = "MatchTypeDisplayName";
+            Column.DisplayMember = "MatchTypeDisplayName";
+            Column.Name = "dgvScoreMatchTypeName";
+            Column.HeaderText = "Match Type";
+
+            DisableDataGridViewComboBoxColumn(Column);
+
+            return Column;
+        }
+
+        private DataGridViewComboBoxColumn BindCompetitorsColumn()
+        {
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = CompetitorModels;
+            
+            DataGridViewComboBoxColumn Column = new DataGridViewComboBoxColumn();
+            Column.DataPropertyName = "DisplayName";
+            Column.DataSource = bindingSource;
+            Column.ValueMember = "DisplayName";
+            Column.DisplayMember = "DisplayName";
+            Column.Name = "dgvScoresDisplayName";
+            Column.HeaderText = "Competitors";
+
+            DisableDataGridViewComboBoxColumn(Column);
+
+            return Column;
+        }
+
+        private void BindFilteredCompetitorsColumn(int matchId, int rowIndex)
+        {
+            //Poor man's deepcopies
+            List<CompetitorModel> cm = new List<CompetitorModel>();
+            foreach (var c in CompetitorModels)
+                cm.Add(c);
+
+            MatchModel m = MatchModels.Where(y => y.MatchId == matchId).FirstOrDefault();
+            
+            cm.RemoveAll(x => !m.Children.Any(z => x.CompetitorId == z.CompetitorId));
+
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = cm;
+
+            DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)dgvScore.Rows[rowIndex].Cells[dgvScore.Columns["dgvScoresDisplayName"].Index]; ;
+            cell.DataSource = bindingSource;
+        }
+
+        private void SetScoreColumnDisplayOrder()
+        {
+            dgvScore.Columns["dgvScoresDivSubDiv"].DisplayIndex = 0;
+            dgvScore.Columns["dgvScoreMatchTypeName"].DisplayIndex = 1;
+            dgvScore.Columns["dgvScoresDisplayName"].DisplayIndex = 2;
+            dgvScore.Columns["dgvScoreJudge1"].DisplayIndex = 3;
+            dgvScore.Columns["dgvScoreJudge2"].DisplayIndex = 4;
+            dgvScore.Columns["dgvScoreJudge3"].DisplayIndex = 5;
+            dgvScore.Columns["dgvScoreJudge4"].DisplayIndex = 6;
+            dgvScore.Columns["dgvScoreJudge5"].DisplayIndex = 7;
+            dgvScore.Columns["dgvScoresTotal"].DisplayIndex = 8;
+            dgvScore.Columns["dgvScoresRanked"].DisplayIndex = 9;
+            dgvScore.Columns["dgvScoresIsDisqualified"].DisplayIndex = 10;
+        }
+
+        private SortableBindingList<Score> RefreshSavedScores()
+        {
+            SortableBindingList<Score> scores = DataAccess.GetScoresByEvent(CurrentEvent);
+            SavedScores = scores;
+            return SavedScores;
         }
 
         private void RefreshScores()
@@ -2624,6 +2777,7 @@ If you do not like the placements, you will have to move the competitors to diff
             ScoresLoadComplete = false;
             SortableBindingList<Score> scores = DataAccess.GetScoresByEvent(CurrentEvent);
             Scores = scores;
+            SavedScores = scores;
             RefreshScoresGrid();
             ScoresLoadComplete = true;
         }
@@ -2633,6 +2787,7 @@ If you do not like the placements, you will have to move the competitors to diff
             ScoresLoadComplete = false;
             SortableBindingList<Score> scores = await DataAccessAsync.GetScoresByEvent(CurrentEvent);
             Scores = scores;
+            SavedScores = scores;
             ScoresLoadComplete = true;
         }
 
@@ -2643,7 +2798,55 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void dgvScore_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
-            ComputeScoreTotal(e.RowIndex);
+            DataGridViewRow row = dgvScore.Rows[e.RowIndex];
+            FlushUnboundScoreGridBuffer(row);
+            ComputeScoreTotal(row);
+        }
+
+        private void FlushUnboundScoreGridBuffers()
+        {
+            if (!DynamicColumnsHaveBeenAdded())
+                return;
+
+            for (int i = 0; i < dgvScore.Rows.Count; i++)
+            {
+                DataGridViewRow row = dgvScore.Rows[i];
+                FlushUnboundScoreGridBuffer(row);
+            }
+        }
+
+        private void FlushUnboundScoreGridBuffer(DataGridViewRow row)
+        {
+            Score s = (Score)row.DataBoundItem;
+
+            //Division-SubDivision
+            if (row.Cells["dgvScoresDivSubDiv"].Value == null)
+                return;
+
+            DivisionSubDivision div = new DivisionSubDivision(row.Cells["dgvScoresDivSubDiv"].Value.ToString());            
+            s.DivisionId = div.DivisionId;
+            s.SubDivisionId = div.SubDivisionId;
+
+            //Match
+            MatchModel match = MatchModels.Where(x => x.DivisionId == div.DivisionId && x.SubDivisionId == div.SubDivisionId).FirstOrDefault();
+            s.MatchId = (match.MatchId != null) ? (int)match.MatchId : -1;
+
+            //Match Type
+            if (row.Cells["dgvScoreMatchTypeName"].Value == null)
+                return;
+
+            s.MatchType = MatchTypes.Where(x => x.MatchTypeDisplayName == row.Cells["dgvScoreMatchTypeName"].Value.ToString()).FirstOrDefault();
+
+            //Competitor
+            if (row.Cells["dgvScoresDisplayName"].Value == null)
+                return;
+
+            s.CompetitorId = CompetitorModels.Where(x => x.DisplayName == row.Cells["dgvScoresDisplayName"].Value.ToString()).FirstOrDefault().CompetitorId;
+        }
+
+        private void dgvScore_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            SetdgvScoreEditableCells();
         }
 
         private void dgvScore_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
@@ -2660,8 +2863,8 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             if (dgvScore.CurrentRow == null) return;
 
-            string div = (dgvScore.CurrentRow.Cells[dgvScoresDivSubDiv.Index].Value == null) ? "?" : dgvScore.CurrentRow.Cells[dgvScoresDivSubDiv.Index].Value.ToString();
-            string competitor = (dgvScore.CurrentRow.Cells[dgvScoresDisplayName.Index].Value == null) ? "?" : dgvScore.CurrentRow.Cells[dgvScoresDisplayName.Index].Value.ToString();
+            string div = (dgvScore.CurrentRow.Cells["dgvScoresDivSubDiv"].Value == null) ? "?" : dgvScore.CurrentRow.Cells["dgvScoresDivSubDiv"].Value.ToString();
+            string competitor = (dgvScore.CurrentRow.Cells["dgvScoresDisplayName"].Value == null) ? "?" : dgvScore.CurrentRow.Cells["dgvScoresDisplayName"].Value.ToString();
 
             cmiScoreDeleteRows.Text = string.Format("Delete row: Div: {0}, Name: {1}", div, competitor);
         }
@@ -2710,6 +2913,110 @@ If you do not like the placements, you will have to move the competitors to diff
             AddingNewScoresRow();
         }
 
+        private void dgvScore_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            if (!DynamicColumnsHaveBeenAdded())
+                return;
+
+            for (int i = 0; i < e.RowCount; i++)
+            {
+                DataGridViewRow row = dgvScore.Rows[e.RowIndex + i];
+                SetdgvScoreColumns(row);
+                ComputeScoreTotal(row);
+            }
+        }
+
+        private bool DynamicColumnsHaveBeenAdded()
+        {
+            if (dgvScore.Columns["dgvScoresDivSubDiv"] == null
+                || dgvScore.Columns["dgvScoreMatchTypeName"] == null
+                || dgvScore.Columns["dgvScoresDisplayName"] == null)
+                return false;
+
+            return true;
+        }
+
+        private void SetdgvScoreEditableCells()
+        {
+            if (!DynamicColumnsHaveBeenAdded())
+                return;
+
+            for (int i = 0; i < dgvScore.Rows.Count; i++)
+            {
+                DataGridViewRow row = dgvScore.Rows[i];
+                SetdgvScoreEditableCells(row);
+            }
+        }
+
+        private void SetdgvScoreEditableCells(DataGridViewRow row)
+        {
+            if (row.Cells[dgcScoresScoreId.Index].Value == null
+                || int.Parse(row.Cells[dgcScoresScoreId.Index].Value.ToString()) == -1
+                || row.Cells[dgvScoresMatchId.Index].Value == null
+                || int.Parse(row.Cells[dgvScoresMatchId.Index].Value.ToString()) == -1)
+            {
+                EnableDataGridViewComboBoxCell((DataGridViewComboBoxCell)row.Cells["dgvScoresDivSubDiv"]);
+                EnableDataGridViewComboBoxCell((DataGridViewComboBoxCell)row.Cells["dgvScoresDisplayName"]);
+                return;
+            }
+
+            int.TryParse(row.Cells[dgcScoresScoreId.Index].Value.ToString(), out int result);
+            if (!SavedScores.Any(y => y.ScoreId == result))
+            {
+                EnableDataGridViewComboBoxCell((DataGridViewComboBoxCell)row.Cells["dgvScoresDivSubDiv"]);
+                EnableDataGridViewComboBoxCell((DataGridViewComboBoxCell)row.Cells["dgvScoresDisplayName"]);
+            }
+        }
+
+        private void SetdgvScoreColumns(DataGridViewRow row)
+        {
+            if (row.Cells["dgvScoresMatchId"].Value == null)
+                return;
+
+            int.TryParse(row.Cells["dgvScoresMatchId"].Value.ToString(), out int result);
+            if (result == -1) //If Match object is default object
+                return;
+
+            row.Cells["dgvScoresDivSubDiv"].Value = MatchModels.Where(m => m.MatchId == result).FirstOrDefault().MatchDisplayName;
+            row.Cells["dgvScoreMatchTypeName"].Value = MatchModels.Where(m => m.MatchId == result).FirstOrDefault().MatchTypeName;
+        }
+
+        private void dgvScore_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dgvScore.Rows[e.RowIndex];
+            if (row.Cells[dgvScore.Columns["dgvScoresDivSubDiv"].Index].ColumnIndex == e.ColumnIndex)
+                SetCellsOnScoresDivisionChange(row);
+        }
+
+        private void dgvScore_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dgvScore.Columns["dgvScoresDisplayName"].Index)
+                FilterAvailableCompetitorsInScoreComboBox(e.RowIndex);
+        }
+
+        private void SetCellsOnScoresDivisionChange(DataGridViewRow row)
+        {
+            //Reset Match Type
+            string div = row.Cells["dgvScoresDivSubDiv"].Value.ToString();
+            row.Cells["dgvScoreMatchTypeName"].Value = MatchModels.Where(m => m.MatchDisplayName.CompareTo(div) == 0).FirstOrDefault().MatchTypeName;
+
+            //Reset Competitor selection
+            row.Cells[dgvScore.Columns["dgvScoresDisplayName"].Index].Value = null;
+        }
+
+        private void FilterAvailableCompetitorsInScoreComboBox(int RowIndex)
+        {
+            DataGridViewCell cell = dgvScore.Rows[RowIndex].Cells[dgvScore.Columns["dgvScoresDivSubDiv"].Index];
+            if (cell.Value == null)
+                return;
+
+            string div = cell.Value.ToString();
+            int? matchId = MatchModels.Where(x => x.MatchDisplayName.CompareTo(div) == 0).FirstOrDefault().MatchId;
+
+            if(matchId != null)
+                BindFilteredCompetitorsColumn((int)matchId, RowIndex);
+        }
+
         private void AddingNewScoresRow()
         {
             if (dgvScore.Rows.Count == Scores.Count)
@@ -2728,34 +3035,38 @@ If you do not like the placements, you will have to move the competitors to diff
         {
             foreach (DataGridViewRow row in dgvScore.Rows)
             {
-                ComputeScoreTotal(row.Index);
+                ComputeScoreTotal(row);
             }
         }
 
-        private void ComputeScoreTotal(int RowIndex)
+        private void ComputeScoreTotal(int rowIndex)
         {
-            if (RowIndex > -1)
+            ComputeScoreTotal(dgvScore.Rows[rowIndex]);
+        }
+
+        private void ComputeScoreTotal(DataGridViewRow row)
+        {
+            if (row == null)
+                return;
+
+            string score1 = (row.Cells[dgvScoreJudge1.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge1.Index].Value.ToString();
+            string score2 = (row.Cells[dgvScoreJudge2.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge2.Index].Value.ToString();
+            string score3 = (row.Cells[dgvScoreJudge3.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge3.Index].Value.ToString();
+            string score4 = (row.Cells[dgvScoreJudge4.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge4.Index].Value.ToString();
+            string score5 = (row.Cells[dgvScoreJudge5.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge5.Index].Value.ToString();
+            decimal result;
+            if (Decimal.TryParse(score1, out result)
+                && Decimal.TryParse(score2, out result)
+                && Decimal.TryParse(score3, out result)
+                && Decimal.TryParse(score4, out result)
+                && Decimal.TryParse(score5, out result))
             {
-                DataGridViewRow row = dgvScore.Rows[RowIndex];
-                string score1 = (row.Cells[dgvScoreJudge1.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge1.Index].Value.ToString();
-                string score2 = (row.Cells[dgvScoreJudge2.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge2.Index].Value.ToString();
-                string score3 = (row.Cells[dgvScoreJudge3.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge3.Index].Value.ToString();
-                string score4 = (row.Cells[dgvScoreJudge4.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge4.Index].Value.ToString();
-                string score5 = (row.Cells[dgvScoreJudge5.Index].Value == null) ? "0" : row.Cells[dgvScoreJudge5.Index].Value.ToString();
-                decimal result;
-                if (Decimal.TryParse(score1, out result)
-                    && Decimal.TryParse(score2, out result)
-                    && Decimal.TryParse(score3, out result)
-                    && Decimal.TryParse(score4, out result)
-                    && Decimal.TryParse(score5, out result))
-                {
-                    row.Cells[dgvScoresTotal.Index].Value = Decimal.Parse(score1) + Decimal.Parse(score2) +
-                        Decimal.Parse(score3) + Decimal.Parse(score4) + Decimal.Parse(score5);
-                }
-                else
-                {
-                    row.Cells[dgvScoresTotal.Index].Value = "N/A";
-                }
+                row.Cells[dgvScoresTotal.Index].Value = Decimal.Parse(score1) + Decimal.Parse(score2) +
+                    Decimal.Parse(score3) + Decimal.Parse(score4) + Decimal.Parse(score5);
+            }
+            else
+            {
+                row.Cells[dgvScoresTotal.Index].Value = "N/A";
             }
         }
         #endregion Score Tab

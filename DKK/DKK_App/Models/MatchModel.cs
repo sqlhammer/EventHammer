@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DKK_App.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace DKK_App.Models
@@ -7,6 +8,11 @@ namespace DKK_App.Models
     {
         private string _MatchDisplayName;
         private int? _SubDivisionId;
+
+        public MatchModel()
+        {
+            MatchId = -1;
+        }
 
         public int? EventId { get; set; }
         public int? SubDivisionId
@@ -33,6 +39,7 @@ namespace DKK_App.Models
         }
         public int? MatchTypeId { get; set; }
         public string MatchTypeName { get; set; }
+        public string MatchTypeDisplayName { get; set; }
         public int? CompetitorId { get; set; }
         public string DisplayName { get; set; }
         public string RankName { get; set; }

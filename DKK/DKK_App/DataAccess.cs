@@ -1792,6 +1792,7 @@ namespace DKK_App
         }
         #endregion
 
+        #region DDL
         public static void TriggerRegistrationLoad()
         {
             string query = "EXEC msdb.dbo.sp_start_job N'Load Registration Data';";
@@ -1860,5 +1861,6 @@ namespace DKK_App
                 }
             }
         }
+        #endregion
     }
 }

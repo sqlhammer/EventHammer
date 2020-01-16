@@ -12,6 +12,9 @@
                 MatchTypeId = 0,
                 MatchTypeName = ""
             };
+
+            ScoreId = -1;
+            MatchId = -1;
         }
 
         public int ScoreId { get; set; }

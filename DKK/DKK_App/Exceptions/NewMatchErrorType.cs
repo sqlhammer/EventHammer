@@ -1,5 +1,5 @@
 ﻿
-namespace DKK_App.Enums
+namespace DKK_App.Exceptions
 {
     public enum NewMatchErrorType
     {

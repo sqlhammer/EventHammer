@@ -17,6 +17,7 @@ namespace DKK_App.Models
         {
             Competitor = new Competitor
             {
+                CompetitorId = -1,
                 Dojo = new Dojo
                 {
                     Facility = new Facility(),

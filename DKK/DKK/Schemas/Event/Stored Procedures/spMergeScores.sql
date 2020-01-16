@@ -1,6 +1,6 @@
 ﻿    
 CREATE PROCEDURE [Event].[spMergeScores]
-	@EventId int,
+	@EventId int, --I don't want this from the DataTable as an extra protection against the Scores object containing an object for an event which is not current.
 	@Scores [Event].[ttScore] READONLY
 AS
 BEGIN

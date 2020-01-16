@@ -134,7 +134,12 @@
             this.txtCompFilter = new System.Windows.Forms.TextBox();
             this.lblCompFilter = new System.Windows.Forms.Label();
             this.tabScore = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.dgvScore = new System.Windows.Forms.DataGridView();
+            this.dgcScoresScoreId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresMatchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvScoresTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.retryConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -190,20 +195,14 @@
             this.cmsScores = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmiScoreAddRow = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiScoreDeleteRows = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.scoreBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dgvScoresDivSubDiv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoresMatchTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoresDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvScoreJudge1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvScoreJudge2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvScoreJudge3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvScoreJudge4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvScoreJudge5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvScoresTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvScoresRanked = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvScoresIsDisqualified = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.scoreBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -768,6 +767,7 @@
             this.olvColEventType});
             this.tlvEvents.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvEvents.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlvEvents.HideSelection = false;
             this.tlvEvents.IsSimpleDragSource = true;
             this.tlvEvents.Location = new System.Drawing.Point(3, 28);
             this.tlvEvents.Margin = new System.Windows.Forms.Padding(2);
@@ -899,6 +899,7 @@
             this.olvColHeight});
             this.tlvMatches.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlvMatches.HideSelection = false;
             this.tlvMatches.IsSimpleDropSink = true;
             this.tlvMatches.Location = new System.Drawing.Point(4, 80);
             this.tlvMatches.Margin = new System.Windows.Forms.Padding(2);
@@ -1077,6 +1078,7 @@
             this.olvMatchCompHeight});
             this.tlvCompetitors.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvCompetitors.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlvCompetitors.HideSelection = false;
             this.tlvCompetitors.IsSimpleDragSource = true;
             this.tlvCompetitors.Location = new System.Drawing.Point(3, 80);
             this.tlvCompetitors.Margin = new System.Windows.Forms.Padding(2);
@@ -1327,6 +1329,7 @@
             this.olvColCompHeight});
             this.tlvComp.Cursor = System.Windows.Forms.Cursors.Default;
             this.tlvComp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlvComp.HideSelection = false;
             this.tlvComp.IsSimpleDragSource = true;
             this.tlvComp.Location = new System.Drawing.Point(3, 76);
             this.tlvComp.Margin = new System.Windows.Forms.Padding(2);
@@ -1421,16 +1424,33 @@
             this.tabScore.Text = "Scores";
             this.tabScore.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(468, 231);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "LOADING";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(444, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Unsaved changes ***";
+            // 
             // dgvScore
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.dgvScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvScore.AutoGenerateColumns = false;
             this.dgvScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvScore.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvScoresDivSubDiv,
-            this.dgvScoresMatchTypeName,
-            this.dgvScoresDisplayName,
+            this.dgcScoresScoreId,
+            this.dgvScoresMatchId,
             this.dgvScoreJudge1,
             this.dgvScoreJudge2,
             this.dgvScoreJudge3,
@@ -1445,11 +1465,35 @@
             this.dgvScore.Size = new System.Drawing.Size(1046, 403);
             this.dgvScore.TabIndex = 0;
             this.dgvScore.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dgvScore_CellContextMenuStripNeeded);
+            this.dgvScore.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScore_CellEndEdit);
+            this.dgvScore.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScore_CellEnter);
             this.dgvScore.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvScore_CellMouseDown);
             this.dgvScore.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScore_CellValidated);
+            this.dgvScore.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvScore_DataBindingComplete);
+            this.dgvScore.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvScore_RowsAdded);
             this.dgvScore.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvScore_RowValidated);
             this.dgvScore.Sorted += new System.EventHandler(this.dgvScore_Sorted);
             this.dgvScore.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvScore_KeyDown);
+            // 
+            // dgcScoresScoreId
+            // 
+            this.dgcScoresScoreId.DataPropertyName = "ScoreId";
+            this.dgcScoresScoreId.HeaderText = "ScoreId";
+            this.dgcScoresScoreId.Name = "dgcScoresScoreId";
+            this.dgcScoresScoreId.Visible = false;
+            // 
+            // dgvScoresMatchId
+            // 
+            this.dgvScoresMatchId.DataPropertyName = "MatchId";
+            this.dgvScoresMatchId.HeaderText = "MatchId";
+            this.dgvScoresMatchId.Name = "dgvScoresMatchId";
+            this.dgvScoresMatchId.Visible = false;
+            // 
+            // dgvScoresTotal
+            // 
+            this.dgvScoresTotal.HeaderText = "Total";
+            this.dgvScoresTotal.Name = "dgvScoresTotal";
+            this.dgvScoresTotal.ReadOnly = true;
             // 
             // msMenu
             // 
@@ -1915,49 +1959,6 @@
             this.cmiScoreDeleteRows.Size = new System.Drawing.Size(149, 22);
             this.cmiScoreDeleteRows.Text = "Delete Row(s)";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(444, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Unsaved changes ***";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(468, 231);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "LOADING";
-            // 
-            // scoreBindingSource
-            // 
-            this.scoreBindingSource.DataSource = typeof(DKK_App.Entities.Score);
-            // 
-            // dgvScoresDivSubDiv
-            // 
-            this.dgvScoresDivSubDiv.DataPropertyName = "DivSubDiv";
-            this.dgvScoresDivSubDiv.HeaderText = "Div-SubDiv";
-            this.dgvScoresDivSubDiv.Name = "dgvScoresDivSubDiv";
-            this.dgvScoresDivSubDiv.ReadOnly = true;
-            // 
-            // dgvScoresMatchTypeName
-            // 
-            this.dgvScoresMatchTypeName.DataPropertyName = "MatchTypeName";
-            this.dgvScoresMatchTypeName.HeaderText = "Match Type";
-            this.dgvScoresMatchTypeName.Name = "dgvScoresMatchTypeName";
-            this.dgvScoresMatchTypeName.ReadOnly = true;
-            // 
-            // dgvScoresDisplayName
-            // 
-            this.dgvScoresDisplayName.DataPropertyName = "DisplayName";
-            this.dgvScoresDisplayName.HeaderText = "Competitor";
-            this.dgvScoresDisplayName.Name = "dgvScoresDisplayName";
-            this.dgvScoresDisplayName.ReadOnly = true;
-            // 
             // dgvScoreJudge1
             // 
             this.dgvScoreJudge1.DataPropertyName = "DisplayScoreJudge1";
@@ -1988,12 +1989,6 @@
             this.dgvScoreJudge5.HeaderText = "Score 5";
             this.dgvScoreJudge5.Name = "dgvScoreJudge5";
             // 
-            // dgvScoresTotal
-            // 
-            this.dgvScoresTotal.HeaderText = "Total";
-            this.dgvScoresTotal.Name = "dgvScoresTotal";
-            this.dgvScoresTotal.ReadOnly = true;
-            // 
             // dgvScoresRanked
             // 
             this.dgvScoresRanked.DataPropertyName = "Ranked";
@@ -2008,6 +2003,10 @@
             this.dgvScoresIsDisqualified.IndeterminateValue = "false";
             this.dgvScoresIsDisqualified.Name = "dgvScoresIsDisqualified";
             this.dgvScoresIsDisqualified.TrueValue = "true";
+            // 
+            // scoreBindingSource
+            // 
+            this.scoreBindingSource.DataSource = typeof(DKK_App.Entities.Score);
             // 
             // frmMain
             // 
@@ -2239,9 +2238,8 @@
         private System.Windows.Forms.ToolStripMenuItem cmiScoreDeleteRows;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresDivSubDiv;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresMatchTypeName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresDisplayName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgcScoresScoreId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresMatchId;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoreJudge1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoreJudge2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoreJudge3;
