@@ -203,6 +203,7 @@
             this.dgvScoresRanked = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvScoresIsDisqualified = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.scoreBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cmiSandboxMode = new System.Windows.Forms.ToolStripMenuItem();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -1681,6 +1682,7 @@
             // 
             this.miHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem1,
+            this.cmiSandboxMode,
             this.autoUpdateToolStripMenuItem,
             this.cmiDownloadLatestVersion,
             this.aboutToolStripMenuItem});
@@ -2008,6 +2010,14 @@
             // 
             this.scoreBindingSource.DataSource = typeof(DKK_App.Entities.Score);
             // 
+            // cmiSandboxMode
+            // 
+            this.cmiSandboxMode.Name = "cmiSandboxMode";
+            this.cmiSandboxMode.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.cmiSandboxMode.Size = new System.Drawing.Size(205, 22);
+            this.cmiSandboxMode.Text = "Sandbox Mode - OFF";
+            this.cmiSandboxMode.Click += new System.EventHandler(this.cmiSandboxMode_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -2248,5 +2258,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresRanked;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgvScoresIsDisqualified;
+        private System.Windows.Forms.ToolStripMenuItem cmiSandboxMode;
     }
 }

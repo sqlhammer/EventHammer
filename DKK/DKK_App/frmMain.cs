@@ -32,6 +32,7 @@ namespace DKK_App
         public List<EventModel> EventModels = new List<EventModel>();
         private Color Green_SQLHammer = Color.FromArgb(40, 190, 155);
         private CompetitorDetailsGridMap map = new CompetitorDetailsGridMap();
+        private bool IsSandboxMode = false;
 
         private bool MatchModelLoadComplete = false;
         private bool CompetitorModelLoadComplete = false;
@@ -92,6 +93,58 @@ namespace DKK_App
                 MessageBox.Show("Failed to connect to remote EventHammer database.", "Connection failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.btnRetryConnection.Visible = true;
             }
+        }
+
+        private void cmiSandboxMode_Click(object sender, EventArgs e)
+        {
+            ToggleSandboxMode(IsSandboxMode);
+        }
+
+        private void ToggleSandboxMode (bool isSandboxMode)
+        {
+            string connectionString = "Data Source=app.eventhammeronline.com,49001;Initial Catalog={0};Persist Security Info=True;User ID=sqlhammer;Password=111monkeyAPPLEjumping@@@;Connect Timeout=15;Application Name=Event Hammer;Max Pool Size=100;";
+
+            if (isSandboxMode)
+            {
+                connectionString = String.Format(connectionString, "dkk");
+                cmiSandboxMode.Text = "Sandbox Mode - OFF";
+                this.BackColor = Color.White;
+            }
+            else
+            {
+                connectionString = String.Format(connectionString, "dkk_dev");
+                cmiSandboxMode.Text = "Sandbox Mode - ON";
+                this.BackColor = Color.LightCoral;
+            }
+
+            UpdateConnectionString(connectionString);
+            IsSandboxMode = !IsSandboxMode;
+
+            ResetEnvironment();
+        }
+
+        private void UpdateConnectionString (string connectionString)
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var connectionStringsSection = (ConnectionStringsSection)config.GetSection("connectionStrings");
+            connectionStringsSection.ConnectionStrings["DKK"].ConnectionString = connectionString;
+            config.Save();
+            ConfigurationManager.RefreshSection("connectionStrings");
+        }
+
+        private void ResetEnvironment()
+        {
+            //To refresh all standard object lists such as events, dojos, titles, etc.
+            RetryConnection();
+
+            //To force the user back to selecting an event which is relevant to this environment
+            DisableNonEventTabs();
+            tab1.SelectedIndex = 0; //tabHome
+
+            //To provoke an auto-refresh of all models for the new environment
+            MatchModelLoadComplete = false;
+            CompetitorModelLoadComplete = false;
+            ScoresLoadComplete = false;
         }
 
         private void RefreshMatchTypes()
@@ -557,12 +610,15 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             {
                 this.cbEventSelect.Items.Add(Event.EventName + " - " + Event.Date.ToString("MM/dd/yyyy"));
             }
+
+            this.cbEventSelect.Text = "";
+            this.rtbEventInfo.Text = "";
         }
 
         private void SetEventSearchDateRange()
         {
-            DateTime minDate = new DateTime(DateTime.Now.Year, 1, 1);
-            DateTime maxDate = new DateTime(DateTime.Now.Year + 1, 12, 31);
+            DateTime minDate = new DateTime(DateTime.Now.Year - 5, 1, 1);
+            DateTime maxDate = new DateTime(DateTime.Now.Year + 2, 12, 31);
 
             this.dtpEventFrom.Value = minDate;
             this.dtpEventTo.Value = maxDate;
