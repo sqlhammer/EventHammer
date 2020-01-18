@@ -56,6 +56,10 @@ namespace DKK_App
             tlvMatches.ContextMenuStrip = this.cmsMatches;
             tlvComp.ContextMenuStrip = this.cmsCompetitor;
 
+            //Set default connection state
+            //Sandbox mode will be OFF
+            ToggleSandboxMode(false);
+
             //First point of database access
             InitializeFormWithDataAccess();
 
@@ -97,32 +101,42 @@ namespace DKK_App
 
         private void cmiSandboxMode_Click(object sender, EventArgs e)
         {
-            ToggleSandboxMode(IsSandboxMode);
+            ToggleSandboxMode(!IsSandboxMode);
         }
 
-        private void ToggleSandboxMode (bool isSandboxMode)
+        private void ToggleSandboxMode (bool targetSandboxMode)
         {
-            string connectionString = "Data Source=app.eventhammeronline.com,49001;Initial Catalog={0};Persist Security Info=True;User ID=sqlhammer;Password=111monkeyAPPLEjumping@@@;Connect Timeout=15;Application Name=Event Hammer;Max Pool Size=100;";
+            string connectionState = "DKK";
 
-            if (isSandboxMode)
+            if (!targetSandboxMode)
             {
-                connectionString = String.Format(connectionString, "dkk");
+                connectionState = "DKK";
                 cmiSandboxMode.Text = "Sandbox Mode - OFF";
                 this.BackColor = Color.White;
             }
             else
             {
-                connectionString = String.Format(connectionString, "dkk_dev");
+                connectionState = "DKK_Dev";
                 cmiSandboxMode.Text = "Sandbox Mode - ON";
                 this.BackColor = Color.LightCoral;
             }
 
-            UpdateConnectionString(connectionString);
-            IsSandboxMode = !IsSandboxMode;
+            UpdateLastConnectionState(connectionState);
+            IsSandboxMode = targetSandboxMode;
 
             ResetEnvironment();
         }
 
+        private void UpdateLastConnectionState(string connectionState)
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["LastConnectionState"].Value = connectionState;
+            config.Save(ConfigurationSaveMode.Modified);
+
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+
+        /*
         private void UpdateConnectionString (string connectionString)
         {
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -131,12 +145,10 @@ namespace DKK_App
             config.Save();
             ConfigurationManager.RefreshSection("connectionStrings");
         }
+        */
 
         private void ResetEnvironment()
         {
-            //To refresh all standard object lists such as events, dojos, titles, etc.
-            RetryConnection();
-
             //To force the user back to selecting an event which is relevant to this environment
             DisableNonEventTabs();
             tab1.SelectedIndex = 0; //tabHome
@@ -145,6 +157,9 @@ namespace DKK_App
             MatchModelLoadComplete = false;
             CompetitorModelLoadComplete = false;
             ScoresLoadComplete = false;
+
+            //To refresh all standard object lists such as events, dojos, titles, etc.
+            RetryConnection();
         }
 
         private void RefreshMatchTypes()

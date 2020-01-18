@@ -35,7 +35,7 @@ namespace DKK_App
         
         private static async Task<List<EventType>> QueryEventTypeInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<EventType> types = new List<EventType>();
 
@@ -222,7 +222,7 @@ namespace DKK_App
 
         private static async Task<List<Competitor>> QueryCompetitorInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<Competitor> objs = new List<Competitor>();
                 Event Event = new Event();
@@ -399,7 +399,7 @@ namespace DKK_App
 
         private static async Task<List<Division>> QueryDivisionInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<Division> objs = new List<Division>();
 
@@ -468,7 +468,7 @@ namespace DKK_App
 
         private static async Task<List<Dojo>> QueryDojoInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<Dojo> objs = new List<Dojo>();
 
@@ -516,7 +516,7 @@ namespace DKK_App
 
         private static async Task<List<MartialArtType>> QueryMartialArtTypeInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<MartialArtType> objs = new List<MartialArtType>();
 
@@ -574,7 +574,7 @@ namespace DKK_App
 
         private static async Task<List<Facility>> QueryFacilityInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<Facility> objs = new List<Facility>();
 
@@ -638,7 +638,7 @@ namespace DKK_App
 
         private static async Task<List<FacilityType>> QueryFacilityTypeInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<FacilityType> objs = new List<FacilityType>();
 
@@ -698,7 +698,7 @@ namespace DKK_App
 
         private static async Task<List<Rank>> QueryRankInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<Rank> objs = new List<Rank>();
 
@@ -756,7 +756,7 @@ namespace DKK_App
 
         private static async Task<List<Title>> QueryTitleInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<Title> objs = new List<Title>();
 
@@ -821,7 +821,7 @@ namespace DKK_App
 
         private static async Task<List<Person>> QueryPersonInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<Person> objs = new List<Person>();
 
@@ -902,7 +902,7 @@ namespace DKK_App
 
         private static async Task<List<MatchType>> QueryMatchTypeInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<MatchType> objs = new List<MatchType>();
 
@@ -970,7 +970,7 @@ namespace DKK_App
 
         private static async Task<List<Match>> QueryMatchInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<Match> objs = new List<Match>();
                 Division div = new Division();
@@ -1136,7 +1136,7 @@ namespace DKK_App
 
         private static async Task<List<MatchCompetitor>> QueryMatchCompetitorDetails(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<MatchCompetitor> objs = new List<MatchCompetitor>();
 
@@ -1383,7 +1383,7 @@ namespace DKK_App
 
         private static async Task<List<MatchCompetitor>> QueryMatchCompetitorInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<MatchCompetitor> objs = new List<MatchCompetitor>();
                 Match match = new Match();
@@ -1465,7 +1465,7 @@ namespace DKK_App
 
         private static async Task<List<Event>> QueryEventInformation(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 List<Event> events = new List<Event>();
 
@@ -1533,7 +1533,7 @@ namespace DKK_App
 
         private static async Task<SortableBindingList<Score>> QueryScores(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 SortableBindingList<Score> scores = new SortableBindingList<Score>();
 
@@ -1645,7 +1645,7 @@ namespace DKK_App
 
         public static async void ExecuteDDL(string query)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DKK"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[Global.GetConnectionState()].ConnectionString))
             {
                 conn.Open();
 

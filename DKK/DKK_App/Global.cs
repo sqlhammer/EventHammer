@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using DKK_App.Objects;
 using System.Deployment.Application;
 using DKK_App.Exceptions;
+using System.Configuration;
 
 namespace DKK_App
 {
@@ -766,6 +767,12 @@ namespace DKK_App
         #endregion
 
         #region Helper 
+
+        public static string GetConnectionState()
+        {
+            return ConfigurationManager.AppSettings["LastConnectionState"];
+        }
+
         public static void InstallUpdateSyncWithInfo()
         {
             UpdateCheckInfo info = null;
