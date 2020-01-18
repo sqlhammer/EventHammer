@@ -2670,6 +2670,11 @@ If you do not like the placements, you will have to move the competitors to diff
 
         #region Score Tab
 
+        private void cmiScoreDeleteRows_Click(object sender, EventArgs e)
+        {
+            dgvScore.Rows.Remove(dgvScore.CurrentRow);
+        }
+
         private void btnScoresUndoChanges_Click(object sender, EventArgs e)
         {
             UndoScoreChanges();
@@ -2690,19 +2695,42 @@ If you do not like the placements, you will have to move the competitors to diff
             dgvScore.EndEdit();
             FlushUnboundScoreGridBuffers();
 
-            //try
-            //{
-            if (Global.ValidateScores(Scores, CurrentEvent) == ScoreMergeErrorType.None)
-                DataAccess.MergeScores(Scores, CurrentEvent);
-            //    MessageBox.Show("Scores saved successfully.", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Scores failed to save.", "Save Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            ScoreErrorType err = Global.ValidateScores(Scores, CurrentEvent);
 
-            //TODO: disable editable cells once they are commited to the DB.
-            //DisableDataGridViewComboBoxCell();
+            if (err == ScoreErrorType.None)
+            {
+                //***********************
+                //TODO: Check why delete didn't work on last test
+                //***********************
+                DataAccess.MergeScores(Scores, CurrentEvent);
+
+                //Refresh whole list so that ScoreIds can be pulled into the bound object list
+                RefreshScores();
+
+                MessageBox.Show("Scores saved successfully.", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                switch (err)
+                {
+                    case ScoreErrorType.DuplicateCompetitorInMatch:
+                        MessageBox.Show("There is a match with the same competitor having two sets of scores.", "Save Failed (Duplicate competitor in match)"
+                            , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case ScoreErrorType.RankOutOfBounds:
+                        MessageBox.Show("Rank values must be greater than 0.", "Save Failed (Rank out of bounds)"
+                            , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case ScoreErrorType.ScoreOutOfBounds:
+                        MessageBox.Show("Judge score values must be greater than or equal to 0 and less than or equal to 10.", "Save Failed (Judge Score out of bounds)"
+                            , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    default:
+                        MessageBox.Show("Scores failed to save.", "Save Failed"
+                            , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+            }
         }
 
         private void RefreshScoresGrid()
@@ -2888,7 +2916,20 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void FlushUnboundScoreGridBuffer(DataGridViewRow row)
         {
-            Score s = (Score)row.DataBoundItem;
+            Score s;
+            try
+            {
+                s = (Score)row.DataBoundItem;
+            }
+            catch
+            {
+                return;
+            }
+
+            if (s == null) return;
+
+            //Event
+            s.EventId = CurrentEvent.EventId;
 
             //Division-SubDivision
             if (row.Cells["dgvScoresDivSubDiv"].Value == null)

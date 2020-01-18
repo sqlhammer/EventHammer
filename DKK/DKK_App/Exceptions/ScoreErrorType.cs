@@ -1,7 +1,7 @@
 ﻿
 namespace DKK_App.Exceptions
 {
-    public enum ScoreMergeErrorType
+    public enum ScoreErrorType
     {
         Unknown,
         None,
@@ -11,6 +11,7 @@ namespace DKK_App.Exceptions
         MatchTypeForeignKeyViolation,
         CompetitorForeignKeyViolation,
         DuplicateScoreId,
+        DuplicateCompetitorInMatch,
         RankOutOfBounds,
         ScoreOutOfBounds
     }

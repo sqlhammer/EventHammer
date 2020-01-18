@@ -12,10 +12,14 @@ BEGIN
 		BEGIN TRANSACTION;
 
 			--delete
-			DELETE
-			FROM [Event].[Score]
-			WHERE eventid = @eventid
-				AND NOT EXISTS (SELECT scoreid FROM @Scores)
+			DELETE FROM [Event].[Score]  
+			WHERE NOT EXISTS 
+				(
+					SELECT scoreid 
+					FROM @Scores b 
+					WHERE [Event].[Score].scoreid = b.scoreid
+				)
+				AND eventid = @EventId
 							
 			--update
 			UPDATE [Event].[Score]

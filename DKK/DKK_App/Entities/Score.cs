@@ -1,4 +1,6 @@
-﻿namespace DKK_App.Entities
+﻿using DKK_App.Exceptions;
+
+namespace DKK_App.Entities
 {
     public class Score
     {
@@ -24,7 +26,6 @@
         public int SubDivisionId { get; set; }
         public string DivSubDiv
         {
-            //TODO need setter with validator to check input (consider drop down input)
             get
             {
                 return Global.GetMatchDisplayName(DivisionId, SubDivisionId);
@@ -32,7 +33,7 @@
         }
         public MatchType MatchType { get; set; }
         public string MatchTypeName
-        { //TODO need setter with validator to check input (consider dropdown input)
+        {
             get
             {
                 return (MatchType == null) ? "" : MatchType.MatchTypeName;
@@ -145,6 +146,45 @@
 
             decimal.TryParse(v, out decimal result);
             return result;
+        }
+
+        private bool IsDefaultOrInvalid(int value)
+        {
+            if (value <= 0)
+                return true;
+
+            return false;
+        }
+
+        private bool IsInvalidJudgeScore(decimal value)
+        {
+            if (value < 0 || value > 10) return true;
+
+            return false;
+        }
+
+        public ScoreErrorType HasAllRequiredAttributes()
+        {
+            if (IsDefaultOrInvalid(MatchId)) return ScoreErrorType.MatchForeignKeyViolation;
+            if (IsDefaultOrInvalid(EventId)) return ScoreErrorType.EventForeignKeyViolation;
+            if (IsDefaultOrInvalid(DivisionId)) return ScoreErrorType.Unknown;
+            if (IsDefaultOrInvalid(SubDivisionId)) return ScoreErrorType.Unknown;
+            if (IsDefaultOrInvalid(CompetitorId)) return ScoreErrorType.CompetitorForeignKeyViolation;
+            if (IsDefaultOrInvalid(Ranked)) return ScoreErrorType.RankOutOfBounds;
+
+            if (MatchType == null || MatchType == default(MatchType)) return ScoreErrorType.MatchTypeForeignKeyViolation;
+            if (IsDefaultOrInvalid(MatchType.MatchTypeId)) return ScoreErrorType.MatchTypeForeignKeyViolation;
+
+            if (!MatchType.IsRankOnlyMatch)
+            {
+                if (IsInvalidJudgeScore(ScoreJudge1)) return ScoreErrorType.ScoreOutOfBounds;
+                if (IsInvalidJudgeScore(ScoreJudge2)) return ScoreErrorType.ScoreOutOfBounds;
+                if (IsInvalidJudgeScore(ScoreJudge3)) return ScoreErrorType.ScoreOutOfBounds;
+                if (IsInvalidJudgeScore(ScoreJudge4)) return ScoreErrorType.ScoreOutOfBounds;
+                if (IsInvalidJudgeScore(ScoreJudge5)) return ScoreErrorType.ScoreOutOfBounds;
+            }
+
+            return ScoreErrorType.None;
         }
     }
 }

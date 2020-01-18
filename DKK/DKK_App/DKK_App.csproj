@@ -112,7 +112,7 @@
     <Compile Include="Entities\Match.cs" />
     <Compile Include="Entities\EventType.cs" />
     <Compile Include="Entities\Event.cs" />
-    <Compile Include="Exceptions\ScoreMergeErrorType.cs" />
+    <Compile Include="Exceptions\ScoreErrorType.cs" />
     <Compile Include="Exceptions\NewMatchErrorType.cs" />
     <Compile Include="Enums\FilterType.cs" />
     <Compile Include="Enums\LengthType.cs" />

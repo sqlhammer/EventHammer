@@ -607,20 +607,43 @@ namespace DKK_App
         #endregion
 
         #region Validators and Conversions
-        public static ScoreMergeErrorType ValidateScores(SortableBindingList<Score> scores, Event currentEvent)
+        public static ScoreErrorType ValidateScores(SortableBindingList<Score> scores, Event currentEvent)
         {
-            //this is going to be a pretty heavy validation, will need to be cautious about performance.
-
             //get a refreshed list from the db to verify most up-to-date
-            SortableBindingList<Score> savedScores = DataAccess.GetScoresByEvent(currentEvent);
+            //SortableBindingList<Score> savedScores = DataAccess.GetScoresByEvent(currentEvent);
 
-            //get complete list of FK entities
-            //      make each object list population async.
+            //Incomplete row check
+            foreach(Score s in scores)
+            {
+                ScoreErrorType err = s.HasAllRequiredAttributes();
+                if (err != ScoreErrorType.None)
+                {
+                    return err;
+                }
+            }
 
-            //compare keys
+            //Duplicate competitor check
+            List<int> matchIds = new List<int>();
+            foreach(Score s in scores)
+            {
+                matchIds.Add(s.MatchId);
+            }
+            matchIds = matchIds.Distinct().ToList();
 
+            foreach(int matchId in matchIds)
+            {
+                foreach (Score s in scores.Where(y => y.MatchId == matchId))
+                {
+                    if (scores.Count(x => x.MatchId == matchId && x.CompetitorId == s.CompetitorId) > 1)
+                        return ScoreErrorType.DuplicateCompetitorInMatch;
+                }
+            }
 
-            return ScoreMergeErrorType.None;
+            //Duplicate rank check
+            //Only look at first, second, third.
+            //Find a way to handle unranked for lesser Kata participants
+
+            return ScoreErrorType.None;
         }
 
         public static string GetEscapedSQLText(string query)
