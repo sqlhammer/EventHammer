@@ -20,8 +20,8 @@ namespace DKK_App
         public List<Event> AllEvents = new List<Event>();
         public List<Event> FilteredEvents = new List<Event>();
         public List<MatchModel> MatchModels = new List<MatchModel>();
-        public MatchContext MatchContext = new MatchContext();
         public List<CompetitorModel> CompetitorModels = new List<CompetitorModel>();
+        public MatchContext MatchContext = new MatchContext();
         public List<MatchType> MatchTypes = new List<MatchType>();
         public SortableBindingList<Score> Scores = new SortableBindingList<Score>();
         public SortableBindingList<Score> SavedScores = new SortableBindingList<Score>();
@@ -2753,18 +2753,6 @@ If you do not like the placements, you will have to move the competitors to diff
             SetScoreColumnDisplayOrder();
         }
 
-        private void DisableDataGridViewComboBoxColumn(DataGridViewComboBoxColumn Column)
-        {
-            Column.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
-            Column.ReadOnly = true;
-        }
-
-        private void EnableDataGridViewComboBoxColumn(DataGridViewComboBoxColumn Column)
-        {
-            Column.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            Column.ReadOnly = false;
-        }
-
         private void DisableDataGridViewComboBoxCell(DataGridViewComboBoxCell cell)
         {
             cell.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
@@ -2777,63 +2765,102 @@ If you do not like the placements, you will have to move the competitors to diff
             cell.ReadOnly = false;
         }
 
+        private void dgvScore_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            ListSortDirection order = ListSortDirection.Ascending;
+            if (dgvScore.SortOrder == SortOrder.Ascending)
+                order = ListSortDirection.Descending;
+
+            foreach (DataGridViewColumn c in dgvScore.Columns)
+                c.HeaderCell.SortGlyphDirection = SortOrder.None;
+
+            DataGridViewColumn col = dgvScore.Columns[e.ColumnIndex];
+            switch (col.Name)
+            {
+                case "dgvScoreMatchTypeName":
+                    col = dgvScore.Columns["dgvScoreMatchTypeNameHidden"];
+                    break;
+                case "dgvScoresDivSubDiv":
+                    col = dgvScore.Columns["dgvScoreDivSubDivHidden"];
+                    break;
+            }
+
+            dgvScore.Sort(col, order);
+            dgvScore.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = (order == ListSortDirection.Ascending) ? SortOrder.Ascending : SortOrder.Descending;
+        }
+
         private DataGridViewComboBoxColumn BindDivisionsColumn()
         {
-            BindingSource bindingSource = new BindingSource();
-            bindingSource.DataSource = MatchModels;
+            BindingSource bindingSource = new BindingSource
+            {
+                DataSource = MatchModels
+            };
 
-            DataGridViewComboBoxColumn Column = new DataGridViewComboBoxColumn();
-            Column.DataPropertyName = "MatchDisplayName";
-            Column.DataSource = bindingSource;
-            Column.ValueMember = "MatchDisplayName";
-            Column.DisplayMember = "MatchDisplayName";
-            Column.Name = "dgvScoresDivSubDiv";
-            Column.HeaderText = "Div-SubDiv";
-
-            DisableDataGridViewComboBoxColumn(Column);
+            DataGridViewComboBoxColumn Column = new DataGridViewComboBoxColumn
+            {
+                DataPropertyName = "MatchDisplayName",
+                DataSource = bindingSource,
+                ValueMember = "MatchDisplayName",
+                DisplayMember = "MatchDisplayName",
+                Name = "dgvScoresDivSubDiv",
+                HeaderText = "Div-SubDiv",
+                SortMode = DataGridViewColumnSortMode.Programmatic,
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton,
+                ReadOnly = true
+            };
 
             return Column;
         }
 
         private DataGridViewComboBoxColumn BindMatchTypesColumn()
         {
-            BindingSource bindingSource = new BindingSource();
-            bindingSource.DataSource = MatchModels;
+            BindingSource bindingSource = new BindingSource
+            {
+                DataSource = MatchModels
+            };
 
-            DataGridViewComboBoxColumn Column = new DataGridViewComboBoxColumn();
-            Column.DataPropertyName = "MatchTypeDisplayName";
-            Column.DataSource = bindingSource;
-            Column.ValueMember = "MatchTypeDisplayName";
-            Column.DisplayMember = "MatchTypeDisplayName";
-            Column.Name = "dgvScoreMatchTypeName";
-            Column.HeaderText = "Match Type";
-
-            DisableDataGridViewComboBoxColumn(Column);
-
+            DataGridViewComboBoxColumn Column = new DataGridViewComboBoxColumn
+            {
+                DataPropertyName = "MatchTypeDisplayName",
+                DataSource = bindingSource,
+                ValueMember = "MatchTypeDisplayName",
+                DisplayMember = "MatchTypeDisplayName",
+                Name = "dgvScoreMatchTypeName",
+                HeaderText = "Match Type",
+                SortMode = DataGridViewColumnSortMode.Programmatic,
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton,
+                ReadOnly = true
+            };
+            
             return Column;
         }
 
         private DataGridViewComboBoxColumn BindCompetitorsColumn()
         {
-            BindingSource bindingSource = new BindingSource();
-            bindingSource.DataSource = CompetitorModels;
-            
-            DataGridViewComboBoxColumn Column = new DataGridViewComboBoxColumn();
-            Column.DataPropertyName = "DisplayName";
-            Column.DataSource = bindingSource;
-            Column.ValueMember = "DisplayName";
-            Column.DisplayMember = "DisplayName";
-            Column.Name = "dgvScoresDisplayName";
-            Column.HeaderText = "Competitors";
+            BindingSource bindingSource = new BindingSource
+            {
+                DataSource = CompetitorModels
+            };
 
-            DisableDataGridViewComboBoxColumn(Column);
+            DataGridViewComboBoxColumn Column = new DataGridViewComboBoxColumn
+            {
+                DataPropertyName = "DisplayName",
+                DataSource = bindingSource,
+                ValueMember = "DisplayName",
+                DisplayMember = "DisplayName",
+                Name = "dgvScoresDisplayName",
+                HeaderText = "Competitors",
+                SortMode = DataGridViewColumnSortMode.Programmatic,
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton,
+                ReadOnly = true
+            };
 
             return Column;
         }
 
         private void BindFilteredCompetitorsColumn(int matchId, int rowIndex)
         {
-            //Poor man's deepcopies
+            //Poor man's deep copy
             List<CompetitorModel> cm = new List<CompetitorModel>();
             foreach (var c in CompetitorModels)
                 cm.Add(c);
@@ -2845,7 +2872,7 @@ If you do not like the placements, you will have to move the competitors to diff
             BindingSource bindingSource = new BindingSource();
             bindingSource.DataSource = cm;
 
-            DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)dgvScore.Rows[rowIndex].Cells[dgvScore.Columns["dgvScoresDisplayName"].Index]; ;
+            DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)dgvScore.Rows[rowIndex].Cells[dgvScore.Columns["dgvScoresDisplayName"].Index];
             cell.DataSource = bindingSource;
         }
 
@@ -2917,15 +2944,8 @@ If you do not like the placements, you will have to move the competitors to diff
         private void FlushUnboundScoreGridBuffer(DataGridViewRow row)
         {
             Score s;
-            try
-            {
-                s = (Score)row.DataBoundItem;
-            }
-            catch
-            {
-                return;
-            }
-
+            try { s = (Score)row.DataBoundItem; }
+            catch { return; }
             if (s == null) return;
 
             //Event
@@ -3124,9 +3144,9 @@ If you do not like the placements, you will have to move the competitors to diff
 
             string div = cell.Value.ToString();
             int? matchId = MatchModels.Where(x => x.MatchDisplayName.CompareTo(div) == 0).FirstOrDefault().MatchId;
-
+            
             if(matchId != null)
-                BindFilteredCompetitorsColumn((int)matchId, RowIndex);
+                BindFilteredCompetitorsColumn((int)matchId, RowIndex);                
         }
 
         private void AddingNewScoresRow()

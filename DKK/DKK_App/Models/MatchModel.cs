@@ -15,20 +15,20 @@ namespace DKK_App.Models
         }
 
         public int? EventId { get; set; }
+        public int? MatchId { get; set; }
+        public int? DivisionId { get; set; }
         public int? SubDivisionId
         {
             get { return _SubDivisionId; }
             set { _SubDivisionId = value; _MatchDisplayName = null; }
         }
-        public int? MatchId { get; set; }
-        public int? DivisionId { get; set; }
         public string MatchDisplayName
         {
             get
             {
                 if (String.IsNullOrEmpty(_MatchDisplayName))
                 {
-                    if (DivisionId != null)
+                    if (DivisionId != null && SubDivisionId != null)
                     {
                         _MatchDisplayName = Global.GetMatchDisplayName((int)DivisionId, (int)SubDivisionId);
                     }

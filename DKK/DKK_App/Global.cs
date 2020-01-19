@@ -642,6 +642,7 @@ namespace DKK_App
             //Duplicate rank check
             //Only look at first, second, third.
             //Find a way to handle unranked for lesser Kata participants
+            //Make sure to exclude disqualifications from the check
 
             return ScoreErrorType.None;
         }
