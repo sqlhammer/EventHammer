@@ -3298,8 +3298,29 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             AutoResizeEventControls();
             AutoResizeMatchControls();
             AutoResizeCompetitorControls();
+            AutoResizeScoreControls();
 
             _resizing = false;
+        }
+
+        private void AutoResizeScoreControls()
+        {
+            const double scores_width_multiplier = 1;
+            const double padding = 10;
+
+            // DataGridView size
+            dgvScore.Width = (int)((tab1.Width * scores_width_multiplier) - (padding * 3));
+            dgvScore.Height = tab1.Height - (int)(padding * 4);
+            dgvScore.Left = (int)padding;
+            dgvScore.Top = (int)padding;
+
+            // DataGridView font
+            Font selection_font = Global.AutoResizeFont(dgvScore);
+            dgvScore.Font = selection_font;
+
+            // Column Width
+            dgvScore.AutoResizeColumns();
+            dgvScore.AutoResizeRows();
         }
 
         private void AutoResizeMainControls()
@@ -3314,6 +3335,19 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             pbPoweredBy.Top = tab1_bottom_edge_buffer;
             pbPoweredBy.Left = this.Width - pbPoweredBy.Width - 20;
 
+            //Labels
+            int labelTop = (tab1.Height / 2) - (lblLoading.Height / 2);
+            int labelLeft = tab1.Left + (tab1.Width / 2) - (lblLoading.Width / 2);
+
+            lblLoading.Top = labelTop;
+            lblLoading.Left = labelLeft;
+
+            lblScoresLoading.Top = labelTop;
+            lblScoresLoading.Left = labelLeft;
+
+            lblCompLoading.Top = labelTop;
+            lblCompLoading.Left = labelLeft;
+
             //Buttons
             //  Static relation to each other, centered
             btnRetryConnection.Left = (this.Width / 2) - (btnRetryConnection.Width / 2);
@@ -3327,6 +3361,10 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             btnClearCompetitorFilter.Top = tab1_bottom_edge_buffer;
             btnClearMatchFilter.Top = tab1_bottom_edge_buffer;
 
+            btnSubmitScores.Left = btnRefreshLists.Left - btnClearCompetitorFilter.Width - 40;
+            btnScoresUndoChanges.Left = btnRefreshLists.Left + btnRefreshLists.Width + 40;
+            btnSubmitScores.Top = tab1_bottom_edge_buffer;
+            btnScoresUndoChanges.Top = tab1_bottom_edge_buffer;
         }
 
         private void AutoResizeHomeControls()

@@ -135,7 +135,6 @@
             this.lblCompFilter = new System.Windows.Forms.Label();
             this.tabScore = new System.Windows.Forms.TabPage();
             this.lblScoresLoading = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.dgvScore = new System.Windows.Forms.DataGridView();
             this.dgcScoresScoreId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvScoreMatchTypeNameHidden = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1417,7 +1416,6 @@
             // tabScore
             // 
             this.tabScore.Controls.Add(this.lblScoresLoading);
-            this.tabScore.Controls.Add(this.label1);
             this.tabScore.Controls.Add(this.dgvScore);
             this.tabScore.Location = new System.Drawing.Point(4, 22);
             this.tabScore.Name = "tabScore";
@@ -1439,20 +1437,12 @@
             this.lblScoresLoading.Text = "Loading...";
             this.lblScoresLoading.Visible = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(444, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Unsaved changes ***";
-            // 
             // dgvScore
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.dgvScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvScore.AutoGenerateColumns = false;
+            this.dgvScore.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvScore.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgcScoresScoreId,
@@ -2284,7 +2274,6 @@
         private System.Windows.Forms.ContextMenuStrip cmsScores;
         private System.Windows.Forms.ToolStripMenuItem cmiScoreAddRow;
         private System.Windows.Forms.ToolStripMenuItem cmiScoreDeleteRows;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem cmiSandboxMode;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcScoresScoreId;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoreMatchTypeNameHidden;
