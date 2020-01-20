@@ -12,6 +12,7 @@ namespace DKK_App.Exceptions
         CompetitorForeignKeyViolation,
         DuplicateScoreId,
         DuplicateCompetitorInMatch,
+        DuplicateRankInMatch,
         RankOutOfBounds,
         ScoreOutOfBounds
     }

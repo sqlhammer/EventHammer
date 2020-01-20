@@ -37,6 +37,7 @@ namespace DKK_App
         private bool MatchModelLoadComplete = false;
         private bool CompetitorModelLoadComplete = false;
         private bool ScoresLoadComplete = false;
+        private bool ScoresHaveBeenEdited = false;
         private bool _resizing = false;
 
         #region Form / Multi-tab
@@ -230,6 +231,7 @@ namespace DKK_App
 
             this.lblLoading.Visible = true;
             this.lblCompLoading.Visible = true;
+            this.lblScoresLoading.Visible = true;
             this.createNewMatchToolStripMenuItem.Enabled = false;
             this.tmrMatchCompetitorRefresh.Enabled = true;
             this.tmrNewMatch.Enabled = true;
@@ -244,7 +246,7 @@ namespace DKK_App
         {
             this.btnRetryConnection.Visible = false;
             this.btnClearCompetitorFilter.Visible = false;
-            this.btnRefreshMatchTab.Visible = false;
+            this.btnRefreshLists.Visible = false;
             this.btnClearMatchFilter.Visible = false;
         }
 
@@ -288,7 +290,7 @@ namespace DKK_App
                 this.tab1.SelectedTab == this.tabCompetitor &&
                 this.btnRetryConnection.Visible == false)
             {
-                this.btnRefreshMatchTab.Visible = true;
+                this.btnRefreshLists.Visible = true;
                 this.btnClearCompetitorFilter.Visible = true;
                 this.msCompetitor.Enabled = true;
             }
@@ -302,7 +304,7 @@ namespace DKK_App
                 this.tab1.SelectedTab == this.tabMatch &&
                 this.btnRetryConnection.Visible == false)
             {
-                this.btnRefreshMatchTab.Visible = true;
+                this.btnRefreshLists.Visible = true;
                 this.btnClearMatchFilter.Visible = true;
                 this.btnClearCompetitorFilter.Visible = true;
                 this.msMatches.Enabled = true;
@@ -317,7 +319,7 @@ namespace DKK_App
                 this.tab1.SelectedTab == this.tabScore &&
                 this.btnRetryConnection.Visible == false)
             {
-                this.btnRefreshMatchTab.Visible = true;
+                this.btnRefreshLists.Visible = true;
                 this.btnClearMatchFilter.Visible = false;
                 this.btnClearCompetitorFilter.Visible = false;
                 //this.msMatches.Enabled = false;
@@ -333,7 +335,7 @@ namespace DKK_App
             if (this.tab1.SelectedTab == this.tabEvents &&
                 this.btnRetryConnection.Visible == false)
             {
-                this.btnRefreshMatchTab.Visible = false;
+                this.btnRefreshLists.Visible = false;
                 this.btnClearMatchFilter.Visible = false;
                 this.btnClearCompetitorFilter.Visible = false;
 
@@ -1097,10 +1099,37 @@ If you do not like the placements, you will have to move the competitors to diff
             }
         }
 
-        private void btnRefreshMatchTab_Click(object sender, EventArgs e)
+        private void btnRefreshLists_Click(object sender, EventArgs e)
         {
+            if (!IsSafeToRefesh())
+                return;
+
             RefreshMatchCompetitorScoreViews();
         }
+
+        private bool IsSafeToRefesh()
+        {
+            if(ScoresHaveBeenEdited)
+            {
+                string msg = @"You may have made changes to the event's scores tab which have not been saved.
+
+Would you like to save prior to refreshing all lists?
+
+Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
+";
+
+                DialogResult result = MessageBox.Show(msg, "Unsaved changes",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Warning);
+
+                switch (result)
+                {
+                    case DialogResult.Cancel: return false;
+                    case DialogResult.Yes: SubmitScores(); break;
+                }
+            }
+
+            return true;
+        }
+
 
         private async void RefreshDivisionsAsync()
         {
@@ -1349,6 +1378,7 @@ If you do not like the placements, you will have to move the competitors to diff
             {
                 this.lblLoading.Visible = false;
                 this.lblCompLoading.Visible = false;
+                this.lblScoresLoading.Visible = false;
                 this.tmrMatchCompetitorRefresh.Enabled = false;
                 this.rbAll.Enabled = true;
                 this.rbApplicableMatches.Enabled = true;
@@ -1356,6 +1386,7 @@ If you do not like the placements, you will have to move the competitors to diff
                 RefreshMatches(MatchModels);
                 RefreshCompetitors(CompetitorModels);
                 RefreshScoresGrid();
+                ScoresHaveBeenEdited = false;
                 AutoResizeForm();
             }
         }
@@ -2725,6 +2756,10 @@ If you do not like the placements, you will have to move the competitors to diff
                         MessageBox.Show("Judge score values must be greater than or equal to 0 and less than or equal to 10.", "Save Failed (Judge Score out of bounds)"
                             , MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
+                    case ScoreErrorType.DuplicateRankInMatch:
+                        MessageBox.Show("There is a match with two competitors having the same rank value for 1st, 2nd, or 3rd place.", "Save Failed (Duplicate rank within match)"
+                            , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     default:
                         MessageBox.Show("Scores failed to save.", "Save Failed"
                             , MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -2898,13 +2933,48 @@ If you do not like the placements, you will have to move the competitors to diff
             return SavedScores;
         }
 
+        private SortableBindingList<Score> DeepCopyScoresList(SortableBindingList<Score> scores)
+        {
+            SortableBindingList<Score> copy = new SortableBindingList<Score>();
+
+            foreach(Score s in scores)
+            {
+                copy.Add(new Score
+                {
+                    CompetitorId = s.CompetitorId,
+                    DisplayName = s.DisplayName,
+                    ScoreJudge1 = s.ScoreJudge1,
+                    ScoreJudge2 = s.ScoreJudge2,
+                    ScoreJudge3 = s.ScoreJudge3,
+                    ScoreJudge4 = s.ScoreJudge4,
+                    ScoreJudge5 = s.ScoreJudge5,
+                    DivisionId = s.DivisionId,
+                    EventId = s.EventId,
+                    IsDisqualified = s.IsDisqualified,
+                    MatchId = s.MatchId,
+                    MatchType = new MatchType
+                    {
+                        IsSpecialConsideration = s.MatchType.IsSpecialConsideration,
+                        MatchTypeId = s.MatchType.MatchTypeId,
+                        MatchTypeName = s.MatchType.MatchTypeName
+                    },
+                    Ranked = s.Ranked,
+                    ScoreId = s.ScoreId,
+                    SubDivisionId = s.SubDivisionId
+                });
+            }
+
+            return copy;
+        }
+
         private void RefreshScores()
         {
             ScoresLoadComplete = false;
             SortableBindingList<Score> scores = DataAccess.GetScoresByEvent(CurrentEvent);
             Scores = scores;
-            SavedScores = scores;
+            SavedScores = DeepCopyScoresList(scores);
             RefreshScoresGrid();
+            ScoresHaveBeenEdited = false;
             ScoresLoadComplete = true;
         }
 
@@ -2913,7 +2983,8 @@ If you do not like the placements, you will have to move the competitors to diff
             ScoresLoadComplete = false;
             SortableBindingList<Score> scores = await DataAccessAsync.GetScoresByEvent(CurrentEvent);
             Scores = scores;
-            SavedScores = scores;
+            SavedScores = DeepCopyScoresList(scores);
+            ScoresHaveBeenEdited = false;
             ScoresLoadComplete = true;
         }
 
@@ -3115,7 +3186,15 @@ If you do not like the placements, you will have to move the competitors to diff
 
         private void dgvScore_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            //Do nothing if total was just being recalculated
+            if (dgvScore.Columns["dgvScoresTotal"].Index == e.ColumnIndex)
+                return;
+
             DataGridViewRow row = dgvScore.Rows[e.RowIndex];
+            row.DefaultCellStyle.BackColor = Color.Aquamarine;
+
+            ScoresHaveBeenEdited = true;
+
             if (row.Cells[dgvScore.Columns["dgvScoresDivSubDiv"].Index].ColumnIndex == e.ColumnIndex)
                 SetCellsOnScoresDivisionChange(row);
         }
@@ -3238,13 +3317,13 @@ If you do not like the placements, you will have to move the competitors to diff
             //Buttons
             //  Static relation to each other, centered
             btnRetryConnection.Left = (this.Width / 2) - (btnRetryConnection.Width / 2);
-            btnRefreshMatchTab.Left = (this.Width / 2) - (btnRefreshMatchTab.Width / 2);
+            btnRefreshLists.Left = (this.Width / 2) - (btnRefreshLists.Width / 2);
 
-            btnClearCompetitorFilter.Left = btnRefreshMatchTab.Left - btnClearCompetitorFilter.Width - 40;
-            btnClearMatchFilter.Left = btnRefreshMatchTab.Left + btnRefreshMatchTab.Width + 40;
+            btnClearCompetitorFilter.Left = btnRefreshLists.Left - btnClearCompetitorFilter.Width - 40;
+            btnClearMatchFilter.Left = btnRefreshLists.Left + btnRefreshLists.Width + 40;
 
             btnRetryConnection.Top = tab1_bottom_edge_buffer;
-            btnRefreshMatchTab.Top = tab1_bottom_edge_buffer;
+            btnRefreshLists.Top = tab1_bottom_edge_buffer;
             btnClearCompetitorFilter.Top = tab1_bottom_edge_buffer;
             btnClearMatchFilter.Top = tab1_bottom_edge_buffer;
 

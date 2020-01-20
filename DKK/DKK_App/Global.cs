@@ -641,8 +641,15 @@ namespace DKK_App
 
             //Duplicate rank check
             //Only look at first, second, third.
-            //Find a way to handle unranked for lesser Kata participants
-            //Make sure to exclude disqualifications from the check
+            //I expected if we do not rank below third place, default values of 0s will be left and therefore are not duplicates.
+            foreach (int matchId in matchIds)
+            {
+                foreach (Score s in scores.Where(y => y.MatchId == matchId && y.IsDisqualified == false))
+                {
+                    if (scores.Count(x => x.MatchId == matchId && x.Ranked == s.Ranked) > 1)
+                        return ScoreErrorType.DuplicateRankInMatch;
+                }
+            }
 
             return ScoreErrorType.None;
         }

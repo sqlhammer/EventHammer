@@ -156,6 +156,14 @@ namespace DKK_App.Entities
             return false;
         }
 
+        private bool IsInvalid(int value)
+        {
+            if (value < 0)
+                return true;
+
+            return false;
+        }
+
         private bool IsInvalidJudgeScore(decimal value)
         {
             if (value < 0 || value > 10) return true;
@@ -170,7 +178,7 @@ namespace DKK_App.Entities
             if (IsDefaultOrInvalid(DivisionId)) return ScoreErrorType.Unknown;
             if (IsDefaultOrInvalid(SubDivisionId)) return ScoreErrorType.Unknown;
             if (IsDefaultOrInvalid(CompetitorId)) return ScoreErrorType.CompetitorForeignKeyViolation;
-            if (IsDefaultOrInvalid(Ranked)) return ScoreErrorType.RankOutOfBounds;
+            if (IsInvalid(Ranked)) return ScoreErrorType.RankOutOfBounds;
 
             if (MatchType == null || MatchType == default(MatchType)) return ScoreErrorType.MatchTypeForeignKeyViolation;
             if (IsDefaultOrInvalid(MatchType.MatchTypeId)) return ScoreErrorType.MatchTypeForeignKeyViolation;
