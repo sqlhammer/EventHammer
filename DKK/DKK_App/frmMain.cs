@@ -2704,6 +2704,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
         private void cmiScoreDeleteRows_Click(object sender, EventArgs e)
         {
             dgvScore.Rows.Remove(dgvScore.CurrentRow);
+            ScoresHaveBeenEdited = true;
         }
 
         private void btnScoresUndoChanges_Click(object sender, EventArgs e)
@@ -2730,9 +2731,6 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
             if (err == ScoreErrorType.None)
             {
-                //***********************
-                //TODO: Check why delete didn't work on last test
-                //***********************
                 DataAccess.MergeScores(Scores, CurrentEvent);
 
                 //Refresh whole list so that ScoreIds can be pulled into the bound object list
