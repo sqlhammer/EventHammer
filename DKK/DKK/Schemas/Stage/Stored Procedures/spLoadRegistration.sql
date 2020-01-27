@@ -111,7 +111,7 @@ BEGIN
 					AND r.parent_first_name IS NOT NULL
 					AND r.parent_last_name IS NOT NULL
 					AND r.parent_email IS NOT NULL
-                    AND trim(r.parent_first_name) <> ''
+					AND trim(r.parent_first_name) <> ''
 					AND trim(r.parent_last_name) <> ''
 					AND trim(r.parent_email) <> ''
 			)
@@ -175,7 +175,7 @@ BEGIN
 							from stage.elementorformentry e
 							cross apply string_split(e.meta_value,',') s
 							where e.meta_key = 'participating_events'
-								and lower(trim(s.value)) = 'knockdown (with protection gear)'
+								and lower(trim(s.value)) = 'knockdown (18 yrs old and up only. no protection gear)'
 								and data_id = r.data_id),0) IsKnockdown
 			FROM #entries r
 			INNER JOIN Person.Person p ON p.FirstName = r.first_name
