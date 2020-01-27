@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DKK", "DKK\DKK.sqlproj", "{BCEA1832-587E-497F-858B-B187ED64F8EB}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "DKK_Integration", "DKK_Integration\DKK_Integration.dtproj", "{113C188A-ADC2-4DE2-92E6-B1AAFF9F40FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DKK_App_Test", "DKK_App_Test\DKK_App_Test.csproj", "{AF97D27F-2F00-496F-805C-1E4E601F8358}"
-EndProject
-Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "DKK_Installer", "DKK_Installer\DKK_Installer.aiproj", "{11F41F68-1EFF-4AC8-A650-F10C75825852}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,18 +81,11 @@ Global
 		{AF97D27F-2F00-496F-805C-1E4E601F8358}.Development|Any CPU.Build.0 = Debug|Any CPU
 		{AF97D27F-2F00-496F-805C-1E4E601F8358}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF97D27F-2F00-496F-805C-1E4E601F8358}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.All|Any CPU.ActiveCfg = DefaultBuild
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.All|Any CPU.Build.0 = DefaultBuild
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.Debug|Any CPU.ActiveCfg = DefaultBuild
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.Debug|Any CPU.Build.0 = DefaultBuild
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.DebugLocal|Any CPU.ActiveCfg = DefaultBuild
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.DebugLocal|Any CPU.Build.0 = DefaultBuild
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.Development|Any CPU.ActiveCfg = DefaultBuild
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.Development|Any CPU.Build.0 = DefaultBuild
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.Release|Any CPU.ActiveCfg = DefaultBuild
-		{11F41F68-1EFF-4AC8-A650-F10C75825852}.Release|Any CPU.Build.0 = DefaultBuild
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B91DB3A0-6558-4800-91E2-ACB53D600F28}
 	EndGlobalSection
 EndGlobal
