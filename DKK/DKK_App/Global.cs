@@ -124,7 +124,7 @@ namespace DKK_App
         #endregion
 
         #region Match Filters
-        public static async Task<List<MatchModel>> FilterMatchModelAsync (List<MatchModel> model, FilterType filter, string pattern)
+        public static async Task<List<MatchModel>> FilterMatchModelAsync (List<MatchModel> model, FilterType filter, string pattern, List<CompetitorModel> competitors, List<MatchType> matchTypes)
         {
             pattern = pattern.ToLower();
 
@@ -150,12 +150,37 @@ namespace DKK_App
                     return await FilterMatchModelAsync_MatchesWithTooFewCompetitors(model);
                 case FilterType.Minor:
                     return await FilterMatchModelAsync_Minor(model);
+                case FilterType.DuplicateMatchType:
+                    return await FilterMatchModelAsync_DuplicateMatchType(model, competitors, matchTypes);
             }
 
             return model;
         }
 
-        public static List<MatchModel> FilterMatchModelAsync_ApplicableMatches (List<MatchModel> model, CompetitorModel competitor, List<Division> divisions)
+        private static async Task<List<MatchModel>> FilterMatchModelAsync_DuplicateMatchType(List<MatchModel> model, List<CompetitorModel> competitors, List<MatchType> matchTypes)
+        {
+            var result = await Task.Run(() =>
+            {
+                List<MatchModel> filteredModel = new List<MatchModel>();
+
+                foreach (CompetitorModel c in competitors)
+                {
+                    foreach (MatchType mt in matchTypes)
+                    {
+                        List<MatchModel> models = model.Where(y => y.Children.Any(z => z.CompetitorId == c.CompetitorId) && y.MatchTypeId == mt.MatchTypeId).ToList();
+
+                        if (models.Count > 1)
+                            filteredModel.AddRange(models);
+                    }
+                }
+
+                return filteredModel;
+            });
+
+            return result;
+        }
+
+        public static List<MatchModel> FilterMatchModel_ApplicableMatches (List<MatchModel> model, CompetitorModel competitor, List<Division> divisions)
         {
             if (divisions.Count == 0)
                 return model;

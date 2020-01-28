@@ -205,6 +205,8 @@
             this.cmsScores = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmiScoreAddRow = new System.Windows.Forms.ToolStripMenuItem();
             this.cmiScoreDeleteRows = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsMatchComp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmiMatchCompFilterByName = new System.Windows.Forms.ToolStripMenuItem();
             this.tab1.SuspendLayout();
             this.tabHome.SuspendLayout();
             this.gbAdmin.SuspendLayout();
@@ -233,6 +235,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).BeginInit();
             this.cmsCompetitor.SuspendLayout();
             this.cmsScores.SuspendLayout();
+            this.cmsMatchComp.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -2046,6 +2049,20 @@
             this.cmiScoreDeleteRows.Text = "Delete Row(s)";
             this.cmiScoreDeleteRows.Click += new System.EventHandler(this.cmiScoreDeleteRows_Click);
             // 
+            // cmsMatchComp
+            // 
+            this.cmsMatchComp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmiMatchCompFilterByName});
+            this.cmsMatchComp.Name = "cmsMatchComp";
+            this.cmsMatchComp.Size = new System.Drawing.Size(228, 26);
+            // 
+            // cmiMatchCompFilterByName
+            // 
+            this.cmiMatchCompFilterByName.Name = "cmiMatchCompFilterByName";
+            this.cmiMatchCompFilterByName.Size = new System.Drawing.Size(227, 22);
+            this.cmiMatchCompFilterByName.Text = "Filter by Selected Competitor";
+            this.cmiMatchCompFilterByName.Click += new System.EventHandler(this.cmiMatchCompFilterByName_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -2107,6 +2124,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPoweredBy)).EndInit();
             this.cmsCompetitor.ResumeLayout(false);
             this.cmsScores.ResumeLayout(false);
+            this.cmsMatchComp.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2288,5 +2306,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvScoresRanked;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgvScoresIsDisqualified;
         private System.Windows.Forms.Label lblScoresLoading;
+        private System.Windows.Forms.ContextMenuStrip cmsMatchComp;
+        private System.Windows.Forms.ToolStripMenuItem cmiMatchCompFilterByName;
     }
 }

@@ -56,6 +56,7 @@ namespace DKK_App
             tlvMatches.ChildrenGetter = delegate (object x) { return ((Models.MatchModel)x).Children; };
             tlvMatches.ContextMenuStrip = this.cmsMatches;
             tlvComp.ContextMenuStrip = this.cmsCompetitor;
+            tlvCompetitors.ContextMenuStrip = this.cmsMatchComp;
 
             //Set default connection state
             //Sandbox mode will be OFF
@@ -384,7 +385,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             if (tlvCompetitors.SelectedObject != null)
             {
                 CompetitorModel competitor = (CompetitorModel)tlvCompetitors.SelectedObject;
-                RefreshMatches(Global.FilterMatchModelAsync_ApplicableMatches(MatchModels, competitor, Divisions));
+                RefreshMatches(Global.FilterMatchModel_ApplicableMatches(MatchModels, competitor, Divisions));
             }
         }
 
@@ -767,6 +768,24 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
         #endregion
 
         #region Match Tab
+        private void cmiMatchCompFilterByName_Click(object sender, EventArgs e)
+        {
+            CompetitorModel c = new CompetitorModel();
+
+            if (tlvCompetitors.SelectedObject != null)
+            {
+                c = (CompetitorModel)tlvCompetitors.SelectedObject;
+                FilterMatchListByName(c.DisplayName);
+            }
+        }
+
+        private void FilterMatchListByName(string name)
+        {
+            cbMatchFilterBy.SelectedIndex = cbMatchFilterBy.Items.IndexOf("Name");
+            txtMatchFilter.Text = name;
+            ApplyMatchFilter();
+        }
+
         private void cmiChangeDivisionNumber_Click(object sender, EventArgs e)
         {
             ChangeSubDivisionNumber();
@@ -1175,6 +1194,9 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
                 case "Is Special Consideration":
                     type = FilterType.IsSpecialConsideration;
                     break;
+                case "Duplicate match type":
+                    type = FilterType.DuplicateMatchType;
+                    break;
             }
 
             return type;
@@ -1204,9 +1226,10 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
             if ((this.cbMatchFilterBy.SelectedIndex != -1 &&
                 !String.IsNullOrEmpty(this.txtMatchFilter.Text)) ||
-                type == FilterType.MatchesWithTooFewCompetitors)
+                type == FilterType.MatchesWithTooFewCompetitors ||
+                type == FilterType.DuplicateMatchType)
             {
-                var model = await Global.FilterMatchModelAsync(MatchModels, type, this.txtMatchFilter.Text);
+                var model = await Global.FilterMatchModelAsync(MatchModels, type, this.txtMatchFilter.Text, CompetitorModels, MatchTypes);
 
                 RefreshMatches(model);
             }
@@ -1348,6 +1371,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
             //Add non-columnar filters
             this.cbMatchFilterBy.Items.Add("Matches w/ <= 1 competitor");
+            this.cbMatchFilterBy.Items.Add("Duplicate match type");
 
             //Set name as default selection
             this.cbMatchFilterBy.SelectedIndex = this.cbMatchFilterBy.FindStringExact("Name");
