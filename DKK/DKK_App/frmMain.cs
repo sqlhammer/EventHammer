@@ -1990,7 +1990,10 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
             comp.OtherInstructorName = "";
             if (comp.Dojo == null)
-                comp.OtherInstructorName = dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value.ToString();
+            {
+                var value = dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value;
+                comp.OtherInstructorName = (value != null) ? value.ToString() : "";
+            }
 
             SaveCompetitor(comp, IsNew);
         }
@@ -3856,7 +3859,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
         private void AutoResizeCompetitorDetailsColumnWidths()
         {
-            int column_width = (dgvCompetitorDetails.Width / (dgvCompetitorDetails.Columns.Count - 1)) - 12;
+            int column_width = (dgvCompetitorDetails.Width / (dgvCompetitorDetails.Columns.Count - 1)) - 16;
 
             //Skip hidden id column (0)
             for (int i = 1; i < dgvCompetitorDetails.Columns.Count; i++)
