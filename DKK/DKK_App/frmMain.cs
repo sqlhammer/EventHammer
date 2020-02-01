@@ -70,7 +70,8 @@ namespace DKK_App
             SetEventDateTimePicker();
             DisableNonEventTabs();
 
-            //this.WindowState = FormWindowState.Maximized;
+            //AutoResizeForm();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void InitializeFormWithDataAccess()
@@ -1946,14 +1947,14 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
                 return;
             }
 
-            comp.Weight = (decimal)dgvCompetitorDetails[map.Weight.Value.ColumnIndex, map.Weight.Value.RowIndex].Value;
+            comp.Weight = Convert.ToDecimal(dgvCompetitorDetails[map.Weight.Value.ColumnIndex, map.Weight.Value.RowIndex].Value.ToString());
             comp.Person.DisplayName = dgvCompetitorDetails[map.LastName.Value.ColumnIndex, map.LastName.Value.RowIndex].Value.ToString() +
                 ", " +
                 dgvCompetitorDetails[map.FirstName.Value.ColumnIndex, map.FirstName.Value.RowIndex].Value.ToString();
-            comp.Height = (decimal)dgvCompetitorDetails[map.Height.Value.ColumnIndex, map.Height.Value.RowIndex].Value;
+            comp.Height = Convert.ToDecimal(dgvCompetitorDetails[map.Height.Value.ColumnIndex, map.Height.Value.RowIndex].Value.ToString());
             comp.Person.Gender = (dgvCompetitorDetails[map.Gender.Value.ColumnIndex,
                                     map.Gender.Value.RowIndex].Value.ToString().CompareTo("Female") == 0) ? "F" : "M";
-            comp.Age = (int)dgvCompetitorDetails[map.Age.Value.ColumnIndex, map.Age.Value.RowIndex].Value;
+            comp.Age = Convert.ToInt32(dgvCompetitorDetails[map.Age.Value.ColumnIndex, map.Age.Value.RowIndex].Value.ToString());
 
             if (dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex, map.ParentFirstName.Value.RowIndex].Value != null
                 && dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex].Value != null
@@ -1966,8 +1967,8 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             comp.Person.PhoneNumber = dgvCompetitorDetails[map.PhoneNumber.Value.ColumnIndex, map.PhoneNumber.Value.RowIndex].Value.ToString();
             comp.Person.Country = dgvCompetitorDetails[map.Country.Value.ColumnIndex, map.Country.Value.RowIndex].Value.ToString();
             comp.Person.StreetAddress1 = dgvCompetitorDetails[map.Street1.Value.ColumnIndex, map.Street1.Value.RowIndex].Value.ToString();
-            comp.Person.StreetAddress2 = dgvCompetitorDetails[map.Street2.Value.ColumnIndex, map.Street2.Value.RowIndex].Value.ToString();
-            comp.Person.AppartmentCode = dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex, map.AppartmentNumber.Value.RowIndex].Value.ToString();
+            comp.Person.StreetAddress2 = (dgvCompetitorDetails[map.Street2.Value.ColumnIndex, map.Street2.Value.RowIndex].Value != null) ? dgvCompetitorDetails[map.Street2.Value.ColumnIndex, map.Street2.Value.RowIndex].Value.ToString() : "";
+            comp.Person.AppartmentCode = (dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex, map.AppartmentNumber.Value.RowIndex].Value != null) ? dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex, map.AppartmentNumber.Value.RowIndex].Value.ToString() : "";
             comp.Person.City = dgvCompetitorDetails[map.City.Value.ColumnIndex, map.City.Value.RowIndex].Value.ToString();
             comp.Person.StateProvince = dgvCompetitorDetails[map.State.Value.ColumnIndex, map.State.Value.RowIndex].Value.ToString();
             comp.Person.PostalCode = dgvCompetitorDetails[map.PostalCode.Value.ColumnIndex, map.PostalCode.Value.RowIndex].Value.ToString();
@@ -1981,18 +1982,20 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
                                         new Title() :
                                         (Titles.Where(t => t.TitleName.CompareTo(dgvCompetitorDetails[map.Title.Value.ColumnIndex,
                                                                                     map.Title.Value.RowIndex].Value.ToString()) == 0)).First();
-            comp.OtherDojoName = dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value.ToString();
 
             string selectedSchool = "";
             if (dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value != null)
                 selectedSchool = dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value.ToString();
             comp.Dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(selectedSchool) == 0)).FirstOrDefault();
 
+            comp.OtherDojoName = "";
             comp.OtherInstructorName = "";
             if (comp.Dojo == null)
             {
                 var value = dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value;
                 comp.OtherInstructorName = (value != null) ? value.ToString() : "";
+                value = dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value;
+                comp.OtherDojoName = (value != null) ? value.ToString() : "";
             }
 
             SaveCompetitor(comp, IsNew);
