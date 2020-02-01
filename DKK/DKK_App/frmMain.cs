@@ -1954,9 +1954,15 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             comp.Person.Gender = (dgvCompetitorDetails[map.Gender.Value.ColumnIndex,
                                     map.Gender.Value.RowIndex].Value.ToString().CompareTo("Female") == 0) ? "F" : "M";
             comp.Age = (int)dgvCompetitorDetails[map.Age.Value.ColumnIndex, map.Age.Value.RowIndex].Value;
-            comp.Parent.FirstName = dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex, map.ParentFirstName.Value.RowIndex].Value.ToString();
-            comp.Parent.LastName = dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex].Value.ToString();
-            comp.Parent.EmailAddress = dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value.ToString();
+
+            if (dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex, map.ParentFirstName.Value.RowIndex].Value != null
+                && dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex].Value != null
+                && dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value != null)
+            {
+                comp.Parent.FirstName = dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex, map.ParentFirstName.Value.RowIndex].Value.ToString();
+                comp.Parent.LastName = dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex].Value.ToString();
+                comp.Parent.EmailAddress = dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value.ToString();
+            }
             comp.Person.PhoneNumber = dgvCompetitorDetails[map.PhoneNumber.Value.ColumnIndex, map.PhoneNumber.Value.RowIndex].Value.ToString();
             comp.Person.Country = dgvCompetitorDetails[map.Country.Value.ColumnIndex, map.Country.Value.RowIndex].Value.ToString();
             comp.Person.StreetAddress1 = dgvCompetitorDetails[map.Street1.Value.ColumnIndex, map.Street1.Value.RowIndex].Value.ToString();
@@ -1971,7 +1977,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
                                                                     map.Belt.Value.RowIndex].Value.ToString()
                                                                 ) == 0)).First();
             comp.Person.Title = (dgvCompetitorDetails[map.Title.Value.ColumnIndex,
-                                    map.Title.Value.RowIndex].Value.ToString() == null) ?
+                                    map.Title.Value.RowIndex].Value == null) ?
                                         new Title() :
                                         (Titles.Where(t => t.TitleName.CompareTo(dgvCompetitorDetails[map.Title.Value.ColumnIndex,
                                                                                     map.Title.Value.RowIndex].Value.ToString()) == 0)).First();
