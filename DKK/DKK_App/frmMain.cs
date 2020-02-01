@@ -1746,6 +1746,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             LoadCompetitorSchool(comp);
             LoadCompetitorTitle(comp.Person.Title);
             LoadCompetitorGender(comp.Person.Gender);
+            SetSpecialConsiderationsCellValue(comp);
         }
 
         private void tlvComp_SelectedIndexChanged(object sender, EventArgs e)
@@ -1883,24 +1884,6 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
         private void btnSaveComp_Click(object sender, EventArgs e)
         {
             SaveCompetitor(false);
-        }
-
-        private void btnSpecialConsiderationDetails_Click(object sender, EventArgs e)
-        {
-            //TODO: update the database call for competitormodel to include desc
-            frmCompSpecialConsiderationDetail frm = new frmCompSpecialConsiderationDetail();
-            CompetitorModel comp = this.tlvComp.SelectedObject as CompetitorModel;
-
-            if (comp != null)
-            {
-                frm.CompetitorModel = (comp);
-            }
-            else
-            {
-                frm.CompetitorModel = (new CompetitorModel());
-            }
-
-            frm.Show();
         }
 
         private void SaveCompetitor(bool IsNew)
@@ -2491,21 +2474,95 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             return belts;
         }
 
+        private void LaunchCompetitorSpecialConsiderationsForm()
+        {
+            CompetitorModel comp = this.tlvComp.SelectedObject as CompetitorModel;
+
+            if (comp != null)
+            {
+                frmCompSpecialConsiderationDetail frm = new frmCompSpecialConsiderationDetail();
+                frm.CompetitorModel = comp;
+                frm.mainForm = this;
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("You must save this competitor or select an existing competitor to set the Special Considerations.", 
+                    "Existing Competitor Required", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Hand);
+                return;
+            }
+        }
+
+        private void LaunchCompetitorEventRegistrationForm()
+        {
+            CompetitorModel comp = this.tlvComp.SelectedObject as CompetitorModel;
+
+            if (comp != null)
+            {
+                frmCompRegEvents frm = new frmCompRegEvents();
+                frm.CompetitorModel = (comp);
+                frm.Show();
+            }
+            else
+            {
+                MessageBox.Show("You must save this competitor or select an existing competitor to set the Registered Events.",
+                    "Existing Competitor Required",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Hand);
+                return;
+            }
+        }
+
+        public void SetSpecialConsiderationsCellValue()
+        {
+            CompetitorModel comp = this.tlvComp.SelectedObject as CompetitorModel;
+
+            SetSpecialConsiderationsCellValue(comp);
+        }
+
+        private void SetSpecialConsiderationsCellValue(bool? isSpecial)
+        {
+            if (isSpecial != null)
+            {
+                if (isSpecial == true)
+                {
+                    dgvCompetitorDetails[map.Special.Base.ColumnIndex, map.Special.Base.RowIndex].Value = "Is Special";
+                }
+                else
+                {
+                    dgvCompetitorDetails[map.Special.Base.ColumnIndex, map.Special.Base.RowIndex].Value = "Not Special";
+                }
+            }
+            else
+            {
+                dgvCompetitorDetails[map.Special.Base.ColumnIndex, map.Special.Base.RowIndex].Value = "Special Considerations";
+            }
+        }
+
+        private void SetSpecialConsiderationsCellValue(CompetitorModel comp)
+        {
+            bool? isSpecial;
+            isSpecial = (comp != null) ? (bool?)comp.IsSpecialConsideration : null;        
+            SetSpecialConsiderationsCellValue(isSpecial);
+        }
+
+        private void SetSpecialConsiderationsCellValue(Competitor comp)
+        {
+            bool? isSpecial;
+            isSpecial = (comp != null) ? (bool?)comp.IsSpecialConsideration : null;
+            SetSpecialConsiderationsCellValue(isSpecial);
+        }
+
         private void dgvCompetitorDetails_SpecialConsiderations_ButtonClick(DataGridViewButtonCell cell)
         {
-            //TODO: open special considerations form
-
-            /*
-            if (String.Compare(cell.Value.ToString(), "Not Special") == 0)
-                cell.Value = "Is Special";
-            else
-                cell.Value = "Not Special";
-                */
+            LaunchCompetitorSpecialConsiderationsForm();
         }
 
         private void dgvCompetitorDetails_RegisteredEvents_ButtonClick(DataGridViewButtonCell cell)
         {
-            //TODO: open reg events form
+            LaunchCompetitorEventRegistrationForm();
         }
 
         private void dgvCompetitorDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
