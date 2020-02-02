@@ -632,13 +632,18 @@ namespace DKK_App
         #endregion
 
         #region Validators and Conversions
-        public static ScoreErrorType ValidateScores(SortableBindingList<Score> scores, Event currentEvent)
+        public static ScoreErrorType ValidateScores(SortableBindingList<Score> scoreList, Event currentEvent)
         {
-            //get a refreshed list from the db to verify most up-to-date
-            //SortableBindingList<Score> savedScores = DataAccess.GetScoresByEvent(currentEvent);
+            List<Score> scores = new List<Score>();
+
+            //Eliminate disqualified rows from the validation
+            foreach (Score score in scoreList.Where(x => x.IsDisqualified == false))
+            {
+                scores.Add(score);
+            }
 
             //Incomplete row check
-            foreach(Score s in scores)
+            foreach (Score s in scores)
             {
                 ScoreErrorType err = s.HasAllRequiredAttributes();
                 if (err != ScoreErrorType.None)
@@ -669,7 +674,7 @@ namespace DKK_App
             //I expected if we do not rank below third place, default values of 0s will be left and therefore are not duplicates.
             foreach (int matchId in matchIds)
             {
-                foreach (Score s in scores.Where(y => y.MatchId == matchId && y.IsDisqualified == false))
+                foreach (Score s in scores.Where(y => y.MatchId == matchId))
                 {
                     if (scores.Count(x => x.MatchId == matchId && x.Ranked == s.Ranked) > 1)
                         return ScoreErrorType.DuplicateRankInMatch;

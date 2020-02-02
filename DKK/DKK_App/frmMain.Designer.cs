@@ -1442,6 +1442,7 @@
             // 
             // dgvScore
             // 
+            this.dgvScore.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.dgvScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvScore.AutoGenerateColumns = false;

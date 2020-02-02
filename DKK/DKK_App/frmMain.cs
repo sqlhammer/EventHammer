@@ -1879,6 +1879,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
             CompetitorModels.Remove(comp);
             RefreshCompetitors(CompetitorModels);
+            ClearCompetitorSelection();
         }
 
         private void btnSaveComp_Click(object sender, EventArgs e)
@@ -2796,7 +2797,11 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
         private void cmiScoreDeleteRows_Click(object sender, EventArgs e)
         {
-            dgvScore.Rows.Remove(dgvScore.CurrentRow);
+            ScoresEndEditAndDiscardNewRow();
+
+            if(!dgvScore.CurrentRow.IsNewRow)
+                dgvScore.Rows.Remove(dgvScore.CurrentRow);
+
             ScoresHaveBeenEdited = true;
         }
 
@@ -2815,10 +2820,15 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             SubmitScores();
         }
 
-        private void SubmitScores()
+        private void ScoresEndEditAndDiscardNewRow()
         {
             dgvScore.EndEdit();
             FlushUnboundScoreGridBuffers();
+        }
+
+        private void SubmitScores()
+        {
+            ScoresEndEditAndDiscardNewRow();
 
             ScoreErrorType err = Global.ValidateScores(Scores, CurrentEvent);
 
@@ -2852,7 +2862,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
                             , MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     default:
-                        MessageBox.Show("Scores failed to save.", "Save Failed"
+                        MessageBox.Show("Scores failed to save.", "Unhandled validation error"
                             , MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
@@ -3153,12 +3163,28 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             e.ContextMenuStrip = cmsScores;
         }
 
-        private void SetScoreContextMenuItemDeleteRowsText()
+        private void SetScoreContextMenuItemDeleteRowsText(int? ColIndex, int? RowIndex)
         {
-            if (dgvScore.CurrentRow == null) return;
+            DataGridViewCell divCell, competitorCell;
+            DataGridViewRow row;
 
-            string div = (dgvScore.CurrentRow.Cells["dgvScoresDivSubDiv"].Value == null) ? "?" : dgvScore.CurrentRow.Cells["dgvScoresDivSubDiv"].Value.ToString();
-            string competitor = (dgvScore.CurrentRow.Cells["dgvScoresDisplayName"].Value == null) ? "?" : dgvScore.CurrentRow.Cells["dgvScoresDisplayName"].Value.ToString();
+            if (ColIndex == null || RowIndex == null)
+            {
+                if (dgvScore.CurrentRow == null)
+                    return;
+
+                row = dgvScore.CurrentRow;
+            }
+            else
+            {
+                row = dgvScore.Rows[(int)RowIndex];
+            }
+
+            divCell = row.Cells["dgvScoresDivSubDiv"];
+            competitorCell = row.Cells["dgvScoresDisplayName"];
+
+            string div = (divCell.Value == null) ? "?" : divCell.Value.ToString();
+            string competitor = (competitorCell.Value == null) ? "?" : competitorCell.Value.ToString();
 
             cmiScoreDeleteRows.Text = string.Format("Delete row: Div: {0}, Name: {1}", div, competitor);
         }
@@ -3167,7 +3193,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
         {
             if (e.ColumnIndex != -1 && e.RowIndex != -1 && e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                SetScoreContextMenuItemDeleteRowsText();
+                SetScoreContextMenuItemDeleteRowsText(e.ColumnIndex,e.RowIndex);
 
                 DataGridViewCell c = (sender as DataGridView)[e.ColumnIndex, e.RowIndex];
                 if (!c.Selected)
@@ -3183,7 +3209,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
         {
             if ((e.KeyCode == Keys.F10 && e.Shift) || e.KeyCode == Keys.Apps)
             {
-                SetScoreContextMenuItemDeleteRowsText();
+                SetScoreContextMenuItemDeleteRowsText(null,null);
 
                 DataGridViewCell currentCell = (sender as DataGridView).CurrentCell;
                 e.SuppressKeyPress = true;
@@ -3321,10 +3347,6 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
         private void AddingNewScoresRow()
         {
-            if (dgvScore.Rows.Count == Scores.Count)
-            {
-                Scores.RemoveAt(Scores.Count - 1);
-            }
             Scores.Add(new Score());
         }
 
