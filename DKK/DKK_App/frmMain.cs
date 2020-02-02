@@ -2797,10 +2797,25 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
         private void cmiScoreDeleteRows_Click(object sender, EventArgs e)
         {
-            ScoresEndEditAndDiscardNewRow();
+            List<DataGridViewRow> rows = new List<DataGridViewRow>();
 
-            if(!dgvScore.CurrentRow.IsNewRow)
-                dgvScore.Rows.Remove(dgvScore.CurrentRow);
+            foreach (DataGridViewTextBoxCell cell in dgvScore.SelectedCells)
+            {
+                //Avoid trying to delete the same row twice when more than 1 column is selected in the same row
+                if (rows.Any(x => x.Index == cell.RowIndex))
+                    continue;
+
+                rows.Add(dgvScore.Rows[cell.RowIndex]);
+            }
+
+            foreach(DataGridViewRow row in rows)
+                DeleteScore(row);
+        }
+
+        private void DeleteScore(DataGridViewRow row)
+        {
+            if (!row.IsNewRow)
+                dgvScore.Rows.Remove(row);
 
             ScoresHaveBeenEdited = true;
         }
@@ -3145,7 +3160,10 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             if (row.Cells["dgvScoresDisplayName"].Value == null)
                 return;
 
-            s.CompetitorId = CompetitorModels.Where(x => x.DisplayName == row.Cells["dgvScoresDisplayName"].Value.ToString()).FirstOrDefault().CompetitorId;
+                    //This checking logic is necessary when the score grid contains a competitor but the competitor no longer exists in the CompetitorModels
+            int cnt = CompetitorModels.Count(x => x.DisplayName == row.Cells["dgvScoresDisplayName"].Value.ToString());
+            CompetitorModel cm = (cnt > 0) ? CompetitorModels.Where(x => x.DisplayName == row.Cells["dgvScoresDisplayName"].Value.ToString()).First() : null;
+            s.CompetitorId = (cm != null) ? cm.CompetitorId : 0;
         }
 
         private void dgvScore_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -3165,6 +3183,12 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
         private void SetScoreContextMenuItemDeleteRowsText(int? ColIndex, int? RowIndex)
         {
+            if(dgvScore.SelectedCells.Count > 1)
+            {
+                cmiScoreDeleteRows.Text = string.Format("Delete all selected rows: Count {0}", dgvScore.SelectedCells.Count.ToString());
+                return;
+            }
+
             DataGridViewCell divCell, competitorCell;
             DataGridViewRow row;
 
