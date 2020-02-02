@@ -4,7 +4,13 @@ Tournament management system for martial arts.
 # Website
 https://eventhammeronline.com/go/ehhelp
 
-# Prerequisites
+# Installation
+https://eventhammeronline.com/go/setup
+
+# Application Prerequisites
+- Windows 10
+
+# Developer Prerequisites
 - MySQL ODBC Driver
 - SQL Server Data Tools
 - SQL Server Reporting Services
