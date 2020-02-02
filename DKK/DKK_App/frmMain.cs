@@ -2887,6 +2887,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
         private void RefreshScoresGrid()
         {
             BuildScoresGrid();
+            RefreshScoreComboBoxValues();
             dgvScore.DataSource = Scores;
             dgvScore.Refresh();
             dgvScore.AutoResizeColumns();
@@ -2938,6 +2939,18 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
             dgvScore.Sort(col, order);
             dgvScore.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection = (order == ListSortDirection.Ascending) ? SortOrder.Ascending : SortOrder.Descending;
+        }
+
+        private void RefreshScoreComboBoxValues()
+        {
+            DataGridViewComboBoxColumn col = (DataGridViewComboBoxColumn)dgvScore.Columns["dgvScoresDivSubDiv"];
+            col.DataSource = new BindingSource { DataSource = MatchModels };
+
+            col = (DataGridViewComboBoxColumn)dgvScore.Columns["dgvScoreMatchTypeName"];
+            col.DataSource = new BindingSource { DataSource = MatchModels };
+
+            col = (DataGridViewComboBoxColumn)dgvScore.Columns["dgvScoresDisplayName"];
+            col.DataSource = new BindingSource { DataSource = CompetitorModels };
         }
 
         private DataGridViewComboBoxColumn BindDivisionsColumn()
@@ -3185,7 +3198,8 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
         {
             if(dgvScore.SelectedCells.Count > 1)
             {
-                cmiScoreDeleteRows.Text = string.Format("Delete all selected rows: Count {0}", dgvScore.SelectedCells.Count.ToString());
+                string cnt = (from DataGridViewCell x in dgvScore.SelectedCells select x.RowIndex).Distinct().Count().ToString();
+                cmiScoreDeleteRows.Text = string.Format("Delete all selected rows: Count {0}", cnt);
                 return;
             }
 
@@ -3348,6 +3362,9 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
 
         private void SetCellsOnScoresDivisionChange(DataGridViewRow row)
         {
+            if (row.Cells["dgvScoresDivSubDiv"].Value == null)
+                return;
+
             //Reset Match Type
             string div = row.Cells["dgvScoresDivSubDiv"].Value.ToString();
             row.Cells["dgvScoreMatchTypeName"].Value = MatchModels.Where(m => m.MatchDisplayName.CompareTo(div) == 0).FirstOrDefault().MatchTypeName;
