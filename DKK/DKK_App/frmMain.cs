@@ -11,6 +11,7 @@ using System.Configuration;
 using DKK_App.Objects;
 using System.ComponentModel;
 using DKK_App.Exceptions;
+using System.Text.RegularExpressions;
 
 namespace DKK_App
 {
@@ -933,7 +934,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
                 if (mt.MatchId == null)
                     return;
 
-                Match m = DataAccess.GetMatch((int)mt.MatchId);
+                Entities.Match m = DataAccess.GetMatch((int)mt.MatchId);
 
                 string msgTitle = "Match Details";
                 string msg = String.Format(@"Division: {0}
@@ -1302,6 +1303,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             CompetitorModelLoadComplete = false;
             List<Competitor> cs = await DataAccessAsync.GetCompetitors(CurrentEvent);
             CompetitorModels = SortCompetitorModels(Global.GetCompetitorModel(cs));
+            ResetCompetitorDetailCellHighlight();
             CompetitorModelLoadComplete = true;
         }
 
@@ -1846,6 +1848,7 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
         {
             this.tlvComp.SelectedObject = null;
             LoadCompetitorDetails(new CompetitorModel());
+            ResetCompetitorDetailCellHighlight();
         }
 
         private void deleteSelectedCompetitorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1887,6 +1890,161 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
             SaveCompetitor(false);
         }
 
+        private void SetCompetitorDetailCellHighlight(int ColumnIndex, int RowIndex, bool isValid)
+        {
+            if(isValid)
+                dgvCompetitorDetails[ColumnIndex,RowIndex].Style.BackColor = Color.White;
+            else
+                dgvCompetitorDetails[ColumnIndex, RowIndex].Style.BackColor = Color.PaleVioletRed;
+        }
+
+        private void ResetCompetitorDetailCellHighlight()
+        {
+            for(int c = 0; c < map.ColumnCount; c++)
+            {
+                for(int r = 0; r < map.RowCount; r++)
+                {
+                    dgvCompetitorDetails[c, r].Style.BackColor = Color.White;
+                }
+            }
+        }
+
+        private bool ValidateCompetitorWithGridHighlighting(Competitor comp)
+        {
+            if (comp == null) return false;
+
+            bool isValid = true;
+            ResetCompetitorDetailCellHighlight();
+
+            //Mandatory fields are not null
+            /*
+             * first name
+             * last name
+             * gender
+             * age
+             * weight
+             * height
+             * belt
+             * school
+             * email
+            */
+            if (dgvCompetitorDetails[map.FirstName.Value.ColumnIndex, map.FirstName.Value.RowIndex].Value == null ||
+                String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.FirstName.Value.ColumnIndex, map.FirstName.Value.RowIndex].Value.ToString()))
+            {
+                SetCompetitorDetailCellHighlight(map.FirstName.Value.ColumnIndex, map.FirstName.Value.RowIndex, false);
+                isValid = false;
+            }
+            if (dgvCompetitorDetails[map.LastName.Value.ColumnIndex, map.LastName.Value.RowIndex].Value == null ||
+                String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.LastName.Value.ColumnIndex, map.LastName.Value.RowIndex].Value.ToString()))
+            {
+                SetCompetitorDetailCellHighlight(map.LastName.Value.ColumnIndex, map.LastName.Value.RowIndex, false);
+                isValid = false;
+            }
+            if (dgvCompetitorDetails[map.Gender.Value.ColumnIndex, map.Gender.Value.RowIndex].Value == null)
+            {
+                SetCompetitorDetailCellHighlight(map.Gender.Value.ColumnIndex, map.Gender.Value.RowIndex, false);
+                isValid = false;
+            }
+            if (dgvCompetitorDetails[map.Age.Value.ColumnIndex, map.Age.Value.RowIndex].Value == null)
+            {
+                SetCompetitorDetailCellHighlight(map.Age.Value.ColumnIndex, map.Age.Value.RowIndex, false);
+                isValid = false;
+            }
+            if (dgvCompetitorDetails[map.Weight.Value.ColumnIndex, map.Weight.Value.RowIndex].Value == null ||
+                String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.Weight.Value.ColumnIndex, map.Weight.Value.RowIndex].Value.ToString()))
+            {
+                SetCompetitorDetailCellHighlight(map.Weight.Value.ColumnIndex, map.Weight.Value.RowIndex, false);
+                isValid = false;
+            }
+            if (dgvCompetitorDetails[map.Height.Value.ColumnIndex, map.Height.Value.RowIndex].Value == null ||
+                String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.Height.Value.ColumnIndex, map.Height.Value.RowIndex].Value.ToString()))
+            {
+                SetCompetitorDetailCellHighlight(map.Height.Value.ColumnIndex, map.Height.Value.RowIndex, false);
+                isValid = false;
+            }
+            if (dgvCompetitorDetails[map.Belt.Value.ColumnIndex, map.Belt.Value.RowIndex].Value == null)
+            {
+                SetCompetitorDetailCellHighlight(map.Belt.Value.ColumnIndex, map.Belt.Value.RowIndex, false);
+                isValid = false;
+            }
+            if (dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value == null)
+            {
+                SetCompetitorDetailCellHighlight(map.School.Value.ColumnIndex, map.School.Value.RowIndex, false);
+                isValid = false;
+            }
+            if (dgvCompetitorDetails[map.Email.Value.ColumnIndex, map.Email.Value.RowIndex].Value == null ||
+                String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.Email.Value.ColumnIndex, map.Email.Value.RowIndex].Value.ToString()))
+            {
+                SetCompetitorDetailCellHighlight(map.Email.Value.ColumnIndex, map.Email.Value.RowIndex, false);
+                isValid = false;
+            }
+
+            //Conditional mandates
+
+            ////    Minor must have parent
+            if (Convert.ToInt32(dgvCompetitorDetails[map.Age.Value.ColumnIndex, map.Age.Value.RowIndex].Value.ToString()) < 18)
+            {
+                if (dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value == null ||
+                    String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value.ToString()))
+                {
+                    SetCompetitorDetailCellHighlight(map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex, false);
+                    isValid = false;
+                }
+                if (dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex, map.ParentFirstName.Value.RowIndex].Value == null ||
+                    String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.ParentFirstName.Value.ColumnIndex, map.ParentFirstName.Value.RowIndex].Value.ToString()))
+                {
+                    SetCompetitorDetailCellHighlight(map.ParentFirstName.Value.ColumnIndex, map.ParentFirstName.Value.RowIndex, false);
+                    isValid = false;
+                }
+                if (dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex].Value == null ||
+                    String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex].Value.ToString()))
+                {
+                    SetCompetitorDetailCellHighlight(map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex, false);
+                    isValid = false;
+                }
+            }
+
+            ////    Other school must have school and instructor name
+
+            if (dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value.ToString().CompareTo("Other") == 0)
+            {
+                if (dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value == null ||
+                    String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value.ToString()))
+                {
+                    SetCompetitorDetailCellHighlight(map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex, false);
+                    isValid = false;
+                }
+                if (dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value == null ||
+                    String.IsNullOrWhiteSpace(dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value.ToString()))
+                {
+                    SetCompetitorDetailCellHighlight(map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex, false);
+                    isValid = false;
+                }
+            }
+
+            //Formats
+
+            ////    Email format
+            if (dgvCompetitorDetails[map.Email.Value.ColumnIndex, map.Email.Value.RowIndex].Value != null)
+            {
+                if (!Global.IsValidEmail(dgvCompetitorDetails[map.Email.Value.ColumnIndex, map.Email.Value.RowIndex].Value.ToString()))
+                {
+                    SetCompetitorDetailCellHighlight(map.Email.Value.ColumnIndex, map.Email.Value.RowIndex, false);
+                    isValid = false;
+                }
+            }
+            if (dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value != null)
+            {
+                if (!Global.IsValidEmail(dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value.ToString()))
+                {
+                    SetCompetitorDetailCellHighlight(map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex, false);
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
         private void SaveCompetitor(bool IsNew)
         {
             CompetitorModel cm = this.tlvComp.SelectedObject as CompetitorModel;
@@ -1921,6 +2079,16 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
                 return;
             }
 
+            if (!ValidateCompetitorWithGridHighlighting(comp))
+            {
+                MessageBox.Show("The competitor was NOT saved. Recheck the highlighted fields for accuracy.",
+                "Competitor Input Validation Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
             comp.Person.FirstName = dgvCompetitorDetails[map.FirstName.Value.ColumnIndex, map.FirstName.Value.RowIndex].Value.ToString();
             comp.Person.EmailAddress = dgvCompetitorDetails[map.Email.Value.ColumnIndex, map.Email.Value.RowIndex].Value.ToString();
             comp.Person.LastName = dgvCompetitorDetails[map.LastName.Value.ColumnIndex, map.LastName.Value.RowIndex].Value.ToString();
@@ -1948,14 +2116,30 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
                 comp.Parent.LastName = dgvCompetitorDetails[map.ParentLastName.Value.ColumnIndex, map.ParentLastName.Value.RowIndex].Value.ToString();
                 comp.Parent.EmailAddress = dgvCompetitorDetails[map.ParentEmail.Value.ColumnIndex, map.ParentEmail.Value.RowIndex].Value.ToString();
             }
-            comp.Person.PhoneNumber = dgvCompetitorDetails[map.PhoneNumber.Value.ColumnIndex, map.PhoneNumber.Value.RowIndex].Value.ToString();
-            comp.Person.Country = dgvCompetitorDetails[map.Country.Value.ColumnIndex, map.Country.Value.RowIndex].Value.ToString();
-            comp.Person.StreetAddress1 = dgvCompetitorDetails[map.Street1.Value.ColumnIndex, map.Street1.Value.RowIndex].Value.ToString();
-            comp.Person.StreetAddress2 = (dgvCompetitorDetails[map.Street2.Value.ColumnIndex, map.Street2.Value.RowIndex].Value != null) ? dgvCompetitorDetails[map.Street2.Value.ColumnIndex, map.Street2.Value.RowIndex].Value.ToString() : "";
-            comp.Person.AppartmentCode = (dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex, map.AppartmentNumber.Value.RowIndex].Value != null) ? dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex, map.AppartmentNumber.Value.RowIndex].Value.ToString() : "";
-            comp.Person.City = dgvCompetitorDetails[map.City.Value.ColumnIndex, map.City.Value.RowIndex].Value.ToString();
-            comp.Person.StateProvince = dgvCompetitorDetails[map.State.Value.ColumnIndex, map.State.Value.RowIndex].Value.ToString();
-            comp.Person.PostalCode = dgvCompetitorDetails[map.PostalCode.Value.ColumnIndex, map.PostalCode.Value.RowIndex].Value.ToString();
+
+            var value = dgvCompetitorDetails[map.PhoneNumber.Value.ColumnIndex, map.PhoneNumber.Value.RowIndex].Value;
+            comp.Person.PhoneNumber = (value != null) ? value.ToString() : null;
+
+            value = dgvCompetitorDetails[map.Country.Value.ColumnIndex, map.Country.Value.RowIndex].Value;
+            comp.Person.Country = (value != null) ? value.ToString() : null;
+
+            value = dgvCompetitorDetails[map.Street1.Value.ColumnIndex, map.Street1.Value.RowIndex].Value;
+            comp.Person.StreetAddress1 = (value != null) ? value.ToString() : null;
+
+            value = dgvCompetitorDetails[map.Street2.Value.ColumnIndex, map.Street2.Value.RowIndex].Value;
+            comp.Person.StreetAddress2 = (value != null) ? value.ToString() : "";
+
+            value = dgvCompetitorDetails[map.AppartmentNumber.Value.ColumnIndex, map.AppartmentNumber.Value.RowIndex].Value;
+            comp.Person.AppartmentCode = (value != null) ? value.ToString() : "";
+
+            value = dgvCompetitorDetails[map.City.Value.ColumnIndex, map.City.Value.RowIndex].Value;
+            comp.Person.City = (value != null) ? value.ToString() : "";
+
+            value = dgvCompetitorDetails[map.State.Value.ColumnIndex, map.State.Value.RowIndex].Value;
+            comp.Person.StateProvince = (value != null) ? value.ToString() : "";
+
+            value = dgvCompetitorDetails[map.PostalCode.Value.ColumnIndex, map.PostalCode.Value.RowIndex].Value;
+            comp.Person.PostalCode = (value != null) ? value.ToString() : "";
 
             comp.Rank = (Ranks.Where(r => r.RankName.CompareTo(
                                                                 dgvCompetitorDetails[map.Belt.Value.ColumnIndex,
@@ -1968,15 +2152,14 @@ Save changes (Yes), discard changes (No), or abort the refresh (Cancel)?
                                                                                     map.Title.Value.RowIndex].Value.ToString()) == 0)).First();
 
             string selectedSchool = "";
-            if (dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value != null)
-                selectedSchool = dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value.ToString();
+            selectedSchool = dgvCompetitorDetails[map.School.Value.ColumnIndex, map.School.Value.RowIndex].Value.ToString();
             comp.Dojo = (Dojos.Where(d => d.Facility.FacilityName.CompareTo(selectedSchool) == 0)).FirstOrDefault();
 
             comp.OtherDojoName = "";
             comp.OtherInstructorName = "";
             if (comp.Dojo == null)
             {
-                var value = dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value;
+                value = dgvCompetitorDetails[map.Instructor.Value.ColumnIndex, map.Instructor.Value.RowIndex].Value;
                 comp.OtherInstructorName = (value != null) ? value.ToString() : "";
                 value = dgvCompetitorDetails[map.OtherSchool.Value.ColumnIndex, map.OtherSchool.Value.RowIndex].Value;
                 comp.OtherDojoName = (value != null) ? value.ToString() : "";
