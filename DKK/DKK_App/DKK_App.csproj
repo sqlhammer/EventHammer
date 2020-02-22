@@ -31,7 +31,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>29</ApplicationRevision>
+    <ApplicationRevision>30</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -152,6 +152,12 @@
     <Compile Include="frmRemoveMatchCompetitor.Designer.cs">
       <DependentUpon>frmRemoveMatchCompetitor.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSplashScreen.Designer.cs">
+      <DependentUpon>frmSplashScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Global.cs" />
     <Compile Include="Models\CompetitorModel.cs" />
     <Compile Include="Models\EventModel.cs" />
@@ -184,6 +190,9 @@
     <EmbeddedResource Include="frmRemoveMatchCompetitor.resx">
       <DependentUpon>frmRemoveMatchCompetitor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -195,6 +204,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="DKK_App_TemporaryKey.pfx" />
+    <None Include="Images\Event Hammer Splash Screen.psd" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -229,6 +239,9 @@
   <ItemGroup>
     <None Include="Images\dkk_logo_medium_horizontal.png" />
     <Content Include="eventhammer-ico.ico" />
+    <Content Include="Images\Event Hammer Splash Screen.jpg" />
+    <Content Include="Images\eventhammer-ico.ico" />
+    <Content Include="Images\eventhammer-icon-512x512.png" />
     <Content Include="Images\powered-by-sqlhammer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

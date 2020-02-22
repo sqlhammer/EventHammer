@@ -11,7 +11,6 @@ using System.Configuration;
 using DKK_App.Objects;
 using System.ComponentModel;
 using DKK_App.Exceptions;
-using System.Text.RegularExpressions;
 
 namespace DKK_App
 {
@@ -50,6 +49,8 @@ namespace DKK_App
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            var splashScreen = ShowSplashScreen();
+
             this.MinimumSize = new System.Drawing.Size(1155, 620);
 
             //Setup TreeListViews
@@ -73,6 +74,31 @@ namespace DKK_App
 
             //AutoResizeForm();
             this.WindowState = FormWindowState.Maximized;
+
+            HideSplashScreen(splashScreen);
+        }
+
+        private frmSplashScreen ShowSplashScreen()
+        {
+            double widthMultiplier = 0.20;
+            double heightMultiplier = 0.55;
+
+            double screenWidth = Screen.PrimaryScreen.Bounds.Width;
+
+            frmSplashScreen splashScreen = new frmSplashScreen
+            {
+                Width = (int)(screenWidth * widthMultiplier),
+                Height = (int)((screenWidth * widthMultiplier) * heightMultiplier)
+            };
+
+            splashScreen.Show();
+            return splashScreen;
+        }
+
+        private void HideSplashScreen(frmSplashScreen screen)
+        {
+            screen.Hide();
+            screen = null;
         }
 
         private void InitializeFormWithDataAccess()

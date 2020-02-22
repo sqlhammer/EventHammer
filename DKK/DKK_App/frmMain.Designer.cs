@@ -2084,6 +2084,7 @@
             this.MainMenuStrip = this.msMenu;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Event Hammer";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.SizeChanged += new System.EventHandler(this.frmMain_SizeChanged);
