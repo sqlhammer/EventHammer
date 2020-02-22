@@ -107,10 +107,9 @@ namespace DKK_App
             {
                 //Global.CheckForUpdates(); //Disabled in favor of ClickOnce auto-upgrades
                 SetEventSearchDateRange();
+                RefreshEvents();
                 RefreshEventSelect();
-                RefreshEvents();
                 SetEventTypeDropdown();
-                RefreshEvents();
                 RefreshDivisions();
                 RefreshRanks();
                 RefreshDojos();
@@ -654,7 +653,7 @@ Please refresh the list data from the Competitors tab to verify completion.", "R
             this.cbEventSelect.Items.Clear();
             foreach (Event Event in FilteredEvents)
             {
-                this.cbEventSelect.Items.Add(Event.EventName + " - " + Event.Date.ToString("MM/dd/yyyy"));
+                this.cbEventSelect.Items.Add(Event.Date.ToString("yyyy-MM-dd") + " - " + Event.EventName);
             }
 
             this.cbEventSelect.Text = "";
