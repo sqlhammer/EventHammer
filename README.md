@@ -17,4 +17,3 @@ https://eventhammeronline.com/go/setup
 - SQL Server Integration Services
 - Visual Studio 2017
 - C# Windows form application
-- Advanced Installer for Visual Studio 2017
